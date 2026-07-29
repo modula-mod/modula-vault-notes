@@ -1,0 +1,11 @@
+{
+  "viewId": "modula.vault-notes.views.favourites",
+  "moduleId": "modula.vault-notes",
+  "kind": "collection",
+  "title": "Favourites",
+  "collection": "note",
+  "query": {"collection": "note", "defaultLimit": 25, "maxLimit": 100, "allowedSortFields": ["updatedAt", "createdAt", "title"], "allowedFilterFields": ["favourite"], "searchableFields": ["title", "plainTextProjection"]},
+  "layout": [{"id": "favourites", "component": "recordList", "collection": "note"}],
+  "emptyState": {"title": "No favourites"},
+  "requiredCapabilities": ["records:module.modula.vault-notes.note:read"]
+}

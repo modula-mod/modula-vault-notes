@@ -1,0 +1,16 @@
+{
+  "viewId": "modula.vault-notes.views.home",
+  "moduleId": "modula.vault-notes",
+  "kind": "dashboard",
+  "title": "Vault Notes",
+  "layout": [
+    {"id": "pinned", "component": "section", "title": "Pinned", "children": [{"id": "pinned-list", "component": "recordList", "collection": "note"}]},
+    {"id": "recent", "component": "section", "title": "Recent", "children": [{"id": "recent-list", "component": "recordList", "collection": "note"}]},
+    {"id": "folders", "component": "section", "title": "Folders", "children": [{"id": "folder-list", "component": "recordList", "collection": "folder"}]}
+  ],
+  "toolbar": [
+    {"actionId": "modula.vault-notes.actions.note.create", "kind": "record.create", "label": "Create note", "inputSchema": {"fields": [{"fieldId": "title", "name": "title", "type": "text", "label": "Title", "required": true}, {"fieldId": "document", "name": "document", "type": "json", "label": "Document", "required": true}, {"fieldId": "plainTextProjection", "name": "plainTextProjection", "type": "multilineText", "label": "Plain text", "required": true}, {"fieldId": "tagIds", "name": "tagIds", "type": "tags", "label": "Tags"}, {"fieldId": "pinned", "name": "pinned", "type": "boolean", "label": "Pinned"}, {"fieldId": "favourite", "name": "favourite", "type": "boolean", "label": "Favourite"}, {"fieldId": "archived", "name": "archived", "type": "boolean", "label": "Archived"}, {"fieldId": "dataSchemaVersion", "name": "dataSchemaVersion", "type": "text", "label": "Data schema", "required": true}]}, "capability": "records:module.modula.vault-notes.note:write", "confirmationPolicy": "none", "destructive": false, "successDestination": {"kind": "stay"}, "errorPresentation": {"kind": "inline"}, "requiresIdempotencyKey": true, "target": {"collection": "note"}}
+  ],
+  "emptyState": {"title": "No notes", "actionId": "modula.vault-notes.actions.note.create"},
+  "requiredCapabilities": ["records:module.modula.vault-notes.note:read"]
+}

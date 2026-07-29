@@ -1,0 +1,86 @@
+{
+  "manifestVersion": 1,
+  "moduleId": "modula.vault-notes",
+  "name": "Vault Notes",
+  "description": "Standard 1.0 reference notes module with structured documents, generic records, declarative views, settings, search and diagnostics.",
+  "version": "1.0.0",
+  "publisher": {"publisherId": "modula", "displayName": "Modula", "website": "https://modula.digital"},
+  "source": {
+    "provider": "github",
+    "repository": "modula-mod/modula-vault-notes",
+    "commit": "0000000000000000000000000000000000000000",
+    "manifestPath": "module.manifest.json",
+    "releaseTag": "vault-notes-v1.0.0",
+    "releaseAssetName": "modula-vault-notes-1.0.0.tgz"
+  },
+  "license": {"status": "firstParty", "spdx": "LicenseRef-Modula-First-Party", "evidenceIds": ["LICENSE", "README.md", "SECURITY.md"]},
+  "trust": {"requestedLevel": "firstParty"},
+  "compatibility": {
+    "minimumGreenfieldVersion": "0.1.0",
+    "minimumModulaHostVersion": "0.1.0",
+    "protocolVersions": ["greenfield.v1", "modula-module-standard.v1"],
+    "platforms": ["server", "web", "ios", "android"]
+  },
+  "permissions": [
+    {"permission": "schemas:register", "reason": "Register Vault Notes generic record schemas.", "risk": "medium"},
+    {"permission": "settings:register", "reason": "Register schema-driven Vault Notes settings.", "risk": "medium"},
+    {"permission": "routes:register", "reason": "Register canonical module host routes.", "risk": "medium"},
+    {"permission": "functions:register", "reason": "Register declarative Vault Notes actions.", "risk": "high"},
+    {"permission": "events:subscribe", "reason": "Route Vault Notes events to search and diagnostics.", "risk": "medium"},
+    {"permission": "search:index", "reason": "Publish account-scoped note and folder search projections.", "risk": "medium"},
+    {"permission": "records:module.modula.vault-notes.note:read", "reason": "Read account-scoped notes.", "risk": "low"},
+    {"permission": "records:module.modula.vault-notes.note:write", "reason": "Create and update account-scoped notes.", "risk": "medium"},
+    {"permission": "records:module.modula.vault-notes.note:delete", "reason": "Trash and permanently delete account-scoped notes.", "risk": "high"},
+    {"permission": "records:module.modula.vault-notes.folder:read", "reason": "Read account-scoped folders.", "risk": "low"},
+    {"permission": "records:module.modula.vault-notes.folder:write", "reason": "Create and update account-scoped folders.", "risk": "medium"},
+    {"permission": "records:module.modula.vault-notes.folder:delete", "reason": "Delete account-scoped folders.", "risk": "high"},
+    {"permission": "records:module.modula.vault-notes.tag:read", "reason": "Read account-scoped tags.", "risk": "low"},
+    {"permission": "records:module.modula.vault-notes.tag:write", "reason": "Create and assign account-scoped tags.", "risk": "medium"},
+    {"permission": "records:module.modula.vault-notes.note-link:read", "reason": "Read account-scoped note links.", "risk": "low"},
+    {"permission": "records:module.modula.vault-notes.note-link:write", "reason": "Create account-scoped note links.", "risk": "medium"},
+    {"permission": "records:module.modula.vault-notes.note-version:read", "reason": "Read bounded note version snapshots.", "risk": "low"},
+    {"permission": "records:module.modula.vault-notes.note-version:write", "reason": "Write bounded note version snapshots.", "risk": "medium"},
+    {"permission": "records:module.modula.vault-notes.saved-source:read", "reason": "Read saved-source provenance references.", "risk": "low"},
+    {"permission": "records:module.modula.vault-notes.saved-source:write", "reason": "Write saved-source provenance references.", "risk": "medium"}
+  ],
+  "contributions": {
+    "schemas": [
+      {"id": "modula.vault-notes.schemas.note", "title": "Vault note schema", "schemaRef": "schemas/note.schema.json", "collection": "note", "defaultVisibility": "private"},
+      {"id": "modula.vault-notes.schemas.folder", "title": "Vault folder schema", "schemaRef": "schemas/folder.schema.json", "collection": "folder", "defaultVisibility": "private"},
+      {"id": "modula.vault-notes.schemas.tag", "title": "Vault tag schema", "schemaRef": "schemas/tag.schema.json", "collection": "tag", "defaultVisibility": "private"},
+      {"id": "modula.vault-notes.schemas.note-link", "title": "Vault note link schema", "schemaRef": "schemas/note-link.schema.json", "collection": "note-link", "defaultVisibility": "private"},
+      {"id": "modula.vault-notes.schemas.note-version", "title": "Vault note version schema", "schemaRef": "schemas/note-version.schema.json", "collection": "note-version", "defaultVisibility": "private"},
+      {"id": "modula.vault-notes.schemas.saved-source", "title": "Vault saved source schema", "schemaRef": "schemas/saved-source.schema.json", "collection": "saved-source", "defaultVisibility": "private"}
+    ],
+    "routes": [
+      {"id": "modula.vault-notes.routes.home", "title": "Vault Notes", "path": "/module/modula.vault-notes", "routeKind": "module"},
+      {"id": "modula.vault-notes.routes.note", "title": "Vault Note", "path": "/module/modula.vault-notes/note", "routeKind": "detail"},
+      {"id": "modula.vault-notes.routes.folder", "title": "Vault Folder", "path": "/module/modula.vault-notes/folder", "routeKind": "detail"},
+      {"id": "modula.vault-notes.routes.search", "title": "Vault Notes Search", "path": "/module/modula.vault-notes/search", "routeKind": "module"},
+      {"id": "modula.vault-notes.routes.settings", "title": "Vault Notes Settings", "path": "/module/modula.vault-notes/settings", "routeKind": "settings"}
+    ],
+    "settings": [
+      {"id": "modula.vault-notes.settings.installation", "title": "Vault Notes settings", "schemaRef": "schemas/vault-settings.v1.schema.json", "scope": "installation"}
+    ],
+    "functions": [
+      {"id": "modula.vault-notes.functions.note-create", "title": "Create note", "functionId": "modula.vault-notes.function.note.create", "mode": "declarative", "inputSchemaRef": "schemas/note.schema.json", "outputSchemaRef": "schemas/note.schema.json", "executionRequired": false},
+      {"id": "modula.vault-notes.functions.note-update", "title": "Update note", "functionId": "modula.vault-notes.function.note.update", "mode": "declarative", "inputSchemaRef": "schemas/note.schema.json", "outputSchemaRef": "schemas/note.schema.json", "executionRequired": false},
+      {"id": "modula.vault-notes.functions.note-export", "title": "Export notes", "functionId": "modula.vault-notes.function.note.export", "mode": "declarative", "inputSchemaRef": "schemas/vault-settings.v1.schema.json", "outputSchemaRef": "schemas/vault-export.v1.schema.json", "executionRequired": false}
+    ],
+    "events": [
+      {"id": "modula.vault-notes.events.note-created", "title": "Note created", "eventType": "vault-notes.note.created", "direction": "emits"},
+      {"id": "modula.vault-notes.events.note-updated", "title": "Note updated", "eventType": "vault-notes.note.updated", "direction": "emits"},
+      {"id": "modula.vault-notes.events.note-deleted", "title": "Note deleted", "eventType": "vault-notes.note.deleted", "direction": "emits"},
+      {"id": "modula.vault-notes.events.note-restored", "title": "Note restored", "eventType": "vault-notes.note.restored", "direction": "emits"},
+      {"id": "modula.vault-notes.events.folder-created", "title": "Folder created", "eventType": "vault-notes.folder.created", "direction": "emits"}
+    ]
+  },
+  "lifecycle": {"executionMode": "declarative"},
+  "integrity": {"manifestSha256": "04552922fedba9465a1b89853c580470f7fca6ee39054582e907155fd9906226"},
+  "extensions": {
+    "standard": {"standardVersion": "1.0.0", "manifestSchemaVersion": "1.0.0", "dataSchemaVersion": "1.0.0", "standardReleaseTag": "mms-v1.0.0", "standardReleaseCommit": "ac1bede6e9be6518a21e8248596b99b4099da5c6"},
+    "settingsDefaults": {"defaultCollectionView": "list", "defaultSort": "updatedAt", "autosaveDelayMs": 1200, "versionHistoryRetention": 25, "confirmPermanentDeletion": true, "showWordCount": true, "showCharacterCount": false, "includeArchivedNotesInSearch": false, "defaultExportFormat": "json"},
+    "releaseChannels": ["development", "founder-alpha"],
+    "moduleStandardManifestPath": "modula.module.json"
+  }
+}

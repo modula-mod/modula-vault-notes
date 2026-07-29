@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://modula.digital/modules/vault-notes/schemas/tag-1.0.0.json",
+  "title": "Vault Tag",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "name", "normalizedName", "createdAt", "updatedAt"],
+  "properties": {
+    "id": {"type": "string", "minLength": 1, "maxLength": 120},
+    "name": {"type": "string", "minLength": 1, "maxLength": 80},
+    "normalizedName": {"type": "string", "minLength": 1, "maxLength": 80},
+    "createdAt": {"type": "string", "format": "date-time"},
+    "updatedAt": {"type": "string", "format": "date-time"}
+  },
+  "x-greenfield": {
+    "searchableFields": ["name", "normalizedName"],
+    "filterableFields": ["normalizedName"],
+    "sortableFields": ["name", "createdAt", "updatedAt"],
+    "retentionPolicy": "keepOnUninstall"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "viewId": "modula.vault-notes.views.editor",
+  "moduleId": "modula.vault-notes",
+  "kind": "form",
+  "title": "Editor",
+  "collection": "note",
+  "layout": [
+    {"id": "saving-state", "component": "metadata", "label": "Autosave state"},
+    {"id": "title", "component": "field", "field": "title"},
+    {"id": "document", "component": "field", "field": "document"},
+    {"id": "version", "component": "metadata", "field": "revision"}
+  ],
+  "requiredCapabilities": ["records:module.modula.vault-notes.note:write"]
+}

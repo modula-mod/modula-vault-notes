@@ -1,0 +1,36 @@
+{
+  "name": "@modula/vault-notes",
+  "version": "1.0.0",
+  "description": "Vault Notes 1.0 reference module for Modula Module Standard 1.0.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "modula.module.json",
+    "module.manifest.json",
+    "schemas",
+    "src/views",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "SECURITY.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "verify": "pnpm build && pnpm test && node scripts/verify-release.mjs",
+    "release:package": "node scripts/package-release.mjs"
+  },
+  "dependencies": {
+    "@modula/module-sdk": "file:../modula-module-standard/packages/module-sdk",
+    "@modula/module-standard": "file:../modula-module-standard/packages/module-standard",
+    "@modula/module-validator": "file:../modula-module-standard/packages/module-validator"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.10",
+    "typescript": "~6.0.3",
+    "vitest": "^3.2.4"
+  },
+  "license": "LicenseRef-Modula-First-Party"
+}

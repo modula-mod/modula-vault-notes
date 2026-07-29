@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://modula.digital/modules/vault-notes/schemas/note-version-1.0.0.json",
+  "title": "Vault Note Version",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "noteId", "revision", "title", "document", "createdAt", "createdBy", "changeSource"],
+  "properties": {
+    "id": {"type": "string", "minLength": 1, "maxLength": 120},
+    "noteId": {"type": "string", "minLength": 1, "maxLength": 120},
+    "revision": {"type": "integer", "minimum": 1},
+    "title": {"type": "string", "minLength": 1, "maxLength": 240},
+    "document": {"type": "object"},
+    "createdAt": {"type": "string", "format": "date-time"},
+    "createdBy": {"type": "string", "minLength": 1, "maxLength": 120},
+    "changeSource": {"enum": ["manual", "restore", "import", "future-ai"]}
+  },
+  "x-greenfield": {
+    "fields": [
+      {"fieldId": "noteId", "name": "noteId", "type": "recordReference", "label": "Note", "required": true},
+      {"fieldId": "revision", "name": "revision", "type": "text", "label": "Revision", "required": true},
+      {"fieldId": "title", "name": "title", "type": "text", "label": "Title", "required": true},
+      {"fieldId": "document", "name": "document", "type": "json", "label": "Document", "required": true},
+      {"fieldId": "changeSource", "name": "changeSource", "type": "singleSelect", "label": "Change source", "required": true, "options": [{"value": "manual", "label": "Manual"}, {"value": "restore", "label": "Restore"}, {"value": "import", "label": "Import"}, {"value": "future-ai", "label": "Future AI"}]}
+    ],
+    "searchableFields": ["title"],
+    "filterableFields": ["noteId", "changeSource"],
+    "sortableFields": ["revision", "createdAt"],
+    "referenceFields": ["noteId"],
+    "retentionPolicy": "keepOnUninstall"
+  }
+}

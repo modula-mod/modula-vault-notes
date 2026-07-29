@@ -1,0 +1,11 @@
+{
+  "viewId": "modula.vault-notes.views.archived",
+  "moduleId": "modula.vault-notes",
+  "kind": "collection",
+  "title": "Archived",
+  "collection": "note",
+  "query": {"collection": "note", "defaultLimit": 25, "maxLimit": 100, "allowedSortFields": ["updatedAt", "createdAt", "title"], "allowedFilterFields": ["archived"], "searchableFields": ["title", "plainTextProjection"]},
+  "layout": [{"id": "archived", "component": "recordList", "collection": "note"}],
+  "emptyState": {"title": "No archived notes"},
+  "requiredCapabilities": ["records:module.modula.vault-notes.note:read"]
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "defaultCollectionView": {"enum": ["list", "compact-list", "grid"]},
+    "defaultSort": {"enum": ["updatedAt", "createdAt", "title"]},
+    "autosaveDelayMs": {"type": "integer", "minimum": 500, "maximum": 10000},
+    "versionHistoryRetention": {"type": "integer", "minimum": 1, "maximum": 100},
+    "confirmPermanentDeletion": {"type": "boolean"},
+    "showWordCount": {"type": "boolean"},
+    "showCharacterCount": {"type": "boolean"},
+    "includeArchivedNotesInSearch": {"type": "boolean"},
+    "defaultExportFormat": {"enum": ["json", "markdown", "plain-text", "zip"]}
+  }
+}

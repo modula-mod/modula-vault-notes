@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://modula.digital/modules/vault-notes/schemas/note-link-1.0.0.json",
+  "title": "Vault Note Link",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "sourceNoteId", "targetNoteId", "linkType", "createdAt"],
+  "properties": {
+    "id": {"type": "string", "minLength": 1, "maxLength": 120},
+    "sourceNoteId": {"type": "string", "minLength": 1, "maxLength": 120},
+    "targetNoteId": {"type": "string", "minLength": 1, "maxLength": 120},
+    "linkType": {"enum": ["internal", "related", "source"]},
+    "createdAt": {"type": "string", "format": "date-time"}
+  },
+  "x-greenfield": {
+    "searchableFields": [],
+    "filterableFields": ["sourceNoteId", "targetNoteId", "linkType"],
+    "sortableFields": ["createdAt"],
+    "referenceFields": ["sourceNoteId", "targetNoteId"],
+    "retentionPolicy": "keepOnUninstall"
+  }
+}

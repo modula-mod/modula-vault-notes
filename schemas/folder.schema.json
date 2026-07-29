@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://modula.digital/modules/vault-notes/schemas/folder-1.0.0.json",
+  "title": "Vault Folder",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "name", "position", "createdAt", "updatedAt"],
+  "properties": {
+    "id": {"type": "string", "minLength": 1, "maxLength": 120},
+    "name": {"type": "string", "minLength": 1, "maxLength": 120},
+    "parentFolderId": {"type": "string", "maxLength": 120},
+    "position": {"type": "integer", "minimum": 0},
+    "createdAt": {"type": "string", "format": "date-time"},
+    "updatedAt": {"type": "string", "format": "date-time"}
+  },
+  "x-greenfield": {
+    "searchableFields": ["name"],
+    "filterableFields": ["parentFolderId"],
+    "sortableFields": ["position", "name", "createdAt", "updatedAt"],
+    "referenceFields": ["parentFolderId"],
+    "retentionPolicy": "keepOnUninstall"
+  }
+}

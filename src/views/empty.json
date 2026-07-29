@@ -1,0 +1,8 @@
+{
+  "viewId": "modula.vault-notes.views.empty",
+  "moduleId": "modula.vault-notes",
+  "kind": "emptyState",
+  "title": "No Notes",
+  "layout": [{"id": "empty", "component": "emptyState", "title": "No notes"}],
+  "requiredCapabilities": ["records:module.modula.vault-notes.note:read"]
+}
