@@ -17,10 +17,10 @@ import {
 
 const root = new URL('..', import.meta.url).pathname
 
-describe('Vault Notes Standard 1.0 manifest', () => {
+describe('Vault Notes Standard 1.2 manifest', () => {
   const manifest = JSON.parse(readFileSync(join(root, 'modula.module.json'), 'utf8'))
 
-  it('validates through the external Standard 1.0 validator', () => {
+  it('validates through the external Standard 1.2 validator', () => {
     const result = validateModulaModuleManifest(manifest)
     expect(result.valid, result.issues.map(issue => `${issue.code} ${issue.path}`).join('\n')).toBe(true)
   })
@@ -29,7 +29,7 @@ describe('Vault Notes Standard 1.0 manifest', () => {
     expect(manifest.id).toBe(VAULT_NOTES_MODULE_ID)
     expect(manifest.standardVersion).toBe(VAULT_NOTES_STANDARD_VERSION)
     expect(manifest.moduleVersion).toBe(VAULT_NOTES_MODULE_VERSION)
-    expect(manifest.manifestSchemaVersion).toBe('1.0.0')
+    expect(manifest.manifestSchemaVersion).toBe('1.2.0')
     expect(manifest.dataSchemaVersion).toBe(VAULT_NOTES_DATA_SCHEMA_VERSION)
   })
 
@@ -55,6 +55,13 @@ describe('Vault Notes Standard 1.0 manifest', () => {
     ]))
     expect(manifest.settings[0].defaults.defaultExportFormat).toBe('json')
     expect(manifest.search.map((item: any) => item.projectionHandler.projection.entityType)).toEqual(['note', 'vault-folder'])
+    expect(manifest.ai[0].productActions.map((action: any) => action.id)).toEqual(expect.arrayContaining([
+      'vault-notes.ai.summarise',
+      'vault-notes.ai.suggest-title',
+      'vault-notes.ai.rewrite-selection',
+      'vault-notes.ai.extract-action-items',
+      'vault-notes.ai.suggest-tags',
+    ]))
   })
 })
 

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://modula.digital/modules/vault-notes/schemas/ai/rewrite-selection-result-1.0.0.json",
+  "title": "Rewrite Selection Result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["replacement", "transformation"],
+  "properties": {
+    "replacement": {"type": "string", "minLength": 1, "maxLength": 12000},
+    "transformation": {"enum": ["clearer", "shorter", "longer", "professional", "casual", "correct-grammar"]}
+  }
+}

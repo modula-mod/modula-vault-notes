@@ -2,85 +2,606 @@
   "manifestVersion": 1,
   "moduleId": "modula.vault-notes",
   "name": "Vault Notes",
-  "description": "Standard 1.0 reference notes module with structured documents, generic records, declarative views, settings, search and diagnostics.",
-  "version": "1.0.0",
-  "publisher": {"publisherId": "modula", "displayName": "Modula", "website": "https://modula.digital"},
+  "description": "Vault Notes 1.1 reference module with optional provider-neutral AI product actions.",
+  "version": "1.1.0",
+  "publisher": {
+    "publisherId": "modula",
+    "displayName": "Modula",
+    "website": "https://modula.digital"
+  },
   "source": {
     "provider": "github",
     "repository": "modula-mod/modula-vault-notes",
     "commit": "0000000000000000000000000000000000000000",
     "manifestPath": "module.manifest.json",
-    "releaseTag": "vault-notes-v1.0.0",
-    "releaseAssetName": "modula-vault-notes-1.0.0.tgz"
+    "releaseTag": "vault-notes-v1.1.0",
+    "releaseAssetName": "modula-vault-notes-1.1.0.tgz"
   },
-  "license": {"status": "firstParty", "spdx": "LicenseRef-Modula-First-Party", "evidenceIds": ["LICENSE", "README.md", "SECURITY.md"]},
-  "trust": {"requestedLevel": "firstParty"},
+  "license": {
+    "status": "firstParty",
+    "spdx": "LicenseRef-Modula-First-Party",
+    "evidenceIds": [
+      "LICENSE",
+      "README.md",
+      "SECURITY.md"
+    ]
+  },
+  "trust": {
+    "requestedLevel": "firstParty"
+  },
   "compatibility": {
     "minimumGreenfieldVersion": "0.1.0",
     "minimumModulaHostVersion": "0.1.0",
-    "protocolVersions": ["greenfield.v1", "modula-module-standard.v1"],
-    "platforms": ["server", "web", "ios", "android"]
+    "protocolVersions": [
+      "greenfield.v1",
+      "modula-module-standard.v1"
+    ],
+    "platforms": [
+      "server",
+      "web",
+      "ios",
+      "android"
+    ]
   },
   "permissions": [
-    {"permission": "schemas:register", "reason": "Register Vault Notes generic record schemas.", "risk": "medium"},
-    {"permission": "settings:register", "reason": "Register schema-driven Vault Notes settings.", "risk": "medium"},
-    {"permission": "routes:register", "reason": "Register canonical module host routes.", "risk": "medium"},
-    {"permission": "functions:register", "reason": "Register declarative Vault Notes actions.", "risk": "high"},
-    {"permission": "events:subscribe", "reason": "Route Vault Notes events to search and diagnostics.", "risk": "medium"},
-    {"permission": "search:index", "reason": "Publish account-scoped note and folder search projections.", "risk": "medium"},
-    {"permission": "records:module.modula.vault-notes.note:read", "reason": "Read account-scoped notes.", "risk": "low"},
-    {"permission": "records:module.modula.vault-notes.note:write", "reason": "Create and update account-scoped notes.", "risk": "medium"},
-    {"permission": "records:module.modula.vault-notes.note:delete", "reason": "Trash and permanently delete account-scoped notes.", "risk": "high"},
-    {"permission": "records:module.modula.vault-notes.folder:read", "reason": "Read account-scoped folders.", "risk": "low"},
-    {"permission": "records:module.modula.vault-notes.folder:write", "reason": "Create and update account-scoped folders.", "risk": "medium"},
-    {"permission": "records:module.modula.vault-notes.folder:delete", "reason": "Delete account-scoped folders.", "risk": "high"},
-    {"permission": "records:module.modula.vault-notes.tag:read", "reason": "Read account-scoped tags.", "risk": "low"},
-    {"permission": "records:module.modula.vault-notes.tag:write", "reason": "Create and assign account-scoped tags.", "risk": "medium"},
-    {"permission": "records:module.modula.vault-notes.note-link:read", "reason": "Read account-scoped note links.", "risk": "low"},
-    {"permission": "records:module.modula.vault-notes.note-link:write", "reason": "Create account-scoped note links.", "risk": "medium"},
-    {"permission": "records:module.modula.vault-notes.note-version:read", "reason": "Read bounded note version snapshots.", "risk": "low"},
-    {"permission": "records:module.modula.vault-notes.note-version:write", "reason": "Write bounded note version snapshots.", "risk": "medium"},
-    {"permission": "records:module.modula.vault-notes.saved-source:read", "reason": "Read saved-source provenance references.", "risk": "low"},
-    {"permission": "records:module.modula.vault-notes.saved-source:write", "reason": "Write saved-source provenance references.", "risk": "medium"}
+    {
+      "permission": "schemas:register",
+      "reason": "Register Vault Notes generic record schemas.",
+      "risk": "medium"
+    },
+    {
+      "permission": "settings:register",
+      "reason": "Register schema-driven Vault Notes settings.",
+      "risk": "medium"
+    },
+    {
+      "permission": "routes:register",
+      "reason": "Register canonical module host routes.",
+      "risk": "medium"
+    },
+    {
+      "permission": "functions:register",
+      "reason": "Register declarative Vault Notes actions.",
+      "risk": "high"
+    },
+    {
+      "permission": "events:subscribe",
+      "reason": "Route Vault Notes events to search and diagnostics.",
+      "risk": "medium"
+    },
+    {
+      "permission": "search:index",
+      "reason": "Publish account-scoped note and folder search projections.",
+      "risk": "medium"
+    },
+    {
+      "permission": "records:module.modula.vault-notes.note:read",
+      "reason": "Read account-scoped notes.",
+      "risk": "low"
+    },
+    {
+      "permission": "records:module.modula.vault-notes.note:write",
+      "reason": "Create and update account-scoped notes.",
+      "risk": "medium"
+    },
+    {
+      "permission": "records:module.modula.vault-notes.note:delete",
+      "reason": "Trash and permanently delete account-scoped notes.",
+      "risk": "high"
+    },
+    {
+      "permission": "records:module.modula.vault-notes.folder:read",
+      "reason": "Read account-scoped folders.",
+      "risk": "low"
+    },
+    {
+      "permission": "records:module.modula.vault-notes.folder:write",
+      "reason": "Create and update account-scoped folders.",
+      "risk": "medium"
+    },
+    {
+      "permission": "records:module.modula.vault-notes.folder:delete",
+      "reason": "Delete account-scoped folders.",
+      "risk": "high"
+    },
+    {
+      "permission": "records:module.modula.vault-notes.tag:read",
+      "reason": "Read account-scoped tags.",
+      "risk": "low"
+    },
+    {
+      "permission": "records:module.modula.vault-notes.tag:write",
+      "reason": "Create and assign account-scoped tags.",
+      "risk": "medium"
+    },
+    {
+      "permission": "records:module.modula.vault-notes.note-link:read",
+      "reason": "Read account-scoped note links.",
+      "risk": "low"
+    },
+    {
+      "permission": "records:module.modula.vault-notes.note-link:write",
+      "reason": "Create account-scoped note links.",
+      "risk": "medium"
+    },
+    {
+      "permission": "records:module.modula.vault-notes.note-version:read",
+      "reason": "Read bounded note version snapshots.",
+      "risk": "low"
+    },
+    {
+      "permission": "records:module.modula.vault-notes.note-version:write",
+      "reason": "Write bounded note version snapshots.",
+      "risk": "medium"
+    },
+    {
+      "permission": "records:module.modula.vault-notes.saved-source:read",
+      "reason": "Read saved-source provenance references.",
+      "risk": "low"
+    },
+    {
+      "permission": "records:module.modula.vault-notes.saved-source:write",
+      "reason": "Write saved-source provenance references.",
+      "risk": "medium"
+    },
+    {
+      "permission": "ai.request",
+      "reason": "Request optional host-mediated AI product actions for explicit user review.",
+      "risk": "medium"
+    },
+    {
+      "permission": "ai.stream",
+      "reason": "Stream optional AI suggestions without mutating notes.",
+      "risk": "medium"
+    },
+    {
+      "permission": "ai.structured-output",
+      "reason": "Validate structured AI suggestions before preview or application.",
+      "risk": "medium"
+    },
+    {
+      "permission": "ai.context.private",
+      "reason": "Use the current authorised private note as AI context when the user triggers an AI action.",
+      "risk": "high"
+    }
   ],
   "contributions": {
     "schemas": [
-      {"id": "modula.vault-notes.schemas.note", "title": "Vault note schema", "schemaRef": "schemas/note.schema.json", "collection": "note", "defaultVisibility": "private"},
-      {"id": "modula.vault-notes.schemas.folder", "title": "Vault folder schema", "schemaRef": "schemas/folder.schema.json", "collection": "folder", "defaultVisibility": "private"},
-      {"id": "modula.vault-notes.schemas.tag", "title": "Vault tag schema", "schemaRef": "schemas/tag.schema.json", "collection": "tag", "defaultVisibility": "private"},
-      {"id": "modula.vault-notes.schemas.note-link", "title": "Vault note link schema", "schemaRef": "schemas/note-link.schema.json", "collection": "note-link", "defaultVisibility": "private"},
-      {"id": "modula.vault-notes.schemas.note-version", "title": "Vault note version schema", "schemaRef": "schemas/note-version.schema.json", "collection": "note-version", "defaultVisibility": "private"},
-      {"id": "modula.vault-notes.schemas.saved-source", "title": "Vault saved source schema", "schemaRef": "schemas/saved-source.schema.json", "collection": "saved-source", "defaultVisibility": "private"}
+      {
+        "id": "modula.vault-notes.schemas.note",
+        "title": "Vault note schema",
+        "schemaRef": "schemas/note.schema.json",
+        "collection": "note",
+        "defaultVisibility": "private"
+      },
+      {
+        "id": "modula.vault-notes.schemas.folder",
+        "title": "Vault folder schema",
+        "schemaRef": "schemas/folder.schema.json",
+        "collection": "folder",
+        "defaultVisibility": "private"
+      },
+      {
+        "id": "modula.vault-notes.schemas.tag",
+        "title": "Vault tag schema",
+        "schemaRef": "schemas/tag.schema.json",
+        "collection": "tag",
+        "defaultVisibility": "private"
+      },
+      {
+        "id": "modula.vault-notes.schemas.note-link",
+        "title": "Vault note link schema",
+        "schemaRef": "schemas/note-link.schema.json",
+        "collection": "note-link",
+        "defaultVisibility": "private"
+      },
+      {
+        "id": "modula.vault-notes.schemas.note-version",
+        "title": "Vault note version schema",
+        "schemaRef": "schemas/note-version.schema.json",
+        "collection": "note-version",
+        "defaultVisibility": "private"
+      },
+      {
+        "id": "modula.vault-notes.schemas.saved-source",
+        "title": "Vault saved source schema",
+        "schemaRef": "schemas/saved-source.schema.json",
+        "collection": "saved-source",
+        "defaultVisibility": "private"
+      }
     ],
     "routes": [
-      {"id": "modula.vault-notes.routes.home", "title": "Vault Notes", "path": "/module/modula.vault-notes", "routeKind": "module"},
-      {"id": "modula.vault-notes.routes.note", "title": "Vault Note", "path": "/module/modula.vault-notes/note", "routeKind": "detail"},
-      {"id": "modula.vault-notes.routes.folder", "title": "Vault Folder", "path": "/module/modula.vault-notes/folder", "routeKind": "detail"},
-      {"id": "modula.vault-notes.routes.search", "title": "Vault Notes Search", "path": "/module/modula.vault-notes/search", "routeKind": "module"},
-      {"id": "modula.vault-notes.routes.settings", "title": "Vault Notes Settings", "path": "/module/modula.vault-notes/settings", "routeKind": "settings"}
+      {
+        "id": "modula.vault-notes.routes.home",
+        "title": "Vault Notes",
+        "path": "/module/modula.vault-notes",
+        "routeKind": "module"
+      },
+      {
+        "id": "modula.vault-notes.routes.note",
+        "title": "Vault Note",
+        "path": "/module/modula.vault-notes/note",
+        "routeKind": "detail"
+      },
+      {
+        "id": "modula.vault-notes.routes.folder",
+        "title": "Vault Folder",
+        "path": "/module/modula.vault-notes/folder",
+        "routeKind": "detail"
+      },
+      {
+        "id": "modula.vault-notes.routes.search",
+        "title": "Vault Notes Search",
+        "path": "/module/modula.vault-notes/search",
+        "routeKind": "module"
+      },
+      {
+        "id": "modula.vault-notes.routes.settings",
+        "title": "Vault Notes Settings",
+        "path": "/module/modula.vault-notes/settings",
+        "routeKind": "settings"
+      }
     ],
     "settings": [
-      {"id": "modula.vault-notes.settings.installation", "title": "Vault Notes settings", "schemaRef": "schemas/vault-settings.v1.schema.json", "scope": "installation"}
+      {
+        "id": "modula.vault-notes.settings.installation",
+        "title": "Vault Notes settings",
+        "schemaRef": "schemas/vault-settings.v1.schema.json",
+        "scope": "installation"
+      }
     ],
     "functions": [
-      {"id": "modula.vault-notes.functions.note-create", "title": "Create note", "functionId": "modula.vault-notes.function.note.create", "mode": "declarative", "inputSchemaRef": "schemas/note.schema.json", "outputSchemaRef": "schemas/note.schema.json", "executionRequired": false},
-      {"id": "modula.vault-notes.functions.note-update", "title": "Update note", "functionId": "modula.vault-notes.function.note.update", "mode": "declarative", "inputSchemaRef": "schemas/note.schema.json", "outputSchemaRef": "schemas/note.schema.json", "executionRequired": false},
-      {"id": "modula.vault-notes.functions.note-export", "title": "Export notes", "functionId": "modula.vault-notes.function.note.export", "mode": "declarative", "inputSchemaRef": "schemas/vault-settings.v1.schema.json", "outputSchemaRef": "schemas/vault-export.v1.schema.json", "executionRequired": false}
+      {
+        "id": "modula.vault-notes.functions.note-create",
+        "title": "Create note",
+        "functionId": "modula.vault-notes.function.note.create",
+        "mode": "declarative",
+        "inputSchemaRef": "schemas/note.schema.json",
+        "outputSchemaRef": "schemas/note.schema.json",
+        "executionRequired": false
+      },
+      {
+        "id": "modula.vault-notes.functions.note-update",
+        "title": "Update note",
+        "functionId": "modula.vault-notes.function.note.update",
+        "mode": "declarative",
+        "inputSchemaRef": "schemas/note.schema.json",
+        "outputSchemaRef": "schemas/note.schema.json",
+        "executionRequired": false
+      },
+      {
+        "id": "modula.vault-notes.functions.note-export",
+        "title": "Export notes",
+        "functionId": "modula.vault-notes.function.note.export",
+        "mode": "declarative",
+        "inputSchemaRef": "schemas/vault-settings.v1.schema.json",
+        "outputSchemaRef": "schemas/vault-export.v1.schema.json",
+        "executionRequired": false
+      }
     ],
     "events": [
-      {"id": "modula.vault-notes.events.note-created", "title": "Note created", "eventType": "vault-notes.note.created", "direction": "emits"},
-      {"id": "modula.vault-notes.events.note-updated", "title": "Note updated", "eventType": "vault-notes.note.updated", "direction": "emits"},
-      {"id": "modula.vault-notes.events.note-deleted", "title": "Note deleted", "eventType": "vault-notes.note.deleted", "direction": "emits"},
-      {"id": "modula.vault-notes.events.note-restored", "title": "Note restored", "eventType": "vault-notes.note.restored", "direction": "emits"},
-      {"id": "modula.vault-notes.events.folder-created", "title": "Folder created", "eventType": "vault-notes.folder.created", "direction": "emits"}
+      {
+        "id": "modula.vault-notes.events.note-created",
+        "title": "Note created",
+        "eventType": "vault-notes.note.created",
+        "direction": "emits"
+      },
+      {
+        "id": "modula.vault-notes.events.note-updated",
+        "title": "Note updated",
+        "eventType": "vault-notes.note.updated",
+        "direction": "emits"
+      },
+      {
+        "id": "modula.vault-notes.events.note-deleted",
+        "title": "Note deleted",
+        "eventType": "vault-notes.note.deleted",
+        "direction": "emits"
+      },
+      {
+        "id": "modula.vault-notes.events.note-restored",
+        "title": "Note restored",
+        "eventType": "vault-notes.note.restored",
+        "direction": "emits"
+      },
+      {
+        "id": "modula.vault-notes.events.folder-created",
+        "title": "Folder created",
+        "eventType": "vault-notes.folder.created",
+        "direction": "emits"
+      }
     ]
   },
-  "lifecycle": {"executionMode": "declarative"},
-  "integrity": {"manifestSha256": "04552922fedba9465a1b89853c580470f7fca6ee39054582e907155fd9906226"},
+  "lifecycle": {
+    "executionMode": "declarative"
+  },
+  "integrity": {
+    "manifestSha256": "d674b65a66bc5a671dc43ef2f8883d2faabc02b34c7c52d5c80162df9f661cfb"
+  },
   "extensions": {
-    "standard": {"standardVersion": "1.0.0", "manifestSchemaVersion": "1.0.0", "dataSchemaVersion": "1.0.0", "standardReleaseTag": "mms-v1.0.0", "standardReleaseCommit": "ac1bede6e9be6518a21e8248596b99b4099da5c6"},
-    "settingsDefaults": {"defaultCollectionView": "list", "defaultSort": "updatedAt", "autosaveDelayMs": 1200, "versionHistoryRetention": 25, "confirmPermanentDeletion": true, "showWordCount": true, "showCharacterCount": false, "includeArchivedNotesInSearch": false, "defaultExportFormat": "json"},
-    "releaseChannels": ["development", "founder-alpha"],
-    "moduleStandardManifestPath": "modula.module.json"
+    "standard": {
+      "standardVersion": "1.2.0",
+      "manifestSchemaVersion": "1.2.0",
+      "dataSchemaVersion": "1.0.0",
+      "standardReleaseTag": "mms-v1.2.0",
+      "standardReleaseCommit": "763882502d17a3fd70e33d6cc544304224e5a271"
+    },
+    "settingsDefaults": {
+      "defaultCollectionView": "list",
+      "defaultSort": "updatedAt",
+      "autosaveDelayMs": 1200,
+      "versionHistoryRetention": 25,
+      "confirmPermanentDeletion": true,
+      "showWordCount": true,
+      "showCharacterCount": false,
+      "includeArchivedNotesInSearch": false,
+      "defaultExportFormat": "json"
+    },
+    "releaseChannels": [
+      "development",
+      "founder-alpha"
+    ],
+    "moduleStandardManifestPath": "modula.module.json",
+    "ai": {
+      "optional": true,
+      "prompts": [
+        "vault-notes.summarise.v1",
+        "vault-notes.suggest-title.v1",
+        "vault-notes.rewrite-selection.v1",
+        "vault-notes.extract-action-items.v1",
+        "vault-notes.suggest-tags.v1"
+      ],
+      "productActions": [
+        "vault-notes.ai.summarise",
+        "vault-notes.ai.suggest-title",
+        "vault-notes.ai.rewrite-selection",
+        "vault-notes.ai.extract-action-items",
+        "vault-notes.ai.suggest-tags"
+      ],
+      "permissions": [
+        "ai.request",
+        "ai.stream",
+        "ai.structured-output",
+        "ai.context.private"
+      ],
+      "providerIndependent": true
+    }
+  },
+  "ai": {
+    "features": [
+      "summarise",
+      "extract",
+      "generate"
+    ],
+    "prompts": [
+      "vault-notes.summarise.v1",
+      "vault-notes.suggest-title.v1",
+      "vault-notes.rewrite-selection.v1",
+      "vault-notes.extract-action-items.v1",
+      "vault-notes.suggest-tags.v1"
+    ],
+    "requiredCapabilities": [
+      "text-generation",
+      "streaming",
+      "structured-output"
+    ],
+    "dataAccess": {
+      "recordScopes": [
+        "modula.vault-notes.note"
+      ],
+      "defaultPolicy": "account-consent"
+    },
+    "productActions": [
+      {
+        "id": "vault-notes.ai.summarise",
+        "name": "Summarise note",
+        "description": "Generate a preview-only summary from one authorised note revision.",
+        "promptId": "vault-notes.summarise.v1",
+        "promptVersionRange": "^1.0.0",
+        "inputSchema": "schemas/ai/summarise-note-input.schema.json",
+        "outputSchema": "schemas/ai/note-summary-result.schema.json",
+        "requiredPermissions": [
+          "ai.request",
+          "ai.stream",
+          "ai.structured-output",
+          "ai.context.private"
+        ],
+        "requiredCapabilities": [
+          "text-generation",
+          "streaming",
+          "structured-output"
+        ],
+        "context": {
+          "sources": [
+            "current-record",
+            "record-metadata"
+          ],
+          "maximumRecords": 1,
+          "maximumCharacters": 12000,
+          "allowedClassifications": [
+            "private"
+          ]
+        },
+        "execution": {
+          "streaming": true,
+          "structuredOutput": true,
+          "maximumToolCalls": 0,
+          "timeoutMs": 30000
+        },
+        "application": {
+          "mode": "preview-only",
+          "explicitConfirmation": true,
+          "createsRecordRevision": false
+        }
+      },
+      {
+        "id": "vault-notes.ai.suggest-title",
+        "name": "Suggest title",
+        "description": "Generate title suggestions without applying them automatically.",
+        "promptId": "vault-notes.suggest-title.v1",
+        "promptVersionRange": "^1.0.0",
+        "inputSchema": "schemas/ai/suggest-title-input.schema.json",
+        "outputSchema": "schemas/ai/suggested-title-result.schema.json",
+        "requiredPermissions": [
+          "ai.request",
+          "ai.stream",
+          "ai.structured-output",
+          "ai.context.private"
+        ],
+        "requiredCapabilities": [
+          "text-generation",
+          "streaming",
+          "structured-output"
+        ],
+        "context": {
+          "sources": [
+            "current-record",
+            "record-metadata"
+          ],
+          "maximumRecords": 1,
+          "maximumCharacters": 12000,
+          "allowedClassifications": [
+            "private"
+          ]
+        },
+        "execution": {
+          "streaming": true,
+          "structuredOutput": true,
+          "maximumToolCalls": 0,
+          "timeoutMs": 30000
+        },
+        "application": {
+          "mode": "metadata-suggestion",
+          "explicitConfirmation": true,
+          "createsRecordRevision": true
+        }
+      },
+      {
+        "id": "vault-notes.ai.rewrite-selection",
+        "name": "Rewrite selection",
+        "description": "Rewrite selected note text and show an original/proposed preview.",
+        "promptId": "vault-notes.rewrite-selection.v1",
+        "promptVersionRange": "^1.0.0",
+        "inputSchema": "schemas/ai/rewrite-selection-input.schema.json",
+        "outputSchema": "schemas/ai/rewrite-selection-result.schema.json",
+        "requiredPermissions": [
+          "ai.request",
+          "ai.stream",
+          "ai.structured-output",
+          "ai.context.private"
+        ],
+        "requiredCapabilities": [
+          "text-generation",
+          "streaming",
+          "structured-output"
+        ],
+        "context": {
+          "sources": [
+            "selected-content",
+            "record-metadata"
+          ],
+          "maximumRecords": 1,
+          "maximumCharacters": 12000,
+          "allowedClassifications": [
+            "private"
+          ]
+        },
+        "execution": {
+          "streaming": true,
+          "structuredOutput": true,
+          "maximumToolCalls": 0,
+          "timeoutMs": 30000
+        },
+        "application": {
+          "mode": "replace-selection",
+          "explicitConfirmation": true,
+          "createsRecordRevision": true
+        }
+      },
+      {
+        "id": "vault-notes.ai.extract-action-items",
+        "name": "Extract action items",
+        "description": "Extract action-item suggestions without creating Tasks records.",
+        "promptId": "vault-notes.extract-action-items.v1",
+        "promptVersionRange": "^1.0.0",
+        "inputSchema": "schemas/ai/extract-action-items-input.schema.json",
+        "outputSchema": "schemas/ai/extracted-action-items-result.schema.json",
+        "requiredPermissions": [
+          "ai.request",
+          "ai.stream",
+          "ai.structured-output",
+          "ai.context.private"
+        ],
+        "requiredCapabilities": [
+          "text-generation",
+          "streaming",
+          "structured-output"
+        ],
+        "context": {
+          "sources": [
+            "current-record",
+            "record-metadata"
+          ],
+          "maximumRecords": 1,
+          "maximumCharacters": 12000,
+          "allowedClassifications": [
+            "private"
+          ]
+        },
+        "execution": {
+          "streaming": true,
+          "structuredOutput": true,
+          "maximumToolCalls": 0,
+          "timeoutMs": 30000
+        },
+        "application": {
+          "mode": "insert",
+          "explicitConfirmation": true,
+          "createsRecordRevision": true
+        }
+      },
+      {
+        "id": "vault-notes.ai.suggest-tags",
+        "name": "Suggest tags",
+        "description": "Suggest tags without creating or assigning them automatically.",
+        "promptId": "vault-notes.suggest-tags.v1",
+        "promptVersionRange": "^1.0.0",
+        "inputSchema": "schemas/ai/suggest-tags-input.schema.json",
+        "outputSchema": "schemas/ai/suggested-tags-result.schema.json",
+        "requiredPermissions": [
+          "ai.request",
+          "ai.stream",
+          "ai.structured-output",
+          "ai.context.private"
+        ],
+        "requiredCapabilities": [
+          "text-generation",
+          "streaming",
+          "structured-output"
+        ],
+        "context": {
+          "sources": [
+            "current-record",
+            "record-metadata"
+          ],
+          "maximumRecords": 1,
+          "maximumCharacters": 12000,
+          "allowedClassifications": [
+            "private"
+          ]
+        },
+        "execution": {
+          "streaming": true,
+          "structuredOutput": true,
+          "maximumToolCalls": 0,
+          "timeoutMs": 30000
+        },
+        "application": {
+          "mode": "metadata-suggestion",
+          "explicitConfirmation": true,
+          "createsRecordRevision": true
+        }
+      }
+    ]
   }
 }

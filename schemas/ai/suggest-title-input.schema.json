@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://modula.digital/modules/vault-notes/schemas/ai/suggest-title-input-1.0.0.json",
+  "title": "Suggest Title Input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["recordId", "expectedRevision"],
+  "properties": {
+    "recordId": {"type": "string", "minLength": 1, "maxLength": 120},
+    "expectedRevision": {"type": "integer", "minimum": 1}
+  }
+}

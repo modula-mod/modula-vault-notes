@@ -1,9 +1,9 @@
 export const VAULT_NOTES_MODULE_ID = 'modula.vault-notes' as const
 export const VAULT_NOTES_SLUG = 'vault-notes' as const
 export const VAULT_NOTES_NAME = 'Vault Notes' as const
-export const VAULT_NOTES_STANDARD_VERSION = '1.0.0' as const
-export const VAULT_NOTES_MODULE_VERSION = '1.0.0' as const
-export const VAULT_NOTES_MANIFEST_SCHEMA_VERSION = '1.0.0' as const
+export const VAULT_NOTES_STANDARD_VERSION = '1.2.0' as const
+export const VAULT_NOTES_MODULE_VERSION = '1.1.0' as const
+export const VAULT_NOTES_MANIFEST_SCHEMA_VERSION = '1.2.0' as const
 export const VAULT_NOTES_DATA_SCHEMA_VERSION = '1.0.0' as const
 
 export type VaultDocumentBlockType =
@@ -113,7 +113,7 @@ export type VaultNoteVersionRecord = {
   document: VaultStructuredDocument
   createdAt: string
   createdBy: string
-  changeSource: 'manual' | 'restore' | 'import' | 'future-ai'
+  changeSource: 'manual' | 'restore' | 'import' | 'ai-assisted'
 }
 
 export type VaultExportFormat = 'json' | 'markdown' | 'plain-text' | 'zip'
