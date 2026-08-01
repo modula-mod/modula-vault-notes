@@ -13,7 +13,7 @@
     "document": {"type": "object"},
     "createdAt": {"type": "string", "format": "date-time"},
     "createdBy": {"type": "string", "minLength": 1, "maxLength": 120},
-    "changeSource": {"enum": ["manual", "restore", "import", "future-ai"]}
+    "changeSource": {"enum": ["manual", "restore", "import", "ai-assisted"]}
   },
   "x-greenfield": {
     "fields": [
@@ -21,7 +21,7 @@
       {"fieldId": "revision", "name": "revision", "type": "text", "label": "Revision", "required": true},
       {"fieldId": "title", "name": "title", "type": "text", "label": "Title", "required": true},
       {"fieldId": "document", "name": "document", "type": "json", "label": "Document", "required": true},
-      {"fieldId": "changeSource", "name": "changeSource", "type": "singleSelect", "label": "Change source", "required": true, "options": [{"value": "manual", "label": "Manual"}, {"value": "restore", "label": "Restore"}, {"value": "import", "label": "Import"}, {"value": "future-ai", "label": "Future AI"}]}
+      {"fieldId": "changeSource", "name": "changeSource", "type": "singleSelect", "label": "Change source", "required": true, "options": [{"value": "manual", "label": "Manual"}, {"value": "restore", "label": "Restore"}, {"value": "import", "label": "Import"}, {"value": "ai-assisted", "label": "AI assisted"}]}
     ],
     "searchableFields": ["title"],
     "filterableFields": ["noteId", "changeSource"],
