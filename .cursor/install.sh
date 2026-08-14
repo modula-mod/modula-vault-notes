@@ -33,8 +33,10 @@ if [ ! -d "$STD_DIR/.git" ]; then
 fi
 
 echo "==> Updating Modula Module Standard to $STD_REF"
-git -C "$STD_DIR" fetch --tags --prune origin
-git -C "$STD_DIR" checkout "$STD_REF"
+# Best-effort refresh. When a usable checkout already exists (e.g. restored from
+# a build snapshot) a transient network/token issue must not fail the install.
+git -C "$STD_DIR" fetch --tags --prune origin || echo "warn: fetch failed, using existing checkout"
+git -C "$STD_DIR" checkout "$STD_REF" || echo "warn: checkout $STD_REF failed, using current HEAD"
 git -C "$STD_DIR" pull --ff-only origin "$STD_REF" || true
 
 echo "==> Installing and building Modula Module Standard packages"
