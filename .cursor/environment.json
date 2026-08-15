@@ -1,0 +1,5 @@
+{
+  "name": "Vault Notes",
+  "install": "bash .cursor/install.sh",
+  "repositoryDependencies": ["github.com/modula-mod/modula-module-standard"]
+}
