@@ -1,10 +1,10 @@
 {
-  "viewId": "modula.vault-notes.views.search",
-  "moduleId": "modula.vault-notes",
+  "viewId": "digital.modula.vault-notes.views.search",
+  "moduleId": "digital.modula.vault-notes",
   "kind": "collection",
   "title": "Search",
   "collection": "note",
   "query": {"collection": "note", "defaultLimit": 25, "maxLimit": 100, "allowedSortFields": ["updatedAt", "createdAt", "title"], "allowedFilterFields": ["folderId", "tagIds", "archived"], "searchableFields": ["title", "plainTextProjection", "tagIds"], "folderField": "folderId"},
   "layout": [{"id": "search", "component": "search", "collection": "note"}, {"id": "results", "component": "recordList", "collection": "note"}],
-  "requiredCapabilities": ["records:module.modula.vault-notes.note:read", "search:index"]
+  "requiredCapabilities": ["records:module.digital.modula.vault-notes.note:read", "search:index"]
 }

@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+- Align source identity with the canonical Product Hub module ID
+  `digital.modula.vault-notes`. This is not a new product version and does not
+  invent 1.2.0. Tagged current release remains `vault-notes-v1.1.0`.
+- README states this repository is the canonical source for
+  `digital.modula.vault-notes`.
+
 ## 1.1.0
 
 - Declare optional provider-neutral AI product actions for summaries, title suggestions, selection rewrites, action-item extraction and tag suggestions.

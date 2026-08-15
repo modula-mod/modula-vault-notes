@@ -1,6 +1,6 @@
 {
-  "viewId": "modula.vault-notes.views.settings",
-  "moduleId": "modula.vault-notes",
+  "viewId": "digital.modula.vault-notes.views.settings",
+  "moduleId": "digital.modula.vault-notes",
   "kind": "settings",
   "title": "Vault Notes Settings",
   "layout": [{"id": "settings", "component": "section", "title": "Settings", "children": [{"id": "settings-fields", "component": "metadata", "label": "schema-driven"}]}],

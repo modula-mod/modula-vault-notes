@@ -1,11 +1,11 @@
 {
-  "viewId": "modula.vault-notes.views.trash",
-  "moduleId": "modula.vault-notes",
+  "viewId": "digital.modula.vault-notes.views.trash",
+  "moduleId": "digital.modula.vault-notes",
   "kind": "collection",
   "title": "Trash",
   "collection": "note",
   "query": {"collection": "note", "defaultLimit": 25, "maxLimit": 100, "allowedSortFields": ["updatedAt", "createdAt", "title"], "allowedFilterFields": ["deletedAt"], "searchableFields": ["title", "plainTextProjection"]},
   "layout": [{"id": "trash", "component": "recordList", "collection": "note"}],
   "emptyState": {"title": "Trash is empty"},
-  "requiredCapabilities": ["records:module.modula.vault-notes.note:read", "records:module.modula.vault-notes.note:delete"]
+  "requiredCapabilities": ["records:module.digital.modula.vault-notes.note:read", "records:module.digital.modula.vault-notes.note:delete"]
 }

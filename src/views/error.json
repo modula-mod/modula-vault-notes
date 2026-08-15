@@ -1,8 +1,8 @@
 {
-  "viewId": "modula.vault-notes.views.error",
-  "moduleId": "modula.vault-notes",
+  "viewId": "digital.modula.vault-notes.views.error",
+  "moduleId": "digital.modula.vault-notes",
   "kind": "emptyState",
   "title": "Vault Notes Unavailable",
   "layout": [{"id": "error", "component": "errorState", "title": "Vault Notes unavailable"}],
-  "requiredCapabilities": ["records:module.modula.vault-notes.note:read"]
+  "requiredCapabilities": ["records:module.digital.modula.vault-notes.note:read"]
 }

@@ -25,19 +25,19 @@ for (const [field, value] of Object.entries({standardVersion: '1.2.0', moduleVer
 
 const requiredRecords = ['note', 'folder', 'tag', 'note-link', 'note-version', 'saved-source']
 for (const record of requiredRecords) {
-  if (standard.records.some(item => item.id === `modula.vault-notes.record.${record}`)) pass(`record ${record} declared`)
+  if (standard.records.some(item => item.id === `digital.modula.vault-notes.record.${record}`)) pass(`record ${record} declared`)
   else fail(`record ${record} missing`)
 }
 
 const requiredViews = ['home', 'collection', 'detail', 'editor', 'search', 'favourites', 'archived', 'trash', 'folders', 'settings', 'empty', 'error']
 for (const view of requiredViews) {
-  if (standard.views.some(item => item.id === `modula.vault-notes.view.${view}`)) pass(`view vault-notes.${view} declared`)
+  if (standard.views.some(item => item.id === `digital.modula.vault-notes.view.${view}`)) pass(`view vault-notes.${view} declared`)
   else fail(`view vault-notes.${view} missing`)
 }
 
 const actionNames = ['create', 'open', 'update', 'duplicate', 'archive', 'unarchive', 'delete', 'restore', 'delete-permanently', 'pin', 'unpin', 'favourite', 'unfavourite', 'move', 'export']
 for (const action of actionNames) {
-  const actionId = `modula.vault-notes.action.note.${action}`
+  const actionId = `digital.modula.vault-notes.action.note.${action}`
   if (standard.actions.some(item => item.id === actionId) && standard.functions.some(item => item.id === actionId.replace('.action.', '.function.'))) pass(`note.${action} action/function declared`)
   else fail(`note.${action} action/function missing`)
 }

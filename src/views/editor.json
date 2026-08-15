@@ -1,6 +1,6 @@
 {
-  "viewId": "modula.vault-notes.views.editor",
-  "moduleId": "modula.vault-notes",
+  "viewId": "digital.modula.vault-notes.views.editor",
+  "moduleId": "digital.modula.vault-notes",
   "kind": "form",
   "title": "Editor",
   "collection": "note",
@@ -10,5 +10,5 @@
     {"id": "document", "component": "field", "field": "document"},
     {"id": "version", "component": "metadata", "field": "revision"}
   ],
-  "requiredCapabilities": ["records:module.modula.vault-notes.note:write"]
+  "requiredCapabilities": ["records:module.digital.modula.vault-notes.note:write"]
 }

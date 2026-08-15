@@ -4,7 +4,7 @@
   "moduleVersion": "1.1.0",
   "manifestSchemaVersion": "1.2.0",
   "dataSchemaVersion": "1.0.0",
-  "id": "modula.vault-notes",
+  "id": "digital.modula.vault-notes",
   "slug": "vault-notes",
   "name": "Vault Notes",
   "description": "Reference notes module for Modula Module Standard 1.2 with optional provider-neutral AI product actions.",
@@ -209,7 +209,7 @@
   ],
   "records": [
     {
-      "id": "modula.vault-notes.record.note",
+      "id": "digital.modula.vault-notes.record.note",
       "schema": {
         "type": "object",
         "required": [
@@ -350,7 +350,7 @@
       }
     },
     {
-      "id": "modula.vault-notes.record.folder",
+      "id": "digital.modula.vault-notes.record.folder",
       "schema": {
         "type": "object",
         "required": [
@@ -433,7 +433,7 @@
       }
     },
     {
-      "id": "modula.vault-notes.record.tag",
+      "id": "digital.modula.vault-notes.record.tag",
       "schema": {
         "type": "object",
         "required": [
@@ -505,7 +505,7 @@
       }
     },
     {
-      "id": "modula.vault-notes.record.note-link",
+      "id": "digital.modula.vault-notes.record.note-link",
       "schema": {
         "type": "object",
         "required": [
@@ -585,7 +585,7 @@
       }
     },
     {
-      "id": "modula.vault-notes.record.note-version",
+      "id": "digital.modula.vault-notes.record.note-version",
       "schema": {
         "type": "object",
         "required": [
@@ -677,7 +677,7 @@
       }
     },
     {
-      "id": "modula.vault-notes.record.saved-source",
+      "id": "digital.modula.vault-notes.record.saved-source",
       "schema": {
         "type": "object",
         "required": [
@@ -762,7 +762,7 @@
   ],
   "views": [
     {
-      "id": "modula.vault-notes.view.home",
+      "id": "digital.modula.vault-notes.view.home",
       "type": "dashboard",
       "title": "Vault Notes",
       "permissions": [
@@ -780,10 +780,10 @@
       }
     },
     {
-      "id": "modula.vault-notes.view.collection",
+      "id": "digital.modula.vault-notes.view.collection",
       "type": "collection",
       "title": "Notes",
-      "recordId": "modula.vault-notes.record.note",
+      "recordId": "digital.modula.vault-notes.record.note",
       "permissions": [
         "module.records.read"
       ],
@@ -809,10 +809,10 @@
       }
     },
     {
-      "id": "modula.vault-notes.view.detail",
+      "id": "digital.modula.vault-notes.view.detail",
       "type": "detail",
       "title": "Note",
-      "recordId": "modula.vault-notes.record.note",
+      "recordId": "digital.modula.vault-notes.record.note",
       "permissions": [
         "module.records.read"
       ],
@@ -829,10 +829,10 @@
       }
     },
     {
-      "id": "modula.vault-notes.view.editor",
+      "id": "digital.modula.vault-notes.view.editor",
       "type": "form",
       "title": "Edit Note",
-      "recordId": "modula.vault-notes.record.note",
+      "recordId": "digital.modula.vault-notes.record.note",
       "permissions": [
         "module.records.write"
       ],
@@ -849,10 +849,10 @@
       }
     },
     {
-      "id": "modula.vault-notes.view.search",
+      "id": "digital.modula.vault-notes.view.search",
       "type": "collection",
       "title": "Search",
-      "recordId": "modula.vault-notes.record.note",
+      "recordId": "digital.modula.vault-notes.record.note",
       "permissions": [
         "module.records.read",
         "module.search.publish"
@@ -862,10 +862,10 @@
       }
     },
     {
-      "id": "modula.vault-notes.view.favourites",
+      "id": "digital.modula.vault-notes.view.favourites",
       "type": "collection",
       "title": "Favourites",
-      "recordId": "modula.vault-notes.record.note",
+      "recordId": "digital.modula.vault-notes.record.note",
       "permissions": [
         "module.records.read"
       ],
@@ -877,10 +877,10 @@
       }
     },
     {
-      "id": "modula.vault-notes.view.archived",
+      "id": "digital.modula.vault-notes.view.archived",
       "type": "collection",
       "title": "Archived",
-      "recordId": "modula.vault-notes.record.note",
+      "recordId": "digital.modula.vault-notes.record.note",
       "permissions": [
         "module.records.read"
       ],
@@ -892,10 +892,10 @@
       }
     },
     {
-      "id": "modula.vault-notes.view.trash",
+      "id": "digital.modula.vault-notes.view.trash",
       "type": "collection",
       "title": "Trash",
-      "recordId": "modula.vault-notes.record.note",
+      "recordId": "digital.modula.vault-notes.record.note",
       "permissions": [
         "module.records.read",
         "module.records.delete"
@@ -905,10 +905,10 @@
       }
     },
     {
-      "id": "modula.vault-notes.view.folders",
+      "id": "digital.modula.vault-notes.view.folders",
       "type": "collection",
       "title": "Folders",
-      "recordId": "modula.vault-notes.record.folder",
+      "recordId": "digital.modula.vault-notes.record.folder",
       "permissions": [
         "module.records.read"
       ],
@@ -917,7 +917,7 @@
       }
     },
     {
-      "id": "modula.vault-notes.view.settings",
+      "id": "digital.modula.vault-notes.view.settings",
       "type": "settings",
       "title": "Vault Notes Settings",
       "permissions": [
@@ -929,7 +929,7 @@
       }
     },
     {
-      "id": "modula.vault-notes.view.empty",
+      "id": "digital.modula.vault-notes.view.empty",
       "type": "empty-state",
       "title": "No Notes",
       "permissions": [
@@ -940,7 +940,7 @@
       }
     },
     {
-      "id": "modula.vault-notes.view.error",
+      "id": "digital.modula.vault-notes.view.error",
       "type": "error-state",
       "title": "Vault Notes Unavailable",
       "permissions": [
@@ -953,9 +953,9 @@
   ],
   "actions": [
     {
-      "id": "modula.vault-notes.action.note.create",
+      "id": "digital.modula.vault-notes.action.note.create",
       "title": "Create note",
-      "functionId": "modula.vault-notes.function.note.create",
+      "functionId": "digital.modula.vault-notes.function.note.create",
       "permissions": [
         "module.records.write"
       ],
@@ -974,9 +974,9 @@
       }
     },
     {
-      "id": "modula.vault-notes.action.note.open",
+      "id": "digital.modula.vault-notes.action.note.open",
       "title": "Open note",
-      "functionId": "modula.vault-notes.function.note.open",
+      "functionId": "digital.modula.vault-notes.function.note.open",
       "permissions": [
         "module.records.read"
       ],
@@ -991,9 +991,9 @@
       }
     },
     {
-      "id": "modula.vault-notes.action.note.update",
+      "id": "digital.modula.vault-notes.action.note.update",
       "title": "Update note",
-      "functionId": "modula.vault-notes.function.note.update",
+      "functionId": "digital.modula.vault-notes.function.note.update",
       "permissions": [
         "module.records.write"
       ],
@@ -1013,9 +1013,9 @@
       }
     },
     {
-      "id": "modula.vault-notes.action.note.duplicate",
+      "id": "digital.modula.vault-notes.action.note.duplicate",
       "title": "Duplicate note",
-      "functionId": "modula.vault-notes.function.note.duplicate",
+      "functionId": "digital.modula.vault-notes.function.note.duplicate",
       "permissions": [
         "module.records.write"
       ],
@@ -1034,9 +1034,9 @@
       }
     },
     {
-      "id": "modula.vault-notes.action.note.archive",
+      "id": "digital.modula.vault-notes.action.note.archive",
       "title": "Archive note",
-      "functionId": "modula.vault-notes.function.note.archive",
+      "functionId": "digital.modula.vault-notes.function.note.archive",
       "permissions": [
         "module.records.write"
       ],
@@ -1055,9 +1055,9 @@
       }
     },
     {
-      "id": "modula.vault-notes.action.note.unarchive",
+      "id": "digital.modula.vault-notes.action.note.unarchive",
       "title": "Unarchive note",
-      "functionId": "modula.vault-notes.function.note.unarchive",
+      "functionId": "digital.modula.vault-notes.function.note.unarchive",
       "permissions": [
         "module.records.write"
       ],
@@ -1076,9 +1076,9 @@
       }
     },
     {
-      "id": "modula.vault-notes.action.note.delete",
+      "id": "digital.modula.vault-notes.action.note.delete",
       "title": "Delete note",
-      "functionId": "modula.vault-notes.function.note.delete",
+      "functionId": "digital.modula.vault-notes.function.note.delete",
       "permissions": [
         "module.records.delete"
       ],
@@ -1097,9 +1097,9 @@
       }
     },
     {
-      "id": "modula.vault-notes.action.note.restore",
+      "id": "digital.modula.vault-notes.action.note.restore",
       "title": "Restore note",
-      "functionId": "modula.vault-notes.function.note.restore",
+      "functionId": "digital.modula.vault-notes.function.note.restore",
       "permissions": [
         "module.records.write"
       ],
@@ -1118,9 +1118,9 @@
       }
     },
     {
-      "id": "modula.vault-notes.action.note.delete-permanently",
+      "id": "digital.modula.vault-notes.action.note.delete-permanently",
       "title": "Permanently delete note",
-      "functionId": "modula.vault-notes.function.note.delete-permanently",
+      "functionId": "digital.modula.vault-notes.function.note.delete-permanently",
       "permissions": [
         "module.records.delete"
       ],
@@ -1139,9 +1139,9 @@
       }
     },
     {
-      "id": "modula.vault-notes.action.note.pin",
+      "id": "digital.modula.vault-notes.action.note.pin",
       "title": "Pin note",
-      "functionId": "modula.vault-notes.function.note.pin",
+      "functionId": "digital.modula.vault-notes.function.note.pin",
       "permissions": [
         "module.records.write"
       ],
@@ -1158,9 +1158,9 @@
       }
     },
     {
-      "id": "modula.vault-notes.action.note.unpin",
+      "id": "digital.modula.vault-notes.action.note.unpin",
       "title": "Unpin note",
-      "functionId": "modula.vault-notes.function.note.unpin",
+      "functionId": "digital.modula.vault-notes.function.note.unpin",
       "permissions": [
         "module.records.write"
       ],
@@ -1177,9 +1177,9 @@
       }
     },
     {
-      "id": "modula.vault-notes.action.note.favourite",
+      "id": "digital.modula.vault-notes.action.note.favourite",
       "title": "Favourite note",
-      "functionId": "modula.vault-notes.function.note.favourite",
+      "functionId": "digital.modula.vault-notes.function.note.favourite",
       "permissions": [
         "module.records.write"
       ],
@@ -1196,9 +1196,9 @@
       }
     },
     {
-      "id": "modula.vault-notes.action.note.unfavourite",
+      "id": "digital.modula.vault-notes.action.note.unfavourite",
       "title": "Unfavourite note",
-      "functionId": "modula.vault-notes.function.note.unfavourite",
+      "functionId": "digital.modula.vault-notes.function.note.unfavourite",
       "permissions": [
         "module.records.write"
       ],
@@ -1215,9 +1215,9 @@
       }
     },
     {
-      "id": "modula.vault-notes.action.note.move",
+      "id": "digital.modula.vault-notes.action.note.move",
       "title": "Move note",
-      "functionId": "modula.vault-notes.function.note.move",
+      "functionId": "digital.modula.vault-notes.function.note.move",
       "permissions": [
         "module.records.write"
       ],
@@ -1234,9 +1234,9 @@
       }
     },
     {
-      "id": "modula.vault-notes.action.note.export",
+      "id": "digital.modula.vault-notes.action.note.export",
       "title": "Export notes",
-      "functionId": "modula.vault-notes.function.note.export",
+      "functionId": "digital.modula.vault-notes.function.note.export",
       "permissions": [
         "module.export.create"
       ],
@@ -1254,9 +1254,9 @@
       }
     },
     {
-      "id": "modula.vault-notes.action.folder.create",
+      "id": "digital.modula.vault-notes.action.folder.create",
       "title": "Create folder",
-      "functionId": "modula.vault-notes.function.folder.create",
+      "functionId": "digital.modula.vault-notes.function.folder.create",
       "permissions": [
         "module.records.write"
       ],
@@ -1274,9 +1274,9 @@
       }
     },
     {
-      "id": "modula.vault-notes.action.folder.rename",
+      "id": "digital.modula.vault-notes.action.folder.rename",
       "title": "Rename folder",
-      "functionId": "modula.vault-notes.function.folder.rename",
+      "functionId": "digital.modula.vault-notes.function.folder.rename",
       "permissions": [
         "module.records.write"
       ],
@@ -1294,9 +1294,9 @@
       }
     },
     {
-      "id": "modula.vault-notes.action.folder.delete",
+      "id": "digital.modula.vault-notes.action.folder.delete",
       "title": "Delete folder",
-      "functionId": "modula.vault-notes.function.folder.delete",
+      "functionId": "digital.modula.vault-notes.function.folder.delete",
       "permissions": [
         "module.records.delete"
       ],
@@ -1314,9 +1314,9 @@
       }
     },
     {
-      "id": "modula.vault-notes.action.tag.create",
+      "id": "digital.modula.vault-notes.action.tag.create",
       "title": "Create tag",
-      "functionId": "modula.vault-notes.function.tag.create",
+      "functionId": "digital.modula.vault-notes.function.tag.create",
       "permissions": [
         "module.records.write"
       ],
@@ -1333,9 +1333,9 @@
       }
     },
     {
-      "id": "modula.vault-notes.action.tag.assign",
+      "id": "digital.modula.vault-notes.action.tag.assign",
       "title": "Assign tag",
-      "functionId": "modula.vault-notes.function.tag.assign",
+      "functionId": "digital.modula.vault-notes.function.tag.assign",
       "permissions": [
         "module.records.write"
       ],
@@ -1352,9 +1352,9 @@
       }
     },
     {
-      "id": "modula.vault-notes.action.tag.remove",
+      "id": "digital.modula.vault-notes.action.tag.remove",
       "title": "Remove tag",
-      "functionId": "modula.vault-notes.function.tag.remove",
+      "functionId": "digital.modula.vault-notes.function.tag.remove",
       "permissions": [
         "module.records.write"
       ],
@@ -1373,7 +1373,7 @@
   ],
   "functions": [
     {
-      "id": "modula.vault-notes.function.note.create",
+      "id": "digital.modula.vault-notes.function.note.create",
       "title": "Create note",
       "inputSchema": {
         "type": "object",
@@ -1433,7 +1433,7 @@
       }
     },
     {
-      "id": "modula.vault-notes.function.note.open",
+      "id": "digital.modula.vault-notes.function.note.open",
       "title": "Open note",
       "inputSchema": {
         "type": "object",
@@ -1472,7 +1472,7 @@
       }
     },
     {
-      "id": "modula.vault-notes.function.note.update",
+      "id": "digital.modula.vault-notes.function.note.update",
       "title": "Update note",
       "inputSchema": {
         "type": "object",
@@ -1531,7 +1531,7 @@
       }
     },
     {
-      "id": "modula.vault-notes.function.note.duplicate",
+      "id": "digital.modula.vault-notes.function.note.duplicate",
       "title": "Duplicate note",
       "inputSchema": {
         "type": "object",
@@ -1578,7 +1578,7 @@
       }
     },
     {
-      "id": "modula.vault-notes.function.note.archive",
+      "id": "digital.modula.vault-notes.function.note.archive",
       "title": "Archive note",
       "inputSchema": {
         "type": "object",
@@ -1621,7 +1621,7 @@
       }
     },
     {
-      "id": "modula.vault-notes.function.note.unarchive",
+      "id": "digital.modula.vault-notes.function.note.unarchive",
       "title": "Unarchive note",
       "inputSchema": {
         "type": "object",
@@ -1664,7 +1664,7 @@
       }
     },
     {
-      "id": "modula.vault-notes.function.note.delete",
+      "id": "digital.modula.vault-notes.function.note.delete",
       "title": "Delete note",
       "inputSchema": {
         "type": "object",
@@ -1711,7 +1711,7 @@
       }
     },
     {
-      "id": "modula.vault-notes.function.note.restore",
+      "id": "digital.modula.vault-notes.function.note.restore",
       "title": "Restore note",
       "inputSchema": {
         "type": "object",
@@ -1754,7 +1754,7 @@
       }
     },
     {
-      "id": "modula.vault-notes.function.note.delete-permanently",
+      "id": "digital.modula.vault-notes.function.note.delete-permanently",
       "title": "Permanently delete note",
       "inputSchema": {
         "type": "object",
@@ -1801,7 +1801,7 @@
       }
     },
     {
-      "id": "modula.vault-notes.function.note.pin",
+      "id": "digital.modula.vault-notes.function.note.pin",
       "title": "Pin note",
       "inputSchema": {
         "type": "object",
@@ -1842,7 +1842,7 @@
       }
     },
     {
-      "id": "modula.vault-notes.function.note.unpin",
+      "id": "digital.modula.vault-notes.function.note.unpin",
       "title": "Unpin note",
       "inputSchema": {
         "type": "object",
@@ -1883,7 +1883,7 @@
       }
     },
     {
-      "id": "modula.vault-notes.function.note.favourite",
+      "id": "digital.modula.vault-notes.function.note.favourite",
       "title": "Favourite note",
       "inputSchema": {
         "type": "object",
@@ -1924,7 +1924,7 @@
       }
     },
     {
-      "id": "modula.vault-notes.function.note.unfavourite",
+      "id": "digital.modula.vault-notes.function.note.unfavourite",
       "title": "Unfavourite note",
       "inputSchema": {
         "type": "object",
@@ -1965,7 +1965,7 @@
       }
     },
     {
-      "id": "modula.vault-notes.function.note.move",
+      "id": "digital.modula.vault-notes.function.note.move",
       "title": "Move note",
       "inputSchema": {
         "type": "object",
@@ -2009,7 +2009,7 @@
       }
     },
     {
-      "id": "modula.vault-notes.function.note.export",
+      "id": "digital.modula.vault-notes.function.note.export",
       "title": "Export notes",
       "inputSchema": {
         "type": "object",
@@ -2056,7 +2056,7 @@
       }
     },
     {
-      "id": "modula.vault-notes.function.folder.create",
+      "id": "digital.modula.vault-notes.function.folder.create",
       "title": "Create folder",
       "inputSchema": {
         "type": "object",
@@ -2101,7 +2101,7 @@
       }
     },
     {
-      "id": "modula.vault-notes.function.folder.rename",
+      "id": "digital.modula.vault-notes.function.folder.rename",
       "title": "Rename folder",
       "inputSchema": {
         "type": "object",
@@ -2147,7 +2147,7 @@
       }
     },
     {
-      "id": "modula.vault-notes.function.folder.delete",
+      "id": "digital.modula.vault-notes.function.folder.delete",
       "title": "Delete folder",
       "inputSchema": {
         "type": "object",
@@ -2193,7 +2193,7 @@
       }
     },
     {
-      "id": "modula.vault-notes.function.tag.create",
+      "id": "digital.modula.vault-notes.function.tag.create",
       "title": "Create tag",
       "inputSchema": {
         "type": "object",
@@ -2234,7 +2234,7 @@
       }
     },
     {
-      "id": "modula.vault-notes.function.tag.assign",
+      "id": "digital.modula.vault-notes.function.tag.assign",
       "title": "Assign tag",
       "inputSchema": {
         "type": "object",
@@ -2279,7 +2279,7 @@
       }
     },
     {
-      "id": "modula.vault-notes.function.tag.remove",
+      "id": "digital.modula.vault-notes.function.tag.remove",
       "title": "Remove tag",
       "inputSchema": {
         "type": "object",
@@ -2326,7 +2326,7 @@
   ],
   "settings": [
     {
-      "id": "modula.vault-notes.settings.main",
+      "id": "digital.modula.vault-notes.settings.main",
       "scope": "installation",
       "schema": {
         "type": "object",
@@ -2404,7 +2404,7 @@
   ],
   "events": [
     {
-      "id": "modula.vault-notes.event.note.created",
+      "id": "digital.modula.vault-notes.event.note.created",
       "type": "vault-notes.note.created",
       "direction": "emitted",
       "schemaVersion": "1.0.0",
@@ -2417,7 +2417,7 @@
       "replaySupport": true
     },
     {
-      "id": "modula.vault-notes.event.note.updated",
+      "id": "digital.modula.vault-notes.event.note.updated",
       "type": "vault-notes.note.updated",
       "direction": "emitted",
       "schemaVersion": "1.0.0",
@@ -2430,7 +2430,7 @@
       "replaySupport": true
     },
     {
-      "id": "modula.vault-notes.event.note.archived",
+      "id": "digital.modula.vault-notes.event.note.archived",
       "type": "vault-notes.note.archived",
       "direction": "emitted",
       "schemaVersion": "1.0.0",
@@ -2443,7 +2443,7 @@
       "replaySupport": true
     },
     {
-      "id": "modula.vault-notes.event.note.unarchived",
+      "id": "digital.modula.vault-notes.event.note.unarchived",
       "type": "vault-notes.note.unarchived",
       "direction": "emitted",
       "schemaVersion": "1.0.0",
@@ -2456,7 +2456,7 @@
       "replaySupport": true
     },
     {
-      "id": "modula.vault-notes.event.note.deleted",
+      "id": "digital.modula.vault-notes.event.note.deleted",
       "type": "vault-notes.note.deleted",
       "direction": "emitted",
       "schemaVersion": "1.0.0",
@@ -2469,7 +2469,7 @@
       "replaySupport": true
     },
     {
-      "id": "modula.vault-notes.event.note.restored",
+      "id": "digital.modula.vault-notes.event.note.restored",
       "type": "vault-notes.note.restored",
       "direction": "emitted",
       "schemaVersion": "1.0.0",
@@ -2482,7 +2482,7 @@
       "replaySupport": true
     },
     {
-      "id": "modula.vault-notes.event.note.permanently-deleted",
+      "id": "digital.modula.vault-notes.event.note.permanently-deleted",
       "type": "vault-notes.note.permanently-deleted",
       "direction": "emitted",
       "schemaVersion": "1.0.0",
@@ -2495,7 +2495,7 @@
       "replaySupport": false
     },
     {
-      "id": "modula.vault-notes.event.note.duplicated",
+      "id": "digital.modula.vault-notes.event.note.duplicated",
       "type": "vault-notes.note.duplicated",
       "direction": "emitted",
       "schemaVersion": "1.0.0",
@@ -2508,7 +2508,7 @@
       "replaySupport": true
     },
     {
-      "id": "modula.vault-notes.event.note.exported",
+      "id": "digital.modula.vault-notes.event.note.exported",
       "type": "vault-notes.note.exported",
       "direction": "emitted",
       "schemaVersion": "1.0.0",
@@ -2522,7 +2522,7 @@
       "replaySupport": false
     },
     {
-      "id": "modula.vault-notes.event.folder.created",
+      "id": "digital.modula.vault-notes.event.folder.created",
       "type": "vault-notes.folder.created",
       "direction": "emitted",
       "schemaVersion": "1.0.0",
@@ -2535,7 +2535,7 @@
       "replaySupport": true
     },
     {
-      "id": "modula.vault-notes.event.folder.updated",
+      "id": "digital.modula.vault-notes.event.folder.updated",
       "type": "vault-notes.folder.updated",
       "direction": "emitted",
       "schemaVersion": "1.0.0",
@@ -2548,7 +2548,7 @@
       "replaySupport": true
     },
     {
-      "id": "modula.vault-notes.event.folder.deleted",
+      "id": "digital.modula.vault-notes.event.folder.deleted",
       "type": "vault-notes.folder.deleted",
       "direction": "emitted",
       "schemaVersion": "1.0.0",
@@ -2561,7 +2561,7 @@
       "replaySupport": true
     },
     {
-      "id": "modula.vault-notes.event.ai-product-action-requested",
+      "id": "digital.modula.vault-notes.event.ai-product-action-requested",
       "type": "ai.product-action.requested",
       "direction": "emitted",
       "schemaVersion": "1.0.0",
@@ -2574,7 +2574,7 @@
       "replaySupport": false
     },
     {
-      "id": "modula.vault-notes.event.ai-product-action-completed",
+      "id": "digital.modula.vault-notes.event.ai-product-action-completed",
       "type": "ai.product-action.completed",
       "direction": "emitted",
       "schemaVersion": "1.0.0",
@@ -2587,7 +2587,7 @@
       "replaySupport": false
     },
     {
-      "id": "modula.vault-notes.event.ai-product-action-rejected",
+      "id": "digital.modula.vault-notes.event.ai-product-action-rejected",
       "type": "ai.product-action.rejected",
       "direction": "emitted",
       "schemaVersion": "1.0.0",
@@ -2600,7 +2600,7 @@
       "replaySupport": false
     },
     {
-      "id": "modula.vault-notes.event.ai-product-action-applied",
+      "id": "digital.modula.vault-notes.event.ai-product-action-applied",
       "type": "ai.product-action.applied",
       "direction": "emitted",
       "schemaVersion": "1.0.0",
@@ -2613,7 +2613,7 @@
       "replaySupport": false
     },
     {
-      "id": "modula.vault-notes.event.ai-product-action-expired",
+      "id": "digital.modula.vault-notes.event.ai-product-action-expired",
       "type": "ai.product-action.expired",
       "direction": "emitted",
       "schemaVersion": "1.0.0",
@@ -2626,7 +2626,7 @@
       "replaySupport": false
     },
     {
-      "id": "modula.vault-notes.event.vault-notes-ai-result-applied",
+      "id": "digital.modula.vault-notes.event.vault-notes-ai-result-applied",
       "type": "vault-notes.ai.result-applied",
       "direction": "emitted",
       "schemaVersion": "1.0.0",
@@ -2642,8 +2642,8 @@
   "automations": [],
   "search": [
     {
-      "id": "modula.vault-notes.search.note",
-      "recordId": "modula.vault-notes.record.note",
+      "id": "digital.modula.vault-notes.search.note",
+      "recordId": "digital.modula.vault-notes.record.note",
       "indexedFields": [
         "title",
         "plainTextProjection",
@@ -2673,8 +2673,8 @@
       }
     },
     {
-      "id": "modula.vault-notes.search.folder",
-      "recordId": "modula.vault-notes.record.folder",
+      "id": "digital.modula.vault-notes.search.folder",
+      "recordId": "digital.modula.vault-notes.record.folder",
       "indexedFields": [
         "name"
       ],
@@ -2694,7 +2694,7 @@
   ],
   "ai": [
     {
-      "id": "modula.vault-notes.ai.product-actions",
+      "id": "digital.modula.vault-notes.ai.product-actions",
       "features": [
         "summarize",
         "extract",
@@ -3079,7 +3079,7 @@
     "dataSchemaVersion": "1.0.0",
     "steps": [
       {
-        "id": "modula.vault-notes.migration.1-0-0",
+        "id": "digital.modula.vault-notes.migration.1-0-0",
         "from": "0.0.0",
         "to": "1.0.0",
         "reversible": true,

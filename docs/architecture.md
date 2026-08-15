@@ -14,7 +14,7 @@ Primary flow:
 1. `modula.module.json` validates against Modula Module Standard 1.0.
 2. `module.manifest.json` adapts the release into the Greenfield registry.
 3. Greenfield registers schemas, settings, events, search and declarative views.
-4. The module host renders `/module/modula.vault-notes` and subpaths.
+4. The module host renders `/module/digital.modula.vault-notes` and subpaths.
 5. Generic module records store all note data account-scoped.
 
 Deferred systems are extension points only: AI, automations, DIMON, social/file

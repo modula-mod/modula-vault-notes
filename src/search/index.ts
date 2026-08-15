@@ -23,7 +23,7 @@ export function projectNoteForSearch(note: VaultNoteRecord, accountId: string, f
     status: note.deletedAt ? 'deleted' : 'active',
     sourceVersion: note.revision,
     metadata: {
-      moduleId: 'modula.vault-notes',
+      moduleId: 'digital.modula.vault-notes',
       folderId: note.folderId,
       folderName: folder?.name,
       sourceTitle: note.source?.title,
@@ -47,7 +47,7 @@ export function projectFolderForSearch(folder: VaultFolderRecord, accountId: str
     status: 'active',
     sourceVersion: Date.parse(folder.updatedAt),
     metadata: {
-      moduleId: 'modula.vault-notes',
+      moduleId: 'digital.modula.vault-notes',
       parentFolderId: folder.parentFolderId,
       position: folder.position,
       createdAt: folder.createdAt,

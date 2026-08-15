@@ -1,16 +1,16 @@
 {
-  "viewId": "modula.vault-notes.views.folders",
-  "moduleId": "modula.vault-notes",
+  "viewId": "digital.modula.vault-notes.views.folders",
+  "moduleId": "digital.modula.vault-notes",
   "kind": "collection",
   "title": "Folders",
   "collection": "folder",
   "query": {"collection": "folder", "defaultLimit": 50, "maxLimit": 100, "allowedSortFields": ["position", "name", "updatedAt"], "allowedFilterFields": ["parentFolderId"], "searchableFields": ["name"], "referenceFields": ["parentFolderId"]},
   "layout": [{"id": "folders", "component": "recordList", "collection": "folder"}],
   "toolbar": [
-    {"actionId": "modula.vault-notes.actions.folder.create", "kind": "record.create", "label": "Create folder", "inputSchema": {"schemaRef": "schemas/folder.schema.json"}, "capability": "records:module.modula.vault-notes.folder:write", "confirmationPolicy": "none", "destructive": false, "successDestination": {"kind": "stay"}, "errorPresentation": {"kind": "inline"}, "requiresIdempotencyKey": true, "target": {"collection": "folder"}},
-    {"actionId": "modula.vault-notes.actions.folder.rename", "kind": "record.update", "label": "Rename folder", "inputSchema": {"schemaRef": "schemas/folder.schema.json"}, "capability": "records:module.modula.vault-notes.folder:write", "confirmationPolicy": "none", "destructive": false, "successDestination": {"kind": "stay"}, "errorPresentation": {"kind": "inline"}, "requiresIdempotencyKey": true, "target": {"collection": "folder", "recordIdField": "recordId"}},
-    {"actionId": "modula.vault-notes.actions.folder.delete", "kind": "record.delete", "label": "Delete folder", "inputSchema": {"fields": [{"fieldId": "recordId", "name": "recordId", "type": "text", "label": "Record ID", "required": true}]}, "capability": "records:module.modula.vault-notes.folder:delete", "confirmationPolicy": "confirmDestructive", "destructive": true, "successDestination": {"kind": "stay"}, "errorPresentation": {"kind": "inline"}, "requiresIdempotencyKey": true, "target": {"collection": "folder", "recordIdField": "recordId"}}
+    {"actionId": "digital.modula.vault-notes.actions.folder.create", "kind": "record.create", "label": "Create folder", "inputSchema": {"schemaRef": "schemas/folder.schema.json"}, "capability": "records:module.digital.modula.vault-notes.folder:write", "confirmationPolicy": "none", "destructive": false, "successDestination": {"kind": "stay"}, "errorPresentation": {"kind": "inline"}, "requiresIdempotencyKey": true, "target": {"collection": "folder"}},
+    {"actionId": "digital.modula.vault-notes.actions.folder.rename", "kind": "record.update", "label": "Rename folder", "inputSchema": {"schemaRef": "schemas/folder.schema.json"}, "capability": "records:module.digital.modula.vault-notes.folder:write", "confirmationPolicy": "none", "destructive": false, "successDestination": {"kind": "stay"}, "errorPresentation": {"kind": "inline"}, "requiresIdempotencyKey": true, "target": {"collection": "folder", "recordIdField": "recordId"}},
+    {"actionId": "digital.modula.vault-notes.actions.folder.delete", "kind": "record.delete", "label": "Delete folder", "inputSchema": {"fields": [{"fieldId": "recordId", "name": "recordId", "type": "text", "label": "Record ID", "required": true}]}, "capability": "records:module.digital.modula.vault-notes.folder:delete", "confirmationPolicy": "confirmDestructive", "destructive": true, "successDestination": {"kind": "stay"}, "errorPresentation": {"kind": "inline"}, "requiresIdempotencyKey": true, "target": {"collection": "folder", "recordIdField": "recordId"}}
   ],
-  "emptyState": {"title": "No folders", "actionId": "modula.vault-notes.actions.folder.create"},
-  "requiredCapabilities": ["records:module.modula.vault-notes.folder:read"]
+  "emptyState": {"title": "No folders", "actionId": "digital.modula.vault-notes.actions.folder.create"},
+  "requiredCapabilities": ["records:module.digital.modula.vault-notes.folder:read"]
 }

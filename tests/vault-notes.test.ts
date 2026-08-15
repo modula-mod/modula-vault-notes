@@ -35,12 +35,12 @@ describe('Vault Notes Standard 1.2 manifest', () => {
 
   it('declares required records, views, actions, functions, permissions, events, settings and search', () => {
     expect(manifest.records.map((record: any) => record.id)).toEqual(expect.arrayContaining([
-      'modula.vault-notes.record.note',
-      'modula.vault-notes.record.folder',
-      'modula.vault-notes.record.tag',
-      'modula.vault-notes.record.note-link',
-      'modula.vault-notes.record.note-version',
-      'modula.vault-notes.record.saved-source',
+      'digital.modula.vault-notes.record.note',
+      'digital.modula.vault-notes.record.folder',
+      'digital.modula.vault-notes.record.tag',
+      'digital.modula.vault-notes.record.note-link',
+      'digital.modula.vault-notes.record.note-version',
+      'digital.modula.vault-notes.record.saved-source',
     ]))
     expect(manifest.views).toHaveLength(12)
     expect(manifest.actions).toHaveLength(21)

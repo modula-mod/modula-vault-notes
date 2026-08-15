@@ -1,14 +1,14 @@
 {
-  "viewId": "modula.vault-notes.views.collection",
-  "moduleId": "modula.vault-notes",
+  "viewId": "digital.modula.vault-notes.views.collection",
+  "moduleId": "digital.modula.vault-notes",
   "kind": "collection",
   "title": "Notes",
   "collection": "note",
   "query": {"collection": "note", "defaultLimit": 25, "maxLimit": 100, "sort": [{"field": "updatedAt", "direction": "desc"}], "allowedSortFields": ["createdAt", "updatedAt", "title"], "allowedFilterFields": ["folderId", "tagIds", "pinned", "favourite", "archived"], "searchableFields": ["title", "plainTextProjection", "tagIds"], "folderField": "folderId", "referenceFields": ["folderId", "tagIds"]},
   "layout": [{"id": "notes", "component": "recordList", "collection": "note"}],
   "toolbar": [
-    {"actionId": "modula.vault-notes.actions.note.create", "kind": "record.create", "label": "Create note", "inputSchema": {"schemaRef": "schemas/note.schema.json"}, "capability": "records:module.modula.vault-notes.note:write", "confirmationPolicy": "none", "destructive": false, "successDestination": {"kind": "stay"}, "errorPresentation": {"kind": "inline"}, "requiresIdempotencyKey": true, "target": {"collection": "note"}}
+    {"actionId": "digital.modula.vault-notes.actions.note.create", "kind": "record.create", "label": "Create note", "inputSchema": {"schemaRef": "schemas/note.schema.json"}, "capability": "records:module.digital.modula.vault-notes.note:write", "confirmationPolicy": "none", "destructive": false, "successDestination": {"kind": "stay"}, "errorPresentation": {"kind": "inline"}, "requiresIdempotencyKey": true, "target": {"collection": "note"}}
   ],
-  "emptyState": {"title": "No notes", "actionId": "modula.vault-notes.actions.note.create"},
-  "requiredCapabilities": ["records:module.modula.vault-notes.note:read"]
+  "emptyState": {"title": "No notes", "actionId": "digital.modula.vault-notes.actions.note.create"},
+  "requiredCapabilities": ["records:module.digital.modula.vault-notes.note:read"]
 }
