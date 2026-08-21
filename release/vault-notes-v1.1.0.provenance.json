@@ -1,0 +1,11 @@
+{
+  "moduleId": "digital.modula.vault-notes",
+  "moduleVersion": "1.1.0",
+  "releaseTag": "vault-notes-v1.1.0",
+  "releaseCommit": "f443972d53f94b6f192a37bcce8742bdf18a99b5",
+  "releaseAssetName": "modula-vault-notes-1.1.0.tgz",
+  "packageChecksum": "46f918b07dc7d9c2734be4e6bb7729c137d316ceaa3f9d272da1bd7f78ad253a",
+  "publishedAt": "2026-08-01T16:34:15Z",
+  "standardReleaseTag": "mms-v1.2.0",
+  "standardReleaseCommit": "763882502d17a3fd70e33d6cc544304224e5a271"
+}

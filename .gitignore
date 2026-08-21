@@ -1,5 +1,7 @@
 node_modules/
 dist/
-release/
+release/*
+!release/vault-notes-v1.1.0.provenance.json
 .DS_Store
 *.tgz
+!release/modula-vault-notes-1.1.0.tgz

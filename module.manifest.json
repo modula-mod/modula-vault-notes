@@ -316,9 +316,60 @@
     "executionMode": "declarative"
   },
   "integrity": {
-    "manifestSha256": "d674b65a66bc5a671dc43ef2f8883d2faabc02b34c7c52d5c80162df9f661cfb"
+    "manifestSha256": "9b8a3c1c20a1a33d9462dce263cfd6de37edfc448df18f48a7a9a88bc6cc92b0"
   },
   "extensions": {
+    "marketplace": {
+      "version": "1.0.0",
+      "category": "Productivity",
+      "ageRating": "4+",
+      "privacy": {
+        "state": "declared",
+        "value": "Account scoped"
+      },
+      "offlineSupport": {
+        "state": "declared",
+        "value": false
+      },
+      "syncSupport": {
+        "state": "declared",
+        "value": true
+      },
+      "inAppPurchases": {
+        "state": "declared",
+        "value": false
+      },
+      "previews": [],
+      "availableViewIds": [
+        "digital.modula.vault-notes.view.home",
+        "digital.modula.vault-notes.view.collection",
+        "digital.modula.vault-notes.view.detail",
+        "digital.modula.vault-notes.view.editor",
+        "digital.modula.vault-notes.view.search",
+        "digital.modula.vault-notes.view.favourites",
+        "digital.modula.vault-notes.view.archived",
+        "digital.modula.vault-notes.view.trash",
+        "digital.modula.vault-notes.view.folders",
+        "digital.modula.vault-notes.view.settings",
+        "digital.modula.vault-notes.view.empty",
+        "digital.modula.vault-notes.view.error"
+      ],
+      "release": {
+        "publishedAt": "2026-08-01T16:34:15.000Z",
+        "sizeBytes": 26458,
+        "notes": [
+          "Adds optional, provider-neutral AI product actions with explicit review before changes are applied.",
+          "Publishes immutable prompt and result schemas for summarising, title suggestions, rewrites, action-item extraction and tag suggestions.",
+          "Vault Notes remains operational without AI permissions or an active AI provider."
+        ],
+        "source": {
+          "provider": "github-release",
+          "tag": "vault-notes-v1.1.0",
+          "asset": "modula-vault-notes-1.1.0.tgz",
+          "sha256": "46f918b07dc7d9c2734be4e6bb7729c137d316ceaa3f9d272da1bd7f78ad253a"
+        }
+      }
+    },
     "standard": {
       "standardVersion": "1.2.0",
       "manifestSchemaVersion": "1.2.0",

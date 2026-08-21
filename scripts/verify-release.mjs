@@ -14,6 +14,7 @@ const fail = message => {
 }
 
 const standard = readJson('modula.module.json')
+const greenfield = readJson('module.manifest.json')
 const validation = validateModulaModuleManifest(standard)
 if (validation.valid) pass('Standard 1.2 manifest validates')
 else fail(`Standard manifest invalid: ${validation.issues.map(issue => `${issue.code} ${issue.path}`).join('; ')}`)
@@ -33,6 +34,22 @@ const requiredViews = ['home', 'collection', 'detail', 'editor', 'search', 'favo
 for (const view of requiredViews) {
   if (standard.views.some(item => item.id === `digital.modula.vault-notes.view.${view}`)) pass(`view vault-notes.${view} declared`)
   else fail(`view vault-notes.${view} missing`)
+}
+
+const marketplace = greenfield.extensions?.marketplace ?? {}
+if (marketplace.category === 'Productivity') pass('Marketplace category is publisher-declared')
+else fail('Marketplace category missing')
+if (marketplace.ageRating === '4+') pass('Marketplace age rating is publisher-declared')
+else fail('Marketplace age rating missing')
+if (marketplace.previews?.length === 0) pass('Marketplace previews remain empty until verified media is published')
+else fail('Marketplace previews must contain only separately verified media')
+if (marketplace.availableViewIds?.length === requiredViews.length) pass('Marketplace listing references all canonical module views')
+else fail('Marketplace listing must reference every canonical module view')
+if (marketplace.release?.source?.sha256 === '46f918b07dc7d9c2734be4e6bb7729c137d316ceaa3f9d272da1bd7f78ad253a') pass('Marketplace release asset provenance is pinned')
+else fail('Marketplace release asset provenance missing')
+for (const field of ['rating', 'ratingCount', 'chartRank', 'downloadCount']) {
+  if (!(field in marketplace)) pass(`runtime Marketplace aggregate is not hardcoded: ${field}`)
+  else fail(`runtime Marketplace aggregate must not be declared in the module: ${field}`)
 }
 
 const actionNames = ['create', 'open', 'update', 'duplicate', 'archive', 'unarchive', 'delete', 'restore', 'delete-permanently', 'pin', 'unpin', 'favourite', 'unfavourite', 'move', 'export']
