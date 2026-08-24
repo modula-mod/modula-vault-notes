@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.2.0
 
 - Evolve the manifest to Modula Module Standard 2.1 and declare twelve governed extension points.
 - Remove embedded AI declarations and source; optional AI is now owned by the separate Vault AI add-on.

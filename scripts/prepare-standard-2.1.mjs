@@ -29,6 +29,9 @@ const extensionProduct = moduleVersion => ({
 })
 
 const standard = readJson('modula.module.json')
+const requestedVersion = process.argv[2]
+const requestedCommit = process.argv[3]
+if (requestedVersion) standard.moduleVersion = requestedVersion
 standard.schemaVersion = '2.1.0'
 standard.standardVersion = '2.1.0'
 standard.manifestSchemaVersion = '2.1.0'
@@ -39,9 +42,11 @@ standard.permissions = standard.permissions.filter(permission => !permission.id.
 standard.capabilities = standard.capabilities.filter(capability => capability.id !== 'ai')
 standard.ai = []
 standard.extensionProduct = extensionProduct(standard.moduleVersion)
+if (requestedCommit) standard.release.commitSha = requestedCommit
 writeJson('modula.module.json', standard)
 
 const greenfield = readJson('module.manifest.json')
+if (requestedVersion) greenfield.version = requestedVersion
 greenfield.manifestVersion = 2
 greenfield.standardVersion = '2.1.0'
 greenfield.sectionVersions = createDefaultModuleSectionVersions('2.1.0')
@@ -49,6 +54,28 @@ greenfield.description = 'Offline-capable Vault Notes core with governed extensi
 greenfield.permissions = greenfield.permissions.filter(permission => !permission.permission.startsWith('ai.'))
 delete greenfield.ai
 greenfield.extensionProduct = extensionProduct(greenfield.version)
+if (requestedCommit) greenfield.source.commit = requestedCommit
+if (requestedVersion) {
+  greenfield.source.releaseTag = `vault-notes-v${requestedVersion}`
+  greenfield.source.releaseAssetName = `modula-vault-notes-${requestedVersion}.tgz`
+  const marketplaceRelease = greenfield.extensions?.marketplace?.release
+  if (marketplaceRelease) {
+    marketplaceRelease.publishedAt = '2026-08-24T00:00:00.000Z'
+    marketplaceRelease.sizeBytes = null
+    marketplaceRelease.notes = [
+      'Exposes governed Standard 2.1 extension points while Vault Notes remains fully standalone.',
+      'Moves optional AI out of Vault Notes core into the separately versioned Vault AI add-on.',
+      'Publishes versioned note and collection events for capability-authorised subscribers.',
+    ]
+    marketplaceRelease.source = {provider: 'github-release', tag: `vault-notes-v${requestedVersion}`, asset: `modula-vault-notes-${requestedVersion}.tgz`}
+  }
+  if (greenfield.extensions?.standard) {
+    greenfield.extensions.standard.standardVersion = '2.1.0'
+    greenfield.extensions.standard.manifestSchemaVersion = '2.1.0'
+    greenfield.extensions.standard.standardReleaseTag = 'mms-v2.1.0'
+    greenfield.extensions.standard.standardReleaseCommit = 'd5a99a4bf1dec789b4d96df5182ae3a95a87f3d7'
+  }
+}
 greenfield.contributions.events = [
   {id: `${productId}.events.note-created-v1`, title: 'Note created', eventType: 'vault.note.created.v1', direction: 'emits'},
   {id: `${productId}.events.note-updated-v1`, title: 'Note updated', eventType: 'vault.note.updated.v1', direction: 'emits'},
@@ -67,4 +94,3 @@ function readJson(path) {
 function writeJson(path, value) {
   writeFileSync(path, `${JSON.stringify(value, null, 2)}\n`)
 }
-

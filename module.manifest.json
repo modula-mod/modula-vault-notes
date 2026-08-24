@@ -3,7 +3,7 @@
   "moduleId": "digital.modula.vault-notes",
   "name": "Vault Notes",
   "description": "Offline-capable Vault Notes core with governed extension points and no embedded optional add-ons.",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "publisher": {
     "publisherId": "modula",
     "displayName": "Modula",
@@ -12,10 +12,10 @@
   "source": {
     "provider": "github",
     "repository": "modula-mod/modula-vault-notes",
-    "commit": "0000000000000000000000000000000000000000",
+    "commit": "3e3e50d19317e94f00ea094a657267aa986a34ca",
     "manifestPath": "module.manifest.json",
-    "releaseTag": "vault-notes-v1.1.0",
-    "releaseAssetName": "modula-vault-notes-1.1.0.tgz"
+    "releaseTag": "vault-notes-v1.2.0",
+    "releaseAssetName": "modula-vault-notes-1.2.0.tgz"
   },
   "license": {
     "status": "firstParty",
@@ -302,7 +302,7 @@
     "executionMode": "declarative"
   },
   "integrity": {
-    "manifestSha256": "040e514b5903b041efad0a5f08b7a012a2b6ed6ed8169fa60fc5d45591445498"
+    "manifestSha256": "943aa180a41416574c7a9400f40863177d60568c7a04dcf7d164416e3a6df387"
   },
   "extensions": {
     "marketplace": {
@@ -341,27 +341,26 @@
         "digital.modula.vault-notes.view.error"
       ],
       "release": {
-        "publishedAt": "2026-08-01T16:34:15.000Z",
-        "sizeBytes": 26458,
+        "publishedAt": "2026-08-24T00:00:00.000Z",
+        "sizeBytes": null,
         "notes": [
-          "Adds optional, provider-neutral AI product actions with explicit review before changes are applied.",
-          "Publishes immutable prompt and result schemas for summarising, title suggestions, rewrites, action-item extraction and tag suggestions.",
-          "Vault Notes remains operational without AI permissions or an active AI provider."
+          "Exposes governed Standard 2.1 extension points while Vault Notes remains fully standalone.",
+          "Moves optional AI out of Vault Notes core into the separately versioned Vault AI add-on.",
+          "Publishes versioned note and collection events for capability-authorised subscribers."
         ],
         "source": {
           "provider": "github-release",
-          "tag": "vault-notes-v1.1.0",
-          "asset": "modula-vault-notes-1.1.0.tgz",
-          "sha256": "46f918b07dc7d9c2734be4e6bb7729c137d316ceaa3f9d272da1bd7f78ad253a"
+          "tag": "vault-notes-v1.2.0",
+          "asset": "modula-vault-notes-1.2.0.tgz"
         }
       }
     },
     "standard": {
-      "standardVersion": "1.2.0",
-      "manifestSchemaVersion": "1.2.0",
+      "standardVersion": "2.1.0",
+      "manifestSchemaVersion": "2.1.0",
       "dataSchemaVersion": "1.0.0",
-      "standardReleaseTag": "mms-v1.2.0",
-      "standardReleaseCommit": "763882502d17a3fd70e33d6cc544304224e5a271"
+      "standardReleaseTag": "mms-v2.1.0",
+      "standardReleaseCommit": "d5a99a4bf1dec789b4d96df5182ae3a95a87f3d7"
     },
     "settingsDefaults": {
       "defaultCollectionView": "list",
@@ -453,7 +452,7 @@
     "marketplace": "2.1.0"
   },
   "extensionProduct": {
-    "version": "1.1.0",
+    "version": "1.2.0",
     "kind": "module",
     "targets": [],
     "extensionPoints": [

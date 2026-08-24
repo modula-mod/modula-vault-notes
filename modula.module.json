@@ -1,7 +1,7 @@
 {
   "schemaVersion": "2.1.0",
   "standardVersion": "2.1.0",
-  "moduleVersion": "1.1.0",
+  "moduleVersion": "1.2.0",
   "manifestSchemaVersion": "2.1.0",
   "dataSchemaVersion": "1.0.0",
   "id": "digital.modula.vault-notes",
@@ -2799,7 +2799,7 @@
   },
   "release": {
     "repository": "modula-mod/modula-vault-notes",
-    "commitSha": "0000000000000000000000000000000000000000",
+    "commitSha": "3e3e50d19317e94f00ea094a657267aa986a34ca",
     "checksum": "0000000000000000000000000000000000000000000000000000000000000000",
     "licenseEvidence": [
       "LICENSE",
@@ -2885,7 +2885,7 @@
     "marketplace": "2.1.0"
   },
   "extensionProduct": {
-    "version": "1.1.0",
+    "version": "1.2.0",
     "kind": "module",
     "targets": [],
     "extensionPoints": [
