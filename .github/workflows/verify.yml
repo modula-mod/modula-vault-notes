@@ -25,6 +25,10 @@ jobs:
           cache: pnpm
           cache-dependency-path: modula-vault-notes/pnpm-lock.yaml
       - run: pnpm install --frozen-lockfile
+        working-directory: modula-module-standard
+      - run: pnpm build
+        working-directory: modula-module-standard
+      - run: pnpm install --frozen-lockfile
         working-directory: modula-vault-notes
       - run: pnpm verify
         working-directory: modula-vault-notes
