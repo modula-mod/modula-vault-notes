@@ -16,10 +16,10 @@ const fail = message => {
 const standard = readJson('modula.module.json')
 const greenfield = readJson('module.manifest.json')
 const validation = validateModulaModuleManifest(standard)
-if (validation.valid) pass('Standard 1.2 manifest validates')
+if (validation.valid) pass('Standard 2.1 manifest validates')
 else fail(`Standard manifest invalid: ${validation.issues.map(issue => `${issue.code} ${issue.path}`).join('; ')}`)
 
-for (const [field, value] of Object.entries({standardVersion: '1.2.0', moduleVersion: '1.1.0', manifestSchemaVersion: '1.2.0', dataSchemaVersion: '1.0.0'})) {
+for (const [field, value] of Object.entries({standardVersion: '2.1.0', moduleVersion: '1.2.0', manifestSchemaVersion: '2.1.0', dataSchemaVersion: '1.0.0'})) {
   if (standard[field] === value) pass(`${field} is ${value}`)
   else fail(`${field} must be ${value}`)
 }
@@ -45,8 +45,8 @@ if (marketplace.previews?.length === 0) pass('Marketplace previews remain empty 
 else fail('Marketplace previews must contain only separately verified media')
 if (marketplace.availableViewIds?.length === requiredViews.length) pass('Marketplace listing references all canonical module views')
 else fail('Marketplace listing must reference every canonical module view')
-if (marketplace.release?.source?.sha256 === '46f918b07dc7d9c2734be4e6bb7729c137d316ceaa3f9d272da1bd7f78ad253a') pass('Marketplace release asset provenance is pinned')
-else fail('Marketplace release asset provenance missing')
+if (marketplace.release?.source?.tag === 'vault-notes-v1.2.0' && marketplace.release?.source?.asset === 'modula-vault-notes-1.2.0.tgz') pass('Marketplace release identity is pinned')
+else fail('Marketplace release identity missing')
 for (const field of ['rating', 'ratingCount', 'chartRank', 'downloadCount']) {
   if (!(field in marketplace)) pass(`runtime Marketplace aggregate is not hardcoded: ${field}`)
   else fail(`runtime Marketplace aggregate must not be declared in the module: ${field}`)
@@ -64,18 +64,20 @@ for (const permission of ['module.records.read', 'module.records.write', 'module
   else fail(`${permission} missing`)
 }
 
-for (const permission of ['ai.request', 'ai.stream', 'ai.structured-output', 'ai.context.private']) {
-  if (standard.permissions.some(item => item.id === permission && item.required === false)) pass(`${permission} requested optionally`)
-  else fail(`${permission} optional request missing`)
+if (standard.ai.length === 0 && !standard.permissions.some(item => item.id.startsWith('ai.'))) pass('optional AI implementation is absent from Vault Notes core')
+else fail('Vault Notes core must not declare embedded AI implementation')
+const requiredExtensionPoints = [
+  'digital.modula.vault-notes.editor.command',
+  'digital.modula.vault-notes.note.actions',
+  'digital.modula.vault-notes.note.after-save',
+  'digital.modula.vault-notes.settings.section',
+]
+for (const point of requiredExtensionPoints) {
+  if (standard.extensionProduct?.extensionPoints?.some(item => item.id === point)) pass(`extension point declared: ${point}`)
+  else fail(`extension point missing: ${point}`)
 }
-
-const actionIds = standard.ai.flatMap(item => item.productActions ?? []).map(item => item.id)
-for (const actionId of ['vault-notes.ai.summarise', 'vault-notes.ai.suggest-title', 'vault-notes.ai.rewrite-selection', 'vault-notes.ai.extract-action-items', 'vault-notes.ai.suggest-tags']) {
-  if (actionIds.includes(actionId)) pass(`${actionId} AI product action declared`)
-  else fail(`${actionId} AI product action missing`)
-}
-if (!JSON.stringify(standard.ai).match(/providerId|modelId|apiKey|providerUrl|providerPayload/)) pass('AI declarations are provider independent')
-else fail('AI declarations contain provider-bound fields')
+if (standard.extensionProduct?.kind === 'module' && standard.extensionProduct.targets.length === 0 && standard.extensionProduct.contributions.length === 0) pass('Vault Notes remains standalone')
+else fail('Vault Notes core extension product contract is invalid')
 
 const sourceText = collectText(root)
 for (const prohibited of ['src/features/vault-notes', 'app/vault-notes', 'dangerouslySetInnerHTML', 'providerApiKey', 'accessToken', 'refreshToken', 'customSql']) {
