@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import {readFileSync, readdirSync, statSync} from 'node:fs'
+import {existsSync, readFileSync, readdirSync, statSync} from 'node:fs'
 import {join} from 'node:path'
 import {validateModulaModuleManifest} from '@modula/module-validator'
 
@@ -66,6 +66,8 @@ for (const permission of ['module.records.read', 'module.records.write', 'module
 
 if (standard.ai.length === 0 && !standard.permissions.some(item => item.id.startsWith('ai.'))) pass('optional AI implementation is absent from Vault Notes core')
 else fail('Vault Notes core must not declare embedded AI implementation')
+if (!existsSync(join(root, 'dist/ai'))) pass('compiled release contains no stale embedded AI artifacts')
+else fail('compiled release contains stale embedded AI artifacts')
 const requiredExtensionPoints = [
   'digital.modula.vault-notes.editor.command',
   'digital.modula.vault-notes.note.actions',
