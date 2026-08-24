@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Evolve the manifest to Modula Module Standard 2.1 and declare twelve governed extension points.
+- Remove embedded AI declarations and source; optional AI is now owned by the separate Vault AI add-on.
+- Publish versioned Vault Notes events for declarative extension subscribers.
+
+## Unreleased
+
 - Align source identity with the canonical Product Hub module ID
   `digital.modula.vault-notes`. This is not a new product version and does not
   invent 1.2.0. Tagged current release remains `vault-notes-v1.1.0`.

@@ -1,5 +1,7 @@
 # Vault Notes
 
+Vault Notes is an offline-capable core module and a governed extension host. It works without optional products. AI, voice, formatting, automation, connectors, functions, tools, and widgets attach through declared Modula Module Standard 2.1 extension points and capability grants; they do not import Vault Notes internals or access its database directly.
+
 Canonical source repository for `digital.modula.vault-notes`.
 
 There is one Vault Notes product. This GitHub repository name does not have to

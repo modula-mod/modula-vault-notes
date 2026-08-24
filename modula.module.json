@@ -1,13 +1,13 @@
 {
-  "schemaVersion": "1.2.0",
-  "standardVersion": "1.2.0",
+  "schemaVersion": "2.1.0",
+  "standardVersion": "2.1.0",
   "moduleVersion": "1.1.0",
-  "manifestSchemaVersion": "1.2.0",
+  "manifestSchemaVersion": "2.1.0",
   "dataSchemaVersion": "1.0.0",
   "id": "digital.modula.vault-notes",
   "slug": "vault-notes",
   "name": "Vault Notes",
-  "description": "Reference notes module for Modula Module Standard 1.2 with optional provider-neutral AI product actions.",
+  "description": "Offline-capable reference notes module exposing governed extension points under Modula Module Standard 2.1.",
   "publisher": {
     "id": "modula",
     "name": "Modula",
@@ -17,7 +17,7 @@
   "compatibility": {
     "host": "^1.0.0",
     "runtime": "^1.0.0",
-    "standard": "^1.2.0",
+    "standard": "^2.1.0",
     "platforms": [
       "ios",
       "android",
@@ -118,34 +118,6 @@
       "required": true,
       "risk": "high",
       "policyMode": "require-confirmation"
-    },
-    {
-      "id": "ai.request",
-      "reason": "Request optional host-mediated AI product actions for explicit user review.",
-      "required": false,
-      "risk": "medium",
-      "policyMode": "require-confirmation"
-    },
-    {
-      "id": "ai.stream",
-      "reason": "Stream optional AI suggestions without mutating notes.",
-      "required": false,
-      "risk": "medium",
-      "policyMode": "require-confirmation"
-    },
-    {
-      "id": "ai.structured-output",
-      "reason": "Validate structured AI suggestions before preview or application.",
-      "required": false,
-      "risk": "medium",
-      "policyMode": "require-confirmation"
-    },
-    {
-      "id": "ai.context.private",
-      "reason": "Use the current authorised private note as AI context when the user triggers an AI action.",
-      "required": false,
-      "risk": "high",
-      "policyMode": "require-confirmation"
     }
   ],
   "capabilities": [
@@ -199,12 +171,6 @@
       "required": false,
       "reason": "Use host generic migrations when needed.",
       "degradedBehavior": "Vault Notes remains uninstallable until host generic record support is available."
-    },
-    {
-      "id": "ai",
-      "required": false,
-      "reason": "Expose optional user-triggered AI product actions.",
-      "degradedBehavior": "Vault Notes remains fully usable without AI."
     }
   ],
   "records": [
@@ -2692,263 +2658,7 @@
       }
     }
   ],
-  "ai": [
-    {
-      "id": "digital.modula.vault-notes.ai.product-actions",
-      "features": [
-        "summarize",
-        "extract",
-        "draft"
-      ],
-      "allowedContext": [
-        "metadata",
-        "record-content",
-        "user-selected-text"
-      ],
-      "toolDefinitions": [],
-      "structuredOutputs": [
-        {
-          "$id": "schemas/ai/note-summary-result.schema.json",
-          "type": "object"
-        },
-        {
-          "$id": "schemas/ai/suggested-title-result.schema.json",
-          "type": "object"
-        },
-        {
-          "$id": "schemas/ai/rewrite-selection-result.schema.json",
-          "type": "object"
-        },
-        {
-          "$id": "schemas/ai/extracted-action-items-result.schema.json",
-          "type": "object"
-        },
-        {
-          "$id": "schemas/ai/suggested-tags-result.schema.json",
-          "type": "object"
-        }
-      ],
-      "permissions": [
-        "ai.request",
-        "ai.stream",
-        "ai.structured-output",
-        "ai.context.private"
-      ],
-      "policyMode": "require-confirmation",
-      "productActions": [
-        {
-          "id": "vault-notes.ai.summarise",
-          "name": "Summarise note",
-          "description": "Generate a preview-only summary from one authorised note revision.",
-          "promptId": "vault-notes.summarise.v1",
-          "promptVersionRange": "^1.0.0",
-          "inputSchema": "schemas/ai/summarise-note-input.schema.json",
-          "outputSchema": "schemas/ai/note-summary-result.schema.json",
-          "requiredPermissions": [
-            "ai.request",
-            "ai.stream",
-            "ai.structured-output",
-            "ai.context.private"
-          ],
-          "requiredCapabilities": [
-            "text-generation",
-            "streaming",
-            "structured-output"
-          ],
-          "context": {
-            "sources": [
-              "current-record",
-              "record-metadata"
-            ],
-            "maximumRecords": 1,
-            "maximumCharacters": 12000,
-            "allowedClassifications": [
-              "private"
-            ]
-          },
-          "execution": {
-            "streaming": true,
-            "structuredOutput": true,
-            "maximumToolCalls": 0,
-            "timeoutMs": 30000
-          },
-          "application": {
-            "mode": "preview-only",
-            "explicitConfirmation": true,
-            "createsRecordRevision": false
-          }
-        },
-        {
-          "id": "vault-notes.ai.suggest-title",
-          "name": "Suggest title",
-          "description": "Generate title suggestions without applying them automatically.",
-          "promptId": "vault-notes.suggest-title.v1",
-          "promptVersionRange": "^1.0.0",
-          "inputSchema": "schemas/ai/suggest-title-input.schema.json",
-          "outputSchema": "schemas/ai/suggested-title-result.schema.json",
-          "requiredPermissions": [
-            "ai.request",
-            "ai.stream",
-            "ai.structured-output",
-            "ai.context.private"
-          ],
-          "requiredCapabilities": [
-            "text-generation",
-            "streaming",
-            "structured-output"
-          ],
-          "context": {
-            "sources": [
-              "current-record",
-              "record-metadata"
-            ],
-            "maximumRecords": 1,
-            "maximumCharacters": 12000,
-            "allowedClassifications": [
-              "private"
-            ]
-          },
-          "execution": {
-            "streaming": true,
-            "structuredOutput": true,
-            "maximumToolCalls": 0,
-            "timeoutMs": 30000
-          },
-          "application": {
-            "mode": "metadata-suggestion",
-            "explicitConfirmation": true,
-            "createsRecordRevision": true
-          }
-        },
-        {
-          "id": "vault-notes.ai.rewrite-selection",
-          "name": "Rewrite selection",
-          "description": "Rewrite selected note text and show an original/proposed preview.",
-          "promptId": "vault-notes.rewrite-selection.v1",
-          "promptVersionRange": "^1.0.0",
-          "inputSchema": "schemas/ai/rewrite-selection-input.schema.json",
-          "outputSchema": "schemas/ai/rewrite-selection-result.schema.json",
-          "requiredPermissions": [
-            "ai.request",
-            "ai.stream",
-            "ai.structured-output",
-            "ai.context.private"
-          ],
-          "requiredCapabilities": [
-            "text-generation",
-            "streaming",
-            "structured-output"
-          ],
-          "context": {
-            "sources": [
-              "selected-content",
-              "record-metadata"
-            ],
-            "maximumRecords": 1,
-            "maximumCharacters": 12000,
-            "allowedClassifications": [
-              "private"
-            ]
-          },
-          "execution": {
-            "streaming": true,
-            "structuredOutput": true,
-            "maximumToolCalls": 0,
-            "timeoutMs": 30000
-          },
-          "application": {
-            "mode": "replace-selection",
-            "explicitConfirmation": true,
-            "createsRecordRevision": true
-          }
-        },
-        {
-          "id": "vault-notes.ai.extract-action-items",
-          "name": "Extract action items",
-          "description": "Extract action-item suggestions without creating Tasks records.",
-          "promptId": "vault-notes.extract-action-items.v1",
-          "promptVersionRange": "^1.0.0",
-          "inputSchema": "schemas/ai/extract-action-items-input.schema.json",
-          "outputSchema": "schemas/ai/extracted-action-items-result.schema.json",
-          "requiredPermissions": [
-            "ai.request",
-            "ai.stream",
-            "ai.structured-output",
-            "ai.context.private"
-          ],
-          "requiredCapabilities": [
-            "text-generation",
-            "streaming",
-            "structured-output"
-          ],
-          "context": {
-            "sources": [
-              "current-record",
-              "record-metadata"
-            ],
-            "maximumRecords": 1,
-            "maximumCharacters": 12000,
-            "allowedClassifications": [
-              "private"
-            ]
-          },
-          "execution": {
-            "streaming": true,
-            "structuredOutput": true,
-            "maximumToolCalls": 0,
-            "timeoutMs": 30000
-          },
-          "application": {
-            "mode": "insert",
-            "explicitConfirmation": true,
-            "createsRecordRevision": true
-          }
-        },
-        {
-          "id": "vault-notes.ai.suggest-tags",
-          "name": "Suggest tags",
-          "description": "Suggest tags without creating or assigning them automatically.",
-          "promptId": "vault-notes.suggest-tags.v1",
-          "promptVersionRange": "^1.0.0",
-          "inputSchema": "schemas/ai/suggest-tags-input.schema.json",
-          "outputSchema": "schemas/ai/suggested-tags-result.schema.json",
-          "requiredPermissions": [
-            "ai.request",
-            "ai.stream",
-            "ai.structured-output",
-            "ai.context.private"
-          ],
-          "requiredCapabilities": [
-            "text-generation",
-            "streaming",
-            "structured-output"
-          ],
-          "context": {
-            "sources": [
-              "current-record",
-              "record-metadata"
-            ],
-            "maximumRecords": 1,
-            "maximumCharacters": 12000,
-            "allowedClassifications": [
-              "private"
-            ]
-          },
-          "execution": {
-            "streaming": true,
-            "structuredOutput": true,
-            "maximumToolCalls": 0,
-            "timeoutMs": 30000
-          },
-          "application": {
-            "mode": "metadata-suggestion",
-            "explicitConfirmation": true,
-            "createsRecordRevision": true
-          }
-        }
-      ]
-    }
-  ],
+  "ai": [],
   "diagnostics": {
     "components": [
       "startup",
@@ -3125,6 +2835,176 @@
     },
     "security": {
       "advisories": []
+    }
+  },
+  "sectionVersions": {
+    "identity": "2.1.0",
+    "lifecycle": "2.1.0",
+    "backend": "2.1.0",
+    "engines": "2.1.0",
+    "ai": "2.1.0",
+    "permissions": "2.1.0",
+    "settings": "2.1.0",
+    "routes": "2.1.0",
+    "views": "2.1.0",
+    "records": "2.1.0",
+    "actions": "2.1.0",
+    "functions": "2.1.0",
+    "jobs": "2.1.0",
+    "events": "2.1.0",
+    "notifications": "2.1.0",
+    "search": "2.1.0",
+    "exports": "2.1.0",
+    "imports": "2.1.0",
+    "synchronization": "2.1.0",
+    "dependencies": "2.1.0",
+    "optionalDependencies": "2.1.0",
+    "integrations": "2.1.0",
+    "billing": "2.1.0",
+    "telemetry": "2.1.0",
+    "diagnostics": "2.1.0",
+    "accessibility": "2.1.0",
+    "localization": "2.1.0",
+    "appearance": "2.1.0",
+    "onboarding": "2.1.0",
+    "migrations": "2.1.0",
+    "capabilities": "2.1.0",
+    "services": "2.1.0",
+    "apis": "2.1.0",
+    "hooks": "2.1.0",
+    "metrics": "2.1.0",
+    "storage": "2.1.0",
+    "widgets": "2.1.0",
+    "navigation": "2.1.0",
+    "ui": "2.1.0",
+    "automation": "2.1.0",
+    "offline": "2.1.0",
+    "realtime": "2.1.0",
+    "versioning": "2.1.0",
+    "compatibilityMatrix": "2.1.0",
+    "marketplace": "2.1.0"
+  },
+  "extensionProduct": {
+    "version": "1.1.0",
+    "kind": "module",
+    "targets": [],
+    "extensionPoints": [
+      {
+        "id": "digital.modula.vault-notes.home.section",
+        "title": "Vault Notes home section",
+        "contributionKinds": [
+          "home.section",
+          "widget"
+        ],
+        "maxContributions": 20
+      },
+      {
+        "id": "digital.modula.vault-notes.editor.toolbar",
+        "title": "Vault Notes editor toolbar",
+        "contributionKinds": [
+          "toolbar.action"
+        ],
+        "requiredCapability": "notes.editor.contribute",
+        "maxContributions": 20
+      },
+      {
+        "id": "digital.modula.vault-notes.editor.command",
+        "title": "Vault Notes editor commands",
+        "contributionKinds": [
+          "editor.command"
+        ],
+        "requiredCapability": "notes.editor.contribute",
+        "maxContributions": 40
+      },
+      {
+        "id": "digital.modula.vault-notes.editor.attachment",
+        "title": "Vault Notes editor attachments",
+        "contributionKinds": [
+          "editor.attachment"
+        ],
+        "requiredCapability": "notes.attachments.create",
+        "maxContributions": 20
+      },
+      {
+        "id": "digital.modula.vault-notes.note.actions",
+        "title": "Vault Notes note actions",
+        "contributionKinds": [
+          "menu.item"
+        ],
+        "requiredCapability": "notes.actions.contribute",
+        "maxContributions": 40
+      },
+      {
+        "id": "digital.modula.vault-notes.note.context-menu",
+        "title": "Vault Notes note context menu",
+        "contributionKinds": [
+          "contextMenu.item"
+        ],
+        "requiredCapability": "notes.actions.contribute",
+        "maxContributions": 40
+      },
+      {
+        "id": "digital.modula.vault-notes.note.inspector",
+        "title": "Vault Notes note inspector",
+        "contributionKinds": [
+          "view.section",
+          "record.decorator"
+        ],
+        "maxContributions": 20
+      },
+      {
+        "id": "digital.modula.vault-notes.note.after-save",
+        "title": "Vault Notes after-save actions",
+        "contributionKinds": [
+          "background.action"
+        ],
+        "requiredCapability": "notes.events.subscribe",
+        "maxContributions": 20
+      },
+      {
+        "id": "digital.modula.vault-notes.collection.actions",
+        "title": "Vault Notes collection actions",
+        "contributionKinds": [
+          "menu.item"
+        ],
+        "requiredCapability": "notes.actions.contribute",
+        "maxContributions": 20
+      },
+      {
+        "id": "digital.modula.vault-notes.search.provider",
+        "title": "Vault Notes search providers",
+        "contributionKinds": [
+          "search.provider"
+        ],
+        "requiredCapability": "notes.search",
+        "maxContributions": 10
+      },
+      {
+        "id": "digital.modula.vault-notes.composer.tool",
+        "title": "Vault Notes composer tools",
+        "contributionKinds": [
+          "composer.tool"
+        ],
+        "maxContributions": 20
+      },
+      {
+        "id": "digital.modula.vault-notes.settings.section",
+        "title": "Vault Notes settings sections",
+        "contributionKinds": [
+          "settings.section"
+        ],
+        "maxContributions": 20
+      }
+    ],
+    "contributions": [],
+    "retention": {
+      "defaultMode": "KEEP_DATA",
+      "supportsUserChoice": true,
+      "metadataNamespace": "digital.modula.vault-notes"
+    },
+    "graphPolicy": {
+      "maxDepth": 8,
+      "maxNodes": 128
     }
   }
 }

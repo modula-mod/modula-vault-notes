@@ -1,9 +1,9 @@
 export const VAULT_NOTES_MODULE_ID = 'digital.modula.vault-notes' as const
 export const VAULT_NOTES_SLUG = 'vault-notes' as const
 export const VAULT_NOTES_NAME = 'Vault Notes' as const
-export const VAULT_NOTES_STANDARD_VERSION = '1.2.0' as const
+export const VAULT_NOTES_STANDARD_VERSION = '2.1.0' as const
 export const VAULT_NOTES_MODULE_VERSION = '1.1.0' as const
-export const VAULT_NOTES_MANIFEST_SCHEMA_VERSION = '1.2.0' as const
+export const VAULT_NOTES_MANIFEST_SCHEMA_VERSION = '2.1.0' as const
 export const VAULT_NOTES_DATA_SCHEMA_VERSION = '1.0.0' as const
 
 export type VaultDocumentBlockType =
