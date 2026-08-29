@@ -1,0 +1,24 @@
+{
+  "id": "editor",
+  "kind": "form",
+  "title": "Edit note",
+  "bindings": [
+    {"id": "note", "source": "record.detail", "recordType": "note", "recordIdParam": "noteId"},
+    {"id": "noteForm", "source": "installation"}
+  ],
+  "root": {
+    "type": "section",
+    "accessibility": {"label": "Vault Notes editor", "role": "form"},
+    "children": [
+      {"type": "field", "binding": "noteForm", "field": {"id": "title", "type": "text", "label": "Title", "required": true, "validation": {"maxLength": 240}}},
+      {"type": "field", "binding": "noteForm", "field": {"id": "body", "type": "richText", "label": "Body", "capability": "ui.richText@1"}},
+      {"type": "field", "binding": "noteForm", "field": {"id": "folderId", "type": "recordReference", "label": "Folder", "recordType": "folder"}},
+      {"type": "field", "binding": "noteForm", "field": {"id": "tags", "type": "tags", "label": "Tags"}},
+      {"type": "row", "children": [{"type": "button", "text": "Create note", "action": "createNote"}, {"type": "button", "text": "Save changes", "action": "updateNote"}]}
+    ]
+  },
+  "states": {
+    "capabilityUnavailable": {"type": "errorState", "text": "This host needs the rich text editor capability", "accessibility": {"role": "status"}},
+    "error": {"type": "errorState", "text": "The note could not be saved", "accessibility": {"role": "status"}}
+  }
+}

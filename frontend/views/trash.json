@@ -1,0 +1,8 @@
+{
+  "id": "trash",
+  "kind": "collection",
+  "title": "Trash",
+  "bindings": [{"id": "notes", "source": "record.query", "recordType": "note", "query": {"filterParam": "filter", "sortParam": "sort", "limit": 100}}],
+  "root": {"type": "stack", "children": [{"type": "filter", "text": "Deleted notes", "binding": "notes"}, {"type": "recordList", "binding": "notes", "action": "openNote", "accessibility": {"label": "Deleted notes", "role": "list"}}]},
+  "states": {"empty": {"type": "emptyState", "text": "Trash is empty"}, "error": {"type": "errorState", "text": "Trash is unavailable", "accessibility": {"role": "status"}}}
+}

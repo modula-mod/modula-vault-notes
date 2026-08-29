@@ -1,0 +1,15 @@
+{
+  "rootView": "home",
+  "tabs": [
+    {"id": "notes", "viewId": "home", "label": "Notes", "icon": "system.note"},
+    {"id": "search", "viewId": "search", "label": "Search", "icon": "system.search"}
+  ],
+  "secondary": [
+    {"id": "favourites", "viewId": "favourites", "label": "Favourites"},
+    {"id": "archived", "viewId": "archived", "label": "Archived"},
+    {"id": "trash", "viewId": "trash", "label": "Trash"},
+    {"id": "folders", "viewId": "folders", "label": "Folders"},
+    {"id": "settings", "viewId": "settings", "label": "Settings"}
+  ],
+  "backBehavior": "host"
+}

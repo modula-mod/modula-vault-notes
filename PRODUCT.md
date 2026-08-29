@@ -18,7 +18,7 @@ Provides `notes.provider`, create/read/update/search, and extension-point contri
 
 ## Frontend
 
-Declarative views only (home, collection, detail, editor, search, folders, settings, empty/unavailable). No remote JSX execution.
+Product-owned declarative frontend source and immutable compiled artifact. It defines home, collection, detail, editor, search, favourites, archive, trash, folders, product settings, loading, empty, permission, offline, and unavailable states. The generic host renders it with semantic platform controls; there is no remote JSX execution.
 
 ## Backend
 
@@ -54,6 +54,7 @@ See `PRIVACY.md` and `docs/privacy.md`. No analytics. No default network.
 ## Acceptance
 
 - MPS verify passes
+- MPS frontend build and renderer-compatible preview pass
 - Public verify fails while artwork is provisional
 - Install / enable / open / CRUD / search / disable / uninstall work through the generic host
 - Coexists with Reference Notes as a second `notes.provider`

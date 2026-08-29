@@ -36,7 +36,9 @@ Do **not** add Greenfield core special cases for this product. New behaviour bel
 
 ## Release
 
-Create a new immutable version for packaging changes. Do not mutate `vault-notes-v1.2.0` or earlier tags.
+Create a new immutable version for packaging changes. Do not mutate `vault-notes-v1.3.0` or earlier tags.
+
+Product-specific UI belongs under `frontend/` and compiles to the validated MPS artifact. Do not implement Vault Notes screens in `modula-latest`; it owns only the generic Shell, Product Host, semantic renderer, and native capability adapters.
 
 Presentation assets in this tree are **provisional / first-party generated**, not founder-approved final branding. Do not mark them as public-stable artwork.
 

@@ -5,7 +5,7 @@
   "identity": {
     "id": "digital.modula.vault-notes",
     "kind": "module",
-    "version": "1.3.0",
+    "version": "1.4.0",
     "displayName": "Vault Notes",
     "slug": "vault-notes",
     "subtitle": "Your private knowledge space.",
@@ -37,10 +37,11 @@
   },
   "release": {
     "channel": "beta",
-    "notes": "MPS 1.0 canonical packaging for Vault Notes. Implementation is unchanged from 1.2.0; this release adds modula.product.json, family metadata, provisional presentation assets, and agent/product documentation. Artwork is first-party generated / development-provisional, not founder-approved final branding.",
+    "notes": "Product-owned Vault Notes frontend for the generic Modula Product Host. Adds immutable declarative routes, collection/detail/editor/search/settings views, frontend provenance, and host-rendered accessibility without arbitrary remote code. Artwork remains first-party generated and development-provisional.",
     "builder": "modula-product-release",
     "provenance": {
-      "manifestSha256": "8474c6e205cdef44eb2b4539b6444aa52cc36085cea77adf1bce15ea33e1fcb5"
+      "manifestSha256": "8474c6e205cdef44eb2b4539b6444aa52cc36085cea77adf1bce15ea33e1fcb5",
+      "frontendSha256": "cbe2178be93332b725e16415ac9d3b38cfc2598e2f24f7f7e8698dc2c6db4115"
     }
   },
   "security": {
@@ -118,211 +119,13 @@
   ],
   "frontend": {
     "mode": "declarative",
-    "views": [
-      {
-        "id": "home",
-        "kind": "dashboard",
-        "title": "Vault Notes",
-        "route": "/",
-        "actions": [
-          "create"
-        ]
-      },
-      {
-        "id": "collection",
-        "kind": "collection",
-        "title": "Notes",
-        "route": "/notes"
-      },
-      {
-        "id": "detail",
-        "kind": "detail",
-        "title": "Note",
-        "route": "/note/:id"
-      },
-      {
-        "id": "editor",
-        "kind": "form",
-        "title": "Edit note",
-        "route": "/note/:id/edit",
-        "fields": [
-          {
-            "id": "title",
-            "type": "text",
-            "label": "Title",
-            "required": true
-          },
-          {
-            "id": "body",
-            "type": "multilineText",
-            "label": "Body"
-          },
-          {
-            "id": "folder",
-            "type": "recordReference",
-            "label": "Folder",
-            "recordType": "folder"
-          }
-        ]
-      },
-      {
-        "id": "search",
-        "kind": "collection",
-        "title": "Search",
-        "route": "/search"
-      },
-      {
-        "id": "favourites",
-        "kind": "collection",
-        "title": "Favourites",
-        "route": "/favourites"
-      },
-      {
-        "id": "archived",
-        "kind": "collection",
-        "title": "Archived",
-        "route": "/archived"
-      },
-      {
-        "id": "trash",
-        "kind": "collection",
-        "title": "Trash",
-        "route": "/trash"
-      },
-      {
-        "id": "folders",
-        "kind": "collection",
-        "title": "Folders",
-        "route": "/folders"
-      },
-      {
-        "id": "settings",
-        "kind": "settings",
-        "title": "Settings",
-        "route": "/settings"
-      },
-      {
-        "id": "empty",
-        "kind": "emptyState",
-        "title": "No notes",
-        "route": "/empty"
-      },
-      {
-        "id": "unavailable",
-        "kind": "emptyState",
-        "title": "Vault Notes unavailable",
-        "route": "/unavailable"
-      }
-    ],
-    "routes": [
-      {
-        "path": "/",
-        "viewId": "home"
-      },
-      {
-        "path": "/notes",
-        "viewId": "collection"
-      },
-      {
-        "path": "/note/:id",
-        "viewId": "detail"
-      },
-      {
-        "path": "/note/:id/edit",
-        "viewId": "editor"
-      },
-      {
-        "path": "/search",
-        "viewId": "search"
-      },
-      {
-        "path": "/favourites",
-        "viewId": "favourites"
-      },
-      {
-        "path": "/archived",
-        "viewId": "archived"
-      },
-      {
-        "path": "/trash",
-        "viewId": "trash"
-      },
-      {
-        "path": "/folders",
-        "viewId": "folders"
-      },
-      {
-        "path": "/settings",
-        "viewId": "settings"
-      },
-      {
-        "path": "/empty",
-        "viewId": "empty"
-      },
-      {
-        "path": "/unavailable",
-        "viewId": "unavailable"
-      }
-    ],
-    "navigation": {
-      "rootView": "home",
-      "tabs": [
-        {
-          "id": "notes",
-          "viewId": "home",
-          "label": "Notes",
-          "icon": "asset://product/icon"
-        },
-        {
-          "id": "search",
-          "viewId": "search",
-          "label": "Search"
-        },
-        {
-          "id": "settings",
-          "viewId": "settings",
-          "label": "Settings"
-        }
-      ],
-      "deepLinks": [
-        {
-          "pattern": "modula://vault-notes/:id",
-          "viewId": "detail"
-        }
-      ],
-      "backBehavior": "host",
-      "modalIntent": "sheet"
-    },
-    "actions": [
-      {
-        "id": "create",
-        "family": "record.create",
-        "label": "New note",
-        "icon": "asset://product/icon"
-      },
-      {
-        "id": "open",
-        "family": "route.open",
-        "label": "Open",
-        "route": "/note/:id"
-      },
-      {
-        "id": "update",
-        "family": "record.update",
-        "label": "Update note"
-      },
-      {
-        "id": "delete",
-        "family": "record.delete",
-        "label": "Delete note",
-        "confirm": true
-      },
-      {
-        "id": "search",
-        "family": "record.query",
-        "label": "Search notes"
-      }
-    ]
+    "artifact": {
+      "path": "frontend/frontend.manifest.json",
+      "mediaType": "application/vnd.modula.frontend+json",
+      "sha256": "cbe2178be93332b725e16415ac9d3b38cfc2598e2f24f7f7e8698dc2c6db4115",
+      "schemaVersion": "1.0.0",
+      "entryView": "home"
+    }
   },
   "backend": {
     "mode": "greenfield-records",

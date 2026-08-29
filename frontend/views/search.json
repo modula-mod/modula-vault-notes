@@ -1,0 +1,12 @@
+{
+  "id": "search",
+  "kind": "collection",
+  "title": "Search Vault Notes",
+  "bindings": [{"id": "notes", "source": "record.query", "recordType": "note", "query": {"searchParam": "q", "filterParam": "filter", "sortParam": "sort", "limit": 100}}],
+  "root": {"type": "stack", "children": [{"type": "search", "text": "Search titles, bodies, and tags", "binding": "notes"}, {"type": "recordList", "binding": "notes", "action": "openNote", "accessibility": {"label": "Search results", "role": "list"}}]},
+  "states": {
+    "loading": {"type": "loadingState", "text": "Searching notes", "accessibility": {"role": "status"}},
+    "empty": {"type": "emptyState", "text": "No notes match this search"},
+    "error": {"type": "errorState", "text": "Search is unavailable", "accessibility": {"role": "status"}}
+  }
+}
