@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Vault Notes development icon">
+  <rect width="64" height="64" rx="14" fill="#F4EDE1"/>
+  <rect x="14" y="12" width="36" height="40" rx="4" fill="#E4D5C1" stroke="#2A241C" stroke-width="1.5"/>
+  <path d="M22 24h20M22 32h16M22 40h12" fill="none" stroke="#8A6A4B" stroke-width="2" stroke-linecap="round"/>
+</svg>

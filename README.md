@@ -18,11 +18,13 @@ generic record persistence and declarative module host rendering.
 - module ID: `digital.modula.vault-notes`
 - publisher: Modula
 - slug: `vault-notes`
-- module version: `1.2.0`
+- module version: `1.3.0`
+- product standard: MPS 1.0-RC (`modula.product.json` is canonical)
 - standard version: `2.1.0`
 - manifest schema version: `2.1.0`
 - data schema version: `1.0.0`
-- current tag: `vault-notes-v1.2.0`
+- current implementation lineage: `vault-notes-v1.2.0`
+- MPS packaging release: `vault-notes-v1.3.0` (new immutable tag; does not mutate 1.2.0)
 
 Legacy module ID `modula.vault-notes` is a migration alias only. It must not
 appear as a second Product Hub product.
@@ -45,6 +47,12 @@ pnpm install --frozen-lockfile
 pnpm build
 pnpm test
 pnpm verify
+```
+
+MPS (from `modula-product-standard`):
+
+```sh
+pnpm mps verify /path/to/modula-vault-notes
 ```
 
 The package consumes `@modula/module-standard`, `@modula/module-validator` and

@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.3.0
+
+- Add canonical MPS 1.0-RC `modula.product.json` as the product source of truth.
+- Declare Vault family `digital.modula.vault`, provider role `notes.provider`, and MPS extension-point IDs.
+- Add AGENTS.md, PRODUCT.md, PRIVACY.md, and provisional first-party presentation assets. Artwork is not founder-approved final branding.
+- Keep Module Standard 2.1 `modula.module.json` and Greenfield `module.manifest.json` as compatibility adapters for historical releases.
+
 ## 1.2.0
 
 - Evolve the manifest to Modula Module Standard 2.1 and declare twelve governed extension points.

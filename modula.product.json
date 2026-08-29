@@ -1,0 +1,657 @@
+{
+  "$schema": "https://modula.digital/schemas/product-standard/1.0-rc/product.schema.json",
+  "schema": "modula.product.1.0",
+  "productStandard": "1.0-RC",
+  "identity": {
+    "id": "digital.modula.vault-notes",
+    "kind": "module",
+    "version": "1.3.0",
+    "displayName": "Vault Notes",
+    "slug": "vault-notes",
+    "subtitle": "Your private knowledge space.",
+    "description": "Offline-capable private notes module for Modula. Notes, folders, tags, search, archive, and governed extension points. Optional AI, Voice, and Formatting attach as separate family products.",
+    "status": "beta",
+    "visibility": "beta",
+    "aliases": [
+      "modula.vault-notes"
+    ]
+  },
+  "publisher": {
+    "id": "modula",
+    "displayName": "Modula",
+    "website": "https://modula.digital",
+    "supportUrl": "https://modula.digital/support"
+  },
+  "source": {
+    "repository": "modula-mod/modula-vault-notes",
+    "commit": "c62f47a468c6d33fc5412db2d30f2b5d1c0bb2ce",
+    "manifestPath": "modula.product.json",
+    "provider": "github"
+  },
+  "licence": {
+    "spdx": "LicenseRef-Modula-First-Party",
+    "evidence": [
+      "LICENSE"
+    ],
+    "declaredByPublisher": true
+  },
+  "release": {
+    "channel": "beta",
+    "notes": "MPS 1.0 canonical packaging for Vault Notes. Implementation is unchanged from 1.2.0; this release adds modula.product.json, family metadata, provisional presentation assets, and agent/product documentation. Artwork is first-party generated / development-provisional, not founder-approved final branding.",
+    "builder": "modula-product-release",
+    "provenance": {
+      "manifestSha256": "8474c6e205cdef44eb2b4539b6444aa52cc36085cea77adf1bce15ea33e1fcb5"
+    }
+  },
+  "security": {
+    "baseline": "mps-1.0",
+    "rawUserBearerForwarding": "forbidden",
+    "crossProductDatabaseAccess": "forbidden",
+    "arbitraryRemoteCode": "forbidden-by-default"
+  },
+  "presentation": {
+    "icon": {
+      "role": "product.icon",
+      "path": "assets/icon/icon.svg",
+      "mediaType": "image/svg+xml",
+      "sha256": "5f5bf90e5cf448e93b0848a03c76268032a2582e9dbf8c249896e0a7d2d500ba",
+      "developmentAsset": true,
+      "alt": "Vault Notes development placeholder icon"
+    },
+    "cover": {
+      "role": "product.cover",
+      "path": "assets/cover/cover.png",
+      "mediaType": "image/png",
+      "width": 1942,
+      "height": 809,
+      "sha256": "632538b738357c31d0dfb1772cc17f17e1ef44dae826c6a91a11e472013ed9de",
+      "developmentAsset": true,
+      "alt": "Provisional first-party Vault Notes editorial cover"
+    }
+  },
+  "compatibility": {
+    "productStandard": "^1.0.0-rc",
+    "greenfieldProtocol": "greenfield.v1",
+    "host": ">=1.0.0",
+    "moduleProfile": "^2.1.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ]
+  },
+  "marketplace": {
+    "category": "productivity"
+  },
+  "telemetry": {
+    "destinationClass": "none",
+    "optOut": "not-applicable",
+    "purpose": "none"
+  },
+  "network": {
+    "class": "none"
+  },
+  "family": {
+    "id": "digital.modula.vault",
+    "role": "root"
+  },
+  "relationships": [
+    {
+      "type": "belongsToFamily",
+      "productId": "digital.modula.vault"
+    },
+    {
+      "type": "compatibleWith",
+      "productId": "digital.modula.vault-notes.formatting",
+      "versionRange": ">=0.1.0"
+    },
+    {
+      "type": "compatibleWith",
+      "productId": "digital.modula.vault-notes.ai",
+      "versionRange": ">=0.1.0"
+    },
+    {
+      "type": "compatibleWith",
+      "productId": "digital.modula.vault-notes.voice",
+      "versionRange": ">=0.1.0"
+    }
+  ],
+  "frontend": {
+    "mode": "declarative",
+    "views": [
+      {
+        "id": "home",
+        "kind": "dashboard",
+        "title": "Vault Notes",
+        "route": "/",
+        "actions": [
+          "create"
+        ]
+      },
+      {
+        "id": "collection",
+        "kind": "collection",
+        "title": "Notes",
+        "route": "/notes"
+      },
+      {
+        "id": "detail",
+        "kind": "detail",
+        "title": "Note",
+        "route": "/note/:id"
+      },
+      {
+        "id": "editor",
+        "kind": "form",
+        "title": "Edit note",
+        "route": "/note/:id/edit",
+        "fields": [
+          {
+            "id": "title",
+            "type": "text",
+            "label": "Title",
+            "required": true
+          },
+          {
+            "id": "body",
+            "type": "multilineText",
+            "label": "Body"
+          },
+          {
+            "id": "folder",
+            "type": "recordReference",
+            "label": "Folder",
+            "recordType": "folder"
+          }
+        ]
+      },
+      {
+        "id": "search",
+        "kind": "collection",
+        "title": "Search",
+        "route": "/search"
+      },
+      {
+        "id": "favourites",
+        "kind": "collection",
+        "title": "Favourites",
+        "route": "/favourites"
+      },
+      {
+        "id": "archived",
+        "kind": "collection",
+        "title": "Archived",
+        "route": "/archived"
+      },
+      {
+        "id": "trash",
+        "kind": "collection",
+        "title": "Trash",
+        "route": "/trash"
+      },
+      {
+        "id": "folders",
+        "kind": "collection",
+        "title": "Folders",
+        "route": "/folders"
+      },
+      {
+        "id": "settings",
+        "kind": "settings",
+        "title": "Settings",
+        "route": "/settings"
+      },
+      {
+        "id": "empty",
+        "kind": "emptyState",
+        "title": "No notes",
+        "route": "/empty"
+      },
+      {
+        "id": "unavailable",
+        "kind": "emptyState",
+        "title": "Vault Notes unavailable",
+        "route": "/unavailable"
+      }
+    ],
+    "routes": [
+      {
+        "path": "/",
+        "viewId": "home"
+      },
+      {
+        "path": "/notes",
+        "viewId": "collection"
+      },
+      {
+        "path": "/note/:id",
+        "viewId": "detail"
+      },
+      {
+        "path": "/note/:id/edit",
+        "viewId": "editor"
+      },
+      {
+        "path": "/search",
+        "viewId": "search"
+      },
+      {
+        "path": "/favourites",
+        "viewId": "favourites"
+      },
+      {
+        "path": "/archived",
+        "viewId": "archived"
+      },
+      {
+        "path": "/trash",
+        "viewId": "trash"
+      },
+      {
+        "path": "/folders",
+        "viewId": "folders"
+      },
+      {
+        "path": "/settings",
+        "viewId": "settings"
+      },
+      {
+        "path": "/empty",
+        "viewId": "empty"
+      },
+      {
+        "path": "/unavailable",
+        "viewId": "unavailable"
+      }
+    ],
+    "navigation": {
+      "rootView": "home",
+      "tabs": [
+        {
+          "id": "notes",
+          "viewId": "home",
+          "label": "Notes",
+          "icon": "asset://product/icon"
+        },
+        {
+          "id": "search",
+          "viewId": "search",
+          "label": "Search"
+        },
+        {
+          "id": "settings",
+          "viewId": "settings",
+          "label": "Settings"
+        }
+      ],
+      "deepLinks": [
+        {
+          "pattern": "modula://vault-notes/:id",
+          "viewId": "detail"
+        }
+      ],
+      "backBehavior": "host",
+      "modalIntent": "sheet"
+    },
+    "actions": [
+      {
+        "id": "create",
+        "family": "record.create",
+        "label": "New note",
+        "icon": "asset://product/icon"
+      },
+      {
+        "id": "open",
+        "family": "route.open",
+        "label": "Open",
+        "route": "/note/:id"
+      },
+      {
+        "id": "update",
+        "family": "record.update",
+        "label": "Update note"
+      },
+      {
+        "id": "delete",
+        "family": "record.delete",
+        "label": "Delete note",
+        "confirm": true
+      },
+      {
+        "id": "search",
+        "family": "record.query",
+        "label": "Search notes"
+      }
+    ]
+  },
+  "backend": {
+    "mode": "greenfield-records",
+    "records": [
+      {
+        "id": "note",
+        "schemaPath": "schemas/note.schema.json",
+        "schemaVersion": "1.0.0",
+        "title": "Note"
+      },
+      {
+        "id": "folder",
+        "schemaPath": "schemas/folder.schema.json",
+        "schemaVersion": "1.0.0",
+        "title": "Folder"
+      },
+      {
+        "id": "tag",
+        "schemaPath": "schemas/tag.schema.json",
+        "schemaVersion": "1.0.0",
+        "title": "Tag"
+      },
+      {
+        "id": "note-link",
+        "schemaPath": "schemas/note-link.schema.json",
+        "schemaVersion": "1.0.0",
+        "title": "Note link"
+      },
+      {
+        "id": "note-version",
+        "schemaPath": "schemas/note-version.schema.json",
+        "schemaVersion": "1.0.0",
+        "title": "Note version"
+      },
+      {
+        "id": "saved-source",
+        "schemaPath": "schemas/saved-source.schema.json",
+        "schemaVersion": "1.0.0",
+        "title": "Saved source"
+      }
+    ]
+  },
+  "storage": {
+    "mode": "greenfield-records"
+  },
+  "data": {
+    "resources": [
+      {
+        "id": "notes",
+        "type": "greenfield-records",
+        "owner": "GREENFIELD_HOSTED_DATA",
+        "schemaVersion": "1.0.0",
+        "schemaPath": "schemas/note.schema.json",
+        "retention": "account-lifetime",
+        "backupOwner": "greenfield",
+        "backupMethodClass": "platform",
+        "exportOwner": "greenfield",
+        "exportFormat": "application/json",
+        "exportSupported": true,
+        "deleteOwner": "greenfield",
+        "sensitivity": "private",
+        "encryption": "platform-default"
+      },
+      {
+        "id": "folders",
+        "type": "greenfield-records",
+        "owner": "GREENFIELD_HOSTED_DATA",
+        "schemaVersion": "1.0.0",
+        "schemaPath": "schemas/folder.schema.json",
+        "retention": "account-lifetime",
+        "backupOwner": "greenfield",
+        "backupMethodClass": "platform",
+        "exportSupported": true,
+        "deleteOwner": "greenfield",
+        "sensitivity": "private",
+        "encryption": "platform-default"
+      }
+    ],
+    "uninstall": {
+      "keepData": true,
+      "deleteData": true,
+      "accountDeletion": "delete"
+    },
+    "export": {
+      "supported": true,
+      "format": "application/json",
+      "owner": "greenfield",
+      "handler": "greenfield.export"
+    }
+  },
+  "permissions": [
+    {
+      "id": "notes.read.selected",
+      "reason": "Read notes you explicitly open.",
+      "category": "records",
+      "required": true,
+      "risk": "low"
+    },
+    {
+      "id": "notes.write",
+      "reason": "Create and update your notes, folders and tags.",
+      "category": "records",
+      "required": true,
+      "risk": "medium"
+    },
+    {
+      "id": "notes.delete",
+      "reason": "Trash, restore, or permanently delete your notes.",
+      "category": "records",
+      "required": true,
+      "risk": "high"
+    },
+    {
+      "id": "notes.search.publish",
+      "reason": "Publish account-scoped search projections for your notes.",
+      "category": "records",
+      "required": true,
+      "risk": "medium"
+    },
+    {
+      "id": "notes.export",
+      "reason": "Create an account-authorized export of your notes.",
+      "category": "records",
+      "required": true,
+      "risk": "high"
+    }
+  ],
+  "capabilities": {
+    "provides": [
+      "notes.provider",
+      "notes.create",
+      "notes.search",
+      "notes.read",
+      "notes.update",
+      "notes.editor.contribute",
+      "notes.actions.contribute",
+      "notes.attachments.create",
+      "notes.attachments.read",
+      "notes.events.subscribe"
+    ],
+    "requires": [],
+    "requests": [],
+    "providerRoles": [
+      "notes.provider"
+    ]
+  },
+  "extensionPoints": [
+    {
+      "id": "digital.modula.vault-notes/home.section@1",
+      "title": "Vault Notes home section",
+      "contributionKinds": [
+        "home.section",
+        "widget"
+      ],
+      "maxContributions": 20
+    },
+    {
+      "id": "digital.modula.vault-notes/editor.toolbar@1",
+      "title": "Vault Notes editor toolbar",
+      "contributionKinds": [
+        "toolbar.action"
+      ],
+      "maxContributions": 20,
+      "requiredCapability": "notes.editor.contribute"
+    },
+    {
+      "id": "digital.modula.vault-notes/editor.command@1",
+      "title": "Vault Notes editor commands",
+      "contributionKinds": [
+        "editor.command"
+      ],
+      "maxContributions": 40,
+      "requiredCapability": "notes.editor.contribute"
+    },
+    {
+      "id": "digital.modula.vault-notes/editor.attachment@1",
+      "title": "Vault Notes editor attachments",
+      "contributionKinds": [
+        "editor.attachment"
+      ],
+      "maxContributions": 20,
+      "requiredCapability": "notes.attachments.create"
+    },
+    {
+      "id": "digital.modula.vault-notes/note.actions@1",
+      "title": "Vault Notes note actions",
+      "contributionKinds": [
+        "menu.item"
+      ],
+      "maxContributions": 40,
+      "requiredCapability": "notes.actions.contribute"
+    },
+    {
+      "id": "digital.modula.vault-notes/note.context-menu@1",
+      "title": "Vault Notes note context menu",
+      "contributionKinds": [
+        "contextMenu.item"
+      ],
+      "maxContributions": 40,
+      "requiredCapability": "notes.actions.contribute"
+    },
+    {
+      "id": "digital.modula.vault-notes/note.inspector@1",
+      "title": "Vault Notes note inspector",
+      "contributionKinds": [
+        "view.section",
+        "record.decorator"
+      ],
+      "maxContributions": 20
+    },
+    {
+      "id": "digital.modula.vault-notes/note.after-save@1",
+      "title": "Vault Notes after-save actions",
+      "contributionKinds": [
+        "background.action"
+      ],
+      "maxContributions": 20,
+      "requiredCapability": "notes.events.subscribe"
+    },
+    {
+      "id": "digital.modula.vault-notes/collection.actions@1",
+      "title": "Vault Notes collection actions",
+      "contributionKinds": [
+        "menu.item"
+      ],
+      "maxContributions": 20,
+      "requiredCapability": "notes.actions.contribute"
+    },
+    {
+      "id": "digital.modula.vault-notes/search.provider@1",
+      "title": "Vault Notes search providers",
+      "contributionKinds": [
+        "search.provider"
+      ],
+      "maxContributions": 10,
+      "requiredCapability": "notes.search"
+    },
+    {
+      "id": "digital.modula.vault-notes/composer.tool@1",
+      "title": "Vault Notes composer tools",
+      "contributionKinds": [
+        "composer.tool"
+      ],
+      "maxContributions": 20
+    },
+    {
+      "id": "digital.modula.vault-notes/settings.section@1",
+      "title": "Vault Notes settings sections",
+      "contributionKinds": [
+        "settings.section"
+      ],
+      "maxContributions": 20
+    }
+  ],
+  "events": [
+    {
+      "direction": "produces",
+      "type": "digital.modula.vault-notes.note.created.v1",
+      "schemaVersion": "1.0.0"
+    },
+    {
+      "direction": "produces",
+      "type": "digital.modula.vault-notes.note.updated.v1",
+      "schemaVersion": "1.0.0"
+    },
+    {
+      "direction": "produces",
+      "type": "digital.modula.vault-notes.note.archived.v1",
+      "schemaVersion": "1.0.0"
+    },
+    {
+      "direction": "produces",
+      "type": "digital.modula.vault-notes.note.deleted.v1",
+      "schemaVersion": "1.0.0"
+    },
+    {
+      "direction": "produces",
+      "type": "digital.modula.vault-notes.note.restored.v1",
+      "schemaVersion": "1.0.0"
+    },
+    {
+      "direction": "produces",
+      "type": "digital.modula.vault-notes.folder.created.v1",
+      "schemaVersion": "1.0.0"
+    }
+  ],
+  "privacy": {
+    "dataAccessed": [
+      "user-authored notes, folders, tags, and saved-source references"
+    ],
+    "dataCreated": [
+      "notes",
+      "folders",
+      "tags",
+      "note links",
+      "note versions"
+    ],
+    "dataTransmitted": [
+      "none-by-default"
+    ],
+    "retention": "until uninstall deleteData or account deletion",
+    "export": "JSON export via Greenfield",
+    "deletion": "uninstall keepData or deleteData; permanent delete requires confirmation",
+    "analytics": "none",
+    "telemetry": "none"
+  },
+  "accessibility": {
+    "screenReader": true,
+    "scalableText": true,
+    "reduceMotion": true,
+    "keyboardNavigation": true,
+    "highContrast": true
+  },
+  "localization": {
+    "defaultLocale": "en",
+    "locales": [
+      "en"
+    ]
+  },
+  "support": {
+    "documentation": "https://modula.digital/docs",
+    "support": "https://modula.digital/support",
+    "privacy": "https://modula.digital/privacy",
+    "securityContact": "https://modula.digital/security",
+    "publisherContact": "https://modula.digital/support"
+  },
+  "offers": [
+    {
+      "model": "free"
+    }
+  ]
+}
