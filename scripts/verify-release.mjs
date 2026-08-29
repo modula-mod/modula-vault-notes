@@ -19,7 +19,7 @@ const validation = validateModulaModuleManifest(standard)
 if (validation.valid) pass('Standard 2.1 manifest validates')
 else fail(`Standard manifest invalid: ${validation.issues.map(issue => `${issue.code} ${issue.path}`).join('; ')}`)
 
-for (const [field, value] of Object.entries({standardVersion: '2.1.0', moduleVersion: '1.2.0', manifestSchemaVersion: '2.1.0', dataSchemaVersion: '1.0.0'})) {
+for (const [field, value] of Object.entries({standardVersion: '2.1.0', moduleVersion: '1.3.0', manifestSchemaVersion: '2.1.0', dataSchemaVersion: '1.0.0'})) {
   if (standard[field] === value) pass(`${field} is ${value}`)
   else fail(`${field} must be ${value}`)
 }
@@ -45,7 +45,7 @@ if (marketplace.previews?.length === 0) pass('Marketplace previews remain empty 
 else fail('Marketplace previews must contain only separately verified media')
 if (marketplace.availableViewIds?.length === requiredViews.length) pass('Marketplace listing references all canonical module views')
 else fail('Marketplace listing must reference every canonical module view')
-if (marketplace.release?.source?.tag === 'vault-notes-v1.2.0' && marketplace.release?.source?.asset === 'modula-vault-notes-1.2.0.tgz') pass('Marketplace release identity is pinned')
+if (marketplace.release?.source?.tag === 'vault-notes-v1.3.0' && marketplace.release?.source?.asset === 'modula-vault-notes-1.3.0.tgz') pass('Marketplace release identity is pinned')
 else fail('Marketplace release identity missing')
 for (const field of ['rating', 'ratingCount', 'chartRank', 'downloadCount']) {
   if (!(field in marketplace)) pass(`runtime Marketplace aggregate is not hardcoded: ${field}`)
