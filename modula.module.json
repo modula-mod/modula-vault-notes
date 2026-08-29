@@ -2799,7 +2799,7 @@
   },
   "release": {
     "repository": "modula-mod/modula-vault-notes",
-    "commitSha": "6a6d15b7c56fe7257061ab5c4bcde0b50cb05819",
+    "commitSha": "5d9da73552b38ba875f8e8b81100d39984ea5c6e",
     "checksum": "0000000000000000000000000000000000000000000000000000000000000000",
     "licenseEvidence": [
       "LICENSE",
