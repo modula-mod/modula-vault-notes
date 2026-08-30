@@ -5,7 +5,7 @@
   "identity": {
     "id": "digital.modula.vault-notes",
     "kind": "module",
-    "version": "1.4.0",
+    "version": "1.5.0",
     "displayName": "Vault Notes",
     "slug": "vault-notes",
     "subtitle": "Your private knowledge space.",
@@ -37,11 +37,11 @@
   },
   "release": {
     "channel": "beta",
-    "notes": "Product-owned Vault Notes frontend for the generic Modula Product Host. Adds immutable declarative routes, collection/detail/editor/search/settings views, frontend provenance, and host-rendered accessibility without arbitrary remote code. Artwork remains first-party generated and development-provisional.",
+    "notes": "Vault Notes product UI is now authored as typed TSX against @modula/product-ui and statically compiled into the validated frontend artifact. Raw TSX and arbitrary executable frontend code are excluded from the release. Artwork remains first-party generated and development-provisional.",
     "builder": "modula-product-release",
     "provenance": {
       "manifestSha256": "8474c6e205cdef44eb2b4539b6444aa52cc36085cea77adf1bce15ea33e1fcb5",
-      "frontendSha256": "65f039de00040b0ad68bad1626b38d43f01aef28bdeeaa5cdbe6e9d559fefca7"
+      "frontendSha256": "3c77b60c1c182f7dae6ace0edacdc670d6403cb82afdc08f493da63df3c8efc9"
     }
   },
   "security": {
@@ -122,7 +122,7 @@
     "artifact": {
       "path": "frontend/frontend.manifest.json",
       "mediaType": "application/vnd.modula.frontend+json",
-      "sha256": "65f039de00040b0ad68bad1626b38d43f01aef28bdeeaa5cdbe6e9d559fefca7",
+      "sha256": "3c77b60c1c182f7dae6ace0edacdc670d6403cb82afdc08f493da63df3c8efc9",
       "schemaVersion": "1.0.0",
       "entryView": "home"
     }

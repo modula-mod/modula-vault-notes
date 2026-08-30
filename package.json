@@ -1,6 +1,6 @@
 {
   "name": "@modula/vault-notes",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Offline-capable Vault Notes reference module with governed extension points.",
   "type": "module",
   "main": "./dist/index.js",
@@ -15,7 +15,7 @@
     "PRODUCT.md",
     "PRIVACY.md",
     "schemas",
-    "frontend",
+    "frontend/frontend.manifest.json",
     "src/views",
     "README.md",
     "CHANGELOG.md",
@@ -23,7 +23,8 @@
     "SECURITY.md"
   ],
   "scripts": {
-    "frontend:build": "node scripts/build-frontend.mjs",
+    "frontend:check": "tsc -p tsconfig.frontend.json",
+    "frontend:build": "pnpm frontend:check && node scripts/build-frontend.mjs",
     "build": "pnpm frontend:build && node scripts/clean-dist.mjs && tsc -p tsconfig.json",
     "test": "vitest run",
     "verify": "pnpm build && pnpm test && node scripts/verify-release.mjs",
@@ -35,6 +36,7 @@
     "@modula/module-validator": "file:../modula-module-standard/packages/module-validator"
   },
   "devDependencies": {
+    "@modula/product-ui": "file:../modula-product-standard/packages/product-ui",
     "@types/node": "^24.0.10",
     "typescript": "~6.0.3",
     "vitest": "^3.2.4"

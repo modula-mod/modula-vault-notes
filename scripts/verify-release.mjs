@@ -28,7 +28,7 @@ for (const [field, value] of Object.entries({standardVersion: '2.1.0', moduleVer
 }
 check(product.identity.id === 'digital.modula.vault-notes' && product.identity.version === version, 'canonical MPS identity matches package version')
 check(greenfield.moduleId === product.identity.id && greenfield.version === version, 'Greenfield compatibility identity matches MPS')
-check(packageJson.files.includes('frontend'), 'release package includes product-owned frontend')
+check(packageJson.files.includes('frontend/frontend.manifest.json') && !packageJson.files.includes('frontend'), 'release package includes only the compiled product frontend')
 
 const sourceCommit = product.source?.commit
 const sourceAvailable = typeof sourceCommit === 'string'

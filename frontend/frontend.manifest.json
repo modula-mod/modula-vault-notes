@@ -169,7 +169,7 @@
     ]
   },
   "productId": "digital.modula.vault-notes",
-  "releaseVersion": "1.4.0",
+  "releaseVersion": "1.5.0",
   "routes": [
     {
       "path": "/",
@@ -244,44 +244,90 @@
           {
             "children": [
               {
-                "binding": "notes",
-                "text": "Search your notes",
-                "type": "search"
+                "children": [
+                  {
+                    "binding": "notes",
+                    "text": "Search your notes",
+                    "type": "search"
+                  },
+                  {
+                    "action": "newNote",
+                    "text": "New note",
+                    "type": "button"
+                  }
+                ],
+                "text": "Notes actions",
+                "type": "toolbar"
               },
               {
-                "action": "newNote",
-                "text": "New note",
-                "type": "button"
+                "children": [
+                  {
+                    "accessibility": {
+                      "label": "Vault Notes",
+                      "role": "list"
+                    },
+                    "action": "openNote",
+                    "binding": "notes",
+                    "children": [
+                      {
+                        "binding": "notes",
+                        "children": [
+                          {
+                            "children": [
+                              {
+                                "binding": "notes",
+                                "type": "text",
+                                "valuePath": "title"
+                              },
+                              {
+                                "binding": "notes",
+                                "type": "text",
+                                "valuePath": "plainTextProjection"
+                              },
+                              {
+                                "binding": "notes",
+                                "type": "metadata",
+                                "valuePath": "updatedAt"
+                              }
+                            ],
+                            "layout": {
+                              "direction": "vertical",
+                              "gap": "compact"
+                            },
+                            "type": "stack"
+                          }
+                        ],
+                        "type": "recordRow"
+                      }
+                    ],
+                    "type": "recordList"
+                  }
+                ],
+                "layout": {
+                  "direction": "vertical",
+                  "gap": "regular"
+                },
+                "type": "stack"
               }
             ],
-            "text": "Notes actions",
-            "type": "toolbar"
-          },
-          {
-            "accessibility": {
-              "label": "Vault Notes",
-              "role": "list"
+            "layout": {
+              "direction": "vertical",
+              "gap": "regular",
+              "responsive": [
+                {
+                  "class": "compact",
+                  "columns": 1
+                },
+                {
+                  "class": "wide",
+                  "columns": 2
+                }
+              ]
             },
-            "action": "openNote",
-            "binding": "notes",
-            "type": "recordList"
+            "type": "stack"
           }
         ],
-        "layout": {
-          "direction": "vertical",
-          "gap": "regular",
-          "responsive": [
-            {
-              "class": "compact",
-              "columns": 1
-            },
-            {
-              "class": "wide",
-              "columns": 2
-            }
-          ]
-        },
-        "type": "stack"
+        "type": "section"
       },
       "states": {
         "empty": {
@@ -335,48 +381,53 @@
           {
             "children": [
               {
-                "action": "editNote",
-                "text": "Edit",
-                "type": "button"
+                "children": [
+                  {
+                    "action": "editNote",
+                    "text": "Edit",
+                    "type": "button"
+                  },
+                  {
+                    "action": "shareNote",
+                    "text": "Share",
+                    "type": "button"
+                  },
+                  {
+                    "action": "deleteNote",
+                    "text": "Delete",
+                    "type": "button"
+                  }
+                ],
+                "text": "Note actions",
+                "type": "toolbar"
               },
               {
-                "action": "shareNote",
-                "text": "Share",
-                "type": "button"
+                "accessibility": {
+                  "role": "header"
+                },
+                "binding": "note",
+                "type": "text",
+                "valuePath": "title"
               },
               {
-                "action": "deleteNote",
-                "text": "Delete",
-                "type": "button"
+                "binding": "note",
+                "type": "text",
+                "valuePath": "plainTextProjection"
+              },
+              {
+                "binding": "note",
+                "type": "metadata",
+                "valuePath": "updatedAt"
               }
             ],
-            "text": "Note actions",
-            "type": "toolbar"
-          },
-          {
-            "accessibility": {
-              "role": "header"
+            "layout": {
+              "direction": "vertical",
+              "gap": "regular"
             },
-            "binding": "note",
-            "type": "text",
-            "valuePath": "title"
-          },
-          {
-            "binding": "note",
-            "type": "text",
-            "valuePath": "plainTextProjection"
-          },
-          {
-            "binding": "note",
-            "type": "metadata",
-            "valuePath": "updatedAt"
+            "type": "stack"
           }
         ],
-        "layout": {
-          "direction": "vertical",
-          "gap": "regular"
-        },
-        "type": "stack"
+        "type": "section"
       },
       "states": {
         "error": {
@@ -469,6 +520,11 @@
             "type": "field"
           },
           {
+            "binding": "note",
+            "type": "text",
+            "valuePath": "title"
+          },
+          {
             "children": [
               {
                 "action": "createNote",
@@ -532,13 +588,54 @@
             "type": "search"
           },
           {
-            "accessibility": {
-              "label": "Search results",
-              "role": "list"
+            "children": [
+              {
+                "accessibility": {
+                  "label": "Search results",
+                  "role": "list"
+                },
+                "action": "openNote",
+                "binding": "notes",
+                "children": [
+                  {
+                    "binding": "notes",
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "binding": "notes",
+                            "type": "text",
+                            "valuePath": "title"
+                          },
+                          {
+                            "binding": "notes",
+                            "type": "text",
+                            "valuePath": "plainTextProjection"
+                          },
+                          {
+                            "binding": "notes",
+                            "type": "metadata",
+                            "valuePath": "updatedAt"
+                          }
+                        ],
+                        "layout": {
+                          "direction": "vertical",
+                          "gap": "compact"
+                        },
+                        "type": "stack"
+                      }
+                    ],
+                    "type": "recordRow"
+                  }
+                ],
+                "type": "recordList"
+              }
+            ],
+            "layout": {
+              "direction": "vertical",
+              "gap": "regular"
             },
-            "action": "openNote",
-            "binding": "notes",
-            "type": "recordList"
+            "type": "stack"
           }
         ],
         "type": "stack"
@@ -593,13 +690,54 @@
             "type": "filter"
           },
           {
-            "accessibility": {
-              "label": "Favourite notes",
-              "role": "list"
+            "children": [
+              {
+                "accessibility": {
+                  "label": "Favourite notes",
+                  "role": "list"
+                },
+                "action": "openNote",
+                "binding": "notes",
+                "children": [
+                  {
+                    "binding": "notes",
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "binding": "notes",
+                            "type": "text",
+                            "valuePath": "title"
+                          },
+                          {
+                            "binding": "notes",
+                            "type": "text",
+                            "valuePath": "plainTextProjection"
+                          },
+                          {
+                            "binding": "notes",
+                            "type": "metadata",
+                            "valuePath": "updatedAt"
+                          }
+                        ],
+                        "layout": {
+                          "direction": "vertical",
+                          "gap": "compact"
+                        },
+                        "type": "stack"
+                      }
+                    ],
+                    "type": "recordRow"
+                  }
+                ],
+                "type": "recordList"
+              }
+            ],
+            "layout": {
+              "direction": "vertical",
+              "gap": "regular"
             },
-            "action": "openNote",
-            "binding": "notes",
-            "type": "recordList"
+            "type": "stack"
           }
         ],
         "type": "stack"
@@ -646,13 +784,54 @@
             "type": "filter"
           },
           {
-            "accessibility": {
-              "label": "Archived notes",
-              "role": "list"
+            "children": [
+              {
+                "accessibility": {
+                  "label": "Archived notes",
+                  "role": "list"
+                },
+                "action": "openNote",
+                "binding": "notes",
+                "children": [
+                  {
+                    "binding": "notes",
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "binding": "notes",
+                            "type": "text",
+                            "valuePath": "title"
+                          },
+                          {
+                            "binding": "notes",
+                            "type": "text",
+                            "valuePath": "plainTextProjection"
+                          },
+                          {
+                            "binding": "notes",
+                            "type": "metadata",
+                            "valuePath": "updatedAt"
+                          }
+                        ],
+                        "layout": {
+                          "direction": "vertical",
+                          "gap": "compact"
+                        },
+                        "type": "stack"
+                      }
+                    ],
+                    "type": "recordRow"
+                  }
+                ],
+                "type": "recordList"
+              }
+            ],
+            "layout": {
+              "direction": "vertical",
+              "gap": "regular"
             },
-            "action": "openNote",
-            "binding": "notes",
-            "type": "recordList"
+            "type": "stack"
           }
         ],
         "type": "stack"
@@ -705,6 +884,38 @@
               "purgeNote"
             ],
             "binding": "notes",
+            "children": [
+              {
+                "binding": "notes",
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "binding": "notes",
+                        "type": "text",
+                        "valuePath": "title"
+                      },
+                      {
+                        "binding": "notes",
+                        "type": "text",
+                        "valuePath": "plainTextProjection"
+                      },
+                      {
+                        "binding": "notes",
+                        "type": "metadata",
+                        "valuePath": "updatedAt"
+                      }
+                    ],
+                    "layout": {
+                      "direction": "vertical",
+                      "gap": "compact"
+                    },
+                    "type": "stack"
+                  }
+                ],
+                "type": "recordRow"
+              }
+            ],
             "type": "recordList"
           }
         ],
