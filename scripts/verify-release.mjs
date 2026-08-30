@@ -46,9 +46,17 @@ if (frontendPath && existsSync(join(root, frontendPath))) {
   for (const path of ['/', '/new', '/note/:noteId', '/note/:noteId/edit', '/search', '/favourites', '/archived', '/trash', '/folders', '/settings']) {
     check(frontend.routes.some(route => route.path === path), `product frontend route declared: ${path}`)
   }
-  for (const id of ['newNote', 'openNote', 'editNote', 'createNote', 'updateNote', 'deleteNote', 'shareNote', 'saveSettings']) {
+  for (const id of ['newNote', 'openNote', 'editNote', 'createNote', 'updateNote', 'deleteNote', 'restoreNote', 'purgeNote', 'shareNote', 'saveSettings']) {
     check(frontend.actions.some(action => action.id === id), `product frontend action declared: ${id}`)
   }
+  const editor = frontend.views.find(view => view.id === 'editor')
+  const editorFields = editor?.root?.children?.filter(component => component.type === 'field').map(component => component.field?.id) ?? []
+  check(editorFields.includes('document') && editorFields.includes('tagIds') && !editorFields.includes('body') && !editorFields.includes('tags'), 'frontend editor writes the canonical Vault Notes record fields')
+  const createAction = frontend.actions.find(action => action.id === 'createNote')
+  check(createAction?.input?.transforms?.some(transform => transform.source === 'document' && transform.target === 'plainTextProjection' && transform.transform === 'richText.plainText@1'), 'frontend derives the searchable plain-text projection generically')
+  const trash = frontend.views.find(view => view.id === 'trash')
+  check(trash?.bindings?.some(binding => binding.query?.recordState === 'deleted'), 'trash binds deleted records explicitly')
+  check(JSON.stringify(trash?.root).includes('restoreNote') && JSON.stringify(trash?.root).includes('purgeNote'), 'trash lifecycle actions come from the product frontend')
   check(frontend.accessibility?.screenReader === true && frontend.accessibility?.scalableText === true && frontend.accessibility?.keyboardNavigation === true && frontend.accessibility?.reduceMotion === true, 'frontend accessibility declaration is complete')
   check(frontend.capabilities?.required?.includes('ui.richText@1'), 'rich-text editor is a versioned generic host capability')
   const serialized = JSON.stringify(frontend)

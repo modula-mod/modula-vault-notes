@@ -2,7 +2,7 @@
   "id": "archived",
   "kind": "collection",
   "title": "Archived notes",
-  "bindings": [{"id": "notes", "source": "record.query", "recordType": "note", "query": {"filterParam": "filter", "sortParam": "sort", "limit": 100}}],
+  "bindings": [{"id": "notes", "source": "record.query", "recordType": "note", "query": {"filterParam": "filter", "sortParam": "sort", "limit": 100, "filters": {"archived": true}, "recordState": "active"}}],
   "root": {"type": "stack", "children": [{"type": "filter", "text": "Archived", "binding": "notes"}, {"type": "recordList", "binding": "notes", "action": "openNote", "accessibility": {"label": "Archived notes", "role": "list"}}]},
   "states": {"empty": {"type": "emptyState", "text": "No archived notes"}, "error": {"type": "errorState", "text": "Archived notes are unavailable", "accessibility": {"role": "status"}}}
 }
