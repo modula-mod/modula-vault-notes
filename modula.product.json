@@ -24,7 +24,7 @@
   },
   "source": {
     "repository": "modula-mod/modula-vault-notes",
-    "commit": "68d20e693562712c5ff57cb7c24a40845b7f074c",
+    "commit": "f5e0ff55adc9507a6ce0173e9021707d75c3654c",
     "manifestPath": "modula.product.json",
     "provider": "github"
   },
