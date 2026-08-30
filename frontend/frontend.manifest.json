@@ -30,6 +30,22 @@
     {
       "family": "record.create",
       "id": "createNote",
+      "input": {
+        "defaults": {
+          "archived": false,
+          "dataSchemaVersion": "1.0.0",
+          "favourite": false,
+          "pinned": false,
+          "tagIds": []
+        },
+        "transforms": [
+          {
+            "source": "document",
+            "target": "plainTextProjection",
+            "transform": "richText.plainText@1"
+          }
+        ]
+      },
       "inputBinding": "noteForm",
       "label": "Create note",
       "recordType": "note"
@@ -37,6 +53,15 @@
     {
       "family": "record.update",
       "id": "updateNote",
+      "input": {
+        "transforms": [
+          {
+            "source": "document",
+            "target": "plainTextProjection",
+            "transform": "richText.plainText@1"
+          }
+        ]
+      },
       "inputBinding": "noteForm",
       "label": "Save changes",
       "recordIdBinding": "note",
@@ -55,6 +80,19 @@
       "family": "share",
       "id": "shareNote",
       "label": "Share"
+    },
+    {
+      "family": "record.restore",
+      "id": "restoreNote",
+      "label": "Restore note",
+      "recordType": "note"
+    },
+    {
+      "confirm": true,
+      "family": "record.purge",
+      "id": "purgeNote",
+      "label": "Delete permanently",
+      "recordType": "note"
     },
     {
       "family": "settings.update",
@@ -187,7 +225,11 @@
           "id": "notes",
           "query": {
             "filterParam": "filter",
+            "filters": {
+              "archived": false
+            },
             "limit": 100,
+            "recordState": "active",
             "searchParam": "q",
             "sortParam": "sort"
           },
@@ -322,7 +364,7 @@
           {
             "binding": "note",
             "type": "text",
-            "valuePath": "body"
+            "valuePath": "plainTextProjection"
           },
           {
             "binding": "note",
@@ -399,8 +441,10 @@
             "binding": "noteForm",
             "field": {
               "capability": "ui.richText@1",
-              "id": "body",
+              "helpText": "Rich text is stored as a versioned document and indexed through a derived plain-text projection.",
+              "id": "document",
               "label": "Body",
+              "placeholder": "Start writing your note",
               "type": "richText"
             },
             "type": "field"
@@ -418,7 +462,7 @@
           {
             "binding": "noteForm",
             "field": {
-              "id": "tags",
+              "id": "tagIds",
               "label": "Tags",
               "type": "tags"
             },
@@ -466,7 +510,11 @@
           "id": "notes",
           "query": {
             "filterParam": "filter",
+            "filters": {
+              "archived": false
+            },
             "limit": 100,
+            "recordState": "active",
             "searchParam": "q",
             "sortParam": "sort"
           },
@@ -523,7 +571,12 @@
           "id": "notes",
           "query": {
             "filterParam": "filter",
+            "filters": {
+              "archived": false,
+              "favourite": true
+            },
             "limit": 100,
+            "recordState": "active",
             "sortParam": "sort"
           },
           "recordType": "note",
@@ -572,7 +625,11 @@
           "id": "notes",
           "query": {
             "filterParam": "filter",
+            "filters": {
+              "archived": true
+            },
             "limit": 100,
+            "recordState": "active",
             "sortParam": "sort"
           },
           "recordType": "note",
@@ -622,6 +679,7 @@
           "query": {
             "filterParam": "filter",
             "limit": 100,
+            "recordState": "deleted",
             "sortParam": "sort"
           },
           "recordType": "note",
@@ -642,7 +700,10 @@
               "label": "Deleted notes",
               "role": "list"
             },
-            "action": "openNote",
+            "actions": [
+              "restoreNote",
+              "purgeNote"
+            ],
             "binding": "notes",
             "type": "recordList"
           }

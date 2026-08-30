@@ -2,7 +2,7 @@
   "id": "favourites",
   "kind": "collection",
   "title": "Favourite notes",
-  "bindings": [{"id": "notes", "source": "record.query", "recordType": "note", "query": {"filterParam": "filter", "sortParam": "sort", "limit": 100}}],
+  "bindings": [{"id": "notes", "source": "record.query", "recordType": "note", "query": {"filterParam": "filter", "sortParam": "sort", "limit": 100, "filters": {"favourite": true, "archived": false}, "recordState": "active"}}],
   "root": {"type": "stack", "children": [{"type": "filter", "text": "Favourites", "binding": "notes"}, {"type": "recordList", "binding": "notes", "action": "openNote", "accessibility": {"label": "Favourite notes", "role": "list"}}]},
   "states": {"empty": {"type": "emptyState", "text": "No favourite notes yet"}, "error": {"type": "errorState", "text": "Favourite notes are unavailable", "accessibility": {"role": "status"}}}
 }

@@ -41,7 +41,7 @@
     "builder": "modula-product-release",
     "provenance": {
       "manifestSha256": "8474c6e205cdef44eb2b4539b6444aa52cc36085cea77adf1bce15ea33e1fcb5",
-      "frontendSha256": "cbe2178be93332b725e16415ac9d3b38cfc2598e2f24f7f7e8698dc2c6db4115"
+      "frontendSha256": "65f039de00040b0ad68bad1626b38d43f01aef28bdeeaa5cdbe6e9d559fefca7"
     }
   },
   "security": {
@@ -122,7 +122,7 @@
     "artifact": {
       "path": "frontend/frontend.manifest.json",
       "mediaType": "application/vnd.modula.frontend+json",
-      "sha256": "cbe2178be93332b725e16415ac9d3b38cfc2598e2f24f7f7e8698dc2c6db4115",
+      "sha256": "65f039de00040b0ad68bad1626b38d43f01aef28bdeeaa5cdbe6e9d559fefca7",
       "schemaVersion": "1.0.0",
       "entryView": "home"
     }
