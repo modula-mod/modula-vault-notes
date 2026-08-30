@@ -31,18 +31,21 @@ check(greenfield.moduleId === product.identity.id && greenfield.version === vers
 check(packageJson.files.includes('frontend'), 'release package includes product-owned frontend')
 
 const sourceCommit = product.source?.commit
+const sourceAvailable = typeof sourceCommit === 'string'
+  && spawnSync('git', ['cat-file', '-e', `${sourceCommit}^{commit}`], {cwd: root, stdio: 'ignore'}).status === 0
 check(
   typeof sourceCommit === 'string'
     && sourceCommit === greenfield.source?.commit
     && sourceCommit === standard.release?.commitSha,
   'MPS, Module Standard, and Greenfield source provenance agree',
 )
+check(sourceAvailable, 'declared product source commit is available for provenance verification')
 check(
-  typeof sourceCommit === 'string'
+  sourceAvailable
     && spawnSync('git', ['merge-base', '--is-ancestor', sourceCommit, 'HEAD'], {cwd: root, stdio: 'ignore'}).status === 0,
   'declared product source commit is an ancestor of the release checkout',
 )
-if (typeof sourceCommit === 'string') {
+if (sourceAvailable) {
   const postSourceFiles = execFileSync('git', ['diff', '--name-only', `${sourceCommit}..HEAD`], {cwd: root, encoding: 'utf8'})
     .trim()
     .split('\n')
