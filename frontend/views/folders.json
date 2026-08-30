@@ -1,0 +1,8 @@
+{
+  "id": "folders",
+  "kind": "collection",
+  "title": "Folders",
+  "bindings": [{"id": "folders", "source": "record.query", "recordType": "folder", "query": {"searchParam": "q", "sortParam": "sort", "limit": 100}}],
+  "root": {"type": "stack", "children": [{"type": "search", "text": "Search folders", "binding": "folders"}, {"type": "recordList", "binding": "folders", "accessibility": {"label": "Vault Notes folders", "role": "list"}}]},
+  "states": {"empty": {"type": "emptyState", "text": "No folders yet"}, "error": {"type": "errorState", "text": "Folders are unavailable", "accessibility": {"role": "status"}}}
+}

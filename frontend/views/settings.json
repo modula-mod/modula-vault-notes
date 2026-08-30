@@ -1,0 +1,16 @@
+{
+  "id": "settings",
+  "kind": "settings",
+  "title": "Vault Notes settings",
+  "bindings": [{"id": "preferences", "source": "settings", "settingsKey": "vaultNotes.preferences"}],
+  "root": {
+    "type": "section",
+    "accessibility": {"label": "Vault Notes settings", "role": "form"},
+    "children": [
+      {"type": "field", "binding": "preferences", "field": {"id": "archiveBeforeDelete", "type": "boolean", "label": "Archive before permanent deletion"}},
+      {"type": "field", "binding": "preferences", "field": {"id": "defaultEditor", "type": "singleSelect", "label": "Default editor style", "options": [{"value": "rich", "label": "Rich text"}, {"value": "plain", "label": "Plain text"}]}},
+      {"type": "field", "binding": "preferences", "field": {"id": "confirmDestructiveActions", "type": "boolean", "label": "Confirm destructive actions"}},
+      {"type": "button", "text": "Save settings", "action": "saveSettings"}
+    ]
+  }
+}

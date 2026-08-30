@@ -9,45 +9,65 @@ const releaseDir = join(root, 'release')
 mkdirSync(releaseDir, {recursive: true})
 
 execFileSync('pnpm', ['build'], {cwd: root, stdio: 'inherit'})
+
+const packageJson = readJson('package.json')
+const product = readJson('modula.product.json')
+const standard = readJson('modula.module.json')
+const greenfield = readJson('module.manifest.json')
+const version = product.identity.version
+if (packageJson.version !== version || standard.moduleVersion !== version || greenfield.version !== version) {
+  throw new Error(`Release versions disagree: package=${packageJson.version}, product=${version}, standard=${standard.moduleVersion}, Greenfield=${greenfield.version}`)
+}
+
 execFileSync('pnpm', ['pack', '--pack-destination', releaseDir], {cwd: root, stdio: 'inherit'})
 
-const manifest = JSON.parse(readFileSync(join(root, 'modula.module.json'), 'utf8'))
-const greenfieldManifest = JSON.parse(readFileSync(join(root, 'module.manifest.json'), 'utf8'))
-const packageFile = `modula-vault-notes-${manifest.moduleVersion}.tgz`
+const packageFile = `modula-vault-notes-${version}.tgz`
 const packageChecksum = sha256(readFileSync(join(releaseDir, packageFile)))
-const manifestChecksum = sha256(readFileSync(join(root, 'modula.module.json')))
-const greenfieldManifestChecksum = greenfieldManifest.integrity.manifestSha256
+const productManifestChecksum = sha256(readFileSync(join(root, 'modula.product.json')))
+const standardManifestChecksum = sha256(readFileSync(join(root, 'modula.module.json')))
+const greenfieldManifestChecksum = greenfield.integrity.manifestSha256
+const frontendBytes = readFileSync(join(root, product.frontend.artifact.path))
+const frontendChecksum = sha256(frontendBytes)
+if (frontendChecksum !== product.frontend.artifact.sha256 || frontendChecksum !== product.release.provenance.frontendSha256) {
+  throw new Error('Frontend artifact provenance does not match the packaged bytes.')
+}
+
 const commit = execFileSync('git', ['rev-parse', 'HEAD'], {cwd: root, encoding: 'utf8'}).trim()
-const tag = `vault-notes-v${manifest.moduleVersion}`
+const tag = `vault-notes-v${version}`
 const standardRoot = resolve(root, '../modula-module-standard')
-const standardTag = `mms-v${manifest.standardVersion}`
+const standardTag = `mms-v${standard.standardVersion}`
 const standardCommit = execFileSync('git', ['rev-list', '-n', '1', standardTag], {cwd: standardRoot, encoding: 'utf8'}).trim()
 
 const provenance = {
-  moduleId: manifest.id,
-  moduleVersion: manifest.moduleVersion,
-  standardVersion: manifest.standardVersion,
-  manifestSchemaVersion: manifest.manifestSchemaVersion,
-  dataSchemaVersion: manifest.dataSchemaVersion,
+  productId: product.identity.id,
+  kind: product.identity.kind,
+  version,
+  mpsVersion: product.productStandard,
+  moduleStandardVersion: standard.standardVersion,
+  manifestSchemaVersion: standard.manifestSchemaVersion,
+  dataSchemaVersion: standard.dataSchemaVersion,
   repository: 'modula-mod/modula-vault-notes',
   releaseCommit: commit,
   releaseTag: tag,
   packageFile,
-  manifestChecksum,
-  greenfieldManifestChecksum,
   packageChecksum,
+  productManifestChecksum,
+  standardManifestChecksum,
+  greenfieldManifestChecksum,
+  frontendArtifact: product.frontend.artifact.path,
+  frontendChecksum,
   standardReleaseTag: standardTag,
   standardReleaseCommit: standardCommit,
-  channel: 'development',
-  nextChannel: 'founder-alpha',
+  channel: product.release.channel,
   generatedAt: new Date().toISOString(),
 }
 
 writeFileSync(join(releaseDir, `${tag}.provenance.json`), `${JSON.stringify(provenance, null, 2)}\n`)
-console.log(`package: ${packageFile}`)
-console.log(`package sha256: ${packageChecksum}`)
-console.log(`release commit: ${commit}`)
-console.log(`release tag: ${tag}`)
+console.log(JSON.stringify(provenance, null, 2))
+
+function readJson(path) {
+  return JSON.parse(readFileSync(join(root, path), 'utf8'))
+}
 
 function sha256(value) {
   return createHash('sha256').update(value).digest('hex')

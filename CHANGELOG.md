@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.4.0
+
+- Move the complete Vault Notes experience into a product-owned MPS frontend artifact.
+- Add deterministic routes and views for notes, detail/edit, search, favourites, archive, trash, folders, and product settings.
+- Bind the compiled frontend hash into product release provenance and package the source plus immutable artifact.
+- Continue using Greenfield-hosted records and the generic Modula Product Host; no product-specific shell implementation or arbitrary remote code is introduced.
+
 ## 1.3.0
 
 - Add canonical MPS 1.0-RC `modula.product.json` as the product source of truth.

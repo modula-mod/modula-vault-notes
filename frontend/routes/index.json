@@ -1,0 +1,12 @@
+[
+  {"path": "/", "viewId": "home"},
+  {"path": "/new", "viewId": "editor", "presentation": "sheet"},
+  {"path": "/note/:noteId", "viewId": "detail"},
+  {"path": "/note/:noteId/edit", "viewId": "editor", "presentation": "sheet"},
+  {"path": "/search", "viewId": "search"},
+  {"path": "/favourites", "viewId": "favourites"},
+  {"path": "/archived", "viewId": "archived"},
+  {"path": "/trash", "viewId": "trash"},
+  {"path": "/folders", "viewId": "folders"},
+  {"path": "/settings", "viewId": "settings"}
+]
