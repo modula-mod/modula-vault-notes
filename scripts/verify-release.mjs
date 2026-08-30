@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import {createHash} from 'node:crypto'
+import {execFileSync, spawnSync} from 'node:child_process'
 import {existsSync, readFileSync, readdirSync, statSync} from 'node:fs'
 import {join} from 'node:path'
 import {validateModulaModuleManifest} from '@modula/module-validator'
@@ -28,6 +29,32 @@ for (const [field, value] of Object.entries({standardVersion: '2.1.0', moduleVer
 check(product.identity.id === 'digital.modula.vault-notes' && product.identity.version === version, 'canonical MPS identity matches package version')
 check(greenfield.moduleId === product.identity.id && greenfield.version === version, 'Greenfield compatibility identity matches MPS')
 check(packageJson.files.includes('frontend'), 'release package includes product-owned frontend')
+
+const sourceCommit = product.source?.commit
+const sourceAvailable = typeof sourceCommit === 'string'
+  && spawnSync('git', ['cat-file', '-e', `${sourceCommit}^{commit}`], {cwd: root, stdio: 'ignore'}).status === 0
+check(
+  typeof sourceCommit === 'string'
+    && sourceCommit === greenfield.source?.commit
+    && sourceCommit === standard.release?.commitSha,
+  'MPS, Module Standard, and Greenfield source provenance agree',
+)
+check(sourceAvailable, 'declared product source commit is available for provenance verification')
+check(
+  sourceAvailable
+    && spawnSync('git', ['merge-base', '--is-ancestor', sourceCommit, 'HEAD'], {cwd: root, stdio: 'ignore'}).status === 0,
+  'declared product source commit is an ancestor of the release checkout',
+)
+if (sourceAvailable) {
+  const postSourceFiles = execFileSync('git', ['diff', '--name-only', `${sourceCommit}..HEAD`], {cwd: root, encoding: 'utf8'})
+    .trim()
+    .split('\n')
+    .filter(Boolean)
+  check(
+    !postSourceFiles.some(path => /^(?:frontend|schemas|src)\//.test(path)),
+    'no product implementation changed after the declared source commit',
+  )
+}
 
 const frontendPath = product.frontend?.artifact?.path
 check(product.frontend?.mode === 'declarative' && frontendPath === 'frontend/frontend.manifest.json', 'declarative frontend artifact is declared')
