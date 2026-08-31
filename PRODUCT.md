@@ -10,7 +10,7 @@ Modula account holders who want account-scoped notes that remain private by defa
 
 ## Product kind
 
-`module` (Module Standard 2.1 profile under MPS 1.0-RC)
+`module` (Module Standard 2.1 profile under MPS 1.0)
 
 ## Capabilities
 

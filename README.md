@@ -19,7 +19,7 @@ generic record persistence and declarative module host rendering.
 - publisher: Modula
 - slug: `vault-notes`
 - module version: `1.5.0`
-- product standard: MPS 1.0-RC (`modula.product.json` is canonical)
+- product standard: MPS 1.0 (`modula.product.json` is canonical)
 - standard version: `2.1.0`
 - manifest schema version: `2.1.0`
 - data schema version: `1.0.0`

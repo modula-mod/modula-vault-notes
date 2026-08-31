@@ -1,7 +1,7 @@
 {
-  "$schema": "https://modula.digital/schemas/product-standard/1.0-rc/product.schema.json",
+  "$schema": "https://modula.digital/schemas/product-standard/1.0/product.schema.json",
   "schema": "modula.product.1.0",
-  "productStandard": "1.0-RC",
+  "productStandard": "1.0",
   "identity": {
     "id": "digital.modula.vault-notes",
     "kind": "module",
@@ -40,8 +40,8 @@
     "notes": "Vault Notes product UI is now authored as typed TSX against @modula/product-ui and statically compiled into the validated frontend artifact. Raw TSX and arbitrary executable frontend code are excluded from the release. Artwork remains first-party generated and development-provisional.",
     "builder": "modula-product-release",
     "provenance": {
-      "manifestSha256": "8474c6e205cdef44eb2b4539b6444aa52cc36085cea77adf1bce15ea33e1fcb5",
-      "frontendSha256": "3c77b60c1c182f7dae6ace0edacdc670d6403cb82afdc08f493da63df3c8efc9"
+      "manifestSha256": "f663397d3265d42f49c0cd37275aa06d95eef3855ffe04f33041b0a9a2b10c8e",
+      "frontendSha256": "c45cf81c956d51e647a6a81d962170d326b0aaecea40daaa4b21e1021f7fa470"
     }
   },
   "security": {
@@ -71,7 +71,7 @@
     }
   },
   "compatibility": {
-    "productStandard": "^1.0.0-rc",
+    "productStandard": "^1.0.0",
     "greenfieldProtocol": "greenfield.v1",
     "host": ">=1.0.0",
     "moduleProfile": "^2.1.0",
@@ -122,7 +122,7 @@
     "artifact": {
       "path": "frontend/frontend.manifest.json",
       "mediaType": "application/vnd.modula.frontend+json",
-      "sha256": "3c77b60c1c182f7dae6ace0edacdc670d6403cb82afdc08f493da63df3c8efc9",
+      "sha256": "c45cf81c956d51e647a6a81d962170d326b0aaecea40daaa4b21e1021f7fa470",
       "schemaVersion": "1.0.0",
       "entryView": "home"
     }

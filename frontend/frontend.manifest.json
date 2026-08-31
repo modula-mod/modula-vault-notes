@@ -1,5 +1,5 @@
 {
-  "$schema": "https://modula.digital/schemas/product-standard/1.0-rc/frontend.schema.json",
+  "$schema": "https://modula.digital/schemas/product-standard/1.0/frontend.schema.json",
   "accessibility": {
     "declaration": "host-baseline-with-product-semantics",
     "keyboardNavigation": true,
@@ -115,7 +115,7 @@
     "versionRange": ">=1.0.0 <2.0.0"
   },
   "mode": "declarative",
-  "mpsVersion": "1.0-RC",
+  "mpsVersion": "1.0",
   "navigation": {
     "backBehavior": "host",
     "rootView": "home",
