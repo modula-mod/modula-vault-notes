@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.5.0
+
+- Replaces hand-authored frontend JSON with typed TSX product source compiled by `@modula/product-ui-compiler`.
+- Keeps the installed artifact deterministic and declarative; raw TSX is never packaged or executed by the host.
+
 ## 1.4.0
 
 - Move the complete Vault Notes experience into a product-owned MPS frontend artifact.

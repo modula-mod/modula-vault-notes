@@ -7,7 +7,7 @@ This repository is a **Modula product**, not Greenfield core.
 - Product name: Vault Notes
 - Canonical product ID: `digital.modula.vault-notes` (immutable; already published)
 - Family: `digital.modula.vault` (root). Do not infer family from the word “Vault”.
-- MPS version: **1.0-RC** (promote with the platform when MPS 1.0 is tagged)
+- MPS version: **1.0**
 - Module Standard profile: **2.1**
 - Greenfield protocol: `greenfield.v1`
 - Authoritative manifest: `modula.product.json`

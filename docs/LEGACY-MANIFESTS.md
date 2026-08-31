@@ -1,6 +1,6 @@
 # Legacy manifests
 
-Canonical product source: `modula.product.json` (MPS 1.0-RC).
+Canonical product source: `modula.product.json` (MPS 1.0).
 
 These files remain for compatibility with already-published Module Standard / Greenfield releases:
 
