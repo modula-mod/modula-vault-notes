@@ -34,6 +34,10 @@
         "defaults": {
           "archived": false,
           "dataSchemaVersion": "1.0.0",
+          "document": {
+            "blocks": [],
+            "schemaVersion": "1.0.0"
+          },
           "favourite": false,
           "pinned": false,
           "tagIds": []
@@ -169,7 +173,7 @@
     ]
   },
   "productId": "digital.modula.vault-notes",
-  "releaseVersion": "1.5.0",
+  "releaseVersion": "1.6.0",
   "routes": [
     {
       "path": "/",
@@ -363,7 +367,7 @@
           "type": "errorState"
         }
       },
-      "title": "Vault Notes"
+      "title": "Notes"
     },
     {
       "bindings": [
@@ -492,7 +496,7 @@
             "binding": "noteForm",
             "field": {
               "capability": "ui.richText@1",
-              "helpText": "Rich text is stored as a versioned document and indexed through a derived plain-text projection.",
+              "helpText": "Your note stays private inside Vault Notes.",
               "id": "document",
               "label": "Body",
               "placeholder": "Start writing your note",
@@ -505,6 +509,7 @@
             "field": {
               "id": "folderId",
               "label": "Folder",
+              "placeholder": "Optional folder",
               "recordType": "folder",
               "type": "recordReference"
             },
@@ -515,14 +520,10 @@
             "field": {
               "id": "tagIds",
               "label": "Tags",
+              "placeholder": "Add tags separated by commas",
               "type": "tags"
             },
             "type": "field"
-          },
-          {
-            "binding": "note",
-            "type": "text",
-            "valuePath": "title"
           },
           {
             "children": [

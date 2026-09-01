@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.6.0
+
+- Make note creation compatible with Greenfield-owned record IDs, revisions, and timestamps so the product editor can save without fabricating platform metadata.
+- Simplify the product-authored editor copy and structure for the generic mobile Product Host.
+- Provide a deterministic empty rich-text document for new notes.
+
 ## 1.5.0
 
 - Replaces hand-authored frontend JSON with typed TSX product source compiled by `@modula/product-ui-compiler`.

@@ -81,6 +81,7 @@ if (frontendPath && existsSync(join(root, frontendPath))) {
   check(editorFields.includes('document') && editorFields.includes('tagIds') && !editorFields.includes('body') && !editorFields.includes('tags'), 'frontend editor writes the canonical Vault Notes record fields')
   const createAction = frontend.actions.find(action => action.id === 'createNote')
   check(createAction?.input?.transforms?.some(transform => transform.source === 'document' && transform.target === 'plainTextProjection' && transform.transform === 'richText.plainText@1'), 'frontend derives the searchable plain-text projection generically')
+  check(createAction?.input?.defaults?.document?.schemaVersion === '1.0.0' && Array.isArray(createAction?.input?.defaults?.document?.blocks), 'frontend supplies a deterministic empty rich-text document')
   const trash = frontend.views.find(view => view.id === 'trash')
   check(trash?.bindings?.some(binding => binding.query?.recordState === 'deleted'), 'trash binds deleted records explicitly')
   check(JSON.stringify(trash?.root).includes('restoreNote') && JSON.stringify(trash?.root).includes('purgeNote'), 'trash lifecycle actions come from the product frontend')
@@ -91,6 +92,13 @@ if (frontendPath && existsSync(join(root, frontendPath))) {
 } else {
   fail('compiled frontend artifact exists')
 }
+
+const noteSchema = readJson('schemas/note.schema.json')
+const noteRequired = new Set(Array.isArray(noteSchema.required) ? noteSchema.required : [])
+check(
+  ['id', 'revision', 'createdAt', 'updatedAt'].every(field => !noteRequired.has(field)),
+  'Greenfield-owned record identity, revision, and timestamps are not required product input',
+)
 
 const requiredRecords = ['note', 'folder', 'tag', 'note-link', 'note-version', 'saved-source']
 for (const record of requiredRecords) {

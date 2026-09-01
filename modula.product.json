@@ -5,7 +5,7 @@
   "identity": {
     "id": "digital.modula.vault-notes",
     "kind": "module",
-    "version": "1.5.0",
+    "version": "1.6.0",
     "displayName": "Vault Notes",
     "slug": "vault-notes",
     "subtitle": "Your private knowledge space.",
@@ -40,8 +40,8 @@
     "notes": "Vault Notes product UI is now authored as typed TSX against @modula/product-ui and statically compiled into the validated frontend artifact. Raw TSX and arbitrary executable frontend code are excluded from the release. Artwork remains first-party generated and development-provisional.",
     "builder": "modula-product-release",
     "provenance": {
-      "manifestSha256": "0e175a2e0416409a64285b1a0743f2990f5b7a8caa9f747c2d2d39d09c6c4886",
-      "frontendSha256": "c45cf81c956d51e647a6a81d962170d326b0aaecea40daaa4b21e1021f7fa470"
+      "manifestSha256": "6ae620196da1daceaabf8b68edc790de59870459fce5831507b8c88e3f9d3ca4",
+      "frontendSha256": "56251e8c5aaa28c3db0a74c38700df1adc7c68d287cf98de4a2bb9dc3066d9f7"
     }
   },
   "security": {
@@ -122,7 +122,7 @@
     "artifact": {
       "path": "frontend/frontend.manifest.json",
       "mediaType": "application/vnd.modula.frontend+json",
-      "sha256": "c45cf81c956d51e647a6a81d962170d326b0aaecea40daaa4b21e1021f7fa470",
+      "sha256": "56251e8c5aaa28c3db0a74c38700df1adc7c68d287cf98de4a2bb9dc3066d9f7",
       "schemaVersion": "1.0.0",
       "entryView": "home"
     }

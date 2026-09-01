@@ -4,7 +4,7 @@
   "title": "Vault Note",
   "type": "object",
   "additionalProperties": false,
-  "required": ["id", "title", "document", "plainTextProjection", "tagIds", "pinned", "favourite", "archived", "revision", "createdAt", "updatedAt", "dataSchemaVersion"],
+  "required": ["title", "document", "plainTextProjection", "tagIds", "pinned", "favourite", "archived", "dataSchemaVersion"],
   "properties": {
     "id": {"type": "string", "minLength": 1, "maxLength": 120},
     "title": {"type": "string", "minLength": 1, "maxLength": 240},
