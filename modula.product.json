@@ -24,7 +24,7 @@
   },
   "source": {
     "repository": "modula-mod/modula-vault-notes",
-    "commit": "630f6bae3634bc408ec6234a70d35574acc9d6af",
+    "commit": "466475042469153c43d6cb736642e4aba5523b47",
     "manifestPath": "modula.product.json",
     "provider": "github"
   },
@@ -40,7 +40,7 @@
     "notes": "Vault Notes product UI is now authored as typed TSX against @modula/product-ui and statically compiled into the validated frontend artifact. Raw TSX and arbitrary executable frontend code are excluded from the release. Artwork remains first-party generated and development-provisional.",
     "builder": "modula-product-release",
     "provenance": {
-      "manifestSha256": "6ae620196da1daceaabf8b68edc790de59870459fce5831507b8c88e3f9d3ca4",
+      "manifestSha256": "4aabe9719bb75cb83915bbbb9f093db7bf78bd47b357a14ddd81ce0b78cc9c8f",
       "frontendSha256": "56251e8c5aaa28c3db0a74c38700df1adc7c68d287cf98de4a2bb9dc3066d9f7"
     }
   },
