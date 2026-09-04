@@ -24,7 +24,7 @@
   },
   "source": {
     "repository": "modula-mod/modula-vault-notes",
-    "commit": "466475042469153c43d6cb736642e4aba5523b47",
+    "commit": "28819460e05fc5b8422ba8ab474f5f06fb9973c4",
     "manifestPath": "modula.product.json",
     "provider": "github"
   },
@@ -40,7 +40,7 @@
     "notes": "Vault Notes 1.7 gives note creation and editing distinct product-owned flows while inheriting the compact fields, controls, folder picker, and tag tokens supplied by the generic Product Host. Raw TSX and arbitrary executable frontend code remain excluded from the release.",
     "builder": "modula-product-release",
     "provenance": {
-      "manifestSha256": "315e1411902b3d1c2e03dade787bcf0c078ae1d502d43f67448bea9a4b6acbd2",
+      "manifestSha256": "a677f6287696560c70cdf00a101951156baf145f40ad26951374183f85afcd23",
       "frontendSha256": "4af252f64b8b55d18d10c827f1c998845256b985cfa664326284107871595d7d"
     }
   },
