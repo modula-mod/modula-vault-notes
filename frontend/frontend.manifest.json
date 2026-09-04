@@ -173,7 +173,7 @@
     ]
   },
   "productId": "digital.modula.vault-notes",
-  "releaseVersion": "1.6.0",
+  "releaseVersion": "1.7.0",
   "routes": [
     {
       "path": "/",
@@ -182,7 +182,7 @@
     {
       "path": "/new",
       "presentation": "sheet",
-      "viewId": "editor"
+      "viewId": "newEditor"
     },
     {
       "path": "/note/:noteId",
@@ -461,6 +461,98 @@
     {
       "bindings": [
         {
+          "id": "noteForm",
+          "source": "installation"
+        }
+      ],
+      "id": "newEditor",
+      "kind": "form",
+      "root": {
+        "accessibility": {
+          "label": "Vault Notes editor",
+          "role": "form"
+        },
+        "children": [
+          {
+            "binding": "noteForm",
+            "field": {
+              "id": "title",
+              "label": "Title",
+              "required": true,
+              "type": "text",
+              "validation": {
+                "maxLength": 240
+              }
+            },
+            "type": "field"
+          },
+          {
+            "binding": "noteForm",
+            "field": {
+              "capability": "ui.richText@1",
+              "helpText": "Your note stays private inside Vault Notes.",
+              "id": "document",
+              "label": "Body",
+              "placeholder": "Start writing your note",
+              "type": "richText"
+            },
+            "type": "field"
+          },
+          {
+            "binding": "noteForm",
+            "field": {
+              "id": "folderId",
+              "label": "Folder",
+              "placeholder": "Optional folder",
+              "recordType": "folder",
+              "type": "recordReference"
+            },
+            "type": "field"
+          },
+          {
+            "binding": "noteForm",
+            "field": {
+              "id": "tagIds",
+              "label": "Tags",
+              "placeholder": "Add tags separated by commas",
+              "type": "tags"
+            },
+            "type": "field"
+          },
+          {
+            "children": [
+              {
+                "action": "createNote",
+                "text": "Save note",
+                "type": "button"
+              }
+            ],
+            "type": "row"
+          }
+        ],
+        "type": "section"
+      },
+      "states": {
+        "capabilityUnavailable": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "This host needs the rich text editor capability",
+          "type": "errorState"
+        },
+        "error": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "The note could not be saved",
+          "type": "errorState"
+        }
+      },
+      "title": "New Note"
+    },
+    {
+      "bindings": [
+        {
           "id": "note",
           "recordIdParam": "noteId",
           "recordType": "note",
@@ -528,11 +620,6 @@
           {
             "children": [
               {
-                "action": "createNote",
-                "text": "Create note",
-                "type": "button"
-              },
-              {
                 "action": "updateNote",
                 "text": "Save changes",
                 "type": "button"
@@ -559,7 +646,7 @@
           "type": "errorState"
         }
       },
-      "title": "Edit note"
+      "title": "Edit Note"
     },
     {
       "bindings": [

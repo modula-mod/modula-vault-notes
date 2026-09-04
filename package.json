@@ -1,6 +1,6 @@
 {
   "name": "@modula/vault-notes",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "Offline-capable Vault Notes reference module with governed extension points.",
   "type": "module",
   "main": "./dist/index.js",
