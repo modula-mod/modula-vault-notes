@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.7.0
+
+- Give New Note and Edit Note distinct product-owned screens and actions.
+- Keep the create and update flows compact when rendered by the generic Product Host.
+- Preserve structured folder and tag fields for the host's native picker and token controls.
+
 ## 1.6.0
 
 - Make note creation compatible with Greenfield-owned record IDs, revisions, and timestamps so the product editor can save without fabricating platform metadata.

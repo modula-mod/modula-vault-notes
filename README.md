@@ -18,12 +18,12 @@ generic record persistence and declarative module host rendering.
 - module ID: `digital.modula.vault-notes`
 - publisher: Modula
 - slug: `vault-notes`
-- module version: `1.6.0`
+- module version: `1.7.0`
 - product standard: MPS 1.0 (`modula.product.json` is canonical)
 - standard version: `2.1.0`
 - manifest schema version: `2.1.0`
 - data schema version: `1.0.0`
-- current immutable release: `vault-notes-v1.6.0`
+- proposed immutable release: `vault-notes-v1.7.0`
 - product-owned frontend source: typed TSX compiled to a validated artifact (immutable release lines; earlier tags are never mutated)
 
 Legacy module ID `modula.vault-notes` is a migration alias only. It must not
@@ -33,7 +33,7 @@ Legacy source `modula-mod/modula-module-vault-notes` is archive/redirect only.
 
 ## Scope
 
-Vault Notes 1.6 supports notes, folders, tags, structured documents, optimistic
+Vault Notes 1.7 supports notes, folders, tags, structured documents, optimistic
 revision updates, soft delete, restore, permanent delete, archive, pin,
 favourite, duplicate, export, diagnostics, settings, search projection
 metadata, versioned events, and governed extension points. Optional AI is supplied by the separate Vault AI add-on.

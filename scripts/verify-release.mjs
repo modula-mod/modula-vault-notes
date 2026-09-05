@@ -68,7 +68,7 @@ if (frontendPath && existsSync(join(root, frontendPath))) {
   check(frontend.mpsVersion === product.productStandard, 'frontend MPS version matches product')
   check(frontend.productId === product.identity.id && frontend.releaseVersion === version, 'frontend release identity matches product')
   check(frontend.mode === 'declarative' && frontend.entry === 'home', 'frontend has a declarative home entry')
-  const requiredFrontendViews = ['home', 'detail', 'editor', 'search', 'favourites', 'archived', 'trash', 'folders', 'settings']
+  const requiredFrontendViews = ['home', 'detail', 'newEditor', 'editor', 'search', 'favourites', 'archived', 'trash', 'folders', 'settings']
   for (const id of requiredFrontendViews) check(frontend.views.some(view => view.id === id), `product frontend view declared: ${id}`)
   for (const path of ['/', '/new', '/note/:noteId', '/note/:noteId/edit', '/search', '/favourites', '/archived', '/trash', '/folders', '/settings']) {
     check(frontend.routes.some(route => route.path === path), `product frontend route declared: ${path}`)
@@ -79,6 +79,9 @@ if (frontendPath && existsSync(join(root, frontendPath))) {
   const editor = frontend.views.find(view => view.id === 'editor')
   const editorFields = editor?.root?.children?.filter(component => component.type === 'field').map(component => component.field?.id) ?? []
   check(editorFields.includes('document') && editorFields.includes('tagIds') && !editorFields.includes('body') && !editorFields.includes('tags'), 'frontend editor writes the canonical Vault Notes record fields')
+  const newEditor = frontend.views.find(view => view.id === 'newEditor')
+  check(newEditor?.title === 'New Note' && JSON.stringify(newEditor.root).includes('createNote') && !JSON.stringify(newEditor.root).includes('updateNote'), 'new-note route has product-owned create semantics')
+  check(editor?.title === 'Edit Note' && JSON.stringify(editor.root).includes('updateNote') && !JSON.stringify(editor.root).includes('createNote'), 'edit route has product-owned update semantics')
   const createAction = frontend.actions.find(action => action.id === 'createNote')
   check(createAction?.input?.transforms?.some(transform => transform.source === 'document' && transform.target === 'plainTextProjection' && transform.transform === 'richText.plainText@1'), 'frontend derives the searchable plain-text projection generically')
   check(createAction?.input?.defaults?.document?.schemaVersion === '1.0.0' && Array.isArray(createAction?.input?.defaults?.document?.blocks), 'frontend supplies a deterministic empty rich-text document')

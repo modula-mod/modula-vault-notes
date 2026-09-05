@@ -5,7 +5,7 @@
   "identity": {
     "id": "digital.modula.vault-notes",
     "kind": "module",
-    "version": "1.6.0",
+    "version": "1.7.0",
     "displayName": "Vault Notes",
     "slug": "vault-notes",
     "subtitle": "Your private knowledge space.",
@@ -24,7 +24,7 @@
   },
   "source": {
     "repository": "modula-mod/modula-vault-notes",
-    "commit": "466475042469153c43d6cb736642e4aba5523b47",
+    "commit": "28819460e05fc5b8422ba8ab474f5f06fb9973c4",
     "manifestPath": "modula.product.json",
     "provider": "github"
   },
@@ -37,11 +37,11 @@
   },
   "release": {
     "channel": "beta",
-    "notes": "Vault Notes product UI is now authored as typed TSX against @modula/product-ui and statically compiled into the validated frontend artifact. Raw TSX and arbitrary executable frontend code are excluded from the release. Artwork remains first-party generated and development-provisional.",
+    "notes": "Vault Notes 1.7 gives note creation and editing distinct product-owned flows while inheriting the compact fields, controls, folder picker, and tag tokens supplied by the generic Product Host. Raw TSX and arbitrary executable frontend code remain excluded from the release.",
     "builder": "modula-product-release",
     "provenance": {
-      "manifestSha256": "4aabe9719bb75cb83915bbbb9f093db7bf78bd47b357a14ddd81ce0b78cc9c8f",
-      "frontendSha256": "56251e8c5aaa28c3db0a74c38700df1adc7c68d287cf98de4a2bb9dc3066d9f7"
+      "manifestSha256": "a677f6287696560c70cdf00a101951156baf145f40ad26951374183f85afcd23",
+      "frontendSha256": "4af252f64b8b55d18d10c827f1c998845256b985cfa664326284107871595d7d"
     }
   },
   "security": {
@@ -122,7 +122,7 @@
     "artifact": {
       "path": "frontend/frontend.manifest.json",
       "mediaType": "application/vnd.modula.frontend+json",
-      "sha256": "56251e8c5aaa28c3db0a74c38700df1adc7c68d287cf98de4a2bb9dc3066d9f7",
+      "sha256": "4af252f64b8b55d18d10c827f1c998845256b985cfa664326284107871595d7d",
       "schemaVersion": "1.0.0",
       "entryView": "home"
     }

@@ -105,7 +105,22 @@ function NoteDetail() {
   );
 }
 
-function NoteEditor() {
+function NewNoteEditor() {
+  const noteForm = useForm({id: "noteForm"});
+  return (
+    <Form accessibility={{label: "Vault Notes editor", role: "form"}}>
+      <Field binding={noteForm} field={{id: "title", type: "text", label: "Title", required: true, validation: {maxLength: 240}}} />
+      <Field binding={noteForm} field={{id: "document", type: "richText", label: "Body", capability: "ui.richText@1", placeholder: "Start writing your note", helpText: "Your note stays private inside Vault Notes."}} />
+      <Field binding={noteForm} field={{id: "folderId", type: "recordReference", label: "Folder", recordType: "folder", placeholder: "Optional folder"}} />
+      <Field binding={noteForm} field={{id: "tagIds", type: "tags", label: "Tags", placeholder: "Add tags separated by commas"}} />
+      <Row>
+        <Button label="Save note" action={createNote} />
+      </Row>
+    </Form>
+  );
+}
+
+function EditNoteEditor() {
   const note = useRecord({id: "note", type: "note", idParam: "noteId"});
   const noteForm = useForm({id: "noteForm"});
   return (
@@ -115,7 +130,6 @@ function NoteEditor() {
       <Field binding={noteForm} field={{id: "folderId", type: "recordReference", label: "Folder", recordType: "folder", placeholder: "Optional folder"}} />
       <Field binding={noteForm} field={{id: "tagIds", type: "tags", label: "Tags", placeholder: "Add tags separated by commas"}} />
       <Row>
-        <Button label="Create note" action={createNote} />
         <Button label="Save changes" action={updateNote} />
       </Row>
     </Form>
@@ -167,7 +181,7 @@ export default defineFrontend({
   entry: "home",
   hostRuntime: {versionRange: ">=1.0.0 <2.0.0"},
   routes: [
-    route("/", "home"), route("/new", "editor", {presentation: "sheet"}), route("/note/:noteId", "detail"),
+    route("/", "home"), route("/new", "newEditor", {presentation: "sheet"}), route("/note/:noteId", "detail"),
     route("/note/:noteId/edit", "editor", {presentation: "sheet"}), route("/search", "search"),
     route("/favourites", "favourites"), route("/archived", "archived"), route("/trash", "trash"),
     route("/folders", "folders"), route("/settings", "settings"),
@@ -175,7 +189,8 @@ export default defineFrontend({
   screens: [
     screen("home", "collection", "Notes", NotesHome, {states: {loading: <LoadingState label="Loading your notes" accessibility={{role: "status"}} />, empty: <EmptyState label="Your vault is ready for its first note"><Button label="Create your first note" action={newNote} /></EmptyState>, error: status("Vault Notes could not be loaded"), offline: status("Vault Notes is temporarily unavailable offline")}}),
     screen("detail", "detail", "Note", NoteDetail, {states: {loading: <LoadingState label="Loading note" accessibility={{role: "status"}} />, error: status("This note is unavailable"), permissionDenied: status("You do not have permission to read this note")}}),
-    screen("editor", "form", "Edit note", NoteEditor, {states: {capabilityUnavailable: status("This host needs the rich text editor capability"), error: status("The note could not be saved")}}),
+    screen("newEditor", "form", "New Note", NewNoteEditor, {states: {capabilityUnavailable: status("This host needs the rich text editor capability"), error: status("The note could not be saved")}}),
+    screen("editor", "form", "Edit Note", EditNoteEditor, {states: {capabilityUnavailable: status("This host needs the rich text editor capability"), error: status("The note could not be saved")}}),
     screen("search", "collection", "Search Vault Notes", SearchNotes, {states: {loading: <LoadingState label="Searching notes" accessibility={{role: "status"}} />, empty: <EmptyState label="No notes match this search" />, error: status("Search is unavailable")}}),
     screen("favourites", "collection", "Favourite notes", FavouriteNotes, {states: collectionStates("No favourite notes yet", "Favourite notes are unavailable")}),
     screen("archived", "collection", "Archived notes", ArchivedNotes, {states: collectionStates("No archived notes", "Archived notes are unavailable")}),
