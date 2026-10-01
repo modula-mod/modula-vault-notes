@@ -24,7 +24,7 @@
   },
   "source": {
     "repository": "modula-mod/modula-vault-notes",
-    "commit": "28819460e05fc5b8422ba8ab474f5f06fb9973c4",
+    "commit": "b74194fe4888b77235df39173c90699e27360514",
     "manifestPath": "modula.product.json",
     "provider": "github"
   },
@@ -40,7 +40,7 @@
     "notes": "Vault Notes 1.8 ships the new product icon and cover artwork through the verified registry presentation pipeline. Note features, record schemas, and the declarative product frontend behave as in 1.7; raw TSX and arbitrary executable frontend code remain excluded from the release.",
     "builder": "modula-product-release",
     "provenance": {
-      "manifestSha256": "99973535922528b087cb0554a50d1dde6439009ac7ccc019b7757ae0d11e8ab0",
+      "manifestSha256": "084efdd9d77911c1df982e0c102460f42c32c55d84a1de8dd8b0a78096f0dc3e",
       "frontendSha256": "f5d63cc809005987189ebcf4cb9cc2daddbb2b8eb8275d7a0df6939d3be6ff4d"
     }
   },
