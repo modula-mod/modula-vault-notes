@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.8.0
+
+- Ship the new Vault Notes product icon (1024 px PNG) and editorial cover (1600x900 JPEG) as hash-bound registry presentation assets.
+- Rebuild the declarative product frontend for the 1.8.0 release identity; note behaviour, records, and schemas are unchanged from 1.7.0.
+
 ## 1.7.0
 
 - Give New Note and Edit Note distinct product-owned screens and actions.
