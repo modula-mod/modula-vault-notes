@@ -5,7 +5,7 @@
   "identity": {
     "id": "digital.modula.vault-notes",
     "kind": "module",
-    "version": "1.7.0",
+    "version": "1.8.0",
     "displayName": "Vault Notes",
     "slug": "vault-notes",
     "subtitle": "Your private knowledge space.",
@@ -24,7 +24,7 @@
   },
   "source": {
     "repository": "modula-mod/modula-vault-notes",
-    "commit": "28819460e05fc5b8422ba8ab474f5f06fb9973c4",
+    "commit": "b74194fe4888b77235df39173c90699e27360514",
     "manifestPath": "modula.product.json",
     "provider": "github"
   },
@@ -37,11 +37,11 @@
   },
   "release": {
     "channel": "beta",
-    "notes": "Vault Notes 1.7 gives note creation and editing distinct product-owned flows while inheriting the compact fields, controls, folder picker, and tag tokens supplied by the generic Product Host. Raw TSX and arbitrary executable frontend code remain excluded from the release.",
+    "notes": "Vault Notes 1.8 ships the new product icon and cover artwork through the verified registry presentation pipeline. Note features, record schemas, and the declarative product frontend behave as in 1.7; raw TSX and arbitrary executable frontend code remain excluded from the release.",
     "builder": "modula-product-release",
     "provenance": {
-      "manifestSha256": "b83062e38e0a2e3c2bf8d5ee7fb1d76205664c2955425df1bad51a7a65e9a11f",
-      "frontendSha256": "4af252f64b8b55d18d10c827f1c998845256b985cfa664326284107871595d7d"
+      "manifestSha256": "084efdd9d77911c1df982e0c102460f42c32c55d84a1de8dd8b0a78096f0dc3e",
+      "frontendSha256": "f5d63cc809005987189ebcf4cb9cc2daddbb2b8eb8275d7a0df6939d3be6ff4d"
     }
   },
   "security": {
@@ -124,7 +124,7 @@
     "artifact": {
       "path": "frontend/frontend.manifest.json",
       "mediaType": "application/vnd.modula.frontend+json",
-      "sha256": "4af252f64b8b55d18d10c827f1c998845256b985cfa664326284107871595d7d",
+      "sha256": "f5d63cc809005987189ebcf4cb9cc2daddbb2b8eb8275d7a0df6939d3be6ff4d",
       "schemaVersion": "1.0.0",
       "entryView": "home"
     }

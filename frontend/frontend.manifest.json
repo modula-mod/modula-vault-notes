@@ -173,7 +173,7 @@
     ]
   },
   "productId": "digital.modula.vault-notes",
-  "releaseVersion": "1.7.0",
+  "releaseVersion": "1.8.0",
   "routes": [
     {
       "path": "/",
