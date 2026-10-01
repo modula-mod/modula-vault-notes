@@ -40,7 +40,7 @@
     "notes": "Vault Notes 1.7 gives note creation and editing distinct product-owned flows while inheriting the compact fields, controls, folder picker, and tag tokens supplied by the generic Product Host. Raw TSX and arbitrary executable frontend code remain excluded from the release.",
     "builder": "modula-product-release",
     "provenance": {
-      "manifestSha256": "a677f6287696560c70cdf00a101951156baf145f40ad26951374183f85afcd23",
+      "manifestSha256": "b83062e38e0a2e3c2bf8d5ee7fb1d76205664c2955425df1bad51a7a65e9a11f",
       "frontendSha256": "4af252f64b8b55d18d10c827f1c998845256b985cfa664326284107871595d7d"
     }
   },
@@ -53,21 +53,23 @@
   "presentation": {
     "icon": {
       "role": "product.icon",
-      "path": "assets/icon/icon.svg",
-      "mediaType": "image/svg+xml",
-      "sha256": "5f5bf90e5cf448e93b0848a03c76268032a2582e9dbf8c249896e0a7d2d500ba",
+      "path": "assets/icon/icon-1024.png",
+      "mediaType": "image/png",
+      "width": 1024,
+      "height": 1024,
+      "sha256": "77bf6a7d8f645bbbe3be540c794624fa0cf23934aef1b452b333bda9c36f22fd",
       "developmentAsset": true,
-      "alt": "Vault Notes development placeholder icon"
+      "alt": "Vault Notes icon: a checklist note with a padlock badge on a teal tile"
     },
     "cover": {
       "role": "product.cover",
-      "path": "assets/cover/cover.png",
-      "mediaType": "image/png",
-      "width": 1942,
-      "height": 809,
-      "sha256": "632538b738357c31d0dfb1772cc17f17e1ef44dae826c6a91a11e472013ed9de",
+      "path": "assets/cover/cover.jpg",
+      "mediaType": "image/jpeg",
+      "width": 1600,
+      "height": 900,
+      "sha256": "cef9bbe729e59145bb8622020265b1640832a22a4a69421cc6db12939e145191",
       "developmentAsset": true,
-      "alt": "Provisional first-party Vault Notes editorial cover"
+      "alt": "Vault Notes cover: two note sheets, one with a checklist, on a deep teal background"
     }
   },
   "compatibility": {
