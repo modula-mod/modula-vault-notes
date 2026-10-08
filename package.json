@@ -1,7 +1,7 @@
 {
   "name": "@modula/vault-notes",
-  "version": "1.8.0",
-  "description": "Offline-capable Vault Notes reference module with governed extension points.",
+  "version": "2.0.0-rc.1",
+  "description": "Portable, relationship-aware Vault Notes flagship candidate for the generic Modula module platform.",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -27,6 +27,8 @@
     "frontend:build": "pnpm frontend:check && node scripts/build-frontend.mjs",
     "build": "pnpm frontend:build && node scripts/clean-dist.mjs && tsc -p tsconfig.json",
     "test": "vitest run",
+    "test:scale": "pnpm build && node scripts/benchmark-vault-notes.mjs",
+    "fixtures:vault": "pnpm build && node scripts/vault-fixture-generator.mjs",
     "verify": "pnpm build && pnpm test && node scripts/verify-release.mjs",
     "release:package": "node scripts/package-release.mjs"
   },

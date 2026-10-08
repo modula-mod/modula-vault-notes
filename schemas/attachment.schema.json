@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://modula.digital/modules/vault-notes/schemas/attachment-1.0.0.json",
+  "title": "Vault Note Attachment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["noteId", "assetId", "name", "mimeType", "size", "kind", "createdAt"],
+  "properties": {
+    "noteId": {"type": "string", "minLength": 1, "maxLength": 120},
+    "assetId": {"type": "string", "pattern": "^[A-Za-z0-9._:-]{1,180}$"},
+    "name": {"type": "string", "minLength": 1, "maxLength": 255, "pattern": "^[^/\\\\]+$"},
+    "mimeType": {"type": "string", "pattern": "^[A-Za-z0-9.+-]+/[A-Za-z0-9.+-]+$"},
+    "size": {"type": "integer", "minimum": 0, "maximum": 1000000000},
+    "kind": {"enum": ["image", "pdf", "document", "audio", "file"]},
+    "createdAt": {"type": "string", "format": "date-time"},
+    "durationMs": {"type": "integer", "minimum": 0, "maximum": 86400000},
+    "width": {"type": "integer", "minimum": 1, "maximum": 50000},
+    "height": {"type": "integer", "minimum": 1, "maximum": 50000},
+    "checksumSha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  },
+  "x-greenfield": {
+    "fields": [
+      {"fieldId": "noteId", "name": "noteId", "type": "recordReference", "label": "Note", "required": true, "referenceCollection": "note"},
+      {"fieldId": "assetId", "name": "assetId", "type": "assetReference", "label": "Asset", "required": true},
+      {"fieldId": "name", "name": "name", "type": "text", "label": "Name", "required": true},
+      {"fieldId": "mimeType", "name": "mimeType", "type": "text", "label": "MIME type", "required": true},
+      {"fieldId": "size", "name": "size", "type": "number", "label": "Size", "required": true},
+      {"fieldId": "kind", "name": "kind", "type": "singleSelect", "label": "Kind", "required": true, "options": [{"value": "image", "label": "Image"}, {"value": "pdf", "label": "PDF"}, {"value": "document", "label": "Document"}, {"value": "audio", "label": "Audio"}, {"value": "file", "label": "File"}]},
+      {"fieldId": "createdAt", "name": "createdAt", "type": "dateTime", "label": "Created", "required": true},
+      {"fieldId": "durationMs", "name": "durationMs", "type": "number", "label": "Duration"},
+      {"fieldId": "width", "name": "width", "type": "number", "label": "Width"},
+      {"fieldId": "height", "name": "height", "type": "number", "label": "Height"},
+      {"fieldId": "checksumSha256", "name": "checksumSha256", "type": "text", "label": "Checksum"}
+    ],
+    "searchableFields": ["name", "mimeType"],
+    "filterableFields": ["noteId", "kind", "mimeType"],
+    "sortableFields": ["createdAt", "name", "size"],
+    "referenceFields": ["noteId", "assetId"],
+    "retentionPolicy": "keepOnUninstall"
+  }
+}

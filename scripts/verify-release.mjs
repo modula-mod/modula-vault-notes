@@ -68,9 +68,9 @@ if (frontendPath && existsSync(join(root, frontendPath))) {
   check(frontend.mpsVersion === product.productStandard, 'frontend MPS version matches product')
   check(frontend.productId === product.identity.id && frontend.releaseVersion === version, 'frontend release identity matches product')
   check(frontend.mode === 'declarative' && frontend.entry === 'home', 'frontend has a declarative home entry')
-  const requiredFrontendViews = ['home', 'detail', 'newEditor', 'editor', 'search', 'favourites', 'archived', 'trash', 'folders', 'settings']
+  const requiredFrontendViews = ['home', 'detail', 'newEditor', 'editor', 'search', 'pinned', 'recent', 'favourites', 'archived', 'trash', 'folders', 'settings']
   for (const id of requiredFrontendViews) check(frontend.views.some(view => view.id === id), `product frontend view declared: ${id}`)
-  for (const path of ['/', '/new', '/note/:noteId', '/note/:noteId/edit', '/search', '/favourites', '/archived', '/trash', '/folders', '/settings']) {
+  for (const path of ['/', '/new', '/note/:noteId', '/note/:noteId/edit', '/search', '/pinned', '/recent', '/favourites', '/archived', '/trash', '/folders', '/settings']) {
     check(frontend.routes.some(route => route.path === path), `product frontend route declared: ${path}`)
   }
   for (const id of ['newNote', 'openNote', 'editNote', 'createNote', 'updateNote', 'deleteNote', 'restoreNote', 'purgeNote', 'shareNote', 'saveSettings']) {
@@ -103,12 +103,12 @@ check(
   'Greenfield-owned record identity, revision, and timestamps are not required product input',
 )
 
-const requiredRecords = ['note', 'folder', 'tag', 'note-link', 'note-version', 'saved-source']
+const requiredRecords = ['note', 'folder', 'tag', 'note-link', 'note-version', 'saved-source', 'attachment', 'template', 'saved-search']
 for (const record of requiredRecords) {
   check(standard.records.some(item => item.id === `digital.modula.vault-notes.record.${record}`), `record ${record} declared`)
 }
 
-const requiredLegacyViews = ['home', 'collection', 'detail', 'editor', 'search', 'favourites', 'archived', 'trash', 'folders', 'settings', 'empty', 'error']
+const requiredLegacyViews = ['home', 'collection', 'detail', 'editor', 'search', 'favourites', 'archived', 'trash', 'folders', 'settings', 'empty', 'error', 'pinned', 'recent']
 for (const view of requiredLegacyViews) {
   check(standard.views.some(item => item.id === `digital.modula.vault-notes.view.${view}`), `compatibility view vault-notes.${view} declared`)
 }
@@ -117,7 +117,13 @@ const marketplace = greenfield.extensions?.marketplace ?? {}
 check(marketplace.category === 'Productivity', 'Marketplace category is publisher-declared')
 check(marketplace.ageRating === '4+', 'Marketplace age rating is publisher-declared')
 check(marketplace.previews?.length === 0, 'Marketplace previews remain empty until verified media is published')
-check(marketplace.availableViewIds?.length === requiredLegacyViews.length, 'Marketplace compatibility listing references all canonical module views')
+const canonicalViewIds = standard.views.map(view => view.id)
+check(
+  marketplace.availableViewIds?.length === canonicalViewIds.length
+    && new Set(marketplace.availableViewIds).size === canonicalViewIds.length
+    && canonicalViewIds.every(viewId => marketplace.availableViewIds.includes(viewId)),
+  'Marketplace compatibility listing references all canonical module views',
+)
 check(marketplace.release?.source?.tag === `vault-notes-v${version}` && marketplace.release?.source?.asset === `modula-vault-notes-${version}.tgz`, 'Marketplace release identity is pinned')
 for (const field of ['rating', 'ratingCount', 'chartRank', 'downloadCount']) check(!(field in marketplace), `runtime Marketplace aggregate is not hardcoded: ${field}`)
 
@@ -126,6 +132,20 @@ for (const action of actionNames) {
   const actionId = `digital.modula.vault-notes.action.note.${action}`
   check(standard.actions.some(item => item.id === actionId) && standard.functions.some(item => item.id === actionId.replace('.action.', '.function.')), `note.${action} action/function declared`)
 }
+for (const action of ['get', 'search', 'list-recent', 'create-daily', 'add-tag', 'attach', 'backlinks', 'graph', 'restore-revision', 'import']) {
+  const functionId = `digital.modula.vault-notes.function.note.${action}`
+  const declaration = standard.functions.find(item => item.id === functionId)
+  check(
+    declaration?.inputSchema?.type === 'object'
+      && declaration?.inputSchema?.additionalProperties === false
+      && declaration?.outputSchema?.type === 'object'
+      && standard.actions.some(item => item.functionId === functionId),
+    `note.${action} typed candidate action/function declared`,
+  )
+}
+
+check(standard.offline?.capable === false && standard.synchronization?.items?.length === 0, 'candidate does not claim unsupported offline sync')
+check(standard.widgetRegistry?.items?.length === 0, 'candidate does not claim unsupported host widgets')
 
 for (const permission of ['module.records.read', 'module.records.write', 'module.records.delete', 'module.settings.read', 'module.settings.write', 'module.search.publish', 'module.events.emit', 'module.export.create']) {
   check(standard.permissions.some(item => item.id === permission), `${permission} requested`)

@@ -3,7 +3,7 @@
   "moduleId": "digital.modula.vault-notes",
   "name": "Vault Notes",
   "description": "Offline-capable Vault Notes core with governed extension points and no embedded optional add-ons.",
-  "version": "1.8.0",
+  "version": "2.0.0-rc.1",
   "publisher": {
     "publisherId": "modula",
     "displayName": "Modula",
@@ -14,8 +14,8 @@
     "repository": "modula-mod/modula-vault-notes",
     "commit": "b74194fe4888b77235df39173c90699e27360514",
     "manifestPath": "module.manifest.json",
-    "releaseTag": "vault-notes-v1.8.0",
-    "releaseAssetName": "modula-vault-notes-1.8.0.tgz"
+    "releaseTag": "vault-notes-v2.0.0-rc.1",
+    "releaseAssetName": "modula-vault-notes-2.0.0-rc.1.tgz"
   },
   "license": {
     "status": "firstParty",
@@ -143,6 +143,51 @@
       "permission": "records:module.digital.modula.vault-notes.saved-source:write",
       "reason": "Write saved-source provenance references.",
       "risk": "medium"
+    },
+    {
+      "permission": "records:module.digital.modula.vault-notes.attachment:read",
+      "reason": "Read account-scoped attachment records.",
+      "risk": "low"
+    },
+    {
+      "permission": "records:module.digital.modula.vault-notes.attachment:write",
+      "reason": "Create and update account-scoped attachment records.",
+      "risk": "medium"
+    },
+    {
+      "permission": "records:module.digital.modula.vault-notes.attachment:delete",
+      "reason": "Delete account-scoped attachment records.",
+      "risk": "high"
+    },
+    {
+      "permission": "records:module.digital.modula.vault-notes.template:read",
+      "reason": "Read account-scoped template records.",
+      "risk": "low"
+    },
+    {
+      "permission": "records:module.digital.modula.vault-notes.template:write",
+      "reason": "Create and update account-scoped template records.",
+      "risk": "medium"
+    },
+    {
+      "permission": "records:module.digital.modula.vault-notes.template:delete",
+      "reason": "Delete account-scoped template records.",
+      "risk": "high"
+    },
+    {
+      "permission": "records:module.digital.modula.vault-notes.saved-search:read",
+      "reason": "Read account-scoped saved-search records.",
+      "risk": "low"
+    },
+    {
+      "permission": "records:module.digital.modula.vault-notes.saved-search:write",
+      "reason": "Create and update account-scoped saved-search records.",
+      "risk": "medium"
+    },
+    {
+      "permission": "records:module.digital.modula.vault-notes.saved-search:delete",
+      "reason": "Delete account-scoped saved-search records.",
+      "risk": "high"
     }
   ],
   "contributions": {
@@ -187,6 +232,27 @@
         "title": "Vault saved source schema",
         "schemaRef": "schemas/saved-source.schema.json",
         "collection": "saved-source",
+        "defaultVisibility": "private"
+      },
+      {
+        "id": "digital.modula.vault-notes.schemas.attachment",
+        "title": "Vault attachment metadata schema",
+        "schemaRef": "schemas/attachment.schema.json",
+        "collection": "attachment",
+        "defaultVisibility": "private"
+      },
+      {
+        "id": "digital.modula.vault-notes.schemas.template",
+        "title": "Vault template schema",
+        "schemaRef": "schemas/template.schema.json",
+        "collection": "template",
+        "defaultVisibility": "private"
+      },
+      {
+        "id": "digital.modula.vault-notes.schemas.saved-search",
+        "title": "Vault saved search schema",
+        "schemaRef": "schemas/saved-search.schema.json",
+        "collection": "saved-search",
         "defaultVisibility": "private"
       }
     ],
@@ -257,6 +323,96 @@
         "inputSchemaRef": "schemas/vault-settings.v1.schema.json",
         "outputSchemaRef": "schemas/vault-export.v1.schema.json",
         "executionRequired": false
+      },
+      {
+        "id": "digital.modula.vault-notes.functions.note-get",
+        "title": "Get note",
+        "functionId": "digital.modula.vault-notes.function.note.get",
+        "mode": "declarative",
+        "inputSchemaRef": "schemas/note.schema.json",
+        "outputSchemaRef": "schemas/note.schema.json",
+        "executionRequired": false
+      },
+      {
+        "id": "digital.modula.vault-notes.functions.note-search",
+        "title": "Search notes",
+        "functionId": "digital.modula.vault-notes.function.note.search",
+        "mode": "declarative",
+        "inputSchemaRef": "schemas/note.schema.json",
+        "outputSchemaRef": "schemas/note.schema.json",
+        "executionRequired": false
+      },
+      {
+        "id": "digital.modula.vault-notes.functions.note-list-recent",
+        "title": "List recent notes",
+        "functionId": "digital.modula.vault-notes.function.note.list-recent",
+        "mode": "declarative",
+        "inputSchemaRef": "schemas/note.schema.json",
+        "outputSchemaRef": "schemas/note.schema.json",
+        "executionRequired": false
+      },
+      {
+        "id": "digital.modula.vault-notes.functions.note-create-daily",
+        "title": "Create or open daily note",
+        "functionId": "digital.modula.vault-notes.function.note.create-daily",
+        "mode": "declarative",
+        "inputSchemaRef": "schemas/note.schema.json",
+        "outputSchemaRef": "schemas/note.schema.json",
+        "executionRequired": false
+      },
+      {
+        "id": "digital.modula.vault-notes.functions.note-add-tag",
+        "title": "Add tag to note",
+        "functionId": "digital.modula.vault-notes.function.note.add-tag",
+        "mode": "declarative",
+        "inputSchemaRef": "schemas/note.schema.json",
+        "outputSchemaRef": "schemas/note.schema.json",
+        "executionRequired": false
+      },
+      {
+        "id": "digital.modula.vault-notes.functions.note-attach",
+        "title": "Associate attachment metadata",
+        "functionId": "digital.modula.vault-notes.function.note.attach",
+        "mode": "declarative",
+        "inputSchemaRef": "schemas/attachment.schema.json",
+        "outputSchemaRef": "schemas/attachment.schema.json",
+        "executionRequired": false
+      },
+      {
+        "id": "digital.modula.vault-notes.functions.note-backlinks",
+        "title": "List note backlinks",
+        "functionId": "digital.modula.vault-notes.function.note.backlinks",
+        "mode": "declarative",
+        "inputSchemaRef": "schemas/note.schema.json",
+        "outputSchemaRef": "schemas/note.schema.json",
+        "executionRequired": false
+      },
+      {
+        "id": "digital.modula.vault-notes.functions.note-graph",
+        "title": "Build note graph data",
+        "functionId": "digital.modula.vault-notes.function.note.graph",
+        "mode": "declarative",
+        "inputSchemaRef": "schemas/note.schema.json",
+        "outputSchemaRef": "schemas/note.schema.json",
+        "executionRequired": false
+      },
+      {
+        "id": "digital.modula.vault-notes.functions.note-restore-revision",
+        "title": "Restore note revision",
+        "functionId": "digital.modula.vault-notes.function.note.restore-revision",
+        "mode": "declarative",
+        "inputSchemaRef": "schemas/note.schema.json",
+        "outputSchemaRef": "schemas/note.schema.json",
+        "executionRequired": false
+      },
+      {
+        "id": "digital.modula.vault-notes.functions.note-import",
+        "title": "Import portable notes",
+        "functionId": "digital.modula.vault-notes.function.note.import",
+        "mode": "declarative",
+        "inputSchemaRef": "schemas/vault-export.v1.schema.json",
+        "outputSchemaRef": "schemas/note.schema.json",
+        "executionRequired": false
       }
     ],
     "events": [
@@ -302,7 +458,7 @@
     "executionMode": "declarative"
   },
   "integrity": {
-    "manifestSha256": "4e6ed2aba0d8e775f760caeb79a95c5bf968c04934965ebd39427a782eb757cd"
+    "manifestSha256": "a937682d9d09d13edf70597382159fd9ae940643b81dca33300184b7b4a8fb76"
   },
   "extensions": {
     "marketplace": {
@@ -319,7 +475,7 @@
       },
       "syncSupport": {
         "state": "declared",
-        "value": true
+        "value": false
       },
       "inAppPurchases": {
         "state": "declared",
@@ -338,7 +494,9 @@
         "digital.modula.vault-notes.view.folders",
         "digital.modula.vault-notes.view.settings",
         "digital.modula.vault-notes.view.empty",
-        "digital.modula.vault-notes.view.error"
+        "digital.modula.vault-notes.view.error",
+        "digital.modula.vault-notes.view.pinned",
+        "digital.modula.vault-notes.view.recent"
       ],
       "release": {
         "publishedAt": "2026-08-24T00:00:00.000Z",
@@ -350,8 +508,8 @@
         ],
         "source": {
           "provider": "github-release",
-          "tag": "vault-notes-v1.8.0",
-          "asset": "modula-vault-notes-1.8.0.tgz"
+          "tag": "vault-notes-v2.0.0-rc.1",
+          "asset": "modula-vault-notes-2.0.0-rc.1.tgz"
         }
       }
     },
@@ -371,37 +529,18 @@
       "showWordCount": true,
       "showCharacterCount": false,
       "includeArchivedNotesInSearch": false,
-      "defaultExportFormat": "json"
+      "defaultExportFormat": "json",
+      "newNoteTemplateId": "system.blank",
+      "dailyNoteEnabled": true,
+      "showBacklinks": true,
+      "searchSensitiveNotes": false,
+      "intelligencePreference": "preferLocal"
     },
     "releaseChannels": [
       "development",
       "founder-alpha"
     ],
-    "moduleStandardManifestPath": "modula.module.json",
-    "ai": {
-      "optional": true,
-      "prompts": [
-        "vault-notes.summarise.v1",
-        "vault-notes.suggest-title.v1",
-        "vault-notes.rewrite-selection.v1",
-        "vault-notes.extract-action-items.v1",
-        "vault-notes.suggest-tags.v1"
-      ],
-      "productActions": [
-        "vault-notes.ai.summarise",
-        "vault-notes.ai.suggest-title",
-        "vault-notes.ai.rewrite-selection",
-        "vault-notes.ai.extract-action-items",
-        "vault-notes.ai.suggest-tags"
-      ],
-      "permissions": [
-        "ai.request",
-        "ai.stream",
-        "ai.structured-output",
-        "ai.context.private"
-      ],
-      "providerIndependent": true
-    }
+    "moduleStandardManifestPath": "modula.module.json"
   },
   "standardVersion": "2.1.0",
   "sectionVersions": {
@@ -452,7 +591,7 @@
     "marketplace": "2.1.0"
   },
   "extensionProduct": {
-    "version": "1.8.0",
+    "version": "2.0.0-rc.1",
     "kind": "module",
     "targets": [],
     "extensionPoints": [

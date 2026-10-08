@@ -1,5 +1,16 @@
 # Changelog
 
+## 2.0.0-rc.1 — candidate, not published
+
+- Adds backward-compatible portable note fields for content format, typed properties, attachments, sensitivity, templates, and daily-note identity.
+- Adds deterministic templates, daily-note creation, stable note links, backlinks, related-note ranking, and graph data.
+- Adds bounded attachment metadata associations without exposing filesystem paths.
+- Adds revision restore that creates a new revision and preserves intervening history.
+- Adds rich account-scoped search/filter helpers, saved searches, import, and a versioned portable backup/export contract.
+- Adds local-intelligence request contracts with fail-closed `localOnly` handling for sensitive notes.
+- Adds Pinned and Recent declarative views and aligns module-owned settings with the published settings schema.
+- Does not publish, alter production data, or claim generic sync, sharing, widget, media-upload, or local-intelligence runtime support.
+
 ## 1.8.0
 
 - Ship the new Vault Notes product icon (1024 px PNG) and editorial cover (1600x900 JPEG) as hash-bound registry presentation assets.

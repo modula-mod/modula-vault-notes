@@ -38,6 +38,9 @@ export function noteEvent(type: VaultNotesEventType, note: VaultNoteRecord, cont
       folderId: note.folderId,
       archived: note.archived,
       deleted: Boolean(note.deletedAt),
+      sensitive: note.sensitive === true,
+      attachmentCount: note.attachmentIds?.length ?? 0,
+      propertyCount: note.properties?.values.length ?? 0,
     },
   }
 }

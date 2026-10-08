@@ -5,6 +5,8 @@ export type VaultNotesDiagnosticsInput = {
   folders: VaultFolderRecord[]
   tags: VaultTagRecord[]
   versions: VaultNoteVersionRecord[]
+  links?: number
+  attachments?: number
   searchProjectionLagSeconds: number
   failedActions: number
   exportFailures: number
@@ -36,6 +38,9 @@ export function vaultNotesDiagnostics(input: VaultNotesDiagnosticsInput) {
       tags: input.tags.length,
       trashedNotes: trashed,
       versions: input.versions.length,
+      links: input.links ?? 0,
+      attachments: input.attachments ?? 0,
+      sensitiveNotes: input.notes.filter(note => note.sensitive === true).length,
       failedActions: input.failedActions,
       exportFailures: input.exportFailures,
       dataSchemaVersion: '1.0.0',

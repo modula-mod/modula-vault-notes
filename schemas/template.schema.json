@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://modula.digital/modules/vault-notes/schemas/template-1.0.0.json",
+  "title": "Vault Note Template",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "description", "titlePattern", "document", "properties", "system", "createdAt", "updatedAt"],
+  "properties": {
+    "name": {"type": "string", "minLength": 1, "maxLength": 120},
+    "description": {"type": "string", "maxLength": 500},
+    "titlePattern": {"type": "string", "minLength": 1, "maxLength": 240},
+    "document": {"type": "object"},
+    "properties": {"type": "object"},
+    "system": {"type": "boolean"},
+    "createdAt": {"type": "string", "format": "date-time"},
+    "updatedAt": {"type": "string", "format": "date-time"}
+  },
+  "x-greenfield": {
+    "fields": [
+      {"fieldId": "name", "name": "name", "type": "text", "label": "Name", "required": true},
+      {"fieldId": "description", "name": "description", "type": "multilineText", "label": "Description", "required": true},
+      {"fieldId": "titlePattern", "name": "titlePattern", "type": "text", "label": "Title pattern", "required": true},
+      {"fieldId": "document", "name": "document", "type": "json", "label": "Document", "required": true},
+      {"fieldId": "properties", "name": "properties", "type": "json", "label": "Properties", "required": true},
+      {"fieldId": "system", "name": "system", "type": "boolean", "label": "System", "required": true},
+      {"fieldId": "createdAt", "name": "createdAt", "type": "dateTime", "label": "Created", "required": true},
+      {"fieldId": "updatedAt", "name": "updatedAt", "type": "dateTime", "label": "Updated", "required": true}
+    ],
+    "searchableFields": ["name", "description"],
+    "filterableFields": ["system"],
+    "sortableFields": ["name", "createdAt", "updatedAt"],
+    "referenceFields": [],
+    "retentionPolicy": "keepOnUninstall"
+  }
+}

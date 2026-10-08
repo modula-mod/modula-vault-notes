@@ -33,13 +33,21 @@
       "input": {
         "defaults": {
           "archived": false,
+          "attachmentIds": [],
+          "contentFormat": "blocks-v1",
           "dataSchemaVersion": "1.0.0",
           "document": {
             "blocks": [],
             "schemaVersion": "1.0.0"
           },
           "favourite": false,
+          "intelligencePolicy": "preferLocal",
           "pinned": false,
+          "properties": {
+            "values": [],
+            "version": "1.0.0"
+          },
+          "sensitive": false,
           "tagIds": []
         },
         "transforms": [
@@ -125,6 +133,16 @@
     "rootView": "home",
     "secondary": [
       {
+        "id": "pinned",
+        "label": "Pinned",
+        "viewId": "pinned"
+      },
+      {
+        "id": "recent",
+        "label": "Recent",
+        "viewId": "recent"
+      },
+      {
         "id": "favourites",
         "label": "Favourites",
         "viewId": "favourites"
@@ -173,7 +191,7 @@
     ]
   },
   "productId": "digital.modula.vault-notes",
-  "releaseVersion": "1.8.0",
+  "releaseVersion": "2.0.0-rc.1",
   "routes": [
     {
       "path": "/",
@@ -208,6 +226,14 @@
     {
       "path": "/trash",
       "viewId": "trash"
+    },
+    {
+      "path": "/pinned",
+      "viewId": "pinned"
+    },
+    {
+      "path": "/recent",
+      "viewId": "recent"
     },
     {
       "path": "/folders",
@@ -419,6 +445,14 @@
                 "valuePath": "plainTextProjection"
               },
               {
+                "accessibility": {
+                  "label": "Sensitive note status"
+                },
+                "binding": "note",
+                "type": "badge",
+                "valuePath": "sensitive"
+              },
+              {
                 "binding": "note",
                 "type": "metadata",
                 "valuePath": "updatedAt"
@@ -520,6 +554,70 @@
             "type": "field"
           },
           {
+            "binding": "noteForm",
+            "field": {
+              "id": "icon",
+              "label": "Note icon",
+              "placeholder": "Optional symbol or short label",
+              "type": "text",
+              "validation": {
+                "maxLength": 120
+              }
+            },
+            "type": "field"
+          },
+          {
+            "binding": "noteForm",
+            "field": {
+              "id": "pinned",
+              "label": "Pinned",
+              "type": "boolean"
+            },
+            "type": "field"
+          },
+          {
+            "binding": "noteForm",
+            "field": {
+              "id": "favourite",
+              "label": "Favourite",
+              "type": "boolean"
+            },
+            "type": "field"
+          },
+          {
+            "binding": "noteForm",
+            "field": {
+              "helpText": "Sensitive notes require local-only intelligence and hide indexed content.",
+              "id": "sensitive",
+              "label": "Sensitive note",
+              "type": "boolean"
+            },
+            "type": "field"
+          },
+          {
+            "binding": "noteForm",
+            "field": {
+              "id": "intelligencePolicy",
+              "label": "Local intelligence",
+              "options": [
+                {
+                  "label": "Disabled",
+                  "value": "disabled"
+                },
+                {
+                  "label": "Local only",
+                  "value": "localOnly"
+                },
+                {
+                  "label": "Prefer local",
+                  "value": "preferLocal"
+                }
+              ],
+              "type": "singleSelect"
+            },
+            "type": "field"
+          },
+          {
             "children": [
               {
                 "action": "createNote",
@@ -614,6 +712,70 @@
               "label": "Tags",
               "placeholder": "Add tags separated by commas",
               "type": "tags"
+            },
+            "type": "field"
+          },
+          {
+            "binding": "noteForm",
+            "field": {
+              "id": "icon",
+              "label": "Note icon",
+              "placeholder": "Optional symbol or short label",
+              "type": "text",
+              "validation": {
+                "maxLength": 120
+              }
+            },
+            "type": "field"
+          },
+          {
+            "binding": "noteForm",
+            "field": {
+              "id": "pinned",
+              "label": "Pinned",
+              "type": "boolean"
+            },
+            "type": "field"
+          },
+          {
+            "binding": "noteForm",
+            "field": {
+              "id": "favourite",
+              "label": "Favourite",
+              "type": "boolean"
+            },
+            "type": "field"
+          },
+          {
+            "binding": "noteForm",
+            "field": {
+              "helpText": "Sensitive notes require local-only intelligence and hide indexed content.",
+              "id": "sensitive",
+              "label": "Sensitive note",
+              "type": "boolean"
+            },
+            "type": "field"
+          },
+          {
+            "binding": "noteForm",
+            "field": {
+              "id": "intelligencePolicy",
+              "label": "Local intelligence",
+              "options": [
+                {
+                  "label": "Disabled",
+                  "value": "disabled"
+                },
+                {
+                  "label": "Local only",
+                  "value": "localOnly"
+                },
+                {
+                  "label": "Prefer local",
+                  "value": "preferLocal"
+                }
+              ],
+              "type": "singleSelect"
             },
             "type": "field"
           },
@@ -844,6 +1006,195 @@
         }
       },
       "title": "Favourite notes"
+    },
+    {
+      "bindings": [
+        {
+          "id": "notes",
+          "query": {
+            "filterParam": "filter",
+            "filters": {
+              "archived": false,
+              "pinned": true
+            },
+            "limit": 100,
+            "recordState": "active",
+            "sortParam": "sort"
+          },
+          "recordType": "note",
+          "source": "record.query"
+        }
+      ],
+      "id": "pinned",
+      "kind": "collection",
+      "root": {
+        "children": [
+          {
+            "binding": "notes",
+            "text": "Pinned",
+            "type": "filter"
+          },
+          {
+            "children": [
+              {
+                "accessibility": {
+                  "label": "Pinned notes",
+                  "role": "list"
+                },
+                "action": "openNote",
+                "binding": "notes",
+                "children": [
+                  {
+                    "binding": "notes",
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "binding": "notes",
+                            "type": "text",
+                            "valuePath": "title"
+                          },
+                          {
+                            "binding": "notes",
+                            "type": "text",
+                            "valuePath": "plainTextProjection"
+                          },
+                          {
+                            "binding": "notes",
+                            "type": "metadata",
+                            "valuePath": "updatedAt"
+                          }
+                        ],
+                        "layout": {
+                          "direction": "vertical",
+                          "gap": "compact"
+                        },
+                        "type": "stack"
+                      }
+                    ],
+                    "type": "recordRow"
+                  }
+                ],
+                "type": "recordList"
+              }
+            ],
+            "layout": {
+              "direction": "vertical",
+              "gap": "regular"
+            },
+            "type": "stack"
+          }
+        ],
+        "type": "stack"
+      },
+      "states": {
+        "empty": {
+          "text": "No pinned notes yet",
+          "type": "emptyState"
+        },
+        "error": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "Pinned notes are unavailable",
+          "type": "errorState"
+        }
+      },
+      "title": "Pinned notes"
+    },
+    {
+      "bindings": [
+        {
+          "id": "notes",
+          "query": {
+            "filterParam": "filter",
+            "filters": {
+              "archived": false
+            },
+            "limit": 100,
+            "recordState": "active",
+            "sortParam": "sort"
+          },
+          "recordType": "note",
+          "source": "record.query"
+        }
+      ],
+      "id": "recent",
+      "kind": "collection",
+      "root": {
+        "children": [
+          {
+            "binding": "notes",
+            "text": "Recently edited",
+            "type": "filter"
+          },
+          {
+            "children": [
+              {
+                "accessibility": {
+                  "label": "Recently edited notes",
+                  "role": "list"
+                },
+                "action": "openNote",
+                "binding": "notes",
+                "children": [
+                  {
+                    "binding": "notes",
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "binding": "notes",
+                            "type": "text",
+                            "valuePath": "title"
+                          },
+                          {
+                            "binding": "notes",
+                            "type": "text",
+                            "valuePath": "plainTextProjection"
+                          },
+                          {
+                            "binding": "notes",
+                            "type": "metadata",
+                            "valuePath": "updatedAt"
+                          }
+                        ],
+                        "layout": {
+                          "direction": "vertical",
+                          "gap": "compact"
+                        },
+                        "type": "stack"
+                      }
+                    ],
+                    "type": "recordRow"
+                  }
+                ],
+                "type": "recordList"
+              }
+            ],
+            "layout": {
+              "direction": "vertical",
+              "gap": "regular"
+            },
+            "type": "stack"
+          }
+        ],
+        "type": "stack"
+      },
+      "states": {
+        "empty": {
+          "text": "No recent notes",
+          "type": "emptyState"
+        },
+        "error": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "Recent notes are unavailable",
+          "type": "errorState"
+        }
+      },
+      "title": "Recently edited"
     },
     {
       "bindings": [
@@ -1091,25 +1442,20 @@
           {
             "binding": "preferences",
             "field": {
-              "id": "archiveBeforeDelete",
-              "label": "Archive before permanent deletion",
-              "type": "boolean"
-            },
-            "type": "field"
-          },
-          {
-            "binding": "preferences",
-            "field": {
-              "id": "defaultEditor",
-              "label": "Default editor style",
+              "id": "defaultCollectionView",
+              "label": "Default view",
               "options": [
                 {
-                  "label": "Rich text",
-                  "value": "rich"
+                  "label": "List",
+                  "value": "list"
                 },
                 {
-                  "label": "Plain text",
-                  "value": "plain"
+                  "label": "Compact list",
+                  "value": "compact-list"
+                },
+                {
+                  "label": "Grid",
+                  "value": "grid"
                 }
               ],
               "type": "singleSelect"
@@ -1119,8 +1465,101 @@
           {
             "binding": "preferences",
             "field": {
-              "id": "confirmDestructiveActions",
-              "label": "Confirm destructive actions",
+              "id": "defaultSort",
+              "label": "Default sort",
+              "options": [
+                {
+                  "label": "Recently updated",
+                  "value": "updatedAt"
+                },
+                {
+                  "label": "Recently created",
+                  "value": "createdAt"
+                },
+                {
+                  "label": "Title",
+                  "value": "title"
+                }
+              ],
+              "type": "singleSelect"
+            },
+            "type": "field"
+          },
+          {
+            "binding": "preferences",
+            "field": {
+              "id": "defaultFolderId",
+              "label": "Default folder",
+              "recordType": "folder",
+              "type": "recordReference"
+            },
+            "type": "field"
+          },
+          {
+            "binding": "preferences",
+            "field": {
+              "id": "newNoteTemplateId",
+              "label": "New-note template",
+              "recordType": "template",
+              "type": "recordReference"
+            },
+            "type": "field"
+          },
+          {
+            "binding": "preferences",
+            "field": {
+              "id": "dailyNoteEnabled",
+              "label": "Enable daily notes",
+              "type": "boolean"
+            },
+            "type": "field"
+          },
+          {
+            "binding": "preferences",
+            "field": {
+              "id": "showBacklinks",
+              "label": "Show backlinks",
+              "type": "boolean"
+            },
+            "type": "field"
+          },
+          {
+            "binding": "preferences",
+            "field": {
+              "id": "searchSensitiveNotes",
+              "label": "Search sensitive notes",
+              "type": "boolean"
+            },
+            "type": "field"
+          },
+          {
+            "binding": "preferences",
+            "field": {
+              "id": "intelligencePreference",
+              "label": "Local intelligence",
+              "options": [
+                {
+                  "label": "Disabled",
+                  "value": "disabled"
+                },
+                {
+                  "label": "Local only",
+                  "value": "localOnly"
+                },
+                {
+                  "label": "Prefer local",
+                  "value": "preferLocal"
+                }
+              ],
+              "type": "singleSelect"
+            },
+            "type": "field"
+          },
+          {
+            "binding": "preferences",
+            "field": {
+              "id": "confirmPermanentDeletion",
+              "label": "Confirm permanent deletion",
               "type": "boolean"
             },
             "type": "field"

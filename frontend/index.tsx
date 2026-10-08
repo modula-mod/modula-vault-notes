@@ -1,5 +1,6 @@
 import {
   Button,
+  Badge,
   EmptyState,
   ErrorState,
   Field,
@@ -42,6 +43,11 @@ const createNote = action({
       pinned: false,
       favourite: false,
       archived: false,
+      contentFormat: "blocks-v1",
+      properties: {version: "1.0.0", values: []},
+      attachmentIds: [],
+      sensitive: false,
+      intelligencePolicy: "preferLocal",
       dataSchemaVersion: "1.0.0",
     },
     transforms: [{target: "plainTextProjection", source: "document", transform: "richText.plainText@1"}],
@@ -99,6 +105,7 @@ function NoteDetail() {
         </Toolbar>
         <Text binding={note} valuePath="title" accessibility={{role: "header"}} />
         <Text binding={note} valuePath="plainTextProjection" />
+        <Badge binding={note} valuePath="sensitive" accessibility={{label: "Sensitive note status"}} />
         <Metadata binding={note} valuePath="updatedAt" />
       </Stack>
     </ModuleScreen>
@@ -113,6 +120,11 @@ function NewNoteEditor() {
       <Field binding={noteForm} field={{id: "document", type: "richText", label: "Body", capability: "ui.richText@1", placeholder: "Start writing your note", helpText: "Your note stays private inside Vault Notes."}} />
       <Field binding={noteForm} field={{id: "folderId", type: "recordReference", label: "Folder", recordType: "folder", placeholder: "Optional folder"}} />
       <Field binding={noteForm} field={{id: "tagIds", type: "tags", label: "Tags", placeholder: "Add tags separated by commas"}} />
+      <Field binding={noteForm} field={{id: "icon", type: "text", label: "Note icon", placeholder: "Optional symbol or short label", validation: {maxLength: 120}}} />
+      <Field binding={noteForm} field={{id: "pinned", type: "boolean", label: "Pinned"}} />
+      <Field binding={noteForm} field={{id: "favourite", type: "boolean", label: "Favourite"}} />
+      <Field binding={noteForm} field={{id: "sensitive", type: "boolean", label: "Sensitive note", helpText: "Sensitive notes require local-only intelligence and hide indexed content."}} />
+      <Field binding={noteForm} field={{id: "intelligencePolicy", type: "singleSelect", label: "Local intelligence", options: [{value: "disabled", label: "Disabled"}, {value: "localOnly", label: "Local only"}, {value: "preferLocal", label: "Prefer local"}]}} />
       <Row>
         <Button label="Save note" action={createNote} />
       </Row>
@@ -129,6 +141,11 @@ function EditNoteEditor() {
       <Field binding={noteForm} field={{id: "document", type: "richText", label: "Body", capability: "ui.richText@1", placeholder: "Start writing your note", helpText: "Your note stays private inside Vault Notes."}} />
       <Field binding={noteForm} field={{id: "folderId", type: "recordReference", label: "Folder", recordType: "folder", placeholder: "Optional folder"}} />
       <Field binding={noteForm} field={{id: "tagIds", type: "tags", label: "Tags", placeholder: "Add tags separated by commas"}} />
+      <Field binding={noteForm} field={{id: "icon", type: "text", label: "Note icon", placeholder: "Optional symbol or short label", validation: {maxLength: 120}}} />
+      <Field binding={noteForm} field={{id: "pinned", type: "boolean", label: "Pinned"}} />
+      <Field binding={noteForm} field={{id: "favourite", type: "boolean", label: "Favourite"}} />
+      <Field binding={noteForm} field={{id: "sensitive", type: "boolean", label: "Sensitive note", helpText: "Sensitive notes require local-only intelligence and hide indexed content."}} />
+      <Field binding={noteForm} field={{id: "intelligencePolicy", type: "singleSelect", label: "Local intelligence", options: [{value: "disabled", label: "Disabled"}, {value: "localOnly", label: "Local only"}, {value: "preferLocal", label: "Prefer local"}]}} />
       <Row>
         <Button label="Save changes" action={updateNote} />
       </Row>
@@ -144,6 +161,16 @@ function SearchNotes() {
 function FavouriteNotes() {
   const notes = useRecords({id: "notes", type: "note", filterParam: "filter", sortParam: "sort", limit: 100, filters: {favourite: true, archived: false}, recordState: "active"});
   return <Stack><Filter label="Favourites" records={notes} /><NotesCollection records={notes} label="Favourite notes" /></Stack>;
+}
+
+function PinnedNotes() {
+  const notes = useRecords({id: "notes", type: "note", filterParam: "filter", sortParam: "sort", limit: 100, filters: {pinned: true, archived: false}, recordState: "active"});
+  return <Stack><Filter label="Pinned" records={notes} /><NotesCollection records={notes} label="Pinned notes" /></Stack>;
+}
+
+function RecentNotes() {
+  const notes = useRecords({id: "notes", type: "note", filterParam: "filter", sortParam: "sort", limit: 100, filters: {archived: false}, recordState: "active"});
+  return <Stack><Filter label="Recently edited" records={notes} /><NotesCollection records={notes} label="Recently edited notes" /></Stack>;
 }
 
 function ArchivedNotes() {
@@ -165,9 +192,15 @@ function NotesSettings() {
   const preferences = useSettings({id: "preferences", key: "vaultNotes.preferences"});
   return (
     <Form accessibility={{label: "Vault Notes settings", role: "form"}}>
-      <Field binding={preferences} field={{id: "archiveBeforeDelete", type: "boolean", label: "Archive before permanent deletion"}} />
-      <Field binding={preferences} field={{id: "defaultEditor", type: "singleSelect", label: "Default editor style", options: [{value: "rich", label: "Rich text"}, {value: "plain", label: "Plain text"}]}} />
-      <Field binding={preferences} field={{id: "confirmDestructiveActions", type: "boolean", label: "Confirm destructive actions"}} />
+      <Field binding={preferences} field={{id: "defaultCollectionView", type: "singleSelect", label: "Default view", options: [{value: "list", label: "List"}, {value: "compact-list", label: "Compact list"}, {value: "grid", label: "Grid"}]}} />
+      <Field binding={preferences} field={{id: "defaultSort", type: "singleSelect", label: "Default sort", options: [{value: "updatedAt", label: "Recently updated"}, {value: "createdAt", label: "Recently created"}, {value: "title", label: "Title"}]}} />
+      <Field binding={preferences} field={{id: "defaultFolderId", type: "recordReference", label: "Default folder", recordType: "folder"}} />
+      <Field binding={preferences} field={{id: "newNoteTemplateId", type: "recordReference", label: "New-note template", recordType: "template"}} />
+      <Field binding={preferences} field={{id: "dailyNoteEnabled", type: "boolean", label: "Enable daily notes"}} />
+      <Field binding={preferences} field={{id: "showBacklinks", type: "boolean", label: "Show backlinks"}} />
+      <Field binding={preferences} field={{id: "searchSensitiveNotes", type: "boolean", label: "Search sensitive notes"}} />
+      <Field binding={preferences} field={{id: "intelligencePreference", type: "singleSelect", label: "Local intelligence", options: [{value: "disabled", label: "Disabled"}, {value: "localOnly", label: "Local only"}, {value: "preferLocal", label: "Prefer local"}]}} />
+      <Field binding={preferences} field={{id: "confirmPermanentDeletion", type: "boolean", label: "Confirm permanent deletion"}} />
       <Button label="Save settings" action={saveSettings} />
     </Form>
   );
@@ -184,6 +217,7 @@ export default defineFrontend({
     route("/", "home"), route("/new", "newEditor", {presentation: "sheet"}), route("/note/:noteId", "detail"),
     route("/note/:noteId/edit", "editor", {presentation: "sheet"}), route("/search", "search"),
     route("/favourites", "favourites"), route("/archived", "archived"), route("/trash", "trash"),
+    route("/pinned", "pinned"), route("/recent", "recent"),
     route("/folders", "folders"), route("/settings", "settings"),
   ],
   screens: [
@@ -193,6 +227,8 @@ export default defineFrontend({
     screen("editor", "form", "Edit Note", EditNoteEditor, {states: {capabilityUnavailable: status("This host needs the rich text editor capability"), error: status("The note could not be saved")}}),
     screen("search", "collection", "Search Vault Notes", SearchNotes, {states: {loading: <LoadingState label="Searching notes" accessibility={{role: "status"}} />, empty: <EmptyState label="No notes match this search" />, error: status("Search is unavailable")}}),
     screen("favourites", "collection", "Favourite notes", FavouriteNotes, {states: collectionStates("No favourite notes yet", "Favourite notes are unavailable")}),
+    screen("pinned", "collection", "Pinned notes", PinnedNotes, {states: collectionStates("No pinned notes yet", "Pinned notes are unavailable")}),
+    screen("recent", "collection", "Recently edited", RecentNotes, {states: collectionStates("No recent notes", "Recent notes are unavailable")}),
     screen("archived", "collection", "Archived notes", ArchivedNotes, {states: collectionStates("No archived notes", "Archived notes are unavailable")}),
     screen("trash", "collection", "Trash", Trash, {states: collectionStates("Trash is empty", "Trash is unavailable")}),
     screen("folders", "collection", "Folders", Folders, {states: collectionStates("No folders yet", "Folders are unavailable")}),
@@ -202,7 +238,7 @@ export default defineFrontend({
   navigation: {
     rootView: "home",
     tabs: [{id: "notes", viewId: "home", label: "Notes", icon: "system.note"}, {id: "search", viewId: "search", label: "Search", icon: "system.search"}],
-    secondary: [{id: "favourites", viewId: "favourites", label: "Favourites"}, {id: "archived", viewId: "archived", label: "Archived"}, {id: "trash", viewId: "trash", label: "Trash"}, {id: "folders", viewId: "folders", label: "Folders"}, {id: "settings", viewId: "settings", label: "Settings"}],
+    secondary: [{id: "pinned", viewId: "pinned", label: "Pinned"}, {id: "recent", viewId: "recent", label: "Recent"}, {id: "favourites", viewId: "favourites", label: "Favourites"}, {id: "archived", viewId: "archived", label: "Archived"}, {id: "trash", viewId: "trash", label: "Trash"}, {id: "folders", viewId: "folders", label: "Folders"}, {id: "settings", viewId: "settings", label: "Settings"}],
     backBehavior: "host",
   },
   settings: {viewId: "settings"},
