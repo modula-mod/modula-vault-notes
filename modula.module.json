@@ -465,6 +465,36 @@
           "fields": [
             "templateId"
           ]
+        },
+        {
+          "fields": [
+            "dailyDate"
+          ]
+        },
+        {
+          "fields": [
+            "sensitive"
+          ]
+        },
+        {
+          "fields": [
+            "templateId"
+          ]
+        },
+        {
+          "fields": [
+            "dailyDate"
+          ]
+        },
+        {
+          "fields": [
+            "sensitive"
+          ]
+        },
+        {
+          "fields": [
+            "templateId"
+          ]
         }
       ],
       "uniqueness": {
@@ -3039,10 +3069,39 @@
       "id": "digital.modula.vault-notes.function.note.get",
       "title": "Get note",
       "inputSchema": {
-        "type": "object"
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "recordId"
+        ],
+        "properties": {
+          "recordId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          }
+        }
       },
       "outputSchema": {
-        "type": "object"
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "revision"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "title": {
+            "type": "string"
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
       },
       "permissions": [
         "module.records.read"
@@ -3072,10 +3131,73 @@
       "id": "digital.modula.vault-notes.function.note.search",
       "title": "Search notes",
       "inputSchema": {
-        "type": "object"
+        "type": "object",
+        "additionalProperties": false,
+        "required": [],
+        "properties": {
+          "query": {
+            "type": "string",
+            "maxLength": 1000
+          },
+          "filters": {
+            "type": "object"
+          },
+          "cursor": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 180
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "includeSensitive": {
+            "type": "boolean"
+          }
+        }
       },
       "outputSchema": {
-        "type": "object"
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "title",
+                "revision"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "title": {
+                  "type": "string"
+                },
+                "revision": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
+          },
+          "nextCursor": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 180
+          }
+        }
       },
       "permissions": [
         "module.records.read"
@@ -3105,10 +3227,63 @@
       "id": "digital.modula.vault-notes.function.note.list-recent",
       "title": "List recent notes",
       "inputSchema": {
-        "type": "object"
+        "type": "object",
+        "additionalProperties": false,
+        "required": [],
+        "properties": {
+          "cursor": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 180
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          }
+        }
       },
       "outputSchema": {
-        "type": "object"
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "title",
+                "revision"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "title": {
+                  "type": "string"
+                },
+                "revision": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
+          },
+          "nextCursor": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 180
+          }
+        }
       },
       "permissions": [
         "module.records.read"
@@ -3138,10 +3313,48 @@
       "id": "digital.modula.vault-notes.function.note.create-daily",
       "title": "Create or open daily note",
       "inputSchema": {
-        "type": "object"
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "idempotencyKey"
+        ],
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "templateId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          },
+          "idempotencyKey": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          }
+        }
       },
       "outputSchema": {
-        "type": "object"
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "revision"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "title": {
+            "type": "string"
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
       },
       "permissions": [
         "module.records.write"
@@ -3173,10 +3386,51 @@
       "id": "digital.modula.vault-notes.function.note.add-tag",
       "title": "Add tag to note",
       "inputSchema": {
-        "type": "object"
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "recordId",
+          "tagId",
+          "idempotencyKey"
+        ],
+        "properties": {
+          "recordId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          },
+          "tagId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          },
+          "idempotencyKey": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          }
+        }
       },
       "outputSchema": {
-        "type": "object"
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "revision"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "title": {
+            "type": "string"
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
       },
       "permissions": [
         "module.records.write"
@@ -3206,10 +3460,83 @@
       "id": "digital.modula.vault-notes.function.note.attach",
       "title": "Associate attachment metadata",
       "inputSchema": {
-        "type": "object"
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "recordId",
+          "assetId",
+          "name",
+          "mimeType",
+          "size",
+          "idempotencyKey"
+        ],
+        "properties": {
+          "recordId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          },
+          "assetId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "mimeType": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          },
+          "size": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1073741824
+          },
+          "kind": {
+            "enum": [
+              "image",
+              "pdf",
+              "document",
+              "audio",
+              "file"
+            ]
+          },
+          "durationMs": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "idempotencyKey": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          }
+        }
       },
       "outputSchema": {
-        "type": "object"
+        "type": "object",
+        "required": [
+          "id",
+          "noteId",
+          "assetId"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "noteId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "assetId": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
       },
       "permissions": [
         "module.records.write"
@@ -3240,10 +3567,66 @@
       "id": "digital.modula.vault-notes.function.note.backlinks",
       "title": "List note backlinks",
       "inputSchema": {
-        "type": "object"
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "recordId"
+        ],
+        "properties": {
+          "recordId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          },
+          "cursor": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 180
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          }
+        }
       },
       "outputSchema": {
-        "type": "object"
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "sourceNoteId",
+                "targetNoteId"
+              ],
+              "properties": {
+                "sourceNoteId": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "targetNoteId": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          },
+          "nextCursor": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 180
+          }
+        }
       },
       "permissions": [
         "module.records.read"
@@ -3273,10 +3656,35 @@
       "id": "digital.modula.vault-notes.function.note.graph",
       "title": "Build note graph data",
       "inputSchema": {
-        "type": "object"
+        "type": "object",
+        "additionalProperties": false,
+        "required": [],
+        "properties": {
+          "includeArchived": {
+            "type": "boolean"
+          }
+        }
       },
       "outputSchema": {
-        "type": "object"
+        "type": "object",
+        "required": [
+          "nodes",
+          "edges"
+        ],
+        "properties": {
+          "nodes": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "edges": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
       },
       "permissions": [
         "module.records.read"
@@ -3306,10 +3714,55 @@
       "id": "digital.modula.vault-notes.function.note.restore-revision",
       "title": "Restore note revision",
       "inputSchema": {
-        "type": "object"
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "recordId",
+          "revision",
+          "expectedCurrentRevision",
+          "idempotencyKey"
+        ],
+        "properties": {
+          "recordId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "expectedCurrentRevision": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "idempotencyKey": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          }
+        }
       },
       "outputSchema": {
-        "type": "object"
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "revision"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "title": {
+            "type": "string"
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
       },
       "permissions": [
         "module.records.write"
@@ -3341,10 +3794,49 @@
       "id": "digital.modula.vault-notes.function.note.import",
       "title": "Import portable notes",
       "inputSchema": {
-        "type": "object"
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "format",
+          "content",
+          "idempotencyKey"
+        ],
+        "properties": {
+          "format": {
+            "enum": [
+              "markdown",
+              "plain-text",
+              "vault-backup"
+            ]
+          },
+          "content": {
+            "type": [
+              "string",
+              "object"
+            ]
+          },
+          "idempotencyKey": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          }
+        }
       },
       "outputSchema": {
-        "type": "object"
+        "type": "object",
+        "required": [
+          "imported"
+        ],
+        "properties": {
+          "imported": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "skipped": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
       },
       "permissions": [
         "module.records.write"
@@ -3900,7 +4392,7 @@
   },
   "release": {
     "repository": "modula-mod/modula-vault-notes",
-    "commitSha": "b74194fe4888b77235df39173c90699e27360514",
+    "commitSha": "b4bc764ac513a96d76a3d0e46010ab8be6cde484",
     "checksum": "0000000000000000000000000000000000000000000000000000000000000000",
     "licenseEvidence": [
       "LICENSE",

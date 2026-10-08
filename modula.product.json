@@ -24,7 +24,7 @@
   },
   "source": {
     "repository": "modula-mod/modula-vault-notes",
-    "commit": "b74194fe4888b77235df39173c90699e27360514",
+    "commit": "b4bc764ac513a96d76a3d0e46010ab8be6cde484",
     "manifestPath": "modula.product.json",
     "provider": "github"
   },
@@ -40,7 +40,7 @@
     "notes": "Vault Notes 2.0 RC adds portable document semantics, templates and daily notes, typed properties, stable links and graph data, attachment metadata associations, revision restore, richer search, saved searches, versioned import/export, sensitive-note local-only policy, and pinned/recent module-owned views. Runtime-dependent sync, sharing, media upload, widgets, and local intelligence execution remain gated until generic platform contracts exist.",
     "builder": "modula-product-release",
     "provenance": {
-      "manifestSha256": "12e675fc9ab83f6ecc7234fadd0e08f67bc8d16feb8830758377f92a7d221be3",
+      "manifestSha256": "43a8e236793e8ec74de8f127365d95c4e165dc1b57b4b9fca073afaedce97393",
       "frontendSha256": "0d4fccf6a6ee43c287ff7239413866c81fbdd242fa5d83c7d5667a2bbc4315c1"
     }
   },

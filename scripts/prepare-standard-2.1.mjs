@@ -45,8 +45,12 @@ standard.records = upsertStandardRecords(standard.records)
 standard.settings[0].schema = readJson('schemas/vault-settings.v1.schema.json')
 standard.settings[0].defaults = vaultSettingsDefaults()
 for (const declaration of flagshipFunctionDeclarations()) {
-  if (!standard.functions.some(item => item.id === declaration.function.id)) standard.functions.push(declaration.function)
-  if (!standard.actions.some(item => item.id === declaration.action.id)) standard.actions.push(declaration.action)
+  const functionIndex = standard.functions.findIndex(item => item.id === declaration.function.id)
+  if (functionIndex === -1) standard.functions.push(declaration.function)
+  else standard.functions[functionIndex] = declaration.function
+  const actionIndex = standard.actions.findIndex(item => item.id === declaration.action.id)
+  if (actionIndex === -1) standard.actions.push(declaration.action)
+  else standard.actions[actionIndex] = declaration.action
 }
 for (const view of [
   {id: `${productId}.view.pinned`, type: 'collection', title: 'Pinned notes', permissions: ['module.records.read'], layout: {viewKey: 'vault-notes.pinned', sections: ['notes']}},
