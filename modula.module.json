@@ -495,6 +495,21 @@
           "fields": [
             "templateId"
           ]
+        },
+        {
+          "fields": [
+            "dailyDate"
+          ]
+        },
+        {
+          "fields": [
+            "sensitive"
+          ]
+        },
+        {
+          "fields": [
+            "templateId"
+          ]
         }
       ],
       "uniqueness": {
@@ -4392,7 +4407,7 @@
   },
   "release": {
     "repository": "modula-mod/modula-vault-notes",
-    "commitSha": "b4bc764ac513a96d76a3d0e46010ab8be6cde484",
+    "commitSha": "d26c28d8ff412b7399e1771ed5a73194063d323c",
     "checksum": "0000000000000000000000000000000000000000000000000000000000000000",
     "licenseEvidence": [
       "LICENSE",
