@@ -46,6 +46,8 @@ Run:
 ```sh
 pnpm install --frozen-lockfile
 pnpm frontend:build
+pnpm test:frontend
+pnpm test:frontend:performance
 pnpm build
 pnpm test
 pnpm test:scale

@@ -94,6 +94,10 @@ Dependencies flow from screens to features/components/hooks, then to product-ui 
 
 Six frontend suites inspect the compiled artifact for routes, navigation, list/detail composition, editor parity and commands, search/filter/sort, templates/Daily Note, properties, attachments, history, graph states, settings, permissions, errors, capability declarations, and compatibility. Tests exercise what ModuleHost receives rather than executing compiler-only TSX.
 
+## Frontend performance snapshot
+
+On the candidate VPS checkout, the 147,239-byte artifact parsed in 0.908 ms. Mean semantic preview resolution across 1,000 iterations measured 0.0082 ms for Notes, 0.0083 ms for Search, 0.0089 ms for Note Detail, and 0.0097 ms for the editor route. These measurements cover declarative bootstrap/route projection, not host rendering or network/data latency.
+
 ## Future extraction
 
 Generic candidates and APIs are recorded in `docs/audits/sdk-extraction-candidates.md`. Extraction requires a neutral non-Vault fixture and host implementations.
