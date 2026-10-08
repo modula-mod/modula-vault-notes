@@ -4,6 +4,8 @@ Vault Notes is a portable notes core and a governed extension host. It works wit
 
 Canonical source repository for `digital.modula.vault-notes`.
 
+The 2.0 candidate frontend is a statically compiled multi-surface application. Its entrypoint only registers application composition; screens, product components, feature boundaries, hooks, and truthful capability fallbacks live under `frontend/`. See `docs/architecture/frontend.md`.
+
 There is one Vault Notes product. This GitHub repository name does not have to
 equal the module ID.
 

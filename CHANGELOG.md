@@ -2,6 +2,10 @@
 
 ## 2.0.0-rc.1 — candidate, not published
 
+- Replaces the single frontend source file with a product-owned multi-surface architecture: 22 routes, 22 screens, reusable Vault components, feature domains, hooks, capability-aware states, and artifact-level frontend tests.
+- Reduces `frontend/index.tsx` to the bounded ModuleHost registration boundary and adds a source reachability/file-size architecture guard.
+- Adds module surfaces for folders, tags, templates, Daily Note, revisions, attachments, saved searches, graph projection, structured-view status, local intelligence, and grouped settings without host special cases.
+- Documents exact `@modula/product-ui` support, limitations, missing primitives, and SDK extraction candidates.
 - Adds backward-compatible portable note fields for content format, typed properties, attachments, sensitivity, templates, and daily-note identity.
 - Adds deterministic templates, daily-note creation, stable note links, backlinks, related-note ranking, and graph data.
 - Adds bounded attachment metadata associations without exposing filesystem paths.

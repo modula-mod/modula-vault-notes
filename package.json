@@ -15,6 +15,7 @@
     "PRODUCT.md",
     "PRIVACY.md",
     "schemas",
+    "docs",
     "frontend/frontend.manifest.json",
     "src/views",
     "README.md",
@@ -23,10 +24,13 @@
     "SECURITY.md"
   ],
   "scripts": {
+    "frontend:architecture": "node scripts/verify-frontend-architecture.mjs",
     "frontend:check": "tsc -p tsconfig.frontend.json",
-    "frontend:build": "pnpm frontend:check && node scripts/build-frontend.mjs",
+    "frontend:build": "pnpm frontend:architecture && pnpm frontend:check && node scripts/build-frontend.mjs",
     "build": "pnpm frontend:build && node scripts/clean-dist.mjs && tsc -p tsconfig.json",
     "test": "vitest run",
+    "test:frontend": "vitest run frontend/tests",
+    "test:frontend:performance": "node scripts/benchmark-frontend.mjs",
     "test:scale": "pnpm build && node scripts/benchmark-vault-notes.mjs",
     "fixtures:vault": "pnpm build && node scripts/vault-fixture-generator.mjs",
     "verify": "pnpm build && pnpm test && node scripts/verify-release.mjs",

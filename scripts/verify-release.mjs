@@ -68,16 +68,25 @@ if (frontendPath && existsSync(join(root, frontendPath))) {
   check(frontend.mpsVersion === product.productStandard, 'frontend MPS version matches product')
   check(frontend.productId === product.identity.id && frontend.releaseVersion === version, 'frontend release identity matches product')
   check(frontend.mode === 'declarative' && frontend.entry === 'home', 'frontend has a declarative home entry')
-  const requiredFrontendViews = ['home', 'detail', 'newEditor', 'editor', 'search', 'pinned', 'recent', 'favourites', 'archived', 'trash', 'folders', 'settings']
+  const requiredFrontendViews = [
+    'home', 'detail', 'newEditor', 'editor', 'search', 'pinned', 'recent', 'favourites', 'archived', 'trash',
+    'folders', 'folder', 'tags', 'tag', 'templates', 'daily', 'history', 'revision', 'attachments',
+    'savedSearches', 'graph', 'settings',
+  ]
   for (const id of requiredFrontendViews) check(frontend.views.some(view => view.id === id), `product frontend view declared: ${id}`)
-  for (const path of ['/', '/new', '/note/:noteId', '/note/:noteId/edit', '/search', '/pinned', '/recent', '/favourites', '/archived', '/trash', '/folders', '/settings']) {
+  for (const path of [
+    '/', '/new', '/note/:noteId', '/note/:noteId/edit', '/note/:noteId/history',
+    '/note/:noteId/history/:revisionId', '/search', '/pinned', '/recent', '/favourites', '/archived',
+    '/trash', '/folders', '/folder/:folderId', '/tags', '/tag/:tagId', '/templates', '/daily',
+    '/attachments', '/saved-searches', '/graph', '/settings',
+  ]) {
     check(frontend.routes.some(route => route.path === path), `product frontend route declared: ${path}`)
   }
   for (const id of ['newNote', 'openNote', 'editNote', 'createNote', 'updateNote', 'deleteNote', 'restoreNote', 'purgeNote', 'shareNote', 'saveSettings']) {
     check(frontend.actions.some(action => action.id === id), `product frontend action declared: ${id}`)
   }
   const editor = frontend.views.find(view => view.id === 'editor')
-  const editorFields = editor?.root?.children?.filter(component => component.type === 'field').map(component => component.field?.id) ?? []
+  const editorFields = collectFrontendFields(editor?.root)
   check(editorFields.includes('document') && editorFields.includes('tagIds') && !editorFields.includes('body') && !editorFields.includes('tags'), 'frontend editor writes the canonical Vault Notes record fields')
   const newEditor = frontend.views.find(view => view.id === 'newEditor')
   check(newEditor?.title === 'New Note' && JSON.stringify(newEditor.root).includes('createNote') && !JSON.stringify(newEditor.root).includes('updateNote'), 'new-note route has product-owned create semantics')
@@ -180,4 +189,10 @@ function collectText(dir) {
     else if (stat.isFile() && /\.(json|ts|md|mjs|yml|yaml)$/.test(entry)) output += readFileSync(path, 'utf8')
   }
   return output
+}
+
+function collectFrontendFields(root) {
+  if (!root || typeof root !== 'object') return []
+  const own = root.type === 'field' && root.field?.id ? [root.field.id] : []
+  return [...own, ...(root.children ?? []).flatMap(collectFrontendFields)]
 }

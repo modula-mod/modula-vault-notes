@@ -28,6 +28,114 @@
       "route": "/note/:noteId/edit"
     },
     {
+      "family": "route.open",
+      "id": "openHistory",
+      "label": "Revision history",
+      "route": "/note/:noteId/history"
+    },
+    {
+      "family": "route.open",
+      "id": "openRevision",
+      "label": "Open revision",
+      "route": "/note/:noteId/history/:revisionId"
+    },
+    {
+      "family": "route.open",
+      "id": "openFolder",
+      "label": "Open folder",
+      "route": "/folder/:folderId"
+    },
+    {
+      "family": "route.open",
+      "id": "openTag",
+      "label": "Open tag",
+      "route": "/tag/:tagId"
+    },
+    {
+      "family": "route.open",
+      "id": "openSearch",
+      "label": "Search",
+      "route": "/search"
+    },
+    {
+      "family": "route.open",
+      "id": "openPinned",
+      "label": "Pinned",
+      "route": "/pinned"
+    },
+    {
+      "family": "route.open",
+      "id": "openRecent",
+      "label": "Recent",
+      "route": "/recent"
+    },
+    {
+      "family": "route.open",
+      "id": "openFavourites",
+      "label": "Favourites",
+      "route": "/favourites"
+    },
+    {
+      "family": "route.open",
+      "id": "openArchived",
+      "label": "Archived",
+      "route": "/archived"
+    },
+    {
+      "family": "route.open",
+      "id": "openTrash",
+      "label": "Trash",
+      "route": "/trash"
+    },
+    {
+      "family": "route.open",
+      "id": "openFolders",
+      "label": "Folders",
+      "route": "/folders"
+    },
+    {
+      "family": "route.open",
+      "id": "openTags",
+      "label": "Tags",
+      "route": "/tags"
+    },
+    {
+      "family": "route.open",
+      "id": "openTemplates",
+      "label": "Templates",
+      "route": "/templates"
+    },
+    {
+      "family": "route.open",
+      "id": "openDaily",
+      "label": "Daily Note",
+      "route": "/daily"
+    },
+    {
+      "family": "route.open",
+      "id": "openAttachments",
+      "label": "Attachments",
+      "route": "/attachments"
+    },
+    {
+      "family": "route.open",
+      "id": "openSavedSearches",
+      "label": "Saved Searches",
+      "route": "/saved-searches"
+    },
+    {
+      "family": "route.open",
+      "id": "openGraph",
+      "label": "Graph",
+      "route": "/graph"
+    },
+    {
+      "family": "route.open",
+      "id": "openSettings",
+      "label": "Settings",
+      "route": "/settings"
+    },
+    {
       "family": "record.create",
       "id": "createNote",
       "input": {
@@ -83,7 +191,7 @@
       "confirm": true,
       "family": "record.delete",
       "id": "deleteNote",
-      "label": "Delete note",
+      "label": "Move to Trash",
       "recordIdBinding": "note",
       "recordType": "note"
     },
@@ -107,6 +215,317 @@
       "recordType": "note"
     },
     {
+      "capability": "ui.richText.commands@1",
+      "family": "capability.invoke",
+      "id": "formatHeading",
+      "input": {
+        "defaults": {
+          "command": "heading"
+        }
+      },
+      "label": "Heading"
+    },
+    {
+      "capability": "ui.richText.commands@1",
+      "family": "capability.invoke",
+      "id": "formatBold",
+      "input": {
+        "defaults": {
+          "command": "bold"
+        }
+      },
+      "label": "Bold"
+    },
+    {
+      "capability": "ui.richText.commands@1",
+      "family": "capability.invoke",
+      "id": "formatItalic",
+      "input": {
+        "defaults": {
+          "command": "italic"
+        }
+      },
+      "label": "Italic"
+    },
+    {
+      "capability": "ui.richText.commands@1",
+      "family": "capability.invoke",
+      "id": "formatStrike",
+      "input": {
+        "defaults": {
+          "command": "strikethrough"
+        }
+      },
+      "label": "Strike"
+    },
+    {
+      "capability": "ui.richText.commands@1",
+      "family": "capability.invoke",
+      "id": "formatCode",
+      "input": {
+        "defaults": {
+          "command": "code"
+        }
+      },
+      "label": "Code"
+    },
+    {
+      "capability": "ui.richText.commands@1",
+      "family": "capability.invoke",
+      "id": "formatQuote",
+      "input": {
+        "defaults": {
+          "command": "quote"
+        }
+      },
+      "label": "Quote"
+    },
+    {
+      "capability": "ui.richText.commands@1",
+      "family": "capability.invoke",
+      "id": "formatBulletList",
+      "input": {
+        "defaults": {
+          "command": "bulletList"
+        }
+      },
+      "label": "Bullets"
+    },
+    {
+      "capability": "ui.richText.commands@1",
+      "family": "capability.invoke",
+      "id": "formatNumberedList",
+      "input": {
+        "defaults": {
+          "command": "numberedList"
+        }
+      },
+      "label": "Numbered list"
+    },
+    {
+      "capability": "ui.richText.commands@1",
+      "family": "capability.invoke",
+      "id": "formatChecklist",
+      "input": {
+        "defaults": {
+          "command": "checklist"
+        }
+      },
+      "label": "Checklist"
+    },
+    {
+      "capability": "ui.richText.commands@1",
+      "family": "capability.invoke",
+      "id": "insertLink",
+      "input": {
+        "defaults": {
+          "command": "link"
+        }
+      },
+      "label": "Link"
+    },
+    {
+      "capability": "ui.reference-picker@1",
+      "family": "capability.invoke",
+      "id": "insertReference",
+      "input": {
+        "defaults": {
+          "command": "recordReference",
+          "recordType": "note"
+        }
+      },
+      "label": "Reference"
+    },
+    {
+      "capability": "media.picker@1",
+      "family": "capability.invoke",
+      "id": "insertAttachment",
+      "input": {
+        "defaults": {
+          "command": "assetReference"
+        }
+      },
+      "label": "Attachment"
+    },
+    {
+      "capability": "ui.richText.commands@1",
+      "family": "capability.invoke",
+      "id": "formatCallout",
+      "input": {
+        "defaults": {
+          "command": "callout"
+        }
+      },
+      "label": "Callout"
+    },
+    {
+      "capability": "ui.richText.commands@1",
+      "family": "capability.invoke",
+      "id": "insertTable",
+      "input": {
+        "defaults": {
+          "command": "table"
+        }
+      },
+      "label": "Table"
+    },
+    {
+      "capability": "ui.property-editor@1",
+      "family": "capability.invoke",
+      "id": "editProperties",
+      "input": {
+        "defaults": {
+          "schema": "vault-note-properties@1"
+        }
+      },
+      "label": "Edit typed properties"
+    },
+    {
+      "family": "function.invoke",
+      "functionId": "digital.modula.vault-notes.function.note.create",
+      "id": "createFromTemplate",
+      "input": {
+        "defaults": {
+          "requireReview": true,
+          "source": "template"
+        }
+      },
+      "inputBinding": "templates",
+      "label": "Create from template"
+    },
+    {
+      "family": "function.invoke",
+      "functionId": "digital.modula.vault-notes.function.note.create-daily",
+      "id": "createDailyNote",
+      "input": {
+        "defaults": {
+          "idempotent": true,
+          "source": "daily-route"
+        }
+      },
+      "label": "Open today’s note"
+    },
+    {
+      "capability": "media.picker@1",
+      "family": "capability.invoke",
+      "id": "pickAttachment",
+      "input": {
+        "defaults": {
+          "assetRoles": [
+            "image",
+            "document",
+            "pdf",
+            "audio",
+            "file"
+          ]
+        }
+      },
+      "label": "Choose attachment"
+    },
+    {
+      "family": "function.invoke",
+      "functionId": "digital.modula.vault-notes.function.note.attach",
+      "id": "attachToNote",
+      "inputBinding": "attachmentForm",
+      "label": "Attach to note"
+    },
+    {
+      "confirm": true,
+      "family": "function.invoke",
+      "functionId": "digital.modula.vault-notes.function.note.restore-revision",
+      "id": "restoreRevision",
+      "inputBinding": "revision",
+      "label": "Restore as new revision"
+    },
+    {
+      "capability": "ui.local-intelligence@1",
+      "family": "capability.invoke",
+      "id": "intelligenceSummarize",
+      "input": {
+        "defaults": {
+          "executionPolicy": "preferLocal",
+          "operation": "intelligence.summarize"
+        }
+      },
+      "label": "Summarize"
+    },
+    {
+      "capability": "ui.local-intelligence@1",
+      "family": "capability.invoke",
+      "id": "intelligenceRewrite",
+      "input": {
+        "defaults": {
+          "executionPolicy": "preferLocal",
+          "operation": "intelligence.rewrite"
+        }
+      },
+      "label": "Rewrite"
+    },
+    {
+      "capability": "ui.local-intelligence@1",
+      "family": "capability.invoke",
+      "id": "intelligenceExtractTasks",
+      "input": {
+        "defaults": {
+          "executionPolicy": "preferLocal",
+          "operation": "intelligence.extract",
+          "requireReview": true,
+          "schema": "task-candidates"
+        }
+      },
+      "label": "Extract tasks"
+    },
+    {
+      "capability": "ui.local-intelligence@1",
+      "family": "capability.invoke",
+      "id": "intelligenceSuggestTags",
+      "input": {
+        "defaults": {
+          "executionPolicy": "preferLocal",
+          "operation": "intelligence.classify",
+          "schema": "tags"
+        }
+      },
+      "label": "Suggest tags"
+    },
+    {
+      "capability": "ui.local-intelligence@1",
+      "family": "capability.invoke",
+      "id": "intelligenceSuggestTitle",
+      "input": {
+        "defaults": {
+          "executionPolicy": "preferLocal",
+          "operation": "intelligence.classify",
+          "schema": "title"
+        }
+      },
+      "label": "Suggest title"
+    },
+    {
+      "capability": "ui.local-intelligence@1",
+      "family": "capability.invoke",
+      "id": "intelligenceAskNote",
+      "input": {
+        "defaults": {
+          "executionPolicy": "preferLocal",
+          "operation": "intelligence.ask"
+        }
+      },
+      "label": "Ask this note"
+    },
+    {
+      "capability": "ui.local-intelligence@1",
+      "family": "capability.invoke",
+      "id": "intelligenceRelated",
+      "input": {
+        "defaults": {
+          "executionPolicy": "preferLocal",
+          "operation": "intelligence.semanticSearch"
+        }
+      },
+      "label": "Find related notes"
+    },
+    {
       "family": "settings.update",
       "id": "saveSettings",
       "label": "Save settings",
@@ -115,7 +534,17 @@
   ],
   "capabilities": {
     "optional": [
-      "share.native@1"
+      "share.native@1",
+      "ui.richText.commands@1",
+      "ui.reference-picker@1",
+      "ui.property-editor@1",
+      "ui.attachment-gallery@1",
+      "media.picker@1",
+      "ui.revision-browser@1",
+      "ui.graph@1",
+      "ui.table@1",
+      "ui.board@1",
+      "ui.local-intelligence@1"
     ],
     "required": [
       "ui.richText@1"
@@ -148,6 +577,41 @@
         "viewId": "favourites"
       },
       {
+        "id": "folders",
+        "label": "Folders",
+        "viewId": "folders"
+      },
+      {
+        "id": "tags",
+        "label": "Tags",
+        "viewId": "tags"
+      },
+      {
+        "id": "templates",
+        "label": "Templates",
+        "viewId": "templates"
+      },
+      {
+        "id": "daily",
+        "label": "Daily Note",
+        "viewId": "daily"
+      },
+      {
+        "id": "savedSearches",
+        "label": "Saved Searches",
+        "viewId": "savedSearches"
+      },
+      {
+        "id": "attachments",
+        "label": "Attachments",
+        "viewId": "attachments"
+      },
+      {
+        "id": "graph",
+        "label": "Graph",
+        "viewId": "graph"
+      },
+      {
         "id": "archived",
         "label": "Archived",
         "viewId": "archived"
@@ -156,11 +620,6 @@
         "id": "trash",
         "label": "Trash",
         "viewId": "trash"
-      },
-      {
-        "id": "folders",
-        "label": "Folders",
-        "viewId": "folders"
       },
       {
         "id": "settings",
@@ -212,8 +671,24 @@
       "viewId": "editor"
     },
     {
+      "path": "/note/:noteId/history",
+      "viewId": "history"
+    },
+    {
+      "path": "/note/:noteId/history/:revisionId",
+      "viewId": "revision"
+    },
+    {
       "path": "/search",
       "viewId": "search"
+    },
+    {
+      "path": "/pinned",
+      "viewId": "pinned"
+    },
+    {
+      "path": "/recent",
+      "viewId": "recent"
     },
     {
       "path": "/favourites",
@@ -228,16 +703,40 @@
       "viewId": "trash"
     },
     {
-      "path": "/pinned",
-      "viewId": "pinned"
-    },
-    {
-      "path": "/recent",
-      "viewId": "recent"
-    },
-    {
       "path": "/folders",
       "viewId": "folders"
+    },
+    {
+      "path": "/folder/:folderId",
+      "viewId": "folder"
+    },
+    {
+      "path": "/tags",
+      "viewId": "tags"
+    },
+    {
+      "path": "/tag/:tagId",
+      "viewId": "tag"
+    },
+    {
+      "path": "/templates",
+      "viewId": "templates"
+    },
+    {
+      "path": "/daily",
+      "viewId": "daily"
+    },
+    {
+      "path": "/attachments",
+      "viewId": "attachments"
+    },
+    {
+      "path": "/saved-searches",
+      "viewId": "savedSearches"
+    },
+    {
+      "path": "/graph",
+      "viewId": "graph"
     },
     {
       "path": "/settings",
@@ -265,102 +764,256 @@
           },
           "recordType": "note",
           "source": "record.query"
+        },
+        {
+          "capability": "ui.table@1",
+          "id": "tableCapability",
+          "source": "capability"
+        },
+        {
+          "capability": "ui.board@1",
+          "id": "boardCapability",
+          "source": "capability"
         }
       ],
       "id": "home",
       "kind": "collection",
       "root": {
+        "accessibility": {
+          "label": "Collections use bounded host pagination and never require loading the full vault."
+        },
         "children": [
+          {
+            "children": [
+              {
+                "accessibility": {
+                  "label": "Search Vault Notes",
+                  "role": "search"
+                },
+                "binding": "notes",
+                "text": "Search titles, bodies, tags, folders, properties, and attachments",
+                "type": "search"
+              },
+              {
+                "action": "newNote",
+                "text": "New note",
+                "type": "button"
+              }
+            ],
+            "text": "Notes actions",
+            "type": "toolbar"
+          },
+          {
+            "children": [
+              {
+                "accessibility": {
+                  "label": "Filter by tag, folder, property, attachment state, created date, updated date, pinned, favourite, and archive state."
+                },
+                "binding": "notes",
+                "text": "Search filters",
+                "type": "filter"
+              },
+              {
+                "accessibility": {
+                  "label": "Sort by updated date, created date, or title through the host sort contract."
+                },
+                "binding": "notes",
+                "text": "Sort results",
+                "type": "sort"
+              },
+              {
+                "accessibility": {
+                  "role": "status"
+                },
+                "text": "Nested property and reference filters remain limited by the generic query contract.",
+                "type": "text"
+              }
+            ],
+            "layout": {
+              "direction": "vertical",
+              "gap": "compact"
+            },
+            "type": "stack"
+          },
+          {
+            "children": [
+              {
+                "action": "openPinned",
+                "text": "Pinned",
+                "type": "button"
+              },
+              {
+                "action": "openRecent",
+                "text": "Recent",
+                "type": "button"
+              },
+              {
+                "action": "openFavourites",
+                "text": "Favourites",
+                "type": "button"
+              },
+              {
+                "action": "openFolders",
+                "text": "Folders",
+                "type": "button"
+              },
+              {
+                "action": "openTags",
+                "text": "Tags",
+                "type": "button"
+              },
+              {
+                "action": "openSavedSearches",
+                "text": "Saved searches",
+                "type": "button"
+              },
+              {
+                "action": "openTemplates",
+                "text": "Templates",
+                "type": "button"
+              },
+              {
+                "action": "openDaily",
+                "text": "Daily note",
+                "type": "button"
+              },
+              {
+                "action": "openAttachments",
+                "text": "Attachments",
+                "type": "button"
+              },
+              {
+                "action": "openGraph",
+                "text": "Graph",
+                "type": "button"
+              }
+            ],
+            "layout": {
+              "gap": "compact",
+              "scroll": "horizontal"
+            },
+            "type": "row"
+          },
+          {
+            "children": [
+              {
+                "accessibility": {
+                  "label": "All Vault Notes",
+                  "role": "list"
+                },
+                "action": "openNote",
+                "binding": "notes",
+                "children": [
+                  {
+                    "binding": "notes",
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "binding": "notes",
+                            "type": "text",
+                            "valuePath": "title"
+                          },
+                          {
+                            "binding": "notes",
+                            "type": "text",
+                            "valuePath": "plainTextProjection"
+                          },
+                          {
+                            "children": [
+                              {
+                                "binding": "notes",
+                                "type": "metadata",
+                                "valuePath": "updatedAt"
+                              },
+                              {
+                                "accessibility": {
+                                  "label": "Sensitive note; intelligence is local only",
+                                  "role": "status"
+                                },
+                                "binding": "notes",
+                                "type": "badge",
+                                "valuePath": "sensitive"
+                              }
+                            ],
+                            "layout": {
+                              "gap": "compact"
+                            },
+                            "type": "row"
+                          }
+                        ],
+                        "layout": {
+                          "direction": "vertical",
+                          "gap": "compact"
+                        },
+                        "type": "stack"
+                      }
+                    ],
+                    "type": "recordRow"
+                  }
+                ],
+                "type": "recordList"
+              }
+            ],
+            "layout": {
+              "direction": "vertical",
+              "gap": "regular"
+            },
+            "type": "stack"
+          },
           {
             "children": [
               {
                 "children": [
                   {
-                    "binding": "notes",
-                    "text": "Search your notes",
-                    "type": "search"
+                    "text": "Table projection: note ID, title, folder, tags, typed properties, updated date, and attachment state.",
+                    "type": "text"
                   },
                   {
-                    "action": "newNote",
-                    "text": "New note",
-                    "type": "button"
-                  }
-                ],
-                "text": "Notes actions",
-                "type": "toolbar"
-              },
-              {
-                "children": [
+                    "accessibility": {
+                      "label": "Table capability status"
+                    },
+                    "binding": "tableCapability",
+                    "type": "metadata",
+                    "valuePath": "status"
+                  },
+                  {
+                    "text": "Board projection: records grouped by a declared select, folder, tag, or lifecycle field.",
+                    "type": "text"
+                  },
                   {
                     "accessibility": {
-                      "label": "Vault Notes",
-                      "role": "list"
+                      "label": "Board capability status"
                     },
-                    "action": "openNote",
-                    "binding": "notes",
-                    "children": [
-                      {
-                        "binding": "notes",
-                        "children": [
-                          {
-                            "children": [
-                              {
-                                "binding": "notes",
-                                "type": "text",
-                                "valuePath": "title"
-                              },
-                              {
-                                "binding": "notes",
-                                "type": "text",
-                                "valuePath": "plainTextProjection"
-                              },
-                              {
-                                "binding": "notes",
-                                "type": "metadata",
-                                "valuePath": "updatedAt"
-                              }
-                            ],
-                            "layout": {
-                              "direction": "vertical",
-                              "gap": "compact"
-                            },
-                            "type": "stack"
-                          }
-                        ],
-                        "type": "recordRow"
-                      }
-                    ],
-                    "type": "recordList"
+                    "binding": "boardCapability",
+                    "type": "metadata",
+                    "valuePath": "status"
+                  },
+                  {
+                    "accessibility": {
+                      "role": "status"
+                    },
+                    "text": "Both projections require generic recordTable and recordBoard primitives; Vault must not ship private renderers.",
+                    "type": "errorState"
                   }
                 ],
                 "layout": {
                   "direction": "vertical",
-                  "gap": "regular"
+                  "gap": "compact"
                 },
                 "type": "stack"
               }
             ],
-            "layout": {
-              "direction": "vertical",
-              "gap": "regular",
-              "responsive": [
-                {
-                  "class": "compact",
-                  "columns": 1
-                },
-                {
-                  "class": "wide",
-                  "columns": 2
-                }
-              ]
-            },
-            "type": "stack"
+            "type": "section"
           }
         ],
         "type": "section"
       },
       "states": {
         "empty": {
+          "accessibility": {
+            "role": "status"
+          },
           "children": [
             {
               "action": "newNote",
@@ -389,11 +1042,18 @@
           "accessibility": {
             "role": "status"
           },
-          "text": "Vault Notes is temporarily unavailable offline",
+          "text": "This host cannot open uncached notes while offline",
+          "type": "errorState"
+        },
+        "permissionDenied": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "You do not have permission to read this vault",
           "type": "errorState"
         }
       },
-      "title": "Notes"
+      "title": "Vault Notes"
     },
     {
       "bindings": [
@@ -402,6 +1062,38 @@
           "recordIdParam": "noteId",
           "recordType": "note",
           "source": "record.detail"
+        },
+        {
+          "id": "backlinkNotes",
+          "query": {
+            "filterParam": "references",
+            "limit": 50,
+            "recordState": "active",
+            "sortParam": "sort"
+          },
+          "recordType": "note",
+          "source": "record.query"
+        },
+        {
+          "id": "relatedNotes",
+          "query": {
+            "filterParam": "relatedTo",
+            "limit": 20,
+            "recordState": "active",
+            "sortParam": "sort"
+          },
+          "recordType": "note",
+          "source": "record.query"
+        },
+        {
+          "capability": "media.picker@1",
+          "id": "mediaPickerCapability",
+          "source": "capability"
+        },
+        {
+          "capability": "ui.local-intelligence@1",
+          "id": "localIntelligenceCapability",
+          "source": "capability"
         }
       ],
       "id": "detail",
@@ -418,13 +1110,18 @@
                     "type": "button"
                   },
                   {
+                    "action": "openHistory",
+                    "text": "History",
+                    "type": "button"
+                  },
+                  {
                     "action": "shareNote",
                     "text": "Share",
                     "type": "button"
                   },
                   {
                     "action": "deleteNote",
-                    "text": "Delete",
+                    "text": "Move to Trash",
                     "type": "button"
                   }
                 ],
@@ -432,35 +1129,386 @@
                 "type": "toolbar"
               },
               {
+                "children": [
+                  {
+                    "accessibility": {
+                      "role": "header"
+                    },
+                    "binding": "note",
+                    "type": "text",
+                    "valuePath": "title"
+                  },
+                  {
+                    "accessibility": {
+                      "label": "Note document"
+                    },
+                    "binding": "note",
+                    "type": "text",
+                    "valuePath": "plainTextProjection"
+                  },
+                  {
+                    "accessibility": {
+                      "label": "Sensitive note; intelligence is local only",
+                      "role": "status"
+                    },
+                    "binding": "note",
+                    "type": "badge",
+                    "valuePath": "sensitive"
+                  },
+                  {
+                    "children": [
+                      {
+                        "accessibility": {
+                          "label": "Created date"
+                        },
+                        "binding": "note",
+                        "type": "metadata",
+                        "valuePath": "createdAt"
+                      },
+                      {
+                        "accessibility": {
+                          "label": "Updated date"
+                        },
+                        "binding": "note",
+                        "type": "metadata",
+                        "valuePath": "updatedAt"
+                      },
+                      {
+                        "accessibility": {
+                          "label": "Revision"
+                        },
+                        "binding": "note",
+                        "type": "metadata",
+                        "valuePath": "revision"
+                      }
+                    ],
+                    "layout": {
+                      "gap": "compact"
+                    },
+                    "type": "row"
+                  }
+                ],
+                "type": "section"
+              },
+              {
+                "children": [
+                  {
+                    "accessibility": {
+                      "label": "Folder"
+                    },
+                    "binding": "note",
+                    "type": "text",
+                    "valuePath": "folderId"
+                  },
+                  {
+                    "accessibility": {
+                      "label": "Tags"
+                    },
+                    "binding": "note",
+                    "type": "text",
+                    "valuePath": "tagIds"
+                  }
+                ],
+                "type": "section"
+              },
+              {
                 "accessibility": {
-                  "role": "header"
+                  "label": "Typed note properties"
                 },
-                "binding": "note",
-                "type": "text",
-                "valuePath": "title"
-              },
-              {
-                "binding": "note",
-                "type": "text",
-                "valuePath": "plainTextProjection"
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "accessibility": {
+                          "label": "Note property values"
+                        },
+                        "binding": "note",
+                        "type": "metadata",
+                        "valuePath": "properties"
+                      }
+                    ],
+                    "layout": {
+                      "direction": "vertical",
+                      "gap": "compact"
+                    },
+                    "type": "stack"
+                  }
+                ],
+                "type": "section"
               },
               {
                 "accessibility": {
-                  "label": "Sensitive note status"
+                  "label": "Note attachments"
                 },
-                "binding": "note",
-                "type": "badge",
-                "valuePath": "sensitive"
+                "children": [
+                  {
+                    "accessibility": {
+                      "label": "Attachment identifiers"
+                    },
+                    "binding": "note",
+                    "type": "metadata",
+                    "valuePath": "attachmentIds"
+                  }
+                ],
+                "type": "section"
               },
               {
-                "binding": "note",
-                "type": "metadata",
-                "valuePath": "updatedAt"
+                "accessibility": {
+                  "label": "Notes linking here"
+                },
+                "children": [
+                  {
+                    "accessibility": {
+                      "label": "Backlink notes",
+                      "role": "list"
+                    },
+                    "action": "openNote",
+                    "binding": "backlinkNotes",
+                    "children": [
+                      {
+                        "binding": "backlinkNotes",
+                        "children": [
+                          {
+                            "children": [
+                              {
+                                "binding": "backlinkNotes",
+                                "type": "text",
+                                "valuePath": "title"
+                              },
+                              {
+                                "binding": "backlinkNotes",
+                                "type": "text",
+                                "valuePath": "plainTextProjection"
+                              },
+                              {
+                                "children": [
+                                  {
+                                    "binding": "backlinkNotes",
+                                    "type": "metadata",
+                                    "valuePath": "updatedAt"
+                                  },
+                                  {
+                                    "accessibility": {
+                                      "label": "Sensitive note; intelligence is local only",
+                                      "role": "status"
+                                    },
+                                    "binding": "backlinkNotes",
+                                    "type": "badge",
+                                    "valuePath": "sensitive"
+                                  }
+                                ],
+                                "layout": {
+                                  "gap": "compact"
+                                },
+                                "type": "row"
+                              }
+                            ],
+                            "layout": {
+                              "direction": "vertical",
+                              "gap": "compact"
+                            },
+                            "type": "stack"
+                          }
+                        ],
+                        "type": "recordRow"
+                      }
+                    ],
+                    "type": "recordList"
+                  },
+                  {
+                    "accessibility": {
+                      "role": "status"
+                    },
+                    "text": "Backlinks require a generic reverse-reference query with account and installation scoping.",
+                    "type": "errorState"
+                  }
+                ],
+                "type": "section"
+              },
+              {
+                "children": [
+                  {
+                    "text": "Related notes use deterministic shared tags, stable links, and folder signals before semantic similarity.",
+                    "type": "text"
+                  },
+                  {
+                    "accessibility": {
+                      "label": "Related notes",
+                      "role": "list"
+                    },
+                    "action": "openNote",
+                    "binding": "relatedNotes",
+                    "children": [
+                      {
+                        "accessibility": {
+                          "label": "Related note",
+                          "role": "listitem"
+                        },
+                        "binding": "relatedNotes",
+                        "children": [
+                          {
+                            "children": [
+                              {
+                                "accessibility": {
+                                  "role": "header"
+                                },
+                                "binding": "relatedNotes",
+                                "type": "text",
+                                "valuePath": "title"
+                              },
+                              {
+                                "accessibility": {
+                                  "label": "Note preview",
+                                  "role": "text"
+                                },
+                                "binding": "relatedNotes",
+                                "type": "text",
+                                "valuePath": "plainTextProjection"
+                              },
+                              {
+                                "children": [
+                                  {
+                                    "accessibility": {
+                                      "label": "Created date"
+                                    },
+                                    "binding": "relatedNotes",
+                                    "type": "metadata",
+                                    "valuePath": "createdAt"
+                                  },
+                                  {
+                                    "accessibility": {
+                                      "label": "Updated date"
+                                    },
+                                    "binding": "relatedNotes",
+                                    "type": "metadata",
+                                    "valuePath": "updatedAt"
+                                  },
+                                  {
+                                    "accessibility": {
+                                      "label": "Revision"
+                                    },
+                                    "binding": "relatedNotes",
+                                    "type": "metadata",
+                                    "valuePath": "revision"
+                                  }
+                                ],
+                                "layout": {
+                                  "gap": "compact"
+                                },
+                                "type": "row"
+                              }
+                            ],
+                            "layout": {
+                              "direction": "vertical",
+                              "gap": "compact"
+                            },
+                            "type": "stack"
+                          }
+                        ],
+                        "type": "recordRow"
+                      }
+                    ],
+                    "type": "recordList"
+                  }
+                ],
+                "type": "section"
+              },
+              {
+                "accessibility": {
+                  "label": "Nodus actions"
+                },
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "accessibility": {
+                          "label": "Local intelligence capability status"
+                        },
+                        "binding": "localIntelligenceCapability",
+                        "type": "metadata",
+                        "valuePath": "status"
+                      },
+                      {
+                        "accessibility": {
+                          "label": "Note intelligence policy"
+                        },
+                        "binding": "note",
+                        "type": "metadata",
+                        "valuePath": "intelligencePolicy"
+                      },
+                      {
+                        "accessibility": {
+                          "role": "status"
+                        },
+                        "text": "Sensitive notes use local-only intelligence. No server fallback is allowed.",
+                        "type": "text"
+                      },
+                      {
+                        "action": "intelligenceSummarize",
+                        "text": "Summarize",
+                        "type": "button"
+                      },
+                      {
+                        "action": "intelligenceRewrite",
+                        "text": "Rewrite",
+                        "type": "button"
+                      },
+                      {
+                        "action": "intelligenceExtractTasks",
+                        "text": "Extract tasks for review",
+                        "type": "button"
+                      },
+                      {
+                        "action": "intelligenceSuggestTags",
+                        "text": "Suggest tags",
+                        "type": "button"
+                      },
+                      {
+                        "action": "intelligenceSuggestTitle",
+                        "text": "Suggest title",
+                        "type": "button"
+                      },
+                      {
+                        "action": "intelligenceAskNote",
+                        "text": "Ask this note",
+                        "type": "button"
+                      },
+                      {
+                        "action": "intelligenceRelated",
+                        "text": "Find related notes",
+                        "type": "button"
+                      },
+                      {
+                        "accessibility": {
+                          "role": "status"
+                        },
+                        "text": "Local intelligence unavailable. Sensitive note content will not be sent to a server model.",
+                        "type": "errorState"
+                      }
+                    ],
+                    "layout": {
+                      "direction": "vertical",
+                      "gap": "compact"
+                    },
+                    "type": "stack"
+                  }
+                ],
+                "type": "section"
               }
             ],
             "layout": {
               "direction": "vertical",
-              "gap": "regular"
+              "gap": "regular",
+              "responsive": [
+                {
+                  "class": "compact",
+                  "columns": 1
+                },
+                {
+                  "class": "wide",
+                  "columns": 2
+                }
+              ]
             },
             "type": "stack"
           }
@@ -482,6 +1530,13 @@
           "text": "Loading note",
           "type": "loadingState"
         },
+        "offline": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "This note is not cached for offline access on this host",
+          "type": "errorState"
+        },
         "permissionDenied": {
           "accessibility": {
             "role": "status"
@@ -497,135 +1552,376 @@
         {
           "id": "noteForm",
           "source": "installation"
+        },
+        {
+          "capability": "ui.richText.commands@1",
+          "id": "formattingCapability",
+          "source": "capability"
+        },
+        {
+          "capability": "ui.property-editor@1",
+          "id": "propertyEditorCapability",
+          "source": "capability"
+        },
+        {
+          "capability": "media.picker@1",
+          "id": "mediaPickerCapability",
+          "source": "capability"
         }
       ],
       "id": "newEditor",
       "kind": "form",
       "root": {
-        "accessibility": {
-          "label": "Vault Notes editor",
-          "role": "form"
-        },
         "children": [
           {
-            "binding": "noteForm",
-            "field": {
-              "id": "title",
-              "label": "Title",
-              "required": true,
-              "type": "text",
-              "validation": {
-                "maxLength": 240
-              }
+            "accessibility": {
+              "label": "Vault Notes editor",
+              "role": "form"
             },
-            "type": "field"
-          },
-          {
-            "binding": "noteForm",
-            "field": {
-              "capability": "ui.richText@1",
-              "helpText": "Your note stays private inside Vault Notes.",
-              "id": "document",
-              "label": "Body",
-              "placeholder": "Start writing your note",
-              "type": "richText"
-            },
-            "type": "field"
-          },
-          {
-            "binding": "noteForm",
-            "field": {
-              "id": "folderId",
-              "label": "Folder",
-              "placeholder": "Optional folder",
-              "recordType": "folder",
-              "type": "recordReference"
-            },
-            "type": "field"
-          },
-          {
-            "binding": "noteForm",
-            "field": {
-              "id": "tagIds",
-              "label": "Tags",
-              "placeholder": "Add tags separated by commas",
-              "type": "tags"
-            },
-            "type": "field"
-          },
-          {
-            "binding": "noteForm",
-            "field": {
-              "id": "icon",
-              "label": "Note icon",
-              "placeholder": "Optional symbol or short label",
-              "type": "text",
-              "validation": {
-                "maxLength": 120
-              }
-            },
-            "type": "field"
-          },
-          {
-            "binding": "noteForm",
-            "field": {
-              "id": "pinned",
-              "label": "Pinned",
-              "type": "boolean"
-            },
-            "type": "field"
-          },
-          {
-            "binding": "noteForm",
-            "field": {
-              "id": "favourite",
-              "label": "Favourite",
-              "type": "boolean"
-            },
-            "type": "field"
-          },
-          {
-            "binding": "noteForm",
-            "field": {
-              "helpText": "Sensitive notes require local-only intelligence and hide indexed content.",
-              "id": "sensitive",
-              "label": "Sensitive note",
-              "type": "boolean"
-            },
-            "type": "field"
-          },
-          {
-            "binding": "noteForm",
-            "field": {
-              "id": "intelligencePolicy",
-              "label": "Local intelligence",
-              "options": [
-                {
-                  "label": "Disabled",
-                  "value": "disabled"
-                },
-                {
-                  "label": "Local only",
-                  "value": "localOnly"
-                },
-                {
-                  "label": "Prefer local",
-                  "value": "preferLocal"
-                }
-              ],
-              "type": "singleSelect"
-            },
-            "type": "field"
-          },
-          {
             "children": [
               {
-                "action": "createNote",
-                "text": "Save note",
-                "type": "button"
+                "children": [
+                  {
+                    "accessibility": {
+                      "label": "Selection-aware commands require the generic ui.richText.commands capability."
+                    },
+                    "children": [
+                      {
+                        "accessibility": {
+                          "label": "Formatting capability status"
+                        },
+                        "binding": "formattingCapability",
+                        "type": "metadata",
+                        "valuePath": "status"
+                      },
+                      {
+                        "action": "formatHeading",
+                        "text": "Heading",
+                        "type": "button"
+                      },
+                      {
+                        "action": "formatBold",
+                        "text": "Bold",
+                        "type": "button"
+                      },
+                      {
+                        "action": "formatItalic",
+                        "text": "Italic",
+                        "type": "button"
+                      },
+                      {
+                        "action": "formatStrike",
+                        "text": "Strike",
+                        "type": "button"
+                      },
+                      {
+                        "action": "formatCode",
+                        "text": "Code",
+                        "type": "button"
+                      },
+                      {
+                        "action": "formatQuote",
+                        "text": "Quote",
+                        "type": "button"
+                      },
+                      {
+                        "action": "formatBulletList",
+                        "text": "Bullets",
+                        "type": "button"
+                      },
+                      {
+                        "action": "formatNumberedList",
+                        "text": "Numbered list",
+                        "type": "button"
+                      },
+                      {
+                        "action": "formatChecklist",
+                        "text": "Checklist",
+                        "type": "button"
+                      },
+                      {
+                        "action": "insertLink",
+                        "text": "Link",
+                        "type": "button"
+                      },
+                      {
+                        "action": "insertReference",
+                        "text": "Reference",
+                        "type": "button"
+                      },
+                      {
+                        "action": "insertAttachment",
+                        "text": "Attachment",
+                        "type": "button"
+                      },
+                      {
+                        "action": "formatCallout",
+                        "text": "Callout",
+                        "type": "button"
+                      },
+                      {
+                        "action": "insertTable",
+                        "text": "Table",
+                        "type": "button"
+                      }
+                    ],
+                    "text": "Document formatting",
+                    "type": "toolbar"
+                  },
+                  {
+                    "accessibility": {
+                      "role": "status"
+                    },
+                    "text": "Formatting is stored as portable Vault document blocks and marks.",
+                    "type": "text"
+                  },
+                  {
+                    "children": [
+                      {
+                        "binding": "noteForm",
+                        "field": {
+                          "id": "title",
+                          "label": "Title",
+                          "required": true,
+                          "type": "text",
+                          "validation": {
+                            "maxLength": 240
+                          }
+                        },
+                        "type": "field"
+                      },
+                      {
+                        "binding": "noteForm",
+                        "field": {
+                          "capability": "ui.richText@1",
+                          "helpText": "Portable structured content; arbitrary HTML is not accepted.",
+                          "id": "document",
+                          "label": "Body",
+                          "placeholder": "Start writing your note",
+                          "type": "richText"
+                        },
+                        "type": "field"
+                      }
+                    ],
+                    "type": "section"
+                  },
+                  {
+                    "children": [
+                      {
+                        "binding": "noteForm",
+                        "field": {
+                          "id": "folderId",
+                          "label": "Folder",
+                          "placeholder": "Optional folder",
+                          "recordType": "folder",
+                          "type": "recordReference"
+                        },
+                        "type": "field"
+                      },
+                      {
+                        "binding": "noteForm",
+                        "field": {
+                          "id": "tagIds",
+                          "label": "Tags",
+                          "placeholder": "Add tags",
+                          "type": "tags"
+                        },
+                        "type": "field"
+                      },
+                      {
+                        "binding": "noteForm",
+                        "field": {
+                          "helpText": "Template expansion is performed by the module function, not duplicated in presentation code.",
+                          "id": "templateId",
+                          "label": "Template",
+                          "recordType": "template",
+                          "type": "recordReference"
+                        },
+                        "type": "field"
+                      },
+                      {
+                        "binding": "noteForm",
+                        "field": {
+                          "id": "icon",
+                          "label": "Note icon",
+                          "placeholder": "Optional symbol or short label",
+                          "type": "text",
+                          "validation": {
+                            "maxLength": 120
+                          }
+                        },
+                        "type": "field"
+                      },
+                      {
+                        "binding": "noteForm",
+                        "field": {
+                          "id": "pinned",
+                          "label": "Pinned",
+                          "type": "boolean"
+                        },
+                        "type": "field"
+                      },
+                      {
+                        "binding": "noteForm",
+                        "field": {
+                          "id": "favourite",
+                          "label": "Favourite",
+                          "type": "boolean"
+                        },
+                        "type": "field"
+                      }
+                    ],
+                    "type": "section"
+                  },
+                  {
+                    "accessibility": {
+                      "label": "Typed note properties"
+                    },
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "accessibility": {
+                              "label": "Property editor capability status"
+                            },
+                            "binding": "propertyEditorCapability",
+                            "type": "metadata",
+                            "valuePath": "status"
+                          },
+                          {
+                            "text": "text, number, boolean, date, dateTime, singleSelect, multiSelect, tags, url, recordReference",
+                            "type": "text"
+                          },
+                          {
+                            "accessibility": {
+                              "label": "Current typed properties"
+                            },
+                            "binding": "noteForm",
+                            "type": "metadata",
+                            "valuePath": "properties"
+                          },
+                          {
+                            "action": "editProperties",
+                            "text": "Edit typed properties",
+                            "type": "button"
+                          },
+                          {
+                            "accessibility": {
+                              "role": "status"
+                            },
+                            "text": "Dynamic typed property rows require the generic ui.property-editor capability.",
+                            "type": "errorState"
+                          }
+                        ],
+                        "layout": {
+                          "direction": "vertical",
+                          "gap": "compact"
+                        },
+                        "type": "stack"
+                      }
+                    ],
+                    "type": "section"
+                  },
+                  {
+                    "accessibility": {
+                      "label": "Note attachments"
+                    },
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "accessibility": {
+                              "label": "Attachment identifiers"
+                            },
+                            "binding": "noteForm",
+                            "type": "metadata",
+                            "valuePath": "attachmentIds"
+                          },
+                          {
+                            "accessibility": {
+                              "label": "Media picker capability status"
+                            },
+                            "binding": "mediaPickerCapability",
+                            "type": "metadata",
+                            "valuePath": "status"
+                          },
+                          {
+                            "action": "pickAttachment",
+                            "text": "Add attachment",
+                            "type": "button"
+                          }
+                        ],
+                        "layout": {
+                          "direction": "vertical",
+                          "gap": "compact"
+                        },
+                        "type": "stack"
+                      }
+                    ],
+                    "type": "section"
+                  },
+                  {
+                    "children": [
+                      {
+                        "binding": "noteForm",
+                        "field": {
+                          "helpText": "Sensitive notes require local-only intelligence and hide indexed content by default.",
+                          "id": "sensitive",
+                          "label": "Sensitive note",
+                          "type": "boolean"
+                        },
+                        "type": "field"
+                      },
+                      {
+                        "binding": "noteForm",
+                        "field": {
+                          "id": "intelligencePolicy",
+                          "label": "Local intelligence",
+                          "options": [
+                            {
+                              "label": "Disabled",
+                              "value": "disabled"
+                            },
+                            {
+                              "label": "Local only",
+                              "value": "localOnly"
+                            },
+                            {
+                              "label": "Prefer local",
+                              "value": "preferLocal"
+                            }
+                          ],
+                          "type": "singleSelect"
+                        },
+                        "type": "field"
+                      }
+                    ],
+                    "type": "section"
+                  },
+                  {
+                    "action": "createNote",
+                    "text": "Save note",
+                    "type": "button"
+                  }
+                ],
+                "layout": {
+                  "direction": "vertical",
+                  "gap": "regular",
+                  "responsive": [
+                    {
+                      "class": "compact",
+                      "columns": 1
+                    },
+                    {
+                      "class": "wide",
+                      "columns": 2
+                    }
+                  ]
+                },
+                "type": "stack"
               }
             ],
-            "type": "row"
+            "type": "section"
           }
         ],
         "type": "section"
@@ -635,7 +1931,7 @@
           "accessibility": {
             "role": "status"
           },
-          "text": "This host needs the rich text editor capability",
+          "text": "This host needs the generic rich text editor capability",
           "type": "errorState"
         },
         "error": {
@@ -643,6 +1939,20 @@
             "role": "status"
           },
           "text": "The note could not be saved",
+          "type": "errorState"
+        },
+        "offline": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "Offline creation requires the generic module sync queue",
+          "type": "errorState"
+        },
+        "permissionDenied": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "You do not have permission to create notes",
           "type": "errorState"
         }
       },
@@ -659,135 +1969,376 @@
         {
           "id": "noteForm",
           "source": "installation"
+        },
+        {
+          "capability": "ui.richText.commands@1",
+          "id": "formattingCapability",
+          "source": "capability"
+        },
+        {
+          "capability": "ui.property-editor@1",
+          "id": "propertyEditorCapability",
+          "source": "capability"
+        },
+        {
+          "capability": "media.picker@1",
+          "id": "mediaPickerCapability",
+          "source": "capability"
         }
       ],
       "id": "editor",
       "kind": "form",
       "root": {
-        "accessibility": {
-          "label": "Vault Notes editor",
-          "role": "form"
-        },
         "children": [
           {
-            "binding": "noteForm",
-            "field": {
-              "id": "title",
-              "label": "Title",
-              "required": true,
-              "type": "text",
-              "validation": {
-                "maxLength": 240
-              }
+            "accessibility": {
+              "label": "Vault Notes editor",
+              "role": "form"
             },
-            "type": "field"
-          },
-          {
-            "binding": "noteForm",
-            "field": {
-              "capability": "ui.richText@1",
-              "helpText": "Your note stays private inside Vault Notes.",
-              "id": "document",
-              "label": "Body",
-              "placeholder": "Start writing your note",
-              "type": "richText"
-            },
-            "type": "field"
-          },
-          {
-            "binding": "noteForm",
-            "field": {
-              "id": "folderId",
-              "label": "Folder",
-              "placeholder": "Optional folder",
-              "recordType": "folder",
-              "type": "recordReference"
-            },
-            "type": "field"
-          },
-          {
-            "binding": "noteForm",
-            "field": {
-              "id": "tagIds",
-              "label": "Tags",
-              "placeholder": "Add tags separated by commas",
-              "type": "tags"
-            },
-            "type": "field"
-          },
-          {
-            "binding": "noteForm",
-            "field": {
-              "id": "icon",
-              "label": "Note icon",
-              "placeholder": "Optional symbol or short label",
-              "type": "text",
-              "validation": {
-                "maxLength": 120
-              }
-            },
-            "type": "field"
-          },
-          {
-            "binding": "noteForm",
-            "field": {
-              "id": "pinned",
-              "label": "Pinned",
-              "type": "boolean"
-            },
-            "type": "field"
-          },
-          {
-            "binding": "noteForm",
-            "field": {
-              "id": "favourite",
-              "label": "Favourite",
-              "type": "boolean"
-            },
-            "type": "field"
-          },
-          {
-            "binding": "noteForm",
-            "field": {
-              "helpText": "Sensitive notes require local-only intelligence and hide indexed content.",
-              "id": "sensitive",
-              "label": "Sensitive note",
-              "type": "boolean"
-            },
-            "type": "field"
-          },
-          {
-            "binding": "noteForm",
-            "field": {
-              "id": "intelligencePolicy",
-              "label": "Local intelligence",
-              "options": [
-                {
-                  "label": "Disabled",
-                  "value": "disabled"
-                },
-                {
-                  "label": "Local only",
-                  "value": "localOnly"
-                },
-                {
-                  "label": "Prefer local",
-                  "value": "preferLocal"
-                }
-              ],
-              "type": "singleSelect"
-            },
-            "type": "field"
-          },
-          {
             "children": [
               {
-                "action": "updateNote",
-                "text": "Save changes",
-                "type": "button"
+                "children": [
+                  {
+                    "accessibility": {
+                      "label": "Selection-aware commands require the generic ui.richText.commands capability."
+                    },
+                    "children": [
+                      {
+                        "accessibility": {
+                          "label": "Formatting capability status"
+                        },
+                        "binding": "formattingCapability",
+                        "type": "metadata",
+                        "valuePath": "status"
+                      },
+                      {
+                        "action": "formatHeading",
+                        "text": "Heading",
+                        "type": "button"
+                      },
+                      {
+                        "action": "formatBold",
+                        "text": "Bold",
+                        "type": "button"
+                      },
+                      {
+                        "action": "formatItalic",
+                        "text": "Italic",
+                        "type": "button"
+                      },
+                      {
+                        "action": "formatStrike",
+                        "text": "Strike",
+                        "type": "button"
+                      },
+                      {
+                        "action": "formatCode",
+                        "text": "Code",
+                        "type": "button"
+                      },
+                      {
+                        "action": "formatQuote",
+                        "text": "Quote",
+                        "type": "button"
+                      },
+                      {
+                        "action": "formatBulletList",
+                        "text": "Bullets",
+                        "type": "button"
+                      },
+                      {
+                        "action": "formatNumberedList",
+                        "text": "Numbered list",
+                        "type": "button"
+                      },
+                      {
+                        "action": "formatChecklist",
+                        "text": "Checklist",
+                        "type": "button"
+                      },
+                      {
+                        "action": "insertLink",
+                        "text": "Link",
+                        "type": "button"
+                      },
+                      {
+                        "action": "insertReference",
+                        "text": "Reference",
+                        "type": "button"
+                      },
+                      {
+                        "action": "insertAttachment",
+                        "text": "Attachment",
+                        "type": "button"
+                      },
+                      {
+                        "action": "formatCallout",
+                        "text": "Callout",
+                        "type": "button"
+                      },
+                      {
+                        "action": "insertTable",
+                        "text": "Table",
+                        "type": "button"
+                      }
+                    ],
+                    "text": "Document formatting",
+                    "type": "toolbar"
+                  },
+                  {
+                    "accessibility": {
+                      "role": "status"
+                    },
+                    "text": "Formatting is stored as portable Vault document blocks and marks.",
+                    "type": "text"
+                  },
+                  {
+                    "children": [
+                      {
+                        "binding": "noteForm",
+                        "field": {
+                          "id": "title",
+                          "label": "Title",
+                          "required": true,
+                          "type": "text",
+                          "validation": {
+                            "maxLength": 240
+                          }
+                        },
+                        "type": "field"
+                      },
+                      {
+                        "binding": "noteForm",
+                        "field": {
+                          "capability": "ui.richText@1",
+                          "helpText": "Portable structured content; arbitrary HTML is not accepted.",
+                          "id": "document",
+                          "label": "Body",
+                          "placeholder": "Start writing your note",
+                          "type": "richText"
+                        },
+                        "type": "field"
+                      }
+                    ],
+                    "type": "section"
+                  },
+                  {
+                    "children": [
+                      {
+                        "binding": "noteForm",
+                        "field": {
+                          "id": "folderId",
+                          "label": "Folder",
+                          "placeholder": "Optional folder",
+                          "recordType": "folder",
+                          "type": "recordReference"
+                        },
+                        "type": "field"
+                      },
+                      {
+                        "binding": "noteForm",
+                        "field": {
+                          "id": "tagIds",
+                          "label": "Tags",
+                          "placeholder": "Add tags",
+                          "type": "tags"
+                        },
+                        "type": "field"
+                      },
+                      {
+                        "binding": "noteForm",
+                        "field": {
+                          "helpText": "Template expansion is performed by the module function, not duplicated in presentation code.",
+                          "id": "templateId",
+                          "label": "Template",
+                          "recordType": "template",
+                          "type": "recordReference"
+                        },
+                        "type": "field"
+                      },
+                      {
+                        "binding": "noteForm",
+                        "field": {
+                          "id": "icon",
+                          "label": "Note icon",
+                          "placeholder": "Optional symbol or short label",
+                          "type": "text",
+                          "validation": {
+                            "maxLength": 120
+                          }
+                        },
+                        "type": "field"
+                      },
+                      {
+                        "binding": "noteForm",
+                        "field": {
+                          "id": "pinned",
+                          "label": "Pinned",
+                          "type": "boolean"
+                        },
+                        "type": "field"
+                      },
+                      {
+                        "binding": "noteForm",
+                        "field": {
+                          "id": "favourite",
+                          "label": "Favourite",
+                          "type": "boolean"
+                        },
+                        "type": "field"
+                      }
+                    ],
+                    "type": "section"
+                  },
+                  {
+                    "accessibility": {
+                      "label": "Typed note properties"
+                    },
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "accessibility": {
+                              "label": "Property editor capability status"
+                            },
+                            "binding": "propertyEditorCapability",
+                            "type": "metadata",
+                            "valuePath": "status"
+                          },
+                          {
+                            "text": "text, number, boolean, date, dateTime, singleSelect, multiSelect, tags, url, recordReference",
+                            "type": "text"
+                          },
+                          {
+                            "accessibility": {
+                              "label": "Current typed properties"
+                            },
+                            "binding": "noteForm",
+                            "type": "metadata",
+                            "valuePath": "properties"
+                          },
+                          {
+                            "action": "editProperties",
+                            "text": "Edit typed properties",
+                            "type": "button"
+                          },
+                          {
+                            "accessibility": {
+                              "role": "status"
+                            },
+                            "text": "Dynamic typed property rows require the generic ui.property-editor capability.",
+                            "type": "errorState"
+                          }
+                        ],
+                        "layout": {
+                          "direction": "vertical",
+                          "gap": "compact"
+                        },
+                        "type": "stack"
+                      }
+                    ],
+                    "type": "section"
+                  },
+                  {
+                    "accessibility": {
+                      "label": "Note attachments"
+                    },
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "accessibility": {
+                              "label": "Attachment identifiers"
+                            },
+                            "binding": "noteForm",
+                            "type": "metadata",
+                            "valuePath": "attachmentIds"
+                          },
+                          {
+                            "accessibility": {
+                              "label": "Media picker capability status"
+                            },
+                            "binding": "mediaPickerCapability",
+                            "type": "metadata",
+                            "valuePath": "status"
+                          },
+                          {
+                            "action": "pickAttachment",
+                            "text": "Add attachment",
+                            "type": "button"
+                          }
+                        ],
+                        "layout": {
+                          "direction": "vertical",
+                          "gap": "compact"
+                        },
+                        "type": "stack"
+                      }
+                    ],
+                    "type": "section"
+                  },
+                  {
+                    "children": [
+                      {
+                        "binding": "noteForm",
+                        "field": {
+                          "helpText": "Sensitive notes require local-only intelligence and hide indexed content by default.",
+                          "id": "sensitive",
+                          "label": "Sensitive note",
+                          "type": "boolean"
+                        },
+                        "type": "field"
+                      },
+                      {
+                        "binding": "noteForm",
+                        "field": {
+                          "id": "intelligencePolicy",
+                          "label": "Local intelligence",
+                          "options": [
+                            {
+                              "label": "Disabled",
+                              "value": "disabled"
+                            },
+                            {
+                              "label": "Local only",
+                              "value": "localOnly"
+                            },
+                            {
+                              "label": "Prefer local",
+                              "value": "preferLocal"
+                            }
+                          ],
+                          "type": "singleSelect"
+                        },
+                        "type": "field"
+                      }
+                    ],
+                    "type": "section"
+                  },
+                  {
+                    "action": "updateNote",
+                    "text": "Save note",
+                    "type": "button"
+                  }
+                ],
+                "layout": {
+                  "direction": "vertical",
+                  "gap": "regular",
+                  "responsive": [
+                    {
+                      "class": "compact",
+                      "columns": 1
+                    },
+                    {
+                      "class": "wide",
+                      "columns": 2
+                    }
+                  ]
+                },
+                "type": "stack"
               }
             ],
-            "type": "row"
+            "type": "section"
           }
         ],
         "type": "section"
@@ -797,14 +2348,35 @@
           "accessibility": {
             "role": "status"
           },
-          "text": "This host needs the rich text editor capability",
+          "text": "This host needs rich text, reference, and attachment capabilities",
           "type": "errorState"
         },
         "error": {
           "accessibility": {
             "role": "status"
           },
-          "text": "The note could not be saved",
+          "text": "The note could not be saved; your local draft should be retained by the host",
+          "type": "errorState"
+        },
+        "loading": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "Loading note editor",
+          "type": "loadingState"
+        },
+        "offline": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "Offline editing requires the generic module sync queue",
+          "type": "errorState"
+        },
+        "permissionDenied": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "You do not have permission to edit this note",
           "type": "errorState"
         }
       },
@@ -813,7 +2385,7 @@
     {
       "bindings": [
         {
-          "id": "notes",
+          "id": "searchResults",
           "query": {
             "filterParam": "filter",
             "filters": {
@@ -833,39 +2405,124 @@
       "root": {
         "children": [
           {
-            "binding": "notes",
-            "text": "Search titles, bodies, and tags",
-            "type": "search"
-          },
-          {
             "children": [
+              {
+                "accessibility": {
+                  "label": "Search Vault Notes",
+                  "role": "search"
+                },
+                "binding": "searchResults",
+                "text": "Search titles, bodies, tags, folders, properties, and attachments",
+                "type": "search"
+              },
+              {
+                "children": [
+                  {
+                    "accessibility": {
+                      "label": "Filter by tag, folder, property, attachment state, created date, updated date, pinned, favourite, and archive state."
+                    },
+                    "binding": "searchResults",
+                    "text": "Search filters",
+                    "type": "filter"
+                  },
+                  {
+                    "accessibility": {
+                      "label": "Sort by updated date, created date, or title through the host sort contract."
+                    },
+                    "binding": "searchResults",
+                    "text": "Sort results",
+                    "type": "sort"
+                  },
+                  {
+                    "accessibility": {
+                      "role": "status"
+                    },
+                    "text": "Nested property and reference filters remain limited by the generic query contract.",
+                    "type": "text"
+                  }
+                ],
+                "layout": {
+                  "direction": "vertical",
+                  "gap": "compact"
+                },
+                "type": "stack"
+              },
+              {
+                "text": "Search title, body projection, tags, folder, typed properties, attachment metadata, and dates.",
+                "type": "text"
+              },
+              {
+                "accessibility": {
+                  "role": "status"
+                },
+                "text": "Sensitive notes remain excluded unless the user enables sensitive search in Vault settings.",
+                "type": "text"
+              },
               {
                 "accessibility": {
                   "label": "Search results",
                   "role": "list"
                 },
                 "action": "openNote",
-                "binding": "notes",
+                "binding": "searchResults",
                 "children": [
                   {
-                    "binding": "notes",
+                    "accessibility": {
+                      "label": "Search result",
+                      "role": "listitem"
+                    },
+                    "binding": "searchResults",
                     "children": [
                       {
                         "children": [
                           {
-                            "binding": "notes",
+                            "accessibility": {
+                              "role": "header"
+                            },
+                            "binding": "searchResults",
                             "type": "text",
                             "valuePath": "title"
                           },
                           {
-                            "binding": "notes",
+                            "accessibility": {
+                              "label": "Note preview",
+                              "role": "text"
+                            },
+                            "binding": "searchResults",
                             "type": "text",
                             "valuePath": "plainTextProjection"
                           },
                           {
-                            "binding": "notes",
-                            "type": "metadata",
-                            "valuePath": "updatedAt"
+                            "children": [
+                              {
+                                "accessibility": {
+                                  "label": "Created date"
+                                },
+                                "binding": "searchResults",
+                                "type": "metadata",
+                                "valuePath": "createdAt"
+                              },
+                              {
+                                "accessibility": {
+                                  "label": "Updated date"
+                                },
+                                "binding": "searchResults",
+                                "type": "metadata",
+                                "valuePath": "updatedAt"
+                              },
+                              {
+                                "accessibility": {
+                                  "label": "Revision"
+                                },
+                                "binding": "searchResults",
+                                "type": "metadata",
+                                "valuePath": "revision"
+                              }
+                            ],
+                            "layout": {
+                              "gap": "compact"
+                            },
+                            "type": "row"
                           }
                         ],
                         "layout": {
@@ -888,10 +2545,13 @@
             "type": "stack"
           }
         ],
-        "type": "stack"
+        "type": "section"
       },
       "states": {
         "empty": {
+          "accessibility": {
+            "role": "status"
+          },
           "text": "No notes match this search",
           "type": "emptyState"
         },
@@ -906,106 +2566,25 @@
           "accessibility": {
             "role": "status"
           },
-          "text": "Searching notes",
+          "text": "Loading Vault Notes",
           "type": "loadingState"
-        }
-      },
-      "title": "Search Vault Notes"
-    },
-    {
-      "bindings": [
-        {
-          "id": "notes",
-          "query": {
-            "filterParam": "filter",
-            "filters": {
-              "archived": false,
-              "favourite": true
-            },
-            "limit": 100,
-            "recordState": "active",
-            "sortParam": "sort"
-          },
-          "recordType": "note",
-          "source": "record.query"
-        }
-      ],
-      "id": "favourites",
-      "kind": "collection",
-      "root": {
-        "children": [
-          {
-            "binding": "notes",
-            "text": "Favourites",
-            "type": "filter"
-          },
-          {
-            "children": [
-              {
-                "accessibility": {
-                  "label": "Favourite notes",
-                  "role": "list"
-                },
-                "action": "openNote",
-                "binding": "notes",
-                "children": [
-                  {
-                    "binding": "notes",
-                    "children": [
-                      {
-                        "children": [
-                          {
-                            "binding": "notes",
-                            "type": "text",
-                            "valuePath": "title"
-                          },
-                          {
-                            "binding": "notes",
-                            "type": "text",
-                            "valuePath": "plainTextProjection"
-                          },
-                          {
-                            "binding": "notes",
-                            "type": "metadata",
-                            "valuePath": "updatedAt"
-                          }
-                        ],
-                        "layout": {
-                          "direction": "vertical",
-                          "gap": "compact"
-                        },
-                        "type": "stack"
-                      }
-                    ],
-                    "type": "recordRow"
-                  }
-                ],
-                "type": "recordList"
-              }
-            ],
-            "layout": {
-              "direction": "vertical",
-              "gap": "regular"
-            },
-            "type": "stack"
-          }
-        ],
-        "type": "stack"
-      },
-      "states": {
-        "empty": {
-          "text": "No favourite notes yet",
-          "type": "emptyState"
         },
-        "error": {
+        "offline": {
           "accessibility": {
             "role": "status"
           },
-          "text": "Favourite notes are unavailable",
+          "text": "This collection is unavailable while offline on this host",
+          "type": "errorState"
+        },
+        "permissionDenied": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "You do not have permission to view this Vault content",
           "type": "errorState"
         }
       },
-      "title": "Favourite notes"
+      "title": "Search Vault Notes"
     },
     {
       "bindings": [
@@ -1031,7 +2610,7 @@
         "children": [
           {
             "binding": "notes",
-            "text": "Pinned",
+            "text": "Pinned notes",
             "type": "filter"
           },
           {
@@ -1060,9 +2639,26 @@
                             "valuePath": "plainTextProjection"
                           },
                           {
-                            "binding": "notes",
-                            "type": "metadata",
-                            "valuePath": "updatedAt"
+                            "children": [
+                              {
+                                "binding": "notes",
+                                "type": "metadata",
+                                "valuePath": "updatedAt"
+                              },
+                              {
+                                "accessibility": {
+                                  "label": "Sensitive note; intelligence is local only",
+                                  "role": "status"
+                                },
+                                "binding": "notes",
+                                "type": "badge",
+                                "valuePath": "sensitive"
+                              }
+                            ],
+                            "layout": {
+                              "gap": "compact"
+                            },
+                            "type": "row"
                           }
                         ],
                         "layout": {
@@ -1085,10 +2681,13 @@
             "type": "stack"
           }
         ],
-        "type": "stack"
+        "type": "section"
       },
       "states": {
         "empty": {
+          "accessibility": {
+            "role": "status"
+          },
           "text": "No pinned notes yet",
           "type": "emptyState"
         },
@@ -1097,6 +2696,27 @@
             "role": "status"
           },
           "text": "Pinned notes are unavailable",
+          "type": "errorState"
+        },
+        "loading": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "Loading Vault Notes",
+          "type": "loadingState"
+        },
+        "offline": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "This collection is unavailable while offline on this host",
+          "type": "errorState"
+        },
+        "permissionDenied": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "You do not have permission to view this Vault content",
           "type": "errorState"
         }
       },
@@ -1154,9 +2774,26 @@
                             "valuePath": "plainTextProjection"
                           },
                           {
-                            "binding": "notes",
-                            "type": "metadata",
-                            "valuePath": "updatedAt"
+                            "children": [
+                              {
+                                "binding": "notes",
+                                "type": "metadata",
+                                "valuePath": "updatedAt"
+                              },
+                              {
+                                "accessibility": {
+                                  "label": "Sensitive note; intelligence is local only",
+                                  "role": "status"
+                                },
+                                "binding": "notes",
+                                "type": "badge",
+                                "valuePath": "sensitive"
+                              }
+                            ],
+                            "layout": {
+                              "gap": "compact"
+                            },
+                            "type": "row"
                           }
                         ],
                         "layout": {
@@ -1179,10 +2816,13 @@
             "type": "stack"
           }
         ],
-        "type": "stack"
+        "type": "section"
       },
       "states": {
         "empty": {
+          "accessibility": {
+            "role": "status"
+          },
           "text": "No recent notes",
           "type": "emptyState"
         },
@@ -1192,9 +2832,166 @@
           },
           "text": "Recent notes are unavailable",
           "type": "errorState"
+        },
+        "loading": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "Loading Vault Notes",
+          "type": "loadingState"
+        },
+        "offline": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "This collection is unavailable while offline on this host",
+          "type": "errorState"
+        },
+        "permissionDenied": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "You do not have permission to view this Vault content",
+          "type": "errorState"
         }
       },
       "title": "Recently edited"
+    },
+    {
+      "bindings": [
+        {
+          "id": "notes",
+          "query": {
+            "filterParam": "filter",
+            "filters": {
+              "archived": false,
+              "favourite": true
+            },
+            "limit": 100,
+            "recordState": "active",
+            "sortParam": "sort"
+          },
+          "recordType": "note",
+          "source": "record.query"
+        }
+      ],
+      "id": "favourites",
+      "kind": "collection",
+      "root": {
+        "children": [
+          {
+            "binding": "notes",
+            "text": "Favourite notes",
+            "type": "filter"
+          },
+          {
+            "children": [
+              {
+                "accessibility": {
+                  "label": "Favourite notes",
+                  "role": "list"
+                },
+                "action": "openNote",
+                "binding": "notes",
+                "children": [
+                  {
+                    "binding": "notes",
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "binding": "notes",
+                            "type": "text",
+                            "valuePath": "title"
+                          },
+                          {
+                            "binding": "notes",
+                            "type": "text",
+                            "valuePath": "plainTextProjection"
+                          },
+                          {
+                            "children": [
+                              {
+                                "binding": "notes",
+                                "type": "metadata",
+                                "valuePath": "updatedAt"
+                              },
+                              {
+                                "accessibility": {
+                                  "label": "Sensitive note; intelligence is local only",
+                                  "role": "status"
+                                },
+                                "binding": "notes",
+                                "type": "badge",
+                                "valuePath": "sensitive"
+                              }
+                            ],
+                            "layout": {
+                              "gap": "compact"
+                            },
+                            "type": "row"
+                          }
+                        ],
+                        "layout": {
+                          "direction": "vertical",
+                          "gap": "compact"
+                        },
+                        "type": "stack"
+                      }
+                    ],
+                    "type": "recordRow"
+                  }
+                ],
+                "type": "recordList"
+              }
+            ],
+            "layout": {
+              "direction": "vertical",
+              "gap": "regular"
+            },
+            "type": "stack"
+          }
+        ],
+        "type": "section"
+      },
+      "states": {
+        "empty": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "No favourite notes yet",
+          "type": "emptyState"
+        },
+        "error": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "Favourite notes are unavailable",
+          "type": "errorState"
+        },
+        "loading": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "Loading Vault Notes",
+          "type": "loadingState"
+        },
+        "offline": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "This collection is unavailable while offline on this host",
+          "type": "errorState"
+        },
+        "permissionDenied": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "You do not have permission to view this Vault content",
+          "type": "errorState"
+        }
+      },
+      "title": "Favourite notes"
     },
     {
       "bindings": [
@@ -1219,7 +3016,7 @@
         "children": [
           {
             "binding": "notes",
-            "text": "Archived",
+            "text": "Archived notes",
             "type": "filter"
           },
           {
@@ -1248,9 +3045,26 @@
                             "valuePath": "plainTextProjection"
                           },
                           {
-                            "binding": "notes",
-                            "type": "metadata",
-                            "valuePath": "updatedAt"
+                            "children": [
+                              {
+                                "binding": "notes",
+                                "type": "metadata",
+                                "valuePath": "updatedAt"
+                              },
+                              {
+                                "accessibility": {
+                                  "label": "Sensitive note; intelligence is local only",
+                                  "role": "status"
+                                },
+                                "binding": "notes",
+                                "type": "badge",
+                                "valuePath": "sensitive"
+                              }
+                            ],
+                            "layout": {
+                              "gap": "compact"
+                            },
+                            "type": "row"
                           }
                         ],
                         "layout": {
@@ -1273,10 +3087,13 @@
             "type": "stack"
           }
         ],
-        "type": "stack"
+        "type": "section"
       },
       "states": {
         "empty": {
+          "accessibility": {
+            "role": "status"
+          },
           "text": "No archived notes",
           "type": "emptyState"
         },
@@ -1285,6 +3102,27 @@
             "role": "status"
           },
           "text": "Archived notes are unavailable",
+          "type": "errorState"
+        },
+        "loading": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "Loading Vault Notes",
+          "type": "loadingState"
+        },
+        "offline": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "This collection is unavailable while offline on this host",
+          "type": "errorState"
+        },
+        "permissionDenied": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "You do not have permission to view this Vault content",
           "type": "errorState"
         }
       },
@@ -1340,9 +3178,26 @@
                         "valuePath": "plainTextProjection"
                       },
                       {
-                        "binding": "notes",
-                        "type": "metadata",
-                        "valuePath": "updatedAt"
+                        "children": [
+                          {
+                            "binding": "notes",
+                            "type": "metadata",
+                            "valuePath": "updatedAt"
+                          },
+                          {
+                            "accessibility": {
+                              "label": "Sensitive note; intelligence is local only",
+                              "role": "status"
+                            },
+                            "binding": "notes",
+                            "type": "badge",
+                            "valuePath": "sensitive"
+                          }
+                        ],
+                        "layout": {
+                          "gap": "compact"
+                        },
+                        "type": "row"
                       }
                     ],
                     "layout": {
@@ -1358,10 +3213,13 @@
             "type": "recordList"
           }
         ],
-        "type": "stack"
+        "type": "section"
       },
       "states": {
         "empty": {
+          "accessibility": {
+            "role": "status"
+          },
           "text": "Trash is empty",
           "type": "emptyState"
         },
@@ -1370,6 +3228,27 @@
             "role": "status"
           },
           "text": "Trash is unavailable",
+          "type": "errorState"
+        },
+        "loading": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "Loading Vault Notes",
+          "type": "loadingState"
+        },
+        "offline": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "This collection is unavailable while offline on this host",
+          "type": "errorState"
+        },
+        "permissionDenied": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "You do not have permission to view this Vault content",
           "type": "errorState"
         }
       },
@@ -1399,17 +3278,52 @@
           },
           {
             "accessibility": {
-              "label": "Vault Notes folders",
+              "label": "Vault folders",
               "role": "list"
             },
+            "action": "openFolder",
             "binding": "folders",
+            "children": [
+              {
+                "accessibility": {
+                  "label": "Folder",
+                  "role": "listitem"
+                },
+                "binding": "folders",
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "binding": "folders",
+                        "type": "text",
+                        "valuePath": "name"
+                      },
+                      {
+                        "binding": "folders",
+                        "type": "metadata",
+                        "valuePath": "updatedAt"
+                      }
+                    ],
+                    "layout": {
+                      "direction": "vertical",
+                      "gap": "compact"
+                    },
+                    "type": "stack"
+                  }
+                ],
+                "type": "recordRow"
+              }
+            ],
             "type": "recordList"
           }
         ],
-        "type": "stack"
+        "type": "section"
       },
       "states": {
         "empty": {
+          "accessibility": {
+            "role": "status"
+          },
           "text": "No folders yet",
           "type": "emptyState"
         },
@@ -1419,9 +3333,1246 @@
           },
           "text": "Folders are unavailable",
           "type": "errorState"
+        },
+        "loading": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "Loading Vault Notes",
+          "type": "loadingState"
+        },
+        "offline": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "This collection is unavailable while offline on this host",
+          "type": "errorState"
+        },
+        "permissionDenied": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "You do not have permission to view this Vault content",
+          "type": "errorState"
         }
       },
       "title": "Folders"
+    },
+    {
+      "bindings": [
+        {
+          "id": "folder",
+          "recordIdParam": "folderId",
+          "recordType": "folder",
+          "source": "record.detail"
+        },
+        {
+          "id": "notes",
+          "query": {
+            "filterParam": "folderId",
+            "filters": {
+              "archived": false
+            },
+            "limit": 100,
+            "recordState": "active",
+            "sortParam": "sort"
+          },
+          "recordType": "note",
+          "source": "record.query"
+        }
+      ],
+      "id": "folder",
+      "kind": "collection",
+      "root": {
+        "children": [
+          {
+            "accessibility": {
+              "role": "header"
+            },
+            "binding": "folder",
+            "type": "text",
+            "valuePath": "name"
+          },
+          {
+            "children": [
+              {
+                "accessibility": {
+                  "label": "Notes in folder",
+                  "role": "list"
+                },
+                "action": "openNote",
+                "binding": "notes",
+                "children": [
+                  {
+                    "binding": "notes",
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "binding": "notes",
+                            "type": "text",
+                            "valuePath": "title"
+                          },
+                          {
+                            "binding": "notes",
+                            "type": "text",
+                            "valuePath": "plainTextProjection"
+                          },
+                          {
+                            "children": [
+                              {
+                                "binding": "notes",
+                                "type": "metadata",
+                                "valuePath": "updatedAt"
+                              },
+                              {
+                                "accessibility": {
+                                  "label": "Sensitive note; intelligence is local only",
+                                  "role": "status"
+                                },
+                                "binding": "notes",
+                                "type": "badge",
+                                "valuePath": "sensitive"
+                              }
+                            ],
+                            "layout": {
+                              "gap": "compact"
+                            },
+                            "type": "row"
+                          }
+                        ],
+                        "layout": {
+                          "direction": "vertical",
+                          "gap": "compact"
+                        },
+                        "type": "stack"
+                      }
+                    ],
+                    "type": "recordRow"
+                  }
+                ],
+                "type": "recordList"
+              }
+            ],
+            "layout": {
+              "direction": "vertical",
+              "gap": "regular"
+            },
+            "type": "stack"
+          }
+        ],
+        "type": "section"
+      },
+      "states": {
+        "empty": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "This folder is empty",
+          "type": "emptyState"
+        },
+        "error": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "This folder is unavailable",
+          "type": "errorState"
+        },
+        "loading": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "Loading Vault Notes",
+          "type": "loadingState"
+        },
+        "offline": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "This collection is unavailable while offline on this host",
+          "type": "errorState"
+        },
+        "permissionDenied": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "You do not have permission to view this Vault content",
+          "type": "errorState"
+        }
+      },
+      "title": "Folder"
+    },
+    {
+      "bindings": [
+        {
+          "id": "tags",
+          "query": {
+            "limit": 100,
+            "searchParam": "q",
+            "sortParam": "sort"
+          },
+          "recordType": "tag",
+          "source": "record.query"
+        }
+      ],
+      "id": "tags",
+      "kind": "collection",
+      "root": {
+        "children": [
+          {
+            "binding": "tags",
+            "text": "Search tags",
+            "type": "search"
+          },
+          {
+            "accessibility": {
+              "label": "Vault tags",
+              "role": "list"
+            },
+            "action": "openTag",
+            "binding": "tags",
+            "children": [
+              {
+                "accessibility": {
+                  "label": "Tag",
+                  "role": "listitem"
+                },
+                "binding": "tags",
+                "children": [
+                  {
+                    "accessibility": {
+                      "label": "Vault tag"
+                    },
+                    "binding": "tags",
+                    "type": "badge",
+                    "valuePath": "name"
+                  }
+                ],
+                "type": "recordRow"
+              }
+            ],
+            "type": "recordList"
+          }
+        ],
+        "type": "section"
+      },
+      "states": {
+        "empty": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "No tags yet",
+          "type": "emptyState"
+        },
+        "error": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "Tags are unavailable",
+          "type": "errorState"
+        },
+        "loading": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "Loading Vault Notes",
+          "type": "loadingState"
+        },
+        "offline": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "This collection is unavailable while offline on this host",
+          "type": "errorState"
+        },
+        "permissionDenied": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "You do not have permission to view this Vault content",
+          "type": "errorState"
+        }
+      },
+      "title": "Tags"
+    },
+    {
+      "bindings": [
+        {
+          "id": "tag",
+          "recordIdParam": "tagId",
+          "recordType": "tag",
+          "source": "record.detail"
+        },
+        {
+          "id": "notes",
+          "query": {
+            "filterParam": "tagId",
+            "filters": {
+              "archived": false
+            },
+            "limit": 100,
+            "recordState": "active",
+            "sortParam": "sort"
+          },
+          "recordType": "note",
+          "source": "record.query"
+        }
+      ],
+      "id": "tag",
+      "kind": "collection",
+      "root": {
+        "children": [
+          {
+            "accessibility": {
+              "label": "Selected tag"
+            },
+            "binding": "tag",
+            "type": "badge",
+            "valuePath": "name"
+          },
+          {
+            "children": [
+              {
+                "accessibility": {
+                  "label": "Notes with tag",
+                  "role": "list"
+                },
+                "action": "openNote",
+                "binding": "notes",
+                "children": [
+                  {
+                    "binding": "notes",
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "binding": "notes",
+                            "type": "text",
+                            "valuePath": "title"
+                          },
+                          {
+                            "binding": "notes",
+                            "type": "text",
+                            "valuePath": "plainTextProjection"
+                          },
+                          {
+                            "children": [
+                              {
+                                "binding": "notes",
+                                "type": "metadata",
+                                "valuePath": "updatedAt"
+                              },
+                              {
+                                "accessibility": {
+                                  "label": "Sensitive note; intelligence is local only",
+                                  "role": "status"
+                                },
+                                "binding": "notes",
+                                "type": "badge",
+                                "valuePath": "sensitive"
+                              }
+                            ],
+                            "layout": {
+                              "gap": "compact"
+                            },
+                            "type": "row"
+                          }
+                        ],
+                        "layout": {
+                          "direction": "vertical",
+                          "gap": "compact"
+                        },
+                        "type": "stack"
+                      }
+                    ],
+                    "type": "recordRow"
+                  }
+                ],
+                "type": "recordList"
+              }
+            ],
+            "layout": {
+              "direction": "vertical",
+              "gap": "regular"
+            },
+            "type": "stack"
+          }
+        ],
+        "type": "section"
+      },
+      "states": {
+        "empty": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "No notes use this tag",
+          "type": "emptyState"
+        },
+        "error": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "This tag is unavailable",
+          "type": "errorState"
+        },
+        "loading": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "Loading Vault Notes",
+          "type": "loadingState"
+        },
+        "offline": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "This collection is unavailable while offline on this host",
+          "type": "errorState"
+        },
+        "permissionDenied": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "You do not have permission to view this Vault content",
+          "type": "errorState"
+        }
+      },
+      "title": "Tag"
+    },
+    {
+      "bindings": [
+        {
+          "id": "templates",
+          "query": {
+            "limit": 100,
+            "searchParam": "q",
+            "sortParam": "sort"
+          },
+          "recordType": "template",
+          "source": "record.query"
+        }
+      ],
+      "id": "templates",
+      "kind": "collection",
+      "root": {
+        "children": [
+          {
+            "accessibility": {
+              "role": "status"
+            },
+            "text": "This action requires an installed, reviewed Vault function and normal account permissions.",
+            "type": "text"
+          },
+          {
+            "children": [
+              {
+                "binding": "templates",
+                "text": "Search note templates",
+                "type": "search"
+              },
+              {
+                "accessibility": {
+                  "label": "Vault Notes templates",
+                  "role": "list"
+                },
+                "binding": "templates",
+                "children": [
+                  {
+                    "accessibility": {
+                      "label": "Note template",
+                      "role": "listitem"
+                    },
+                    "binding": "templates",
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "accessibility": {
+                              "role": "header"
+                            },
+                            "binding": "templates",
+                            "type": "text",
+                            "valuePath": "name"
+                          },
+                          {
+                            "binding": "templates",
+                            "type": "text",
+                            "valuePath": "description"
+                          },
+                          {
+                            "binding": "templates",
+                            "type": "metadata",
+                            "valuePath": "category"
+                          },
+                          {
+                            "action": "createFromTemplate",
+                            "text": "Create note from template",
+                            "type": "button"
+                          }
+                        ],
+                        "layout": {
+                          "direction": "vertical",
+                          "gap": "compact"
+                        },
+                        "type": "stack"
+                      }
+                    ],
+                    "type": "recordRow"
+                  }
+                ],
+                "type": "recordList"
+              }
+            ],
+            "layout": {
+              "direction": "vertical",
+              "gap": "regular"
+            },
+            "type": "stack"
+          }
+        ],
+        "type": "section"
+      },
+      "states": {
+        "empty": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "No templates are installed",
+          "type": "emptyState"
+        },
+        "error": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "Templates are unavailable",
+          "type": "errorState"
+        },
+        "loading": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "Loading Vault Notes",
+          "type": "loadingState"
+        },
+        "offline": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "This collection is unavailable while offline on this host",
+          "type": "errorState"
+        },
+        "permissionDenied": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "You do not have permission to view this Vault content",
+          "type": "errorState"
+        }
+      },
+      "title": "Templates"
+    },
+    {
+      "id": "daily",
+      "kind": "detail",
+      "root": {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "text": "Daily notes use the account-local calendar date and exactly-one module function.",
+                    "type": "text"
+                  },
+                  {
+                    "accessibility": {
+                      "role": "status"
+                    },
+                    "text": "This action requires an installed, reviewed Vault function and normal account permissions.",
+                    "type": "text"
+                  },
+                  {
+                    "action": "createDailyNote",
+                    "text": "Open today’s note",
+                    "type": "button"
+                  }
+                ],
+                "layout": {
+                  "direction": "vertical",
+                  "gap": "regular"
+                },
+                "type": "stack"
+              }
+            ],
+            "type": "section"
+          }
+        ],
+        "type": "section"
+      },
+      "states": {
+        "error": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "Daily Note requires the reviewed note.createDaily function",
+          "type": "errorState"
+        },
+        "loading": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "Resolving today’s note",
+          "type": "loadingState"
+        },
+        "offline": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "Offline Daily Note creation requires idempotent module sync",
+          "type": "errorState"
+        },
+        "permissionDenied": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "You do not have permission to create today’s note",
+          "type": "errorState"
+        }
+      },
+      "title": "Daily Note"
+    },
+    {
+      "bindings": [
+        {
+          "id": "revisions",
+          "query": {
+            "filterParam": "noteId",
+            "limit": 100,
+            "sortParam": "sort"
+          },
+          "recordType": "note-version",
+          "source": "record.query"
+        }
+      ],
+      "id": "history",
+      "kind": "collection",
+      "root": {
+        "children": [
+          {
+            "text": "Restores create a new revision and never delete intervening history.",
+            "type": "text"
+          },
+          {
+            "accessibility": {
+              "label": "Note revisions",
+              "role": "list"
+            },
+            "action": "openRevision",
+            "binding": "revisions",
+            "children": [
+              {
+                "accessibility": {
+                  "label": "Note revision",
+                  "role": "listitem"
+                },
+                "binding": "revisions",
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "binding": "revisions",
+                        "type": "text",
+                        "valuePath": "revision"
+                      },
+                      {
+                        "binding": "revisions",
+                        "type": "metadata",
+                        "valuePath": "createdAt"
+                      },
+                      {
+                        "binding": "revisions",
+                        "type": "metadata",
+                        "valuePath": "changeSource"
+                      }
+                    ],
+                    "layout": {
+                      "gap": "regular"
+                    },
+                    "type": "row"
+                  }
+                ],
+                "type": "recordRow"
+              }
+            ],
+            "type": "recordList"
+          }
+        ],
+        "type": "section"
+      },
+      "states": {
+        "empty": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "No revision checkpoints are available",
+          "type": "emptyState"
+        },
+        "error": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "Generic revision history is unavailable on this host",
+          "type": "errorState"
+        },
+        "loading": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "Loading Vault Notes",
+          "type": "loadingState"
+        },
+        "offline": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "This collection is unavailable while offline on this host",
+          "type": "errorState"
+        },
+        "permissionDenied": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "You do not have permission to view this Vault content",
+          "type": "errorState"
+        }
+      },
+      "title": "Revision history"
+    },
+    {
+      "bindings": [
+        {
+          "id": "revision",
+          "recordIdParam": "revisionId",
+          "recordType": "note-version",
+          "source": "record.detail"
+        }
+      ],
+      "id": "revision",
+      "kind": "detail",
+      "root": {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "binding": "revision",
+                    "type": "metadata",
+                    "valuePath": "revision"
+                  },
+                  {
+                    "binding": "revision",
+                    "type": "metadata",
+                    "valuePath": "createdAt"
+                  },
+                  {
+                    "binding": "revision",
+                    "type": "metadata",
+                    "valuePath": "changeSource"
+                  },
+                  {
+                    "accessibility": {
+                      "role": "header"
+                    },
+                    "binding": "revision",
+                    "type": "text",
+                    "valuePath": "snapshot.title"
+                  },
+                  {
+                    "binding": "revision",
+                    "type": "text",
+                    "valuePath": "snapshot.plainTextProjection"
+                  }
+                ],
+                "layout": {
+                  "direction": "vertical",
+                  "gap": "regular"
+                },
+                "type": "stack"
+              }
+            ],
+            "type": "section"
+          },
+          {
+            "action": "restoreRevision",
+            "text": "Restore as new revision",
+            "type": "button"
+          }
+        ],
+        "type": "section"
+      },
+      "states": {
+        "capabilityUnavailable": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "Generic revision view and restore APIs are required",
+          "type": "errorState"
+        },
+        "error": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "This revision is unavailable",
+          "type": "errorState"
+        },
+        "loading": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "Loading revision",
+          "type": "loadingState"
+        },
+        "permissionDenied": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "You do not have permission to view this revision",
+          "type": "errorState"
+        }
+      },
+      "title": "Revision"
+    },
+    {
+      "bindings": [
+        {
+          "id": "attachments",
+          "query": {
+            "filterParam": "filter",
+            "limit": 100,
+            "searchParam": "q",
+            "sortParam": "sort"
+          },
+          "recordType": "attachment",
+          "source": "record.query"
+        },
+        {
+          "id": "attachmentForm",
+          "source": "installation"
+        },
+        {
+          "capability": "ui.attachment-gallery@1",
+          "id": "attachmentGalleryCapability",
+          "source": "capability"
+        }
+      ],
+      "id": "attachments",
+      "kind": "collection",
+      "root": {
+        "children": [
+          {
+            "children": [
+              {
+                "accessibility": {
+                  "label": "Attach a file",
+                  "role": "form"
+                },
+                "children": [
+                  {
+                    "binding": "attachmentForm",
+                    "field": {
+                      "id": "noteId",
+                      "label": "Note",
+                      "recordType": "note",
+                      "required": true,
+                      "type": "recordReference"
+                    },
+                    "type": "field"
+                  },
+                  {
+                    "binding": "attachmentForm",
+                    "field": {
+                      "assetRole": "vault-note-attachment",
+                      "id": "assetId",
+                      "label": "File",
+                      "required": true,
+                      "type": "assetReference"
+                    },
+                    "type": "field"
+                  },
+                  {
+                    "action": "pickAttachment",
+                    "text": "Choose file",
+                    "type": "button"
+                  },
+                  {
+                    "action": "attachToNote",
+                    "text": "Attach to note",
+                    "type": "button"
+                  }
+                ],
+                "type": "section"
+              },
+              {
+                "accessibility": {
+                  "label": "Vault attachments",
+                  "role": "list"
+                },
+                "binding": "attachments",
+                "children": [
+                  {
+                    "accessibility": {
+                      "label": "Attachment",
+                      "role": "listitem"
+                    },
+                    "binding": "attachments",
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "binding": "attachments",
+                            "type": "text",
+                            "valuePath": "name"
+                          },
+                          {
+                            "binding": "attachments",
+                            "type": "metadata",
+                            "valuePath": "mimeType"
+                          },
+                          {
+                            "binding": "attachments",
+                            "type": "metadata",
+                            "valuePath": "size"
+                          },
+                          {
+                            "binding": "attachments",
+                            "type": "metadata",
+                            "valuePath": "createdAt"
+                          },
+                          {
+                            "children": [
+                              {
+                                "accessibility": {
+                                  "label": "Attachment preview capability status"
+                                },
+                                "binding": "attachmentGalleryCapability",
+                                "type": "metadata",
+                                "valuePath": "status"
+                              },
+                              {
+                                "accessibility": {
+                                  "label": "Authorized attachment preview"
+                                },
+                                "binding": "attachments",
+                                "type": "media",
+                                "valuePath": "assetId"
+                              },
+                              {
+                                "accessibility": {
+                                  "role": "status"
+                                },
+                                "text": "PDF and audio previews require generic authorized asset renderers",
+                                "type": "errorState"
+                              }
+                            ],
+                            "layout": {
+                              "direction": "vertical",
+                              "gap": "compact"
+                            },
+                            "type": "stack"
+                          }
+                        ],
+                        "layout": {
+                          "direction": "vertical",
+                          "gap": "compact"
+                        },
+                        "type": "stack"
+                      }
+                    ],
+                    "type": "recordRow"
+                  }
+                ],
+                "type": "recordList"
+              }
+            ],
+            "layout": {
+              "direction": "vertical",
+              "gap": "regular"
+            },
+            "type": "stack"
+          }
+        ],
+        "type": "section"
+      },
+      "states": {
+        "empty": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "No attachments yet",
+          "type": "emptyState"
+        },
+        "error": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "Attachments are unavailable",
+          "type": "errorState"
+        },
+        "loading": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "Loading Vault Notes",
+          "type": "loadingState"
+        },
+        "offline": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "This collection is unavailable while offline on this host",
+          "type": "errorState"
+        },
+        "permissionDenied": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "You do not have permission to view this Vault content",
+          "type": "errorState"
+        }
+      },
+      "title": "Attachments"
+    },
+    {
+      "bindings": [
+        {
+          "id": "savedSearches",
+          "query": {
+            "limit": 100,
+            "searchParam": "q",
+            "sortParam": "sort"
+          },
+          "recordType": "saved-search",
+          "source": "record.query"
+        }
+      ],
+      "id": "savedSearches",
+      "kind": "collection",
+      "root": {
+        "children": [
+          {
+            "children": [
+              {
+                "binding": "savedSearches",
+                "text": "Search saved searches",
+                "type": "search"
+              },
+              {
+                "accessibility": {
+                  "label": "Saved searches",
+                  "role": "list"
+                },
+                "binding": "savedSearches",
+                "children": [
+                  {
+                    "accessibility": {
+                      "label": "Saved search",
+                      "role": "listitem"
+                    },
+                    "binding": "savedSearches",
+                    "children": [
+                      {
+                        "binding": "savedSearches",
+                        "type": "text",
+                        "valuePath": "name"
+                      },
+                      {
+                        "binding": "savedSearches",
+                        "type": "text",
+                        "valuePath": "query"
+                      }
+                    ],
+                    "type": "recordRow"
+                  }
+                ],
+                "type": "recordList"
+              }
+            ],
+            "layout": {
+              "direction": "vertical",
+              "gap": "regular"
+            },
+            "type": "stack"
+          }
+        ],
+        "type": "section"
+      },
+      "states": {
+        "empty": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "No saved searches yet",
+          "type": "emptyState"
+        },
+        "error": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "Saved searches are unavailable",
+          "type": "errorState"
+        },
+        "loading": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "Loading Vault Notes",
+          "type": "loadingState"
+        },
+        "offline": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "This collection is unavailable while offline on this host",
+          "type": "errorState"
+        },
+        "permissionDenied": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "You do not have permission to view this Vault content",
+          "type": "errorState"
+        }
+      },
+      "title": "Saved Searches"
+    },
+    {
+      "bindings": [
+        {
+          "id": "graphNotes",
+          "query": {
+            "filterParam": "filter",
+            "limit": 100,
+            "recordState": "active",
+            "sortParam": "sort"
+          },
+          "recordType": "note",
+          "source": "record.query"
+        },
+        {
+          "id": "graphLinks",
+          "query": {
+            "filterParam": "filter",
+            "limit": 100,
+            "recordState": "active",
+            "sortParam": "sort"
+          },
+          "recordType": "note-link",
+          "source": "record.query"
+        },
+        {
+          "capability": "ui.graph@1",
+          "id": "graphCapability",
+          "source": "capability"
+        }
+      ],
+      "id": "graph",
+      "kind": "dashboard",
+      "root": {
+        "children": [
+          {
+            "accessibility": {
+              "label": "Vault relationship graph"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "accessibility": {
+                      "label": "Graph renderer capability status"
+                    },
+                    "binding": "graphCapability",
+                    "type": "metadata",
+                    "valuePath": "status"
+                  },
+                  {
+                    "text": "Nodes are note IDs and titles; edges are stable note-reference records.",
+                    "type": "text"
+                  },
+                  {
+                    "accessibility": {
+                      "label": "Graph note count"
+                    },
+                    "binding": "graphNotes",
+                    "type": "metadata",
+                    "valuePath": "count"
+                  },
+                  {
+                    "accessibility": {
+                      "label": "Graph edge count"
+                    },
+                    "binding": "graphLinks",
+                    "type": "metadata",
+                    "valuePath": "count"
+                  },
+                  {
+                    "accessibility": {
+                      "role": "status"
+                    },
+                    "text": "Rendering requires a bounded, accessible generic ui.graph primitive with a list fallback.",
+                    "type": "errorState"
+                  }
+                ],
+                "layout": {
+                  "direction": "vertical",
+                  "gap": "regular"
+                },
+                "type": "stack"
+              }
+            ],
+            "type": "section"
+          }
+        ],
+        "type": "section"
+      },
+      "states": {
+        "capabilityUnavailable": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "BLOCKED-BY-MODULE-UI: this host has no generic graph renderer",
+          "type": "errorState"
+        },
+        "error": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "Graph data could not be loaded",
+          "type": "errorState"
+        },
+        "loading": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "Loading graph projection",
+          "type": "loadingState"
+        },
+        "offline": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "The complete graph is unavailable offline",
+          "type": "errorState"
+        },
+        "permissionDenied": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "You do not have permission to inspect this graph",
+          "type": "errorState"
+        }
+      },
+      "title": "Note Graph"
     },
     {
       "bindings": [
@@ -1440,137 +4591,249 @@
         },
         "children": [
           {
-            "binding": "preferences",
-            "field": {
-              "id": "defaultCollectionView",
-              "label": "Default view",
-              "options": [
-                {
-                  "label": "List",
-                  "value": "list"
-                },
-                {
-                  "label": "Compact list",
-                  "value": "compact-list"
-                },
-                {
-                  "label": "Grid",
-                  "value": "grid"
-                }
-              ],
-              "type": "singleSelect"
+            "children": [
+              {
+                "children": [
+                  {
+                    "binding": "preferences",
+                    "field": {
+                      "id": "showWordCount",
+                      "label": "Show word count",
+                      "type": "boolean"
+                    },
+                    "type": "field"
+                  },
+                  {
+                    "binding": "preferences",
+                    "field": {
+                      "id": "showCharacterCount",
+                      "label": "Show character count",
+                      "type": "boolean"
+                    },
+                    "type": "field"
+                  }
+                ],
+                "type": "section"
+              },
+              {
+                "children": [
+                  {
+                    "binding": "preferences",
+                    "field": {
+                      "id": "defaultCollectionView",
+                      "label": "Default view",
+                      "options": [
+                        {
+                          "label": "List",
+                          "value": "list"
+                        },
+                        {
+                          "label": "Compact list",
+                          "value": "compact-list"
+                        },
+                        {
+                          "label": "Grid",
+                          "value": "grid"
+                        }
+                      ],
+                      "type": "singleSelect"
+                    },
+                    "type": "field"
+                  },
+                  {
+                    "binding": "preferences",
+                    "field": {
+                      "id": "defaultSort",
+                      "label": "Default sort",
+                      "options": [
+                        {
+                          "label": "Recently updated",
+                          "value": "updatedAt"
+                        },
+                        {
+                          "label": "Recently created",
+                          "value": "createdAt"
+                        },
+                        {
+                          "label": "Title",
+                          "value": "title"
+                        }
+                      ],
+                      "type": "singleSelect"
+                    },
+                    "type": "field"
+                  },
+                  {
+                    "binding": "preferences",
+                    "field": {
+                      "id": "defaultFolderId",
+                      "label": "Default folder",
+                      "recordType": "folder",
+                      "type": "recordReference"
+                    },
+                    "type": "field"
+                  },
+                  {
+                    "binding": "preferences",
+                    "field": {
+                      "id": "newNoteTemplateId",
+                      "label": "New-note template",
+                      "recordType": "template",
+                      "type": "recordReference"
+                    },
+                    "type": "field"
+                  }
+                ],
+                "type": "section"
+              },
+              {
+                "children": [
+                  {
+                    "binding": "preferences",
+                    "field": {
+                      "id": "dailyNoteEnabled",
+                      "label": "Enable daily notes",
+                      "type": "boolean"
+                    },
+                    "type": "field"
+                  }
+                ],
+                "type": "section"
+              },
+              {
+                "children": [
+                  {
+                    "binding": "preferences",
+                    "field": {
+                      "id": "showBacklinks",
+                      "label": "Show backlinks",
+                      "type": "boolean"
+                    },
+                    "type": "field"
+                  },
+                  {
+                    "binding": "preferences",
+                    "field": {
+                      "id": "searchSensitiveNotes",
+                      "label": "Search sensitive notes",
+                      "type": "boolean"
+                    },
+                    "type": "field"
+                  }
+                ],
+                "type": "section"
+              },
+              {
+                "children": [
+                  {
+                    "binding": "preferences",
+                    "field": {
+                      "id": "intelligencePreference",
+                      "label": "Local intelligence",
+                      "options": [
+                        {
+                          "label": "Disabled",
+                          "value": "disabled"
+                        },
+                        {
+                          "label": "Local only",
+                          "value": "localOnly"
+                        },
+                        {
+                          "label": "Prefer local",
+                          "value": "preferLocal"
+                        }
+                      ],
+                      "type": "singleSelect"
+                    },
+                    "type": "field"
+                  }
+                ],
+                "type": "section"
+              },
+              {
+                "children": [
+                  {
+                    "binding": "preferences",
+                    "field": {
+                      "id": "confirmPermanentDeletion",
+                      "label": "Confirm permanent deletion",
+                      "type": "boolean"
+                    },
+                    "type": "field"
+                  }
+                ],
+                "type": "section"
+              },
+              {
+                "children": [
+                  {
+                    "binding": "preferences",
+                    "field": {
+                      "id": "defaultExportFormat",
+                      "label": "Default export format",
+                      "options": [
+                        {
+                          "label": "Vault backup",
+                          "value": "json"
+                        },
+                        {
+                          "label": "Markdown",
+                          "value": "markdown"
+                        },
+                        {
+                          "label": "Plain text",
+                          "value": "plain-text"
+                        },
+                        {
+                          "label": "ZIP archive",
+                          "value": "zip"
+                        }
+                      ],
+                      "type": "singleSelect"
+                    },
+                    "type": "field"
+                  }
+                ],
+                "type": "section"
+              },
+              {
+                "action": "saveSettings",
+                "text": "Save settings",
+                "type": "button"
+              }
+            ],
+            "layout": {
+              "direction": "vertical",
+              "gap": "regular"
             },
-            "type": "field"
-          },
-          {
-            "binding": "preferences",
-            "field": {
-              "id": "defaultSort",
-              "label": "Default sort",
-              "options": [
-                {
-                  "label": "Recently updated",
-                  "value": "updatedAt"
-                },
-                {
-                  "label": "Recently created",
-                  "value": "createdAt"
-                },
-                {
-                  "label": "Title",
-                  "value": "title"
-                }
-              ],
-              "type": "singleSelect"
-            },
-            "type": "field"
-          },
-          {
-            "binding": "preferences",
-            "field": {
-              "id": "defaultFolderId",
-              "label": "Default folder",
-              "recordType": "folder",
-              "type": "recordReference"
-            },
-            "type": "field"
-          },
-          {
-            "binding": "preferences",
-            "field": {
-              "id": "newNoteTemplateId",
-              "label": "New-note template",
-              "recordType": "template",
-              "type": "recordReference"
-            },
-            "type": "field"
-          },
-          {
-            "binding": "preferences",
-            "field": {
-              "id": "dailyNoteEnabled",
-              "label": "Enable daily notes",
-              "type": "boolean"
-            },
-            "type": "field"
-          },
-          {
-            "binding": "preferences",
-            "field": {
-              "id": "showBacklinks",
-              "label": "Show backlinks",
-              "type": "boolean"
-            },
-            "type": "field"
-          },
-          {
-            "binding": "preferences",
-            "field": {
-              "id": "searchSensitiveNotes",
-              "label": "Search sensitive notes",
-              "type": "boolean"
-            },
-            "type": "field"
-          },
-          {
-            "binding": "preferences",
-            "field": {
-              "id": "intelligencePreference",
-              "label": "Local intelligence",
-              "options": [
-                {
-                  "label": "Disabled",
-                  "value": "disabled"
-                },
-                {
-                  "label": "Local only",
-                  "value": "localOnly"
-                },
-                {
-                  "label": "Prefer local",
-                  "value": "preferLocal"
-                }
-              ],
-              "type": "singleSelect"
-            },
-            "type": "field"
-          },
-          {
-            "binding": "preferences",
-            "field": {
-              "id": "confirmPermanentDeletion",
-              "label": "Confirm permanent deletion",
-              "type": "boolean"
-            },
-            "type": "field"
-          },
-          {
-            "action": "saveSettings",
-            "text": "Save settings",
-            "type": "button"
+            "type": "stack"
           }
         ],
         "type": "section"
+      },
+      "states": {
+        "error": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "Vault settings could not be loaded",
+          "type": "errorState"
+        },
+        "loading": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "Loading Vault settings",
+          "type": "loadingState"
+        },
+        "permissionDenied": {
+          "accessibility": {
+            "role": "status"
+          },
+          "text": "You do not have permission to change Vault settings",
+          "type": "errorState"
+        }
       },
       "title": "Vault Notes settings"
     }
