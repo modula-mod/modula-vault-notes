@@ -435,81 +435,6 @@
           "fields": [
             "templateId"
           ]
-        },
-        {
-          "fields": [
-            "dailyDate"
-          ]
-        },
-        {
-          "fields": [
-            "sensitive"
-          ]
-        },
-        {
-          "fields": [
-            "templateId"
-          ]
-        },
-        {
-          "fields": [
-            "dailyDate"
-          ]
-        },
-        {
-          "fields": [
-            "sensitive"
-          ]
-        },
-        {
-          "fields": [
-            "templateId"
-          ]
-        },
-        {
-          "fields": [
-            "dailyDate"
-          ]
-        },
-        {
-          "fields": [
-            "sensitive"
-          ]
-        },
-        {
-          "fields": [
-            "templateId"
-          ]
-        },
-        {
-          "fields": [
-            "dailyDate"
-          ]
-        },
-        {
-          "fields": [
-            "sensitive"
-          ]
-        },
-        {
-          "fields": [
-            "templateId"
-          ]
-        },
-        {
-          "fields": [
-            "dailyDate"
-          ]
-        },
-        {
-          "fields": [
-            "sensitive"
-          ]
-        },
-        {
-          "fields": [
-            "templateId"
-          ]
         }
       ],
       "uniqueness": {
@@ -4407,7 +4332,7 @@
   },
   "release": {
     "repository": "modula-mod/modula-vault-notes",
-    "commitSha": "d26c28d8ff412b7399e1771ed5a73194063d323c",
+    "commitSha": "bc0f3415610ea9683211dc4a28e33bc5b548428b",
     "checksum": "0000000000000000000000000000000000000000000000000000000000000000",
     "licenseEvidence": [
       "LICENSE",

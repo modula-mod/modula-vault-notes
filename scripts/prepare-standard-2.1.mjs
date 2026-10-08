@@ -160,7 +160,9 @@ function upsertStandardRecords(records) {
   const note = records.find(item => item.id === `${productId}.record.note`)
   if (note) {
     note.schema.properties = {...note.schema.properties, ...readJson('schemas/note.schema.json').properties}
-    note.indexes = [...note.indexes, {fields: ['dailyDate']}, {fields: ['sensitive']}, {fields: ['templateId']}]
+    const uniqueIndexes = new Map(note.indexes.map(index => [JSON.stringify(index.fields), index]))
+    for (const fields of [['dailyDate'], ['sensitive'], ['templateId']]) uniqueIndexes.set(JSON.stringify(fields), {fields})
+    note.indexes = Array.from(uniqueIndexes.values())
     note.searchPolicy.indexedFields = Array.from(new Set([...note.searchPolicy.indexedFields, 'canonicalBody', 'dailyDate', 'templateId']))
     note.searchPolicy.sensitiveFields = Array.from(new Set([...note.searchPolicy.sensitiveFields, 'canonicalBody', 'properties']))
   }
