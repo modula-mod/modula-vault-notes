@@ -16,6 +16,7 @@
     "PRIVACY.md",
     "schemas",
     "docs",
+    "!docs/evidence/**",
     "frontend/frontend.manifest.json",
     "src/views",
     "README.md",

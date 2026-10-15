@@ -153,7 +153,18 @@ for (const action of ['get', 'search', 'list-recent', 'create-daily', 'add-tag',
   )
 }
 
-check(standard.offline?.capable === false && standard.synchronization?.items?.length === 0, 'candidate does not claim unsupported offline sync')
+const recordSync = standard.synchronization?.items?.find(item => item.id === `${product.identity.id}.sync.records`)
+check(
+  standard.offline?.capable === true
+    && standard.offline?.syncStrategy === 'background'
+    && standard.offline?.conflictStrategy === 'manual-review'
+    && standard.offline?.encryption === true
+    && recordSync?.protocol === 'greenfield.v1'
+    && recordSync?.cursor === 'signed-opaque-v1'
+    && recordSync?.conflictStrategy === 'expected-revision'
+    && ['deleted', 'visibility-lost', 'purged'].every(value => recordSync?.tombstones?.includes(value)),
+  'candidate declares the frozen generic sync and offline-host contract',
+)
 check(standard.widgetRegistry?.items?.length === 0, 'candidate does not claim unsupported host widgets')
 
 for (const permission of ['module.records.read', 'module.records.write', 'module.records.delete', 'module.settings.read', 'module.settings.write', 'module.search.publish', 'module.events.emit', 'module.export.create']) {

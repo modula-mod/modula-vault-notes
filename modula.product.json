@@ -24,7 +24,7 @@
   },
   "source": {
     "repository": "modula-mod/modula-vault-notes",
-    "commit": "bc0f3415610ea9683211dc4a28e33bc5b548428b",
+    "commit": "ba88b7e3249a1daf5588800d77742c0876f77427",
     "manifestPath": "modula.product.json",
     "provider": "github"
   },
@@ -40,7 +40,7 @@
     "notes": "Vault Notes 2.0 RC.2 binds the flagship product to frozen GreenField v1 contracts: reviewed settings access, mutation IDs and revision conflicts, signed-cursor sync and tombstones, generic search projections, record relationships and history, record-media binding, record sharing, governed functions/actions, and fail-closed intelligence policy. Native-only renderers continue to degrade explicitly when unavailable.",
     "builder": "modula-product-release",
     "provenance": {
-      "manifestSha256": "6f762147b4f8b9543dfe0194e60d3828aee91cbab6a0d9ba3723741b3ef7bcf9",
+      "manifestSha256": "9a0a766277c86d1e59943a9e63c7956969bdc09f103ea2415f457563ea1e99c2",
       "frontendSha256": "fbf5951ac54c701ee38cb570c90738d193783334d2efb670f83db2123fd98a0e"
     }
   },
