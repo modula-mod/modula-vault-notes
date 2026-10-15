@@ -3,7 +3,7 @@
   "moduleId": "digital.modula.vault-notes",
   "name": "Vault Notes",
   "description": "Offline-capable Vault Notes core with governed extension points and no embedded optional add-ons.",
-  "version": "2.0.0-rc.1",
+  "version": "2.0.0-rc.2",
   "publisher": {
     "publisherId": "modula",
     "displayName": "Modula",
@@ -14,8 +14,8 @@
     "repository": "modula-mod/modula-vault-notes",
     "commit": "bc0f3415610ea9683211dc4a28e33bc5b548428b",
     "manifestPath": "module.manifest.json",
-    "releaseTag": "vault-notes-v2.0.0-rc.1",
-    "releaseAssetName": "modula-vault-notes-2.0.0-rc.1.tgz"
+    "releaseTag": "vault-notes-v2.0.0-rc.2",
+    "releaseAssetName": "modula-vault-notes-2.0.0-rc.2.tgz"
   },
   "license": {
     "status": "firstParty",
@@ -188,6 +188,36 @@
       "permission": "records:module.digital.modula.vault-notes.saved-search:delete",
       "reason": "Delete account-scoped saved-search records.",
       "risk": "high"
+    },
+    {
+      "permission": "settings:read",
+      "reason": "Read the reviewed Vault Notes settings for this installation.",
+      "risk": "low"
+    },
+    {
+      "permission": "settings:write",
+      "reason": "Update the reviewed Vault Notes settings for this installation.",
+      "risk": "medium"
+    },
+    {
+      "permission": "media:module.digital.modula.vault-notes.note:read",
+      "reason": "Read attachment bindings for notes the account can access.",
+      "risk": "low"
+    },
+    {
+      "permission": "media:module.digital.modula.vault-notes.note:write",
+      "reason": "Bind, unbind, and reorder authorized note attachments.",
+      "risk": "medium"
+    },
+    {
+      "permission": "sharing:module.digital.modula.vault-notes.note:read",
+      "reason": "Read record-level sharing state for accessible notes.",
+      "risk": "low"
+    },
+    {
+      "permission": "sharing:module.digital.modula.vault-notes.note:write",
+      "reason": "Create, edit, expire, and revoke record-level note shares.",
+      "risk": "medium"
     }
   ],
   "contributions": {
@@ -458,7 +488,7 @@
     "executionMode": "declarative"
   },
   "integrity": {
-    "manifestSha256": "6a9b4bd6135cb2327280f3aedf1b23df513d8398f257501eeaaf23a4e5d41657"
+    "manifestSha256": "1c904fa818e2713cbc4b99b4b13af2e88dda9f4ff0af4028ee3b727bf3bee1b7"
   },
   "extensions": {
     "marketplace": {
@@ -475,7 +505,7 @@
       },
       "syncSupport": {
         "state": "declared",
-        "value": false
+        "value": true
       },
       "inAppPurchases": {
         "state": "declared",
@@ -508,8 +538,8 @@
         ],
         "source": {
           "provider": "github-release",
-          "tag": "vault-notes-v2.0.0-rc.1",
-          "asset": "modula-vault-notes-2.0.0-rc.1.tgz"
+          "tag": "vault-notes-v2.0.0-rc.2",
+          "asset": "modula-vault-notes-2.0.0-rc.2.tgz"
         }
       }
     },
@@ -591,7 +621,7 @@
     "marketplace": "2.1.0"
   },
   "extensionProduct": {
-    "version": "2.0.0-rc.1",
+    "version": "2.0.0-rc.2",
     "kind": "module",
     "targets": [],
     "extensionPoints": [

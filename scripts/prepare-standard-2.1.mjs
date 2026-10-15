@@ -59,15 +59,15 @@ for (const view of [
 for (const capability of [
   {id: 'imports', required: false, reason: 'Import portable Markdown, plain text, and Vault backups.', degradedBehavior: 'Import remains available only through module helpers.'},
   {id: 'history', required: false, reason: 'List and restore immutable note checkpoints.', degradedBehavior: 'Writes remain revision-safe but history cannot be browsed through the host.'},
-  {id: 'offline', required: false, reason: 'Declare offline intent without claiming a sync runtime.', degradedBehavior: 'The module remains online-only.'},
-  {id: 'sync', required: false, reason: 'Adopt a future generic cursor and tombstone contract.', degradedBehavior: 'No background synchronization is advertised.'},
+  {id: 'offline', required: false, reason: 'Queue mutations locally and replay them through GreenField mutation IDs and revision checks.', degradedBehavior: 'The module remains online-only when the host has no offline store.'},
+  {id: 'sync', required: false, reason: 'Use GreenField signed cursors, ordered changes, tombstones, and visibility-loss events.', degradedBehavior: 'Foreground record reads remain available when background sync is unavailable.'},
   {id: 'widgets', required: false, reason: 'Expose quick capture and note collections after a generic widget registry exists.', degradedBehavior: 'Vault Notes remains route-only.'},
 ]) if (!standard.capabilities.some(item => item.id === capability.id)) standard.capabilities.push(capability)
 standard.exports = {version: '2.1.0', items: [{id: `${productId}.export.portable`, title: 'Portable Vault export', formats: ['json', 'markdown', 'plain-text', 'zip']}]}
 standard.imports = {version: '2.1.0', items: [{id: `${productId}.import.markdown`, title: 'Markdown import'}, {id: `${productId}.import.plain-text`, title: 'Plain-text import'}, {id: `${productId}.import.vault-backup`, title: 'Vault backup import'}]}
-standard.synchronization = {version: '2.1.0', items: [], metadata: {status: 'blocked-by-platform', requires: ['record.changeFeed', 'record.clientMutationId', 'record.tombstones']}}
+standard.synchronization = {version: '2.1.0', items: [{id: `${productId}.sync.records`, title: 'Vault record sync', protocol: 'greenfield.v1', cursor: 'signed-opaque-v1', conflictStrategy: 'expected-revision', tombstones: ['deleted', 'visibility-lost', 'purged']}]}
 standard.widgetRegistry = {version: '2.1.0', items: [], metadata: {status: 'blocked-by-platform'}}
-standard.offline = {version: '2.1.0', capable: false, syncStrategy: 'none'}
+standard.offline = {version: '2.1.0', capable: true, syncStrategy: 'background', conflictStrategy: 'manual-review', encryption: true}
 standard.versioning = {version: '2.1.0', moduleVersion: standard.moduleVersion, standardVersion: '2.1.0', schemaVersion: '1.0.0', manifestVersion: '2.1.0', runtimeVersion: '1.0.0'}
 // Module Standard 2.1 has no dedicated RC channel; prerelease candidates use beta.
 standard.release.channel = 'beta'
@@ -114,7 +114,7 @@ if (requestedVersion) {
   if (greenfield.extensions?.marketplace) {
     greenfield.extensions.marketplace.availableViewIds = Array.from(new Set([...(greenfield.extensions.marketplace.availableViewIds ?? []), `${productId}.view.pinned`, `${productId}.view.recent`]))
     greenfield.extensions.marketplace.offlineSupport = {state: 'declared', value: false}
-    greenfield.extensions.marketplace.syncSupport = {state: 'declared', value: false}
+    greenfield.extensions.marketplace.syncSupport = {state: 'declared', value: true}
   }
 }
 if (greenfield.extensions) greenfield.extensions.settingsDefaults = vaultSettingsDefaults()
@@ -291,6 +291,16 @@ function upsertGreenfieldFunctions(functions) {
 }
 
 function upsertGreenfieldPermissions(permissions) {
+  for (const [permission, risk, reason] of [
+    ['settings:read', 'low', 'Read the reviewed Vault Notes settings for this installation.'],
+    ['settings:write', 'medium', 'Update the reviewed Vault Notes settings for this installation.'],
+    [`media:module.${productId}.note:read`, 'low', 'Read attachment bindings for notes the account can access.'],
+    [`media:module.${productId}.note:write`, 'medium', 'Bind, unbind, and reorder authorized note attachments.'],
+    [`sharing:module.${productId}.note:read`, 'low', 'Read record-level sharing state for accessible notes.'],
+    [`sharing:module.${productId}.note:write`, 'medium', 'Create, edit, expire, and revoke record-level note shares.'],
+  ]) {
+    if (!permissions.some(item => item.permission === permission)) permissions.push({permission, reason, risk})
+  }
   const collections = ['attachment', 'template', 'saved-search']
   for (const collection of collections) {
     for (const [operation, risk, reason] of [

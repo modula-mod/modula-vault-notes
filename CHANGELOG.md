@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.0.0-rc.2 — private preview candidate, not published
+
+- Reconciles Vault Notes with frozen GreenField v1 contracts for settings, sync, history, reverse references, search, media bindings, record sharing, governed functions/actions, and intelligence policy.
+- Adds explicit `settings:read` and `settings:write` requests; upgrading from 1.8 requires a real permission review.
+- Requests record-scoped media and sharing permissions without treating asset IDs or share IDs as authority.
+- Declares signed-cursor background sync, mutation-ID replay, expected-revision conflicts, and bounded tombstone semantics.
+- Keeps final `2.0.0` unsigned, unregistered, and unpublished while the RC is visually and functionally reviewed.
+
 ## 2.0.0-rc.1 — candidate, not published
 
 - Replaces the single frontend source file with a product-owned multi-surface architecture: 22 routes, 22 screens, reusable Vault components, feature domains, hooks, capability-aware states, and artifact-level frontend tests.

@@ -5,7 +5,7 @@
   "identity": {
     "id": "digital.modula.vault-notes",
     "kind": "module",
-    "version": "2.0.0-rc.1",
+    "version": "2.0.0-rc.2",
     "displayName": "Vault Notes",
     "slug": "vault-notes",
     "subtitle": "Your private knowledge space.",
@@ -37,11 +37,11 @@
   },
   "release": {
     "channel": "rc",
-    "notes": "Vault Notes 2.0 RC adds a product-owned 22-route multi-surface frontend, portable document semantics, templates and daily notes, typed properties, stable links and graph data, attachment metadata associations, revision restore, richer search, saved searches, versioned import/export, and sensitive-note local-only policy. Runtime-dependent sync, sharing, media binding, widgets, rich host primitives, and local intelligence execution remain gated until generic platform contracts exist.",
+    "notes": "Vault Notes 2.0 RC.2 binds the flagship product to frozen GreenField v1 contracts: reviewed settings access, mutation IDs and revision conflicts, signed-cursor sync and tombstones, generic search projections, record relationships and history, record-media binding, record sharing, governed functions/actions, and fail-closed intelligence policy. Native-only renderers continue to degrade explicitly when unavailable.",
     "builder": "modula-product-release",
     "provenance": {
-      "manifestSha256": "1e0bd7ae1f9c799e28a2c078f6ebae909684bfd9f9dc6948ccc69e6e25618fe1",
-      "frontendSha256": "3dccc3d45304a7662f9267b2e591185ace73641b2b904365bca18e0f2419083f"
+      "manifestSha256": "6f762147b4f8b9543dfe0194e60d3828aee91cbab6a0d9ba3723741b3ef7bcf9",
+      "frontendSha256": "fbf5951ac54c701ee38cb570c90738d193783334d2efb670f83db2123fd98a0e"
     }
   },
   "security": {
@@ -124,7 +124,7 @@
     "artifact": {
       "path": "frontend/frontend.manifest.json",
       "mediaType": "application/vnd.modula.frontend+json",
-      "sha256": "3dccc3d45304a7662f9267b2e591185ace73641b2b904365bca18e0f2419083f",
+      "sha256": "fbf5951ac54c701ee38cb570c90738d193783334d2efb670f83db2123fd98a0e",
       "schemaVersion": "1.0.0",
       "entryView": "home"
     }

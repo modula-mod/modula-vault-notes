@@ -1,6 +1,6 @@
 # Vault Notes
 
-Vault Notes is a portable notes core and a governed extension host. It works without optional products. Its records are designed for a future offline queue, but the 2.0 RC does not advertise offline operation until GreenField provides a generic cursor, tombstone, and client-mutation contract. AI, voice, formatting, automation, connectors, functions, tools, and widgets attach through declared Modula Module Standard 2.1 extension points and capability grants; they do not import Vault Notes internals or access its database directly.
+Vault Notes is a portable notes core and a governed extension host. It works without optional products. The 2.0 RC uses GreenField's generic mutation IDs, expected revisions, signed sync cursor, ordered changes, and tombstones; a Native host may add an encrypted local queue without changing the server contract. AI, voice, formatting, automation, connectors, functions, tools, and widgets attach through declared Modula Module Standard 2.1 extension points and capability grants; they do not import Vault Notes internals or access its database directly.
 
 Canonical source repository for `digital.modula.vault-notes`.
 
@@ -20,12 +20,12 @@ generic record persistence and declarative module host rendering.
 - module ID: `digital.modula.vault-notes`
 - publisher: Modula
 - slug: `vault-notes`
-- module version: `2.0.0-rc.1`
+- module version: `2.0.0-rc.2`
 - product standard: MPS 1.0 (`modula.product.json` is canonical)
 - standard version: `2.1.0`
 - manifest schema version: `2.1.0`
 - data schema version: `1.0.0`
-- candidate release identity: `vault-notes-v2.0.0-rc.1` (not published)
+- candidate release identity: `vault-notes-v2.0.0-rc.2` (not published)
 - product-owned frontend source: typed TSX compiled to a validated artifact (immutable release lines; earlier tags are never mutated)
 
 Legacy module ID `modula.vault-notes` is a migration alias only. It must not
@@ -37,7 +37,7 @@ Legacy source `modula-mod/modula-module-vault-notes` is archive/redirect only.
 
 Vault Notes 2.0 RC preserves the 1.8 document and data-schema contract while adding templates, daily notes, typed properties, stable references and backlinks, deterministic related notes, graph data, attachment metadata, revision restore, saved searches, richer filters, portable import/export, sensitive-note policy, and generic local-intelligence requests. The product frontend adds pinned and recent collections plus the candidate settings surface. Optional AI is supplied by separate governed capabilities; core Vault does not execute a provider or send note content remotely.
 
-GreenField sync, share links, media upload binding, generic widgets, revision APIs, and local-intelligence execution are explicitly not claimed by this candidate. They require reusable platform contracts, not Vault-specific host branches.
+GreenField sync, record sharing, media binding, reverse references, immutable history/restore, generic search, settings, functions, and inter-module action limits are platform contracts consumed by this candidate. Generic widgets and device-local intelligence execution remain host capabilities; when absent they fail closed without a Vault-specific backend branch.
 
 ## Verification
 

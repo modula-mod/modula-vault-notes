@@ -1,6 +1,6 @@
 {
   "name": "@modula/vault-notes",
-  "version": "2.0.0-rc.1",
+  "version": "2.0.0-rc.2",
   "description": "Portable, relationship-aware Vault Notes flagship candidate for the generic Modula module platform.",
   "type": "module",
   "main": "./dist/index.js",
@@ -33,6 +33,8 @@
     "test:frontend:performance": "node scripts/benchmark-frontend.mjs",
     "test:scale": "pnpm build && node scripts/benchmark-vault-notes.mjs",
     "fixtures:vault": "pnpm build && node scripts/vault-fixture-generator.mjs",
+    "preview": "node scripts/serve-preview.mjs",
+    "preview:verify": "node scripts/verify-preview.mjs",
     "verify": "pnpm build && pnpm test && node scripts/verify-release.mjs",
     "release:package": "node scripts/package-release.mjs"
   },

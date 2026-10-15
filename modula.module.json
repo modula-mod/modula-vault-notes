@@ -1,7 +1,7 @@
 {
   "schemaVersion": "2.1.0",
   "standardVersion": "2.1.0",
-  "moduleVersion": "2.0.0-rc.1",
+  "moduleVersion": "2.0.0-rc.2",
   "manifestSchemaVersion": "2.1.0",
   "dataSchemaVersion": "1.0.0",
   "id": "digital.modula.vault-notes",
@@ -4418,7 +4418,7 @@
     "marketplace": "2.1.0"
   },
   "extensionProduct": {
-    "version": "2.0.0-rc.1",
+    "version": "2.0.0-rc.2",
     "kind": "module",
     "targets": [],
     "extensionPoints": [
@@ -4574,15 +4574,20 @@
   },
   "synchronization": {
     "version": "2.1.0",
-    "items": [],
-    "metadata": {
-      "status": "blocked-by-platform",
-      "requires": [
-        "record.changeFeed",
-        "record.clientMutationId",
-        "record.tombstones"
-      ]
-    }
+    "items": [
+      {
+        "id": "digital.modula.vault-notes.sync.records",
+        "title": "Vault record sync",
+        "protocol": "greenfield.v1",
+        "cursor": "signed-opaque-v1",
+        "conflictStrategy": "expected-revision",
+        "tombstones": [
+          "deleted",
+          "visibility-lost",
+          "purged"
+        ]
+      }
+    ]
   },
   "widgetRegistry": {
     "version": "2.1.0",
@@ -4593,12 +4598,14 @@
   },
   "offline": {
     "version": "2.1.0",
-    "capable": false,
-    "syncStrategy": "none"
+    "capable": true,
+    "syncStrategy": "background",
+    "conflictStrategy": "manual-review",
+    "encryption": true
   },
   "versioning": {
     "version": "2.1.0",
-    "moduleVersion": "2.0.0-rc.1",
+    "moduleVersion": "2.0.0-rc.2",
     "standardVersion": "2.1.0",
     "schemaVersion": "1.0.0",
     "manifestVersion": "2.1.0",
