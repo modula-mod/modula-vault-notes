@@ -19,7 +19,6 @@ import {
 import {PAGINATION_REQUIREMENT} from "../features/notes/queries";
 import {SearchBar} from "../features/search/SearchBar";
 import {SearchFilters} from "../features/search/SearchFilters";
-import {StructuredViewStatus} from "../features/projections/StructuredViewStatus";
 import {useActiveNotes} from "../hooks/useNotes";
 
 function NotesScreen() {
@@ -44,7 +43,6 @@ function NotesScreen() {
         <Button label="Graph" action={openGraphAction} />
       </Row>
       <NotesCollection notes={notes} openNote={openNoteAction} label="All Vault Notes" />
-      <StructuredViewStatus />
     </ModuleScreen>
   );
 }

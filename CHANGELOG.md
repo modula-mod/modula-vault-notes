@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.0.1
+
+- Home is a notes list: search, new note, and the collection shortcuts. The table and board contract notes are no longer on the home screen.
+- The editor opens on title, body, organization, attachments, and privacy. Typed-property diagnostics stay out of the writing surface.
+- Adds delete permissions for tags, note links, note versions, and saved sources.
+- Requests `notifications:create`, temporary file read and write, `jobs:create`, and `widgets:register` for reminders, import and export, background work, and a home-screen widget.
+
 ## 2.0.0 — private preview candidate, not published
 
 - Reconciles Vault Notes with frozen GreenField v1 contracts for settings, sync, history, reverse references, search, media bindings, record sharing, governed functions/actions, and intelligence policy.

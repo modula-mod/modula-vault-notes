@@ -5,7 +5,7 @@
   "identity": {
     "id": "digital.modula.vault-notes",
     "kind": "module",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "displayName": "Vault Notes",
     "slug": "vault-notes",
     "subtitle": "Your private knowledge space.",
@@ -37,7 +37,7 @@
   },
   "release": {
     "channel": "stable",
-    "notes": "Vault Notes 2.0.0. The phone installs this release from the VPS and caches the hosted frontend.",
+    "notes": "Vault Notes 2.0.1. A quieter notes home and editor, delete permissions for tags, links, versions, and saved sources, plus reminders, import and export files, background jobs, and a home-screen widget registration.",
     "builder": "modula-product-release",
     "provenance": {
       "manifestSha256": "9a0a766277c86d1e59943a9e63c7956969bdc09f103ea2415f457563ea1e99c2",
