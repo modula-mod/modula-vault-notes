@@ -1,3 +1,4 @@
+export {extensionSurfaces} from "../features/library";
 import {attachmentsScreen} from "../screens/AttachmentsScreen";
 import {dailyNoteScreen} from "../screens/DailyNoteScreen";
 import {folderScreen} from "../screens/FolderScreen";

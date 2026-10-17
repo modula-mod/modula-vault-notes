@@ -5,7 +5,7 @@
   "identity": {
     "id": "digital.modula.vault-notes",
     "kind": "module",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "displayName": "Vault Notes",
     "slug": "vault-notes",
     "subtitle": "Your private knowledge space.",
@@ -24,7 +24,7 @@
   },
   "source": {
     "repository": "modula-mod/modula-vault-notes",
-    "commit": "a5ec7f6d1efb40edeb6186d107793b172745982d",
+    "commit": "4543b28147a943741756724671194bf64d6aafa6",
     "manifestPath": "modula.product.json",
     "provider": "github"
   },
@@ -37,11 +37,13 @@
   },
   "release": {
     "channel": "stable",
-    "notes": "Vault Notes 2.0.1. A quieter notes home and editor, delete permissions for tags, links, versions, and saved sources, plus reminders, import and export files, background jobs, and a home-screen widget registration.",
+    "notes": "Vault Notes 2.0.2. Notes save into this account's module records. The home, note, and editor are the writing surfaces, and the product hub shows three screenshots.",
     "builder": "modula-product-release",
     "provenance": {
-      "manifestSha256": "dae6ecaba7cd8b1484ddb81da135841e67af9113ced84d0d2c7ee11efe8d8f3c",
-      "frontendSha256": "01ae86a63d3a63bcd064921c75c1b4540899d583118ae675607c7be3a118a0bc"
+      "manifestSha256": "6645916fcb6a6dbc150928d9ee449e89e47aaf6c684f9a7dc8fe5078e7902f0e",
+      "frontendSha256": "a4872caeb59818ea2fd820ff042a4fc47cc98e636fe71fb57fdf633290a5a25c",
+      "sourceCommit": "4543b28147a943741756724671194bf64d6aafa6",
+      "frontendCommit": "4543b28147a943741756724671194bf64d6aafa6"
     }
   },
   "security": {
@@ -70,7 +72,39 @@
       "sha256": "cef9bbe729e59145bb8622020265b1640832a22a4a69421cc6db12939e145191",
       "developmentAsset": true,
       "alt": "Vault Notes cover: two note sheets, one with a checklist, on a deep teal background"
-    }
+    },
+    "screenshots": [
+      {
+        "role": "product.screenshot",
+        "path": "assets/screenshots/notes-home.png",
+        "mediaType": "image/png",
+        "width": 780,
+        "height": 1688,
+        "sha256": "d420ea84c62525e20f63b8e8b15121a019a957e19cc425d83e5ddf2984977874",
+        "developmentAsset": true,
+        "alt": "Vault Notes home: search, new note, and a list of notes"
+      },
+      {
+        "role": "product.screenshot",
+        "path": "assets/screenshots/notes-open.png",
+        "mediaType": "image/png",
+        "width": 780,
+        "height": 1688,
+        "sha256": "9a158dab2b4b94fb817c44c606403edb705ce2e62820ffdc6b5116f404dc8bcf",
+        "developmentAsset": true,
+        "alt": "An open Vault Note with its title, text, and edit and trash actions"
+      },
+      {
+        "role": "product.screenshot",
+        "path": "assets/screenshots/notes-editor.png",
+        "mediaType": "image/png",
+        "width": 780,
+        "height": 1688,
+        "sha256": "a731d7c2008110e46f43baf3cf0de954f425c9d70ab8884d228b12257933360a",
+        "developmentAsset": true,
+        "alt": "The Vault Notes editor with a title, body, and save button"
+      }
+    ]
   },
   "compatibility": {
     "productStandard": "^1.0.0",
@@ -124,7 +158,7 @@
     "artifact": {
       "path": "frontend/frontend.manifest.json",
       "mediaType": "application/vnd.modula.frontend+json",
-      "sha256": "01ae86a63d3a63bcd064921c75c1b4540899d583118ae675607c7be3a118a0bc",
+      "sha256": "a4872caeb59818ea2fd820ff042a4fc47cc98e636fe71fb57fdf633290a5a25c",
       "schemaVersion": "1.0.0",
       "entryView": "home"
     }
