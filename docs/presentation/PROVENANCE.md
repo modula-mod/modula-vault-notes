@@ -32,6 +32,18 @@
   SHA-256 `632538b7…13ed9de`; see `greenfield-product-hub-cover-readme.md`, kept as
   history).
 
+## Screenshots (2.0.2)
+
+Declared in `modula.product.json` → `presentation.screenshots` for Product Hub:
+
+| File | Role | Dimensions | SHA-256 |
+| --- | --- | --- | --- |
+| `assets/screenshots/notes-home.png` | `product.screenshot` | 780×1688 | `f2b8…` (see product.json) |
+| `assets/screenshots/notes-open.png` | `product.screenshot` | 780×1688 | (see product.json) |
+| `assets/screenshots/notes-editor.png` | `product.screenshot` | 780×1688 | (see product.json) |
+
+Generated for the 2.0.2 Product Hub gallery. `developmentAsset: true` until founder visual sign-off.
+
 ## Generator
 
 `vault_notes_art.py` is kept here as committed, so it is a provenance record rather
@@ -40,4 +52,4 @@ but neither asset draws text. It writes `vault-notes-icon.png` and
 `vault-notes-cover.jpg` (quality 88) to the working directory.
 
 Do not run `mps verify --public` as a claim of final visual approval while these flags remain.
-Changing released artwork requires a new release (next: 1.8.0).
+Changing released artwork requires a new release.

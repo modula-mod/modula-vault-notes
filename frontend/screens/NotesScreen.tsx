@@ -4,17 +4,12 @@ import {errorState, loadingState} from "../components/ScreenStates";
 import {NotesCollection} from "../components/NotesCollection";
 import {
   newNoteAction,
-  openAttachmentsAction,
-  openDailyAction,
   openFavouritesAction,
   openFoldersAction,
-  openGraphAction,
   openNoteAction,
   openPinnedAction,
-  openRecentAction,
-  openSavedSearchesAction,
   openTagsAction,
-  openTemplatesAction,
+  openTrashAction,
 } from "../features/notes/actions";
 import {PAGINATION_REQUIREMENT} from "../features/notes/queries";
 import {SearchBar} from "../features/search/SearchBar";
@@ -32,15 +27,10 @@ function NotesScreen() {
       <SearchFilters results={notes} />
       <Row gap="compact" scroll="horizontal">
         <Button label="Pinned" action={openPinnedAction} />
-        <Button label="Recent" action={openRecentAction} />
         <Button label="Favourites" action={openFavouritesAction} />
         <Button label="Folders" action={openFoldersAction} />
         <Button label="Tags" action={openTagsAction} />
-        <Button label="Saved searches" action={openSavedSearchesAction} />
-        <Button label="Templates" action={openTemplatesAction} />
-        <Button label="Daily note" action={openDailyAction} />
-        <Button label="Attachments" action={openAttachmentsAction} />
-        <Button label="Graph" action={openGraphAction} />
+        <Button label="Trash" action={openTrashAction} />
       </Row>
       <NotesCollection notes={notes} openNote={openNoteAction} label="All Vault Notes" />
     </ModuleScreen>

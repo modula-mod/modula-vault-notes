@@ -1,7 +1,7 @@
 {
   "schemaVersion": "2.1.0",
   "standardVersion": "2.1.0",
-  "moduleVersion": "2.0.1",
+  "moduleVersion": "2.0.2",
   "manifestSchemaVersion": "2.1.0",
   "dataSchemaVersion": "1.0.0",
   "id": "digital.modula.vault-notes",
@@ -4418,7 +4418,7 @@
     "marketplace": "2.1.0"
   },
   "extensionProduct": {
-    "version": "2.0.1",
+    "version": "2.0.2",
     "kind": "module",
     "targets": [],
     "extensionPoints": [
@@ -4605,7 +4605,7 @@
   },
   "versioning": {
     "version": "2.1.0",
-    "moduleVersion": "2.0.1",
+    "moduleVersion": "2.0.2",
     "standardVersion": "2.1.0",
     "schemaVersion": "1.0.0",
     "manifestVersion": "2.1.0",
