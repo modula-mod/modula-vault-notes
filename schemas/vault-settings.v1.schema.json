@@ -11,6 +11,12 @@
     "showWordCount": {"type": "boolean"},
     "showCharacterCount": {"type": "boolean"},
     "includeArchivedNotesInSearch": {"type": "boolean"},
-    "defaultExportFormat": {"enum": ["json", "markdown", "plain-text", "zip"]}
+    "defaultExportFormat": {"enum": ["json", "markdown", "plain-text", "zip"]},
+    "defaultFolderId": {"type": "string", "maxLength": 120},
+    "newNoteTemplateId": {"type": "string", "maxLength": 120},
+    "dailyNoteEnabled": {"type": "boolean"},
+    "showBacklinks": {"type": "boolean"},
+    "searchSensitiveNotes": {"type": "boolean"},
+    "intelligencePreference": {"enum": ["disabled", "localOnly", "preferLocal"]}
   }
 }

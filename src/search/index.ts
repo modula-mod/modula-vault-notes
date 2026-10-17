@@ -1,4 +1,4 @@
-import type {VaultFolderRecord, VaultNoteRecord} from '../types.js'
+import type {VaultAttachmentRecord, VaultFolderRecord, VaultNoteRecord} from '../types.js'
 
 export type VaultNotesSearchDocument = {
   entityType: 'note' | 'vault-folder'
@@ -12,13 +12,22 @@ export type VaultNotesSearchDocument = {
   metadata: Record<string, unknown>
 }
 
-export function projectNoteForSearch(note: VaultNoteRecord, accountId: string, folder?: VaultFolderRecord): VaultNotesSearchDocument {
+export function projectNoteForSearch(
+  note: VaultNoteRecord,
+  accountId: string,
+  folder?: VaultFolderRecord,
+  attachments: VaultAttachmentRecord[] = [],
+  options: {includeSensitiveBody?: boolean} = {},
+): VaultNotesSearchDocument {
+  const attachmentNames = attachments.filter(attachment => attachment.noteId === note.id).map(attachment => attachment.name)
+  const propertyText = (note.properties?.values ?? []).flatMap(property => Array.isArray(property.value) ? property.value : [property.value]).filter(value => value !== null).join(' ')
+  const body = [note.plainTextProjection, propertyText, attachmentNames.join(' ')].filter(Boolean).join('\n')
   return {
     entityType: 'note',
     entityId: note.id,
     accountId,
     title: note.title,
-    body: note.deletedAt ? undefined : note.plainTextProjection,
+    body: note.deletedAt || (note.sensitive && !options.includeSensitiveBody) ? undefined : body,
     tags: note.tagIds,
     status: note.deletedAt ? 'deleted' : 'active',
     sourceVersion: note.revision,
@@ -33,6 +42,10 @@ export function projectNoteForSearch(note: VaultNoteRecord, accountId: string, f
       archived: note.archived,
       pinned: note.pinned,
       favourite: note.favourite,
+      sensitive: note.sensitive === true,
+      hasAttachment: attachmentNames.length > 0 || Boolean(note.attachmentIds?.length),
+      attachmentNames: note.sensitive && !options.includeSensitiveBody ? [] : attachmentNames,
+      contentFormat: note.contentFormat ?? 'blocks-v1',
     },
   }
 }

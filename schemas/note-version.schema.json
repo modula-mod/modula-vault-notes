@@ -11,6 +11,10 @@
     "revision": {"type": "integer", "minimum": 1},
     "title": {"type": "string", "minLength": 1, "maxLength": 240},
     "document": {"type": "object"},
+    "plainTextProjection": {"type": "string", "maxLength": 200000},
+    "properties": {"type": "object"},
+    "attachmentIds": {"type": "array", "items": {"type": "string", "maxLength": 180}, "maxItems": 500},
+    "sensitive": {"type": "boolean"},
     "createdAt": {"type": "string", "format": "date-time"},
     "createdBy": {"type": "string", "minLength": 1, "maxLength": 120},
     "changeSource": {"enum": ["manual", "restore", "import", "ai-assisted"]}
@@ -21,6 +25,10 @@
       {"fieldId": "revision", "name": "revision", "type": "text", "label": "Revision", "required": true},
       {"fieldId": "title", "name": "title", "type": "text", "label": "Title", "required": true},
       {"fieldId": "document", "name": "document", "type": "json", "label": "Document", "required": true},
+      {"fieldId": "plainTextProjection", "name": "plainTextProjection", "type": "multilineText", "label": "Plain text"},
+      {"fieldId": "properties", "name": "properties", "type": "json", "label": "Properties"},
+      {"fieldId": "attachmentIds", "name": "attachmentIds", "type": "multiSelect", "label": "Attachments"},
+      {"fieldId": "sensitive", "name": "sensitive", "type": "boolean", "label": "Sensitive"},
       {"fieldId": "changeSource", "name": "changeSource", "type": "singleSelect", "label": "Change source", "required": true, "options": [{"value": "manual", "label": "Manual"}, {"value": "restore", "label": "Restore"}, {"value": "import", "label": "Import"}, {"value": "ai-assisted", "label": "AI assisted"}]}
     ],
     "searchableFields": ["title"],

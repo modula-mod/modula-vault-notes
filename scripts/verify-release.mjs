@@ -68,16 +68,25 @@ if (frontendPath && existsSync(join(root, frontendPath))) {
   check(frontend.mpsVersion === product.productStandard, 'frontend MPS version matches product')
   check(frontend.productId === product.identity.id && frontend.releaseVersion === version, 'frontend release identity matches product')
   check(frontend.mode === 'declarative' && frontend.entry === 'home', 'frontend has a declarative home entry')
-  const requiredFrontendViews = ['home', 'detail', 'newEditor', 'editor', 'search', 'favourites', 'archived', 'trash', 'folders', 'settings']
+  const requiredFrontendViews = [
+    'home', 'detail', 'newEditor', 'editor', 'search', 'pinned', 'recent', 'favourites', 'archived', 'trash',
+    'folders', 'folder', 'tags', 'tag', 'templates', 'daily', 'history', 'revision', 'attachments',
+    'savedSearches', 'graph', 'settings',
+  ]
   for (const id of requiredFrontendViews) check(frontend.views.some(view => view.id === id), `product frontend view declared: ${id}`)
-  for (const path of ['/', '/new', '/note/:noteId', '/note/:noteId/edit', '/search', '/favourites', '/archived', '/trash', '/folders', '/settings']) {
+  for (const path of [
+    '/', '/new', '/note/:noteId', '/note/:noteId/edit', '/note/:noteId/history',
+    '/note/:noteId/history/:revisionId', '/search', '/pinned', '/recent', '/favourites', '/archived',
+    '/trash', '/folders', '/folder/:folderId', '/tags', '/tag/:tagId', '/templates', '/daily',
+    '/attachments', '/saved-searches', '/graph', '/settings',
+  ]) {
     check(frontend.routes.some(route => route.path === path), `product frontend route declared: ${path}`)
   }
   for (const id of ['newNote', 'openNote', 'editNote', 'createNote', 'updateNote', 'deleteNote', 'restoreNote', 'purgeNote', 'shareNote', 'saveSettings']) {
     check(frontend.actions.some(action => action.id === id), `product frontend action declared: ${id}`)
   }
   const editor = frontend.views.find(view => view.id === 'editor')
-  const editorFields = editor?.root?.children?.filter(component => component.type === 'field').map(component => component.field?.id) ?? []
+  const editorFields = collectFrontendFields(editor?.root)
   check(editorFields.includes('document') && editorFields.includes('tagIds') && !editorFields.includes('body') && !editorFields.includes('tags'), 'frontend editor writes the canonical Vault Notes record fields')
   const newEditor = frontend.views.find(view => view.id === 'newEditor')
   check(newEditor?.title === 'New Note' && JSON.stringify(newEditor.root).includes('createNote') && !JSON.stringify(newEditor.root).includes('updateNote'), 'new-note route has product-owned create semantics')
@@ -103,12 +112,12 @@ check(
   'Greenfield-owned record identity, revision, and timestamps are not required product input',
 )
 
-const requiredRecords = ['note', 'folder', 'tag', 'note-link', 'note-version', 'saved-source']
+const requiredRecords = ['note', 'folder', 'tag', 'note-link', 'note-version', 'saved-source', 'attachment', 'template', 'saved-search']
 for (const record of requiredRecords) {
   check(standard.records.some(item => item.id === `digital.modula.vault-notes.record.${record}`), `record ${record} declared`)
 }
 
-const requiredLegacyViews = ['home', 'collection', 'detail', 'editor', 'search', 'favourites', 'archived', 'trash', 'folders', 'settings', 'empty', 'error']
+const requiredLegacyViews = ['home', 'collection', 'detail', 'editor', 'search', 'favourites', 'archived', 'trash', 'folders', 'settings', 'empty', 'error', 'pinned', 'recent']
 for (const view of requiredLegacyViews) {
   check(standard.views.some(item => item.id === `digital.modula.vault-notes.view.${view}`), `compatibility view vault-notes.${view} declared`)
 }
@@ -117,7 +126,13 @@ const marketplace = greenfield.extensions?.marketplace ?? {}
 check(marketplace.category === 'Productivity', 'Marketplace category is publisher-declared')
 check(marketplace.ageRating === '4+', 'Marketplace age rating is publisher-declared')
 check(marketplace.previews?.length === 0, 'Marketplace previews remain empty until verified media is published')
-check(marketplace.availableViewIds?.length === requiredLegacyViews.length, 'Marketplace compatibility listing references all canonical module views')
+const canonicalViewIds = standard.views.map(view => view.id)
+check(
+  marketplace.availableViewIds?.length === canonicalViewIds.length
+    && new Set(marketplace.availableViewIds).size === canonicalViewIds.length
+    && canonicalViewIds.every(viewId => marketplace.availableViewIds.includes(viewId)),
+  'Marketplace compatibility listing references all canonical module views',
+)
 check(marketplace.release?.source?.tag === `vault-notes-v${version}` && marketplace.release?.source?.asset === `modula-vault-notes-${version}.tgz`, 'Marketplace release identity is pinned')
 for (const field of ['rating', 'ratingCount', 'chartRank', 'downloadCount']) check(!(field in marketplace), `runtime Marketplace aggregate is not hardcoded: ${field}`)
 
@@ -126,6 +141,31 @@ for (const action of actionNames) {
   const actionId = `digital.modula.vault-notes.action.note.${action}`
   check(standard.actions.some(item => item.id === actionId) && standard.functions.some(item => item.id === actionId.replace('.action.', '.function.')), `note.${action} action/function declared`)
 }
+for (const action of ['get', 'search', 'list-recent', 'create-daily', 'add-tag', 'attach', 'backlinks', 'graph', 'restore-revision', 'import']) {
+  const functionId = `digital.modula.vault-notes.function.note.${action}`
+  const declaration = standard.functions.find(item => item.id === functionId)
+  check(
+    declaration?.inputSchema?.type === 'object'
+      && declaration?.inputSchema?.additionalProperties === false
+      && declaration?.outputSchema?.type === 'object'
+      && standard.actions.some(item => item.functionId === functionId),
+    `note.${action} typed candidate action/function declared`,
+  )
+}
+
+const recordSync = standard.synchronization?.items?.find(item => item.id === `${product.identity.id}.sync.records`)
+check(
+  standard.offline?.capable === true
+    && standard.offline?.syncStrategy === 'background'
+    && standard.offline?.conflictStrategy === 'manual-review'
+    && standard.offline?.encryption === true
+    && recordSync?.protocol === 'greenfield.v1'
+    && recordSync?.cursor === 'signed-opaque-v1'
+    && recordSync?.conflictStrategy === 'expected-revision'
+    && ['deleted', 'visibility-lost', 'purged'].every(value => recordSync?.tombstones?.includes(value)),
+  'candidate declares the frozen generic sync and offline-host contract',
+)
+check(standard.widgetRegistry?.items?.length === 0, 'candidate does not claim unsupported host widgets')
 
 for (const permission of ['module.records.read', 'module.records.write', 'module.records.delete', 'module.settings.read', 'module.settings.write', 'module.search.publish', 'module.events.emit', 'module.export.create']) {
   check(standard.permissions.some(item => item.id === permission), `${permission} requested`)
@@ -160,4 +200,10 @@ function collectText(dir) {
     else if (stat.isFile() && /\.(json|ts|md|mjs|yml|yaml)$/.test(entry)) output += readFileSync(path, 'utf8')
   }
   return output
+}
+
+function collectFrontendFields(root) {
+  if (!root || typeof root !== 'object') return []
+  const own = root.type === 'field' && root.field?.id ? [root.field.id] : []
+  return [...own, ...(root.children ?? []).flatMap(collectFrontendFields)]
 }

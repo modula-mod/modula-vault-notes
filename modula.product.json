@@ -5,11 +5,11 @@
   "identity": {
     "id": "digital.modula.vault-notes",
     "kind": "module",
-    "version": "1.8.0",
+    "version": "2.0.0-rc.2",
     "displayName": "Vault Notes",
     "slug": "vault-notes",
     "subtitle": "Your private knowledge space.",
-    "description": "Offline-capable private notes module for Modula. Notes, folders, tags, search, archive, and governed extension points. Optional AI, Voice, and Formatting attach as separate family products.",
+    "description": "Portable private notes for Modula with folders, tags, templates, daily notes, typed properties, stable relationships, attachment metadata, history, import/export, sensitive-note policy, and governed extension points.",
     "status": "beta",
     "visibility": "beta",
     "aliases": [
@@ -24,7 +24,7 @@
   },
   "source": {
     "repository": "modula-mod/modula-vault-notes",
-    "commit": "b74194fe4888b77235df39173c90699e27360514",
+    "commit": "ba88b7e3249a1daf5588800d77742c0876f77427",
     "manifestPath": "modula.product.json",
     "provider": "github"
   },
@@ -36,12 +36,12 @@
     "declaredByPublisher": true
   },
   "release": {
-    "channel": "beta",
-    "notes": "Vault Notes 1.8 ships the new product icon and cover artwork through the verified registry presentation pipeline. Note features, record schemas, and the declarative product frontend behave as in 1.7; raw TSX and arbitrary executable frontend code remain excluded from the release.",
+    "channel": "rc",
+    "notes": "Vault Notes 2.0 RC.2 binds the flagship product to frozen GreenField v1 contracts: reviewed settings access, mutation IDs and revision conflicts, signed-cursor sync and tombstones, generic search projections, record relationships and history, record-media binding, record sharing, governed functions/actions, and fail-closed intelligence policy. Native-only renderers continue to degrade explicitly when unavailable.",
     "builder": "modula-product-release",
     "provenance": {
-      "manifestSha256": "084efdd9d77911c1df982e0c102460f42c32c55d84a1de8dd8b0a78096f0dc3e",
-      "frontendSha256": "f5d63cc809005987189ebcf4cb9cc2daddbb2b8eb8275d7a0df6939d3be6ff4d"
+      "manifestSha256": "9a0a766277c86d1e59943a9e63c7956969bdc09f103ea2415f457563ea1e99c2",
+      "frontendSha256": "fbf5951ac54c701ee38cb570c90738d193783334d2efb670f83db2123fd98a0e"
     }
   },
   "security": {
@@ -124,7 +124,7 @@
     "artifact": {
       "path": "frontend/frontend.manifest.json",
       "mediaType": "application/vnd.modula.frontend+json",
-      "sha256": "f5d63cc809005987189ebcf4cb9cc2daddbb2b8eb8275d7a0df6939d3be6ff4d",
+      "sha256": "fbf5951ac54c701ee38cb570c90738d193783334d2efb670f83db2123fd98a0e",
       "schemaVersion": "1.0.0",
       "entryView": "home"
     }
@@ -167,6 +167,24 @@
         "schemaPath": "schemas/saved-source.schema.json",
         "schemaVersion": "1.0.0",
         "title": "Saved source"
+      },
+      {
+        "id": "attachment",
+        "schemaPath": "schemas/attachment.schema.json",
+        "schemaVersion": "1.0.0",
+        "title": "Attachment metadata"
+      },
+      {
+        "id": "template",
+        "schemaPath": "schemas/template.schema.json",
+        "schemaVersion": "1.0.0",
+        "title": "Template"
+      },
+      {
+        "id": "saved-search",
+        "schemaPath": "schemas/saved-search.schema.json",
+        "schemaVersion": "1.0.0",
+        "title": "Saved search"
       }
     ]
   },
@@ -266,6 +284,14 @@
       "notes.actions.contribute",
       "notes.attachments.create",
       "notes.attachments.read",
+      "notes.relationships.read",
+      "notes.relationships.manage",
+      "notes.properties",
+      "notes.templates",
+      "notes.daily",
+      "notes.history",
+      "notes.import",
+      "notes.sensitive",
       "notes.events.subscribe"
     ],
     "requires": [],
@@ -416,20 +442,23 @@
   ],
   "privacy": {
     "dataAccessed": [
-      "user-authored notes, folders, tags, and saved-source references"
+      "user-authored notes, folders, tags, properties, relationship references, attachment metadata, templates, saved searches, and saved-source references"
     ],
     "dataCreated": [
       "notes",
       "folders",
       "tags",
       "note links",
-      "note versions"
+      "note versions",
+      "attachment metadata",
+      "templates",
+      "saved searches"
     ],
     "dataTransmitted": [
       "none-by-default"
     ],
     "retention": "until uninstall deleteData or account deletion",
-    "export": "JSON export via Greenfield",
+    "export": "Versioned JSON, Markdown, plain-text, and archive export without credentials or private signing material",
     "deletion": "uninstall keepData or deleteData; permanent delete requires confirmation",
     "analytics": "none",
     "telemetry": "none"

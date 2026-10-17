@@ -1,0 +1,9 @@
+import {action} from "@modula/product-ui";
+
+export const summarizeAction = action({id: "intelligenceSummarize", family: "capability.invoke", label: "Summarize", capability: "ui.local-intelligence@1", input: {defaults: {operation: "intelligence.summarize", executionPolicy: "preferLocal"}}});
+export const rewriteAction = action({id: "intelligenceRewrite", family: "capability.invoke", label: "Rewrite", capability: "ui.local-intelligence@1", input: {defaults: {operation: "intelligence.rewrite", executionPolicy: "preferLocal"}}});
+export const extractTasksAction = action({id: "intelligenceExtractTasks", family: "capability.invoke", label: "Extract tasks", capability: "ui.local-intelligence@1", input: {defaults: {operation: "intelligence.extract", schema: "task-candidates", executionPolicy: "preferLocal", requireReview: true}}});
+export const suggestTagsAction = action({id: "intelligenceSuggestTags", family: "capability.invoke", label: "Suggest tags", capability: "ui.local-intelligence@1", input: {defaults: {operation: "intelligence.classify", schema: "tags", executionPolicy: "preferLocal"}}});
+export const suggestTitleAction = action({id: "intelligenceSuggestTitle", family: "capability.invoke", label: "Suggest title", capability: "ui.local-intelligence@1", input: {defaults: {operation: "intelligence.classify", schema: "title", executionPolicy: "preferLocal"}}});
+export const askNoteAction = action({id: "intelligenceAskNote", family: "capability.invoke", label: "Ask this note", capability: "ui.local-intelligence@1", input: {defaults: {operation: "intelligence.ask", executionPolicy: "preferLocal"}}});
+export const semanticRelatedAction = action({id: "intelligenceRelated", family: "capability.invoke", label: "Find related notes", capability: "ui.local-intelligence@1", input: {defaults: {operation: "intelligence.semanticSearch", executionPolicy: "preferLocal"}}});

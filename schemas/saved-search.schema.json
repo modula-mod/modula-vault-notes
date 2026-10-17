@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://modula.digital/modules/vault-notes/schemas/saved-search-1.0.0.json",
+  "title": "Vault Saved Search",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "query", "filters", "sort", "createdAt", "updatedAt"],
+  "properties": {
+    "name": {"type": "string", "minLength": 1, "maxLength": 120},
+    "query": {"type": "string", "maxLength": 500},
+    "filters": {"type": "object"},
+    "sort": {"enum": ["createdAt", "updatedAt", "title"]},
+    "createdAt": {"type": "string", "format": "date-time"},
+    "updatedAt": {"type": "string", "format": "date-time"}
+  },
+  "x-greenfield": {
+    "fields": [
+      {"fieldId": "name", "name": "name", "type": "text", "label": "Name", "required": true},
+      {"fieldId": "query", "name": "query", "type": "text", "label": "Query", "required": true},
+      {"fieldId": "filters", "name": "filters", "type": "json", "label": "Filters", "required": true},
+      {"fieldId": "sort", "name": "sort", "type": "singleSelect", "label": "Sort", "required": true, "options": [{"value": "createdAt", "label": "Created"}, {"value": "updatedAt", "label": "Updated"}, {"value": "title", "label": "Title"}]},
+      {"fieldId": "createdAt", "name": "createdAt", "type": "dateTime", "label": "Created", "required": true},
+      {"fieldId": "updatedAt", "name": "updatedAt", "type": "dateTime", "label": "Updated", "required": true}
+    ],
+    "searchableFields": ["name", "query"],
+    "filterableFields": ["sort"],
+    "sortableFields": ["name", "createdAt", "updatedAt"],
+    "referenceFields": [],
+    "retentionPolicy": "keepOnUninstall"
+  }
+}

@@ -1,5 +1,28 @@
 # Changelog
 
+## 2.0.0-rc.2 — private preview candidate, not published
+
+- Reconciles Vault Notes with frozen GreenField v1 contracts for settings, sync, history, reverse references, search, media bindings, record sharing, governed functions/actions, and intelligence policy.
+- Adds explicit `settings:read` and `settings:write` requests; upgrading from 1.8 requires a real permission review.
+- Requests record-scoped media and sharing permissions without treating asset IDs or share IDs as authority.
+- Declares signed-cursor background sync, mutation-ID replay, expected-revision conflicts, and bounded tombstone semantics.
+- Keeps final `2.0.0` unsigned, unregistered, and unpublished while the RC is visually and functionally reviewed.
+
+## 2.0.0-rc.1 — candidate, not published
+
+- Replaces the single frontend source file with a product-owned multi-surface architecture: 22 routes, 22 screens, reusable Vault components, feature domains, hooks, capability-aware states, and artifact-level frontend tests.
+- Reduces `frontend/index.tsx` to the bounded ModuleHost registration boundary and adds a source reachability/file-size architecture guard.
+- Adds module surfaces for folders, tags, templates, Daily Note, revisions, attachments, saved searches, graph projection, structured-view status, local intelligence, and grouped settings without host special cases.
+- Documents exact `@modula/product-ui` support, limitations, missing primitives, and SDK extraction candidates.
+- Adds backward-compatible portable note fields for content format, typed properties, attachments, sensitivity, templates, and daily-note identity.
+- Adds deterministic templates, daily-note creation, stable note links, backlinks, related-note ranking, and graph data.
+- Adds bounded attachment metadata associations without exposing filesystem paths.
+- Adds revision restore that creates a new revision and preserves intervening history.
+- Adds rich account-scoped search/filter helpers, saved searches, import, and a versioned portable backup/export contract.
+- Adds local-intelligence request contracts with fail-closed `localOnly` handling for sensitive notes.
+- Adds Pinned and Recent declarative views and aligns module-owned settings with the published settings schema.
+- Does not publish, alter production data, or claim generic sync, sharing, widget, media-upload, or local-intelligence runtime support.
+
 ## 1.8.0
 
 - Ship the new Vault Notes product icon (1024 px PNG) and editorial cover (1600x900 JPEG) as hash-bound registry presentation assets.

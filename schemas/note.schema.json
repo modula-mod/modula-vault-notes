@@ -9,12 +9,45 @@
     "id": {"type": "string", "minLength": 1, "maxLength": 120},
     "title": {"type": "string", "minLength": 1, "maxLength": 240},
     "document": {"type": "object"},
+    "contentFormat": {"enum": ["blocks-v1", "markdown-v1"]},
+    "canonicalBody": {"type": "string", "maxLength": 250000},
     "plainTextProjection": {"type": "string", "maxLength": 200000},
     "folderId": {"type": "string", "maxLength": 120},
     "tagIds": {"type": "array", "items": {"type": "string", "maxLength": 120}, "maxItems": 100},
     "pinned": {"type": "boolean"},
     "favourite": {"type": "boolean"},
     "archived": {"type": "boolean"},
+    "icon": {"type": "string", "maxLength": 120},
+    "coverAttachmentId": {"type": "string", "maxLength": 180},
+    "properties": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version", "values"],
+      "properties": {
+        "version": {"const": "1.0.0"},
+        "values": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "name", "type", "value"],
+            "properties": {
+              "id": {"type": "string", "minLength": 1, "maxLength": 120},
+              "name": {"type": "string", "minLength": 1, "maxLength": 120},
+              "type": {"enum": ["text", "number", "boolean", "date", "dateTime", "singleSelect", "multiSelect", "tags", "url", "recordReference"]},
+              "value": {"type": ["string", "number", "boolean", "array", "null"], "items": {"type": "string"}},
+              "referenceCollection": {"type": "string", "maxLength": 120}
+            }
+          }
+        }
+      }
+    },
+    "attachmentIds": {"type": "array", "items": {"type": "string", "maxLength": 180}, "maxItems": 500},
+    "sensitive": {"type": "boolean"},
+    "intelligencePolicy": {"enum": ["disabled", "localOnly", "preferLocal"]},
+    "templateId": {"type": "string", "maxLength": 120},
+    "dailyDate": {"type": "string", "format": "date"},
     "source": {"$ref": "./saved-source.schema.json"},
     "revision": {"type": "integer", "minimum": 1},
     "createdAt": {"type": "string", "format": "date-time"},
@@ -26,20 +59,30 @@
     "fields": [
       {"fieldId": "title", "name": "title", "type": "text", "label": "Title", "required": true},
       {"fieldId": "document", "name": "document", "type": "json", "label": "Document", "required": true},
+      {"fieldId": "contentFormat", "name": "contentFormat", "type": "singleSelect", "label": "Content format", "options": [{"value": "blocks-v1", "label": "Portable blocks"}, {"value": "markdown-v1", "label": "Markdown"}]},
+      {"fieldId": "canonicalBody", "name": "canonicalBody", "type": "multilineText", "label": "Canonical body"},
       {"fieldId": "plainTextProjection", "name": "plainTextProjection", "type": "multilineText", "label": "Plain text", "required": true},
       {"fieldId": "folderId", "name": "folderId", "type": "recordReference", "label": "Folder"},
       {"fieldId": "tagIds", "name": "tagIds", "type": "tags", "label": "Tags"},
       {"fieldId": "pinned", "name": "pinned", "type": "boolean", "label": "Pinned"},
       {"fieldId": "favourite", "name": "favourite", "type": "boolean", "label": "Favourite"},
       {"fieldId": "archived", "name": "archived", "type": "boolean", "label": "Archived"},
+      {"fieldId": "icon", "name": "icon", "type": "text", "label": "Icon"},
+      {"fieldId": "coverAttachmentId", "name": "coverAttachmentId", "type": "assetReference", "label": "Cover"},
+      {"fieldId": "properties", "name": "properties", "type": "json", "label": "Properties"},
+      {"fieldId": "attachmentIds", "name": "attachmentIds", "type": "multiSelect", "label": "Attachments"},
+      {"fieldId": "sensitive", "name": "sensitive", "type": "boolean", "label": "Sensitive"},
+      {"fieldId": "intelligencePolicy", "name": "intelligencePolicy", "type": "singleSelect", "label": "Intelligence policy", "options": [{"value": "disabled", "label": "Disabled"}, {"value": "localOnly", "label": "Local only"}, {"value": "preferLocal", "label": "Prefer local"}]},
+      {"fieldId": "templateId", "name": "templateId", "type": "recordReference", "label": "Template"},
+      {"fieldId": "dailyDate", "name": "dailyDate", "type": "date", "label": "Daily date"},
       {"fieldId": "source", "name": "source", "type": "json", "label": "Source"},
       {"fieldId": "dataSchemaVersion", "name": "dataSchemaVersion", "type": "text", "label": "Data schema", "required": true}
     ],
-    "searchableFields": ["title", "plainTextProjection", "tagIds"],
-    "filterableFields": ["folderId", "tagIds", "pinned", "favourite", "archived"],
+    "searchableFields": ["title", "plainTextProjection", "tagIds", "canonicalBody"],
+    "filterableFields": ["folderId", "tagIds", "pinned", "favourite", "archived", "sensitive", "dailyDate", "templateId"],
     "sortableFields": ["createdAt", "updatedAt", "title"],
     "folderField": "folderId",
-    "referenceFields": ["folderId", "tagIds"],
+    "referenceFields": ["folderId", "tagIds", "coverAttachmentId", "attachmentIds", "templateId"],
     "retentionPolicy": "keepOnUninstall"
   }
 }

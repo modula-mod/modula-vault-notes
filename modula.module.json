@@ -1,7 +1,7 @@
 {
   "schemaVersion": "2.1.0",
   "standardVersion": "2.1.0",
-  "moduleVersion": "1.8.0",
+  "moduleVersion": "2.0.0-rc.2",
   "manifestSchemaVersion": "2.1.0",
   "dataSchemaVersion": "1.0.0",
   "id": "digital.modula.vault-notes",
@@ -171,6 +171,36 @@
       "required": false,
       "reason": "Use host generic migrations when needed.",
       "degradedBehavior": "Vault Notes remains uninstallable until host generic record support is available."
+    },
+    {
+      "id": "imports",
+      "required": false,
+      "reason": "Import portable Markdown, plain text, and Vault backups.",
+      "degradedBehavior": "Import remains available only through module helpers."
+    },
+    {
+      "id": "history",
+      "required": false,
+      "reason": "List and restore immutable note checkpoints.",
+      "degradedBehavior": "Writes remain revision-safe but history cannot be browsed through the host."
+    },
+    {
+      "id": "offline",
+      "required": false,
+      "reason": "Declare offline intent without claiming a sync runtime.",
+      "degradedBehavior": "The module remains online-only."
+    },
+    {
+      "id": "sync",
+      "required": false,
+      "reason": "Adopt a future generic cursor and tombstone contract.",
+      "degradedBehavior": "No background synchronization is advertised."
+    },
+    {
+      "id": "widgets",
+      "required": false,
+      "reason": "Expose quick capture and note collections after a generic widget registry exists.",
+      "degradedBehavior": "Vault Notes remains route-only."
     }
   ],
   "records": [
@@ -194,25 +224,33 @@
         ],
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
           },
           "title": {
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
           },
           "document": {
             "type": "object"
           },
           "plainTextProjection": {
-            "type": "string"
+            "type": "string",
+            "maxLength": 200000
           },
           "folderId": {
-            "type": "string"
+            "type": "string",
+            "maxLength": 120
           },
           "tagIds": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "maxLength": 120
+            },
+            "maxItems": 100
           },
           "pinned": {
             "type": "boolean"
@@ -224,22 +262,139 @@
             "type": "boolean"
           },
           "source": {
-            "type": "object"
+            "$ref": "./saved-source.schema.json"
           },
           "revision": {
-            "type": "integer"
+            "type": "integer",
+            "minimum": 1
           },
           "createdAt": {
-            "type": "string"
+            "type": "string",
+            "format": "date-time"
           },
           "updatedAt": {
-            "type": "string"
+            "type": "string",
+            "format": "date-time"
           },
           "deletedAt": {
-            "type": "string"
+            "type": "string",
+            "format": "date-time"
           },
           "dataSchemaVersion": {
             "const": "1.0.0"
+          },
+          "contentFormat": {
+            "enum": [
+              "blocks-v1",
+              "markdown-v1"
+            ]
+          },
+          "canonicalBody": {
+            "type": "string",
+            "maxLength": 250000
+          },
+          "icon": {
+            "type": "string",
+            "maxLength": 120
+          },
+          "coverAttachmentId": {
+            "type": "string",
+            "maxLength": 180
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "version",
+              "values"
+            ],
+            "properties": {
+              "version": {
+                "const": "1.0.0"
+              },
+              "values": {
+                "type": "array",
+                "maxItems": 100,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "id",
+                    "name",
+                    "type",
+                    "value"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 120
+                    },
+                    "name": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 120
+                    },
+                    "type": {
+                      "enum": [
+                        "text",
+                        "number",
+                        "boolean",
+                        "date",
+                        "dateTime",
+                        "singleSelect",
+                        "multiSelect",
+                        "tags",
+                        "url",
+                        "recordReference"
+                      ]
+                    },
+                    "value": {
+                      "type": [
+                        "string",
+                        "number",
+                        "boolean",
+                        "array",
+                        "null"
+                      ],
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "referenceCollection": {
+                      "type": "string",
+                      "maxLength": 120
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "attachmentIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "maxLength": 180
+            },
+            "maxItems": 500
+          },
+          "sensitive": {
+            "type": "boolean"
+          },
+          "intelligencePolicy": {
+            "enum": [
+              "disabled",
+              "localOnly",
+              "preferLocal"
+            ]
+          },
+          "templateId": {
+            "type": "string",
+            "maxLength": 120
+          },
+          "dailyDate": {
+            "type": "string",
+            "format": "date"
           }
         }
       },
@@ -264,6 +419,21 @@
         {
           "fields": [
             "updatedAt"
+          ]
+        },
+        {
+          "fields": [
+            "dailyDate"
+          ]
+        },
+        {
+          "fields": [
+            "sensitive"
+          ]
+        },
+        {
+          "fields": [
+            "templateId"
           ]
         }
       ],
@@ -291,11 +461,16 @@
           "source.title",
           "source.authorDisplayName",
           "createdAt",
-          "updatedAt"
+          "updatedAt",
+          "canonicalBody",
+          "dailyDate",
+          "templateId"
         ],
         "sensitiveFields": [
           "document",
-          "source.metadata"
+          "source.metadata",
+          "canonicalBody",
+          "properties"
         ],
         "visibility": "private"
       },
@@ -724,6 +899,323 @@
           "json"
         ]
       }
+    },
+    {
+      "id": "digital.modula.vault-notes.record.attachment",
+      "schema": {
+        "type": "object",
+        "required": [
+          "noteId",
+          "assetId",
+          "name",
+          "mimeType",
+          "size",
+          "kind",
+          "createdAt"
+        ],
+        "properties": {
+          "noteId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "assetId": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9._:-]{1,180}$"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255,
+            "pattern": "^[^/\\\\]+$"
+          },
+          "mimeType": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9.+-]+/[A-Za-z0-9.+-]+$"
+          },
+          "size": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1000000000
+          },
+          "kind": {
+            "enum": [
+              "image",
+              "pdf",
+              "document",
+              "audio",
+              "file"
+            ]
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "durationMs": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 86400000
+          },
+          "width": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 50000
+          },
+          "height": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 50000
+          },
+          "checksumSha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        }
+      },
+      "ownership": "account",
+      "visibility": "private",
+      "indexes": [
+        {
+          "fields": [
+            "noteId"
+          ]
+        },
+        {
+          "fields": [
+            "kind"
+          ]
+        },
+        {
+          "fields": [
+            "createdAt"
+          ]
+        }
+      ],
+      "uniqueness": {
+        "keys": [
+          "id"
+        ],
+        "scope": "account"
+      },
+      "retention": {
+        "policy": "retain"
+      },
+      "aiPolicy": {
+        "allowed": false,
+        "context": "none",
+        "policyMode": "block"
+      },
+      "searchPolicy": {
+        "searchable": true,
+        "indexedFields": [
+          "name",
+          "mimeType"
+        ],
+        "sensitiveFields": [],
+        "visibility": "private"
+      },
+      "auditPolicy": {
+        "events": [
+          "vault-notes.attachment.updated"
+        ],
+        "includeRecordBody": false
+      },
+      "exportPolicy": {
+        "allowed": true,
+        "formats": [
+          "json"
+        ]
+      }
+    },
+    {
+      "id": "digital.modula.vault-notes.record.template",
+      "schema": {
+        "type": "object",
+        "required": [
+          "name",
+          "description",
+          "titlePattern",
+          "document",
+          "properties",
+          "system",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 500
+          },
+          "titlePattern": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "document": {
+            "type": "object"
+          },
+          "properties": {
+            "type": "object"
+          },
+          "system": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ownership": "account",
+      "visibility": "private",
+      "indexes": [
+        {
+          "fields": [
+            "name"
+          ]
+        },
+        {
+          "fields": [
+            "system"
+          ]
+        }
+      ],
+      "uniqueness": {
+        "keys": [
+          "id"
+        ],
+        "scope": "account"
+      },
+      "retention": {
+        "policy": "retain"
+      },
+      "aiPolicy": {
+        "allowed": false,
+        "context": "none",
+        "policyMode": "block"
+      },
+      "searchPolicy": {
+        "searchable": true,
+        "indexedFields": [
+          "name",
+          "description"
+        ],
+        "sensitiveFields": [],
+        "visibility": "private"
+      },
+      "auditPolicy": {
+        "events": [
+          "vault-notes.template.updated"
+        ],
+        "includeRecordBody": false
+      },
+      "exportPolicy": {
+        "allowed": true,
+        "formats": [
+          "json"
+        ]
+      }
+    },
+    {
+      "id": "digital.modula.vault-notes.record.saved-search",
+      "schema": {
+        "type": "object",
+        "required": [
+          "name",
+          "query",
+          "filters",
+          "sort",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "query": {
+            "type": "string",
+            "maxLength": 500
+          },
+          "filters": {
+            "type": "object"
+          },
+          "sort": {
+            "enum": [
+              "createdAt",
+              "updatedAt",
+              "title"
+            ]
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ownership": "account",
+      "visibility": "private",
+      "indexes": [
+        {
+          "fields": [
+            "name"
+          ]
+        },
+        {
+          "fields": [
+            "updatedAt"
+          ]
+        }
+      ],
+      "uniqueness": {
+        "keys": [
+          "id"
+        ],
+        "scope": "account"
+      },
+      "retention": {
+        "policy": "retain"
+      },
+      "aiPolicy": {
+        "allowed": false,
+        "context": "none",
+        "policyMode": "block"
+      },
+      "searchPolicy": {
+        "searchable": true,
+        "indexedFields": [
+          "name",
+          "query"
+        ],
+        "sensitiveFields": [],
+        "visibility": "private"
+      },
+      "auditPolicy": {
+        "events": [
+          "vault-notes.saved-search.updated"
+        ],
+        "includeRecordBody": false
+      },
+      "exportPolicy": {
+        "allowed": true,
+        "formats": [
+          "json"
+        ]
+      }
     }
   ],
   "views": [
@@ -914,6 +1406,34 @@
       ],
       "layout": {
         "viewKey": "vault-notes.error"
+      }
+    },
+    {
+      "id": "digital.modula.vault-notes.view.pinned",
+      "type": "collection",
+      "title": "Pinned notes",
+      "permissions": [
+        "module.records.read"
+      ],
+      "layout": {
+        "viewKey": "vault-notes.pinned",
+        "sections": [
+          "notes"
+        ]
+      }
+    },
+    {
+      "id": "digital.modula.vault-notes.view.recent",
+      "type": "collection",
+      "title": "Recently edited",
+      "permissions": [
+        "module.records.read"
+      ],
+      "layout": {
+        "viewKey": "vault-notes.recent",
+        "sections": [
+          "notes"
+        ]
       }
     }
   ],
@@ -1333,6 +1853,202 @@
       ],
       "audit": {
         "event": "vault-notes.note.updated",
+        "includeInput": false
+      }
+    },
+    {
+      "id": "digital.modula.vault-notes.action.note.get",
+      "title": "Get note",
+      "functionId": "digital.modula.vault-notes.function.note.get",
+      "permissions": [
+        "module.records.read"
+      ],
+      "confirmationPolicy": {
+        "required": false,
+        "policyMode": "warn"
+      },
+      "sideEffects": [
+        "record.read"
+      ],
+      "audit": {
+        "event": "vault-notes.note.get",
+        "includeInput": false
+      }
+    },
+    {
+      "id": "digital.modula.vault-notes.action.note.search",
+      "title": "Search notes",
+      "functionId": "digital.modula.vault-notes.function.note.search",
+      "permissions": [
+        "module.records.read"
+      ],
+      "confirmationPolicy": {
+        "required": false,
+        "policyMode": "warn"
+      },
+      "sideEffects": [
+        "record.query"
+      ],
+      "audit": {
+        "event": "vault-notes.note.search",
+        "includeInput": false
+      }
+    },
+    {
+      "id": "digital.modula.vault-notes.action.note.list-recent",
+      "title": "List recent notes",
+      "functionId": "digital.modula.vault-notes.function.note.list-recent",
+      "permissions": [
+        "module.records.read"
+      ],
+      "confirmationPolicy": {
+        "required": false,
+        "policyMode": "warn"
+      },
+      "sideEffects": [
+        "record.query"
+      ],
+      "audit": {
+        "event": "vault-notes.note.list-recent",
+        "includeInput": false
+      }
+    },
+    {
+      "id": "digital.modula.vault-notes.action.note.create-daily",
+      "title": "Create or open daily note",
+      "functionId": "digital.modula.vault-notes.function.note.create-daily",
+      "permissions": [
+        "module.records.write"
+      ],
+      "confirmationPolicy": {
+        "required": false,
+        "policyMode": "warn"
+      },
+      "sideEffects": [
+        "record.query",
+        "record.create",
+        "event.emit"
+      ],
+      "audit": {
+        "event": "vault-notes.note.create-daily",
+        "includeInput": false
+      }
+    },
+    {
+      "id": "digital.modula.vault-notes.action.note.add-tag",
+      "title": "Add tag to note",
+      "functionId": "digital.modula.vault-notes.function.note.add-tag",
+      "permissions": [
+        "module.records.write"
+      ],
+      "confirmationPolicy": {
+        "required": false,
+        "policyMode": "warn"
+      },
+      "sideEffects": [
+        "record.update"
+      ],
+      "audit": {
+        "event": "vault-notes.note.add-tag",
+        "includeInput": false
+      }
+    },
+    {
+      "id": "digital.modula.vault-notes.action.note.attach",
+      "title": "Associate attachment metadata",
+      "functionId": "digital.modula.vault-notes.function.note.attach",
+      "permissions": [
+        "module.records.write"
+      ],
+      "confirmationPolicy": {
+        "required": false,
+        "policyMode": "warn"
+      },
+      "sideEffects": [
+        "record.create",
+        "record.update"
+      ],
+      "audit": {
+        "event": "vault-notes.note.attach",
+        "includeInput": false
+      }
+    },
+    {
+      "id": "digital.modula.vault-notes.action.note.backlinks",
+      "title": "List note backlinks",
+      "functionId": "digital.modula.vault-notes.function.note.backlinks",
+      "permissions": [
+        "module.records.read"
+      ],
+      "confirmationPolicy": {
+        "required": false,
+        "policyMode": "warn"
+      },
+      "sideEffects": [
+        "record.query"
+      ],
+      "audit": {
+        "event": "vault-notes.note.backlinks",
+        "includeInput": false
+      }
+    },
+    {
+      "id": "digital.modula.vault-notes.action.note.graph",
+      "title": "Build note graph data",
+      "functionId": "digital.modula.vault-notes.function.note.graph",
+      "permissions": [
+        "module.records.read"
+      ],
+      "confirmationPolicy": {
+        "required": false,
+        "policyMode": "warn"
+      },
+      "sideEffects": [
+        "record.query"
+      ],
+      "audit": {
+        "event": "vault-notes.note.graph",
+        "includeInput": false
+      }
+    },
+    {
+      "id": "digital.modula.vault-notes.action.note.restore-revision",
+      "title": "Restore note revision",
+      "functionId": "digital.modula.vault-notes.function.note.restore-revision",
+      "permissions": [
+        "module.records.write"
+      ],
+      "confirmationPolicy": {
+        "required": true,
+        "policyMode": "require-confirmation"
+      },
+      "sideEffects": [
+        "record.update",
+        "version.snapshot",
+        "event.emit"
+      ],
+      "audit": {
+        "event": "vault-notes.note.restore-revision",
+        "includeInput": false
+      }
+    },
+    {
+      "id": "digital.modula.vault-notes.action.note.import",
+      "title": "Import portable notes",
+      "functionId": "digital.modula.vault-notes.function.note.import",
+      "permissions": [
+        "module.records.write"
+      ],
+      "confirmationPolicy": {
+        "required": true,
+        "policyMode": "require-confirmation"
+      },
+      "sideEffects": [
+        "record.create",
+        "event.emit"
+      ],
+      "audit": {
+        "event": "vault-notes.note.import",
         "includeInput": false
       }
     }
@@ -2288,6 +3004,804 @@
         "required": false,
         "risk": "low"
       }
+    },
+    {
+      "id": "digital.modula.vault-notes.function.note.get",
+      "title": "Get note",
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "recordId"
+        ],
+        "properties": {
+          "recordId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "revision"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "title": {
+            "type": "string"
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      },
+      "permissions": [
+        "module.records.read"
+      ],
+      "aiCallable": false,
+      "automationCallable": false,
+      "idempotent": false,
+      "sideEffects": [
+        "record.read"
+      ],
+      "timeoutMs": 30000,
+      "rateLimit": {
+        "windowSeconds": 60,
+        "maxCalls": 60
+      },
+      "audit": {
+        "event": "vault-notes.note.get",
+        "includeInput": false,
+        "includeOutput": false
+      },
+      "confirmationPolicy": {
+        "required": false,
+        "risk": "medium"
+      }
+    },
+    {
+      "id": "digital.modula.vault-notes.function.note.search",
+      "title": "Search notes",
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [],
+        "properties": {
+          "query": {
+            "type": "string",
+            "maxLength": 1000
+          },
+          "filters": {
+            "type": "object"
+          },
+          "cursor": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 180
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "includeSensitive": {
+            "type": "boolean"
+          }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "title",
+                "revision"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "title": {
+                  "type": "string"
+                },
+                "revision": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
+          },
+          "nextCursor": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 180
+          }
+        }
+      },
+      "permissions": [
+        "module.records.read"
+      ],
+      "aiCallable": false,
+      "automationCallable": false,
+      "idempotent": true,
+      "sideEffects": [
+        "record.query"
+      ],
+      "timeoutMs": 30000,
+      "rateLimit": {
+        "windowSeconds": 60,
+        "maxCalls": 60
+      },
+      "audit": {
+        "event": "vault-notes.note.search",
+        "includeInput": false,
+        "includeOutput": false
+      },
+      "confirmationPolicy": {
+        "required": false,
+        "risk": "medium"
+      }
+    },
+    {
+      "id": "digital.modula.vault-notes.function.note.list-recent",
+      "title": "List recent notes",
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [],
+        "properties": {
+          "cursor": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 180
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "title",
+                "revision"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "title": {
+                  "type": "string"
+                },
+                "revision": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
+          },
+          "nextCursor": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 180
+          }
+        }
+      },
+      "permissions": [
+        "module.records.read"
+      ],
+      "aiCallable": false,
+      "automationCallable": false,
+      "idempotent": true,
+      "sideEffects": [
+        "record.query"
+      ],
+      "timeoutMs": 30000,
+      "rateLimit": {
+        "windowSeconds": 60,
+        "maxCalls": 60
+      },
+      "audit": {
+        "event": "vault-notes.note.list-recent",
+        "includeInput": false,
+        "includeOutput": false
+      },
+      "confirmationPolicy": {
+        "required": false,
+        "risk": "medium"
+      }
+    },
+    {
+      "id": "digital.modula.vault-notes.function.note.create-daily",
+      "title": "Create or open daily note",
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "idempotencyKey"
+        ],
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "templateId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          },
+          "idempotencyKey": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "revision"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "title": {
+            "type": "string"
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      },
+      "permissions": [
+        "module.records.write"
+      ],
+      "aiCallable": false,
+      "automationCallable": false,
+      "idempotent": true,
+      "sideEffects": [
+        "record.query",
+        "record.create",
+        "event.emit"
+      ],
+      "timeoutMs": 30000,
+      "rateLimit": {
+        "windowSeconds": 60,
+        "maxCalls": 60
+      },
+      "audit": {
+        "event": "vault-notes.note.create-daily",
+        "includeInput": false,
+        "includeOutput": false
+      },
+      "confirmationPolicy": {
+        "required": false,
+        "risk": "medium"
+      }
+    },
+    {
+      "id": "digital.modula.vault-notes.function.note.add-tag",
+      "title": "Add tag to note",
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "recordId",
+          "tagId",
+          "idempotencyKey"
+        ],
+        "properties": {
+          "recordId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          },
+          "tagId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          },
+          "idempotencyKey": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "revision"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "title": {
+            "type": "string"
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      },
+      "permissions": [
+        "module.records.write"
+      ],
+      "aiCallable": false,
+      "automationCallable": false,
+      "idempotent": true,
+      "sideEffects": [
+        "record.update"
+      ],
+      "timeoutMs": 30000,
+      "rateLimit": {
+        "windowSeconds": 60,
+        "maxCalls": 60
+      },
+      "audit": {
+        "event": "vault-notes.note.add-tag",
+        "includeInput": false,
+        "includeOutput": false
+      },
+      "confirmationPolicy": {
+        "required": false,
+        "risk": "medium"
+      }
+    },
+    {
+      "id": "digital.modula.vault-notes.function.note.attach",
+      "title": "Associate attachment metadata",
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "recordId",
+          "assetId",
+          "name",
+          "mimeType",
+          "size",
+          "idempotencyKey"
+        ],
+        "properties": {
+          "recordId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          },
+          "assetId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "mimeType": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          },
+          "size": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1073741824
+          },
+          "kind": {
+            "enum": [
+              "image",
+              "pdf",
+              "document",
+              "audio",
+              "file"
+            ]
+          },
+          "durationMs": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "idempotencyKey": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "required": [
+          "id",
+          "noteId",
+          "assetId"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "noteId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "assetId": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "permissions": [
+        "module.records.write"
+      ],
+      "aiCallable": false,
+      "automationCallable": false,
+      "idempotent": true,
+      "sideEffects": [
+        "record.create",
+        "record.update"
+      ],
+      "timeoutMs": 30000,
+      "rateLimit": {
+        "windowSeconds": 60,
+        "maxCalls": 60
+      },
+      "audit": {
+        "event": "vault-notes.note.attach",
+        "includeInput": false,
+        "includeOutput": false
+      },
+      "confirmationPolicy": {
+        "required": false,
+        "risk": "medium"
+      }
+    },
+    {
+      "id": "digital.modula.vault-notes.function.note.backlinks",
+      "title": "List note backlinks",
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "recordId"
+        ],
+        "properties": {
+          "recordId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          },
+          "cursor": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 180
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "sourceNoteId",
+                "targetNoteId"
+              ],
+              "properties": {
+                "sourceNoteId": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "targetNoteId": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          },
+          "nextCursor": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 180
+          }
+        }
+      },
+      "permissions": [
+        "module.records.read"
+      ],
+      "aiCallable": false,
+      "automationCallable": false,
+      "idempotent": true,
+      "sideEffects": [
+        "record.query"
+      ],
+      "timeoutMs": 30000,
+      "rateLimit": {
+        "windowSeconds": 60,
+        "maxCalls": 60
+      },
+      "audit": {
+        "event": "vault-notes.note.backlinks",
+        "includeInput": false,
+        "includeOutput": false
+      },
+      "confirmationPolicy": {
+        "required": false,
+        "risk": "medium"
+      }
+    },
+    {
+      "id": "digital.modula.vault-notes.function.note.graph",
+      "title": "Build note graph data",
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [],
+        "properties": {
+          "includeArchived": {
+            "type": "boolean"
+          }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "required": [
+          "nodes",
+          "edges"
+        ],
+        "properties": {
+          "nodes": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "edges": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "permissions": [
+        "module.records.read"
+      ],
+      "aiCallable": false,
+      "automationCallable": false,
+      "idempotent": true,
+      "sideEffects": [
+        "record.query"
+      ],
+      "timeoutMs": 30000,
+      "rateLimit": {
+        "windowSeconds": 60,
+        "maxCalls": 60
+      },
+      "audit": {
+        "event": "vault-notes.note.graph",
+        "includeInput": false,
+        "includeOutput": false
+      },
+      "confirmationPolicy": {
+        "required": false,
+        "risk": "medium"
+      }
+    },
+    {
+      "id": "digital.modula.vault-notes.function.note.restore-revision",
+      "title": "Restore note revision",
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "recordId",
+          "revision",
+          "expectedCurrentRevision",
+          "idempotencyKey"
+        ],
+        "properties": {
+          "recordId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "expectedCurrentRevision": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "idempotencyKey": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "revision"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "title": {
+            "type": "string"
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      },
+      "permissions": [
+        "module.records.write"
+      ],
+      "aiCallable": false,
+      "automationCallable": false,
+      "idempotent": true,
+      "sideEffects": [
+        "record.update",
+        "version.snapshot",
+        "event.emit"
+      ],
+      "timeoutMs": 30000,
+      "rateLimit": {
+        "windowSeconds": 60,
+        "maxCalls": 60
+      },
+      "audit": {
+        "event": "vault-notes.note.restore-revision",
+        "includeInput": false,
+        "includeOutput": false
+      },
+      "confirmationPolicy": {
+        "required": true,
+        "risk": "high"
+      }
+    },
+    {
+      "id": "digital.modula.vault-notes.function.note.import",
+      "title": "Import portable notes",
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "format",
+          "content",
+          "idempotencyKey"
+        ],
+        "properties": {
+          "format": {
+            "enum": [
+              "markdown",
+              "plain-text",
+              "vault-backup"
+            ]
+          },
+          "content": {
+            "type": [
+              "string",
+              "object"
+            ]
+          },
+          "idempotencyKey": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "required": [
+          "imported"
+        ],
+        "properties": {
+          "imported": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "skipped": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      },
+      "permissions": [
+        "module.records.write"
+      ],
+      "aiCallable": false,
+      "automationCallable": false,
+      "idempotent": true,
+      "sideEffects": [
+        "record.create",
+        "event.emit"
+      ],
+      "timeoutMs": 30000,
+      "rateLimit": {
+        "windowSeconds": 60,
+        "maxCalls": 60
+      },
+      "audit": {
+        "event": "vault-notes.note.import",
+        "includeInput": false,
+        "includeOutput": false
+      },
+      "confirmationPolicy": {
+        "required": true,
+        "risk": "high"
+      }
     }
   ],
   "settings": [
@@ -2295,19 +3809,9 @@
       "id": "digital.modula.vault-notes.settings.main",
       "scope": "installation",
       "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "defaultCollectionView",
-          "defaultSort",
-          "autosaveDelayMs",
-          "versionHistoryRetention",
-          "confirmPermanentDeletion",
-          "showWordCount",
-          "showCharacterCount",
-          "includeArchivedNotesInSearch",
-          "defaultExportFormat"
-        ],
         "properties": {
           "defaultCollectionView": {
             "enum": [
@@ -2352,6 +3856,30 @@
               "plain-text",
               "zip"
             ]
+          },
+          "defaultFolderId": {
+            "type": "string",
+            "maxLength": 120
+          },
+          "newNoteTemplateId": {
+            "type": "string",
+            "maxLength": 120
+          },
+          "dailyNoteEnabled": {
+            "type": "boolean"
+          },
+          "showBacklinks": {
+            "type": "boolean"
+          },
+          "searchSensitiveNotes": {
+            "type": "boolean"
+          },
+          "intelligencePreference": {
+            "enum": [
+              "disabled",
+              "localOnly",
+              "preferLocal"
+            ]
           }
         }
       },
@@ -2364,7 +3892,12 @@
         "showWordCount": true,
         "showCharacterCount": false,
         "includeArchivedNotesInSearch": false,
-        "defaultExportFormat": "json"
+        "defaultExportFormat": "json",
+        "newNoteTemplateId": "system.blank",
+        "dailyNoteEnabled": true,
+        "showBacklinks": true,
+        "searchSensitiveNotes": false,
+        "intelligencePreference": "preferLocal"
       }
     }
   ],
@@ -2799,7 +4332,7 @@
   },
   "release": {
     "repository": "modula-mod/modula-vault-notes",
-    "commitSha": "b74194fe4888b77235df39173c90699e27360514",
+    "commitSha": "ba88b7e3249a1daf5588800d77742c0876f77427",
     "checksum": "0000000000000000000000000000000000000000000000000000000000000000",
     "licenseEvidence": [
       "LICENSE",
@@ -2809,8 +4342,8 @@
     "signing": {
       "signed": false
     },
-    "channel": "stable",
-    "reviewStatus": "approved",
+    "channel": "beta",
+    "reviewStatus": "in-review",
     "securityAdvisories": []
   },
   "trust": {
@@ -2885,7 +4418,7 @@
     "marketplace": "2.1.0"
   },
   "extensionProduct": {
-    "version": "1.8.0",
+    "version": "2.0.0-rc.2",
     "kind": "module",
     "targets": [],
     "extensionPoints": [
@@ -3006,5 +4539,76 @@
       "maxDepth": 8,
       "maxNodes": 128
     }
+  },
+  "exports": {
+    "version": "2.1.0",
+    "items": [
+      {
+        "id": "digital.modula.vault-notes.export.portable",
+        "title": "Portable Vault export",
+        "formats": [
+          "json",
+          "markdown",
+          "plain-text",
+          "zip"
+        ]
+      }
+    ]
+  },
+  "imports": {
+    "version": "2.1.0",
+    "items": [
+      {
+        "id": "digital.modula.vault-notes.import.markdown",
+        "title": "Markdown import"
+      },
+      {
+        "id": "digital.modula.vault-notes.import.plain-text",
+        "title": "Plain-text import"
+      },
+      {
+        "id": "digital.modula.vault-notes.import.vault-backup",
+        "title": "Vault backup import"
+      }
+    ]
+  },
+  "synchronization": {
+    "version": "2.1.0",
+    "items": [
+      {
+        "id": "digital.modula.vault-notes.sync.records",
+        "title": "Vault record sync",
+        "protocol": "greenfield.v1",
+        "cursor": "signed-opaque-v1",
+        "conflictStrategy": "expected-revision",
+        "tombstones": [
+          "deleted",
+          "visibility-lost",
+          "purged"
+        ]
+      }
+    ]
+  },
+  "widgetRegistry": {
+    "version": "2.1.0",
+    "items": [],
+    "metadata": {
+      "status": "blocked-by-platform"
+    }
+  },
+  "offline": {
+    "version": "2.1.0",
+    "capable": true,
+    "syncStrategy": "background",
+    "conflictStrategy": "manual-review",
+    "encryption": true
+  },
+  "versioning": {
+    "version": "2.1.0",
+    "moduleVersion": "2.0.0-rc.2",
+    "standardVersion": "2.1.0",
+    "schemaVersion": "1.0.0",
+    "manifestVersion": "2.1.0",
+    "runtimeVersion": "1.0.0"
   }
 }

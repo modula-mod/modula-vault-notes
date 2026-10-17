@@ -1,7 +1,7 @@
 {
   "name": "@modula/vault-notes",
-  "version": "1.8.0",
-  "description": "Offline-capable Vault Notes reference module with governed extension points.",
+  "version": "2.0.0-rc.2",
+  "description": "Portable, relationship-aware Vault Notes flagship candidate for the generic Modula module platform.",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -15,6 +15,8 @@
     "PRODUCT.md",
     "PRIVACY.md",
     "schemas",
+    "docs",
+    "!docs/evidence/**",
     "frontend/frontend.manifest.json",
     "src/views",
     "README.md",
@@ -23,10 +25,17 @@
     "SECURITY.md"
   ],
   "scripts": {
+    "frontend:architecture": "node scripts/verify-frontend-architecture.mjs",
     "frontend:check": "tsc -p tsconfig.frontend.json",
-    "frontend:build": "pnpm frontend:check && node scripts/build-frontend.mjs",
+    "frontend:build": "pnpm frontend:architecture && pnpm frontend:check && node scripts/build-frontend.mjs",
     "build": "pnpm frontend:build && node scripts/clean-dist.mjs && tsc -p tsconfig.json",
     "test": "vitest run",
+    "test:frontend": "vitest run frontend/tests",
+    "test:frontend:performance": "node scripts/benchmark-frontend.mjs",
+    "test:scale": "pnpm build && node scripts/benchmark-vault-notes.mjs",
+    "fixtures:vault": "pnpm build && node scripts/vault-fixture-generator.mjs",
+    "preview": "node scripts/serve-preview.mjs",
+    "preview:verify": "node scripts/verify-preview.mjs",
     "verify": "pnpm build && pnpm test && node scripts/verify-release.mjs",
     "release:package": "node scripts/package-release.mjs"
   },

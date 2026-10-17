@@ -4,6 +4,6 @@
   "required": ["manifest", "format"],
   "properties": {
     "format": {"enum": ["json", "markdown", "plain-text", "zip"]},
-    "manifest": {"type": "object"}
+    "manifest": {"type": "object", "required": ["formatVersion"], "properties": {"formatVersion": {"const": "2.0.0"}}}
   }
 }
