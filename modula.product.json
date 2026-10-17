@@ -5,13 +5,13 @@
   "identity": {
     "id": "digital.modula.vault-notes",
     "kind": "module",
-    "version": "2.0.0-rc.2",
+    "version": "2.0.0",
     "displayName": "Vault Notes",
     "slug": "vault-notes",
     "subtitle": "Your private knowledge space.",
     "description": "Portable private notes for Modula with folders, tags, templates, daily notes, typed properties, stable relationships, attachment metadata, history, import/export, sensitive-note policy, and governed extension points.",
-    "status": "beta",
-    "visibility": "beta",
+    "status": "stable",
+    "visibility": "public",
     "aliases": [
       "modula.vault-notes"
     ]
@@ -24,7 +24,7 @@
   },
   "source": {
     "repository": "modula-mod/modula-vault-notes",
-    "commit": "ba88b7e3249a1daf5588800d77742c0876f77427",
+    "commit": "f58a04f811a7dfeeb4a1f5001541cccb516f0b3d",
     "manifestPath": "modula.product.json",
     "provider": "github"
   },
@@ -36,12 +36,12 @@
     "declaredByPublisher": true
   },
   "release": {
-    "channel": "rc",
-    "notes": "Vault Notes 2.0 RC.2 binds the flagship product to frozen GreenField v1 contracts: reviewed settings access, mutation IDs and revision conflicts, signed-cursor sync and tombstones, generic search projections, record relationships and history, record-media binding, record sharing, governed functions/actions, and fail-closed intelligence policy. Native-only renderers continue to degrade explicitly when unavailable.",
+    "channel": "stable",
+    "notes": "Vault Notes 2.0.0. The phone installs this release from the VPS and caches the hosted frontend.",
     "builder": "modula-product-release",
     "provenance": {
       "manifestSha256": "9a0a766277c86d1e59943a9e63c7956969bdc09f103ea2415f457563ea1e99c2",
-      "frontendSha256": "fbf5951ac54c701ee38cb570c90738d193783334d2efb670f83db2123fd98a0e"
+      "frontendSha256": "f7b82c1a0dbeb3439e6c3d433e74385e2b0eefdc74b73f53bf8894d660fcec97"
     }
   },
   "security": {
@@ -124,7 +124,7 @@
     "artifact": {
       "path": "frontend/frontend.manifest.json",
       "mediaType": "application/vnd.modula.frontend+json",
-      "sha256": "fbf5951ac54c701ee38cb570c90738d193783334d2efb670f83db2123fd98a0e",
+      "sha256": "f7b82c1a0dbeb3439e6c3d433e74385e2b0eefdc74b73f53bf8894d660fcec97",
       "schemaVersion": "1.0.0",
       "entryView": "home"
     }

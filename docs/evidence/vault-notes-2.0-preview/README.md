@@ -1,8 +1,8 @@
 # Vault Notes 2.0 private preview evidence
 
-This evidence is for the local `2.0.0-rc.2` candidate. The product surface is
+This evidence is for the local `2.0.0` candidate. The product surface is
 labelled **Vault Notes 2.0**, while its technical release identity remains the
-pre-release `2.0.0-rc.2`. It is not signed, registered, published, or installed
+pre-release `2.0.0`. It is not signed, registered, published, or installed
 in production, and it does not replace `digital.modula.vault-notes@1.8.0`.
 
 The preview server binds only to `127.0.0.1`, loads the compiled declarative
