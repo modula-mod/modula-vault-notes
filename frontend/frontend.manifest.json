@@ -650,7 +650,7 @@
     ]
   },
   "productId": "digital.modula.vault-notes",
-  "releaseVersion": "2.0.0",
+  "releaseVersion": "2.0.1",
   "routes": [
     {
       "path": "/",
@@ -764,16 +764,6 @@
           },
           "recordType": "note",
           "source": "record.query"
-        },
-        {
-          "capability": "ui.table@1",
-          "id": "tableCapability",
-          "source": "capability"
-        },
-        {
-          "capability": "ui.board@1",
-          "id": "boardCapability",
-          "source": "capability"
         }
       ],
       "id": "home",
@@ -807,26 +797,11 @@
             "children": [
               {
                 "accessibility": {
-                  "label": "Filter by tag, folder, property, attachment state, created date, updated date, pinned, favourite, and archive state."
-                },
-                "binding": "notes",
-                "text": "Search filters",
-                "type": "filter"
-              },
-              {
-                "accessibility": {
                   "label": "Sort by updated date, created date, or title through the host sort contract."
                 },
                 "binding": "notes",
                 "text": "Sort results",
                 "type": "sort"
-              },
-              {
-                "accessibility": {
-                  "role": "status"
-                },
-                "text": "Nested property and reference filters remain limited by the generic query contract.",
-                "type": "text"
               }
             ],
             "layout": {
@@ -960,51 +935,6 @@
               "gap": "regular"
             },
             "type": "stack"
-          },
-          {
-            "children": [
-              {
-                "children": [
-                  {
-                    "text": "Table projection: note ID, title, folder, tags, typed properties, updated date, and attachment state.",
-                    "type": "text"
-                  },
-                  {
-                    "accessibility": {
-                      "label": "Table capability status"
-                    },
-                    "binding": "tableCapability",
-                    "type": "metadata",
-                    "valuePath": "status"
-                  },
-                  {
-                    "text": "Board projection: records grouped by a declared select, folder, tag, or lifecycle field.",
-                    "type": "text"
-                  },
-                  {
-                    "accessibility": {
-                      "label": "Board capability status"
-                    },
-                    "binding": "boardCapability",
-                    "type": "metadata",
-                    "valuePath": "status"
-                  },
-                  {
-                    "accessibility": {
-                      "role": "status"
-                    },
-                    "text": "Both projections require generic recordTable and recordBoard primitives; Vault must not ship private renderers.",
-                    "type": "errorState"
-                  }
-                ],
-                "layout": {
-                  "direction": "vertical",
-                  "gap": "compact"
-                },
-                "type": "stack"
-              }
-            ],
-            "type": "section"
           }
         ],
         "type": "section"
@@ -1559,11 +1489,6 @@
           "source": "capability"
         },
         {
-          "capability": "ui.property-editor@1",
-          "id": "propertyEditorCapability",
-          "source": "capability"
-        },
-        {
           "capability": "media.picker@1",
           "id": "mediaPickerCapability",
           "source": "capability"
@@ -1669,13 +1594,6 @@
                     "type": "toolbar"
                   },
                   {
-                    "accessibility": {
-                      "role": "status"
-                    },
-                    "text": "Formatting is stored as portable Vault document blocks and marks.",
-                    "type": "text"
-                  },
-                  {
                     "children": [
                       {
                         "binding": "noteForm",
@@ -1769,55 +1687,6 @@
                           "type": "boolean"
                         },
                         "type": "field"
-                      }
-                    ],
-                    "type": "section"
-                  },
-                  {
-                    "accessibility": {
-                      "label": "Typed note properties"
-                    },
-                    "children": [
-                      {
-                        "children": [
-                          {
-                            "accessibility": {
-                              "label": "Property editor capability status"
-                            },
-                            "binding": "propertyEditorCapability",
-                            "type": "metadata",
-                            "valuePath": "status"
-                          },
-                          {
-                            "text": "text, number, boolean, date, dateTime, singleSelect, multiSelect, tags, url, recordReference",
-                            "type": "text"
-                          },
-                          {
-                            "accessibility": {
-                              "label": "Current typed properties"
-                            },
-                            "binding": "noteForm",
-                            "type": "metadata",
-                            "valuePath": "properties"
-                          },
-                          {
-                            "action": "editProperties",
-                            "text": "Edit typed properties",
-                            "type": "button"
-                          },
-                          {
-                            "accessibility": {
-                              "role": "status"
-                            },
-                            "text": "Dynamic typed property rows require the generic ui.property-editor capability.",
-                            "type": "errorState"
-                          }
-                        ],
-                        "layout": {
-                          "direction": "vertical",
-                          "gap": "compact"
-                        },
-                        "type": "stack"
                       }
                     ],
                     "type": "section"
@@ -1976,11 +1845,6 @@
           "source": "capability"
         },
         {
-          "capability": "ui.property-editor@1",
-          "id": "propertyEditorCapability",
-          "source": "capability"
-        },
-        {
           "capability": "media.picker@1",
           "id": "mediaPickerCapability",
           "source": "capability"
@@ -2086,13 +1950,6 @@
                     "type": "toolbar"
                   },
                   {
-                    "accessibility": {
-                      "role": "status"
-                    },
-                    "text": "Formatting is stored as portable Vault document blocks and marks.",
-                    "type": "text"
-                  },
-                  {
                     "children": [
                       {
                         "binding": "noteForm",
@@ -2186,55 +2043,6 @@
                           "type": "boolean"
                         },
                         "type": "field"
-                      }
-                    ],
-                    "type": "section"
-                  },
-                  {
-                    "accessibility": {
-                      "label": "Typed note properties"
-                    },
-                    "children": [
-                      {
-                        "children": [
-                          {
-                            "accessibility": {
-                              "label": "Property editor capability status"
-                            },
-                            "binding": "propertyEditorCapability",
-                            "type": "metadata",
-                            "valuePath": "status"
-                          },
-                          {
-                            "text": "text, number, boolean, date, dateTime, singleSelect, multiSelect, tags, url, recordReference",
-                            "type": "text"
-                          },
-                          {
-                            "accessibility": {
-                              "label": "Current typed properties"
-                            },
-                            "binding": "noteForm",
-                            "type": "metadata",
-                            "valuePath": "properties"
-                          },
-                          {
-                            "action": "editProperties",
-                            "text": "Edit typed properties",
-                            "type": "button"
-                          },
-                          {
-                            "accessibility": {
-                              "role": "status"
-                            },
-                            "text": "Dynamic typed property rows require the generic ui.property-editor capability.",
-                            "type": "errorState"
-                          }
-                        ],
-                        "layout": {
-                          "direction": "vertical",
-                          "gap": "compact"
-                        },
-                        "type": "stack"
                       }
                     ],
                     "type": "section"
@@ -2419,26 +2227,11 @@
                 "children": [
                   {
                     "accessibility": {
-                      "label": "Filter by tag, folder, property, attachment state, created date, updated date, pinned, favourite, and archive state."
-                    },
-                    "binding": "searchResults",
-                    "text": "Search filters",
-                    "type": "filter"
-                  },
-                  {
-                    "accessibility": {
                       "label": "Sort by updated date, created date, or title through the host sort contract."
                     },
                     "binding": "searchResults",
                     "text": "Sort results",
                     "type": "sort"
-                  },
-                  {
-                    "accessibility": {
-                      "role": "status"
-                    },
-                    "text": "Nested property and reference filters remain limited by the generic query contract.",
-                    "type": "text"
                   }
                 ],
                 "layout": {

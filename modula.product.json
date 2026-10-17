@@ -40,8 +40,8 @@
     "notes": "Vault Notes 2.0.1. A quieter notes home and editor, delete permissions for tags, links, versions, and saved sources, plus reminders, import and export files, background jobs, and a home-screen widget registration.",
     "builder": "modula-product-release",
     "provenance": {
-      "manifestSha256": "9a0a766277c86d1e59943a9e63c7956969bdc09f103ea2415f457563ea1e99c2",
-      "frontendSha256": "f7b82c1a0dbeb3439e6c3d433e74385e2b0eefdc74b73f53bf8894d660fcec97"
+      "manifestSha256": "dae6ecaba7cd8b1484ddb81da135841e67af9113ced84d0d2c7ee11efe8d8f3c",
+      "frontendSha256": "01ae86a63d3a63bcd064921c75c1b4540899d583118ae675607c7be3a118a0bc"
     }
   },
   "security": {
@@ -124,7 +124,7 @@
     "artifact": {
       "path": "frontend/frontend.manifest.json",
       "mediaType": "application/vnd.modula.frontend+json",
-      "sha256": "f7b82c1a0dbeb3439e6c3d433e74385e2b0eefdc74b73f53bf8894d660fcec97",
+      "sha256": "01ae86a63d3a63bcd064921c75c1b4540899d583118ae675607c7be3a118a0bc",
       "schemaVersion": "1.0.0",
       "entryView": "home"
     }
