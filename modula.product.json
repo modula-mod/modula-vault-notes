@@ -41,7 +41,9 @@
     "builder": "modula-product-release",
     "provenance": {
       "manifestSha256": "6645916fcb6a6dbc150928d9ee449e89e47aaf6c684f9a7dc8fe5078e7902f0e",
-      "frontendSha256": "a4872caeb59818ea2fd820ff042a4fc47cc98e636fe71fb57fdf633290a5a25c"
+      "frontendSha256": "a4872caeb59818ea2fd820ff042a4fc47cc98e636fe71fb57fdf633290a5a25c",
+      "sourceCommit": "4543b28147a943741756724671194bf64d6aafa6",
+      "frontendCommit": "4543b28147a943741756724671194bf64d6aafa6"
     }
   },
   "security": {
