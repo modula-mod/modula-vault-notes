@@ -16,4 +16,12 @@ if (!standardRoot) {
   throw new Error('Modula Product Standard checkout not found. Set MODULA_PRODUCT_STANDARD_ROOT.')
 }
 
-execFileSync('pnpm', ['--dir', standardRoot, 'mps-frontend', 'build', root], {stdio: 'inherit'})
+const cli = join(standardRoot, 'packages/product-frontend/dist/cli.js')
+if (existsSync(cli)) {
+  execFileSync(process.execPath, [cli, 'build', root], {stdio: 'inherit', cwd: standardRoot})
+} else {
+  execFileSync('pnpm', ['--dir', standardRoot, 'mps-frontend', 'build', root], {
+    stdio: 'inherit',
+    env: {...process.env, PNPM_PM_ON_FAIL: 'ignore'},
+  })
+}
