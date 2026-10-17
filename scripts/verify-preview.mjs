@@ -8,7 +8,7 @@ const artifact = JSON.parse(readFileSync('frontend/frontend.manifest.json', 'utf
 
 const checks = [
   [artifact.productId === 'digital.modula.vault-notes', 'compiled artifact has canonical product identity'],
-  [artifact.releaseVersion === '2.0.0-rc.2', 'compiled artifact is the RC.2 preview identity'],
+  [artifact.releaseVersion === '2.0.0', 'compiled artifact is the RC.2 preview identity'],
   [artifact.routes.length === 22 && artifact.views.length === 22, 'compiled artifact exposes 22 routes and 22 views'],
   [html.includes('/preview/app.js') && html.includes('/preview/styles.css'), 'preview loads local assets only'],
   [js.includes("fetch('/frontend/frontend.manifest.json'"), 'preview verifies the compiled MPS artifact'],

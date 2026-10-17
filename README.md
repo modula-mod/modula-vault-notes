@@ -20,12 +20,12 @@ generic record persistence and declarative module host rendering.
 - module ID: `digital.modula.vault-notes`
 - publisher: Modula
 - slug: `vault-notes`
-- module version: `2.0.0-rc.2`
+- module version: `2.0.0`
 - product standard: MPS 1.0 (`modula.product.json` is canonical)
 - standard version: `2.1.0`
 - manifest schema version: `2.1.0`
 - data schema version: `1.0.0`
-- candidate release identity: `vault-notes-v2.0.0-rc.2` (not published)
+- candidate release identity: `vault-notes-v2.0.0` (not published)
 - product-owned frontend source: typed TSX compiled to a validated artifact (immutable release lines; earlier tags are never mutated)
 
 Legacy module ID `modula.vault-notes` is a migration alias only. It must not

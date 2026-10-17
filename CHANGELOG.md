@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.0.0-rc.2 — private preview candidate, not published
+## 2.0.0 — private preview candidate, not published
 
 - Reconciles Vault Notes with frozen GreenField v1 contracts for settings, sync, history, reverse references, search, media bindings, record sharing, governed functions/actions, and intelligence policy.
 - Adds explicit `settings:read` and `settings:write` requests; upgrading from 1.8 requires a real permission review.

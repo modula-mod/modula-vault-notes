@@ -3,7 +3,7 @@
   "moduleId": "digital.modula.vault-notes",
   "name": "Vault Notes",
   "description": "Offline-capable Vault Notes core with governed extension points and no embedded optional add-ons.",
-  "version": "2.0.0-rc.2",
+  "version": "2.0.0",
   "publisher": {
     "publisherId": "modula",
     "displayName": "Modula",
@@ -12,10 +12,10 @@
   "source": {
     "provider": "github",
     "repository": "modula-mod/modula-vault-notes",
-    "commit": "ba88b7e3249a1daf5588800d77742c0876f77427",
+    "commit": "f58a04f811a7dfeeb4a1f5001541cccb516f0b3d",
     "manifestPath": "module.manifest.json",
-    "releaseTag": "vault-notes-v2.0.0-rc.2",
-    "releaseAssetName": "modula-vault-notes-2.0.0-rc.2.tgz"
+    "releaseTag": "vault-notes-v2.0.0",
+    "releaseAssetName": "modula-vault-notes-2.0.0.tgz"
   },
   "license": {
     "status": "firstParty",
@@ -488,7 +488,7 @@
     "executionMode": "declarative"
   },
   "integrity": {
-    "manifestSha256": "f17f23ff1d4d29610e984dd0299b5c7b5b3412ec5c632f6b34041f3f28494811"
+    "manifestSha256": "cf1ec4c8422ec60d8e2352908f08d5a9ddf137361c676b3e34e8905076e4ce92"
   },
   "extensions": {
     "marketplace": {
@@ -538,8 +538,8 @@
         ],
         "source": {
           "provider": "github-release",
-          "tag": "vault-notes-v2.0.0-rc.2",
-          "asset": "modula-vault-notes-2.0.0-rc.2.tgz"
+          "tag": "vault-notes-v2.0.0",
+          "asset": "modula-vault-notes-2.0.0.tgz"
         }
       }
     },
@@ -621,7 +621,7 @@
     "marketplace": "2.1.0"
   },
   "extensionProduct": {
-    "version": "2.0.0-rc.2",
+    "version": "2.0.0",
     "kind": "module",
     "targets": [],
     "extensionPoints": [
