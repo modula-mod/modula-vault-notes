@@ -3,7 +3,7 @@
   "moduleId": "digital.modula.vault-notes",
   "name": "Vault Notes",
   "description": "Offline-capable Vault Notes core with governed extension points and no embedded optional add-ons.",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "publisher": {
     "publisherId": "modula",
     "displayName": "Modula",
@@ -14,8 +14,8 @@
     "repository": "modula-mod/modula-vault-notes",
     "commit": "f58a04f811a7dfeeb4a1f5001541cccb516f0b3d",
     "manifestPath": "module.manifest.json",
-    "releaseTag": "vault-notes-v2.0.0",
-    "releaseAssetName": "modula-vault-notes-2.0.0.tgz"
+    "releaseTag": "vault-notes-v2.0.1",
+    "releaseAssetName": "modula-vault-notes-2.0.1.tgz"
   },
   "license": {
     "status": "firstParty",
@@ -217,6 +217,51 @@
     {
       "permission": "sharing:module.digital.modula.vault-notes.note:write",
       "reason": "Create, edit, expire, and revoke record-level note shares.",
+      "risk": "medium"
+    },
+    {
+      "permission": "records:module.digital.modula.vault-notes.tag:delete",
+      "reason": "Delete account-scoped tags.",
+      "risk": "high"
+    },
+    {
+      "permission": "records:module.digital.modula.vault-notes.note-link:delete",
+      "reason": "Delete account-scoped note links.",
+      "risk": "high"
+    },
+    {
+      "permission": "records:module.digital.modula.vault-notes.note-version:delete",
+      "reason": "Delete account-scoped note version snapshots.",
+      "risk": "high"
+    },
+    {
+      "permission": "records:module.digital.modula.vault-notes.saved-source:delete",
+      "reason": "Delete saved-source provenance references.",
+      "risk": "high"
+    },
+    {
+      "permission": "notifications:create",
+      "reason": "Remind you about a note on this device.",
+      "risk": "medium"
+    },
+    {
+      "permission": "files:temporary:read",
+      "reason": "Read a file you choose when importing notes.",
+      "risk": "medium"
+    },
+    {
+      "permission": "files:temporary:write",
+      "reason": "Write a temporary export of notes you ask to download.",
+      "risk": "medium"
+    },
+    {
+      "permission": "jobs:create",
+      "reason": "Run a short background job for import, export, or a daily note.",
+      "risk": "high"
+    },
+    {
+      "permission": "widgets:register",
+      "reason": "Offer a Vault Notes widget on the home screen.",
       "risk": "medium"
     }
   ],
@@ -538,8 +583,8 @@
         ],
         "source": {
           "provider": "github-release",
-          "tag": "vault-notes-v2.0.0",
-          "asset": "modula-vault-notes-2.0.0.tgz"
+          "tag": "vault-notes-v2.0.1",
+          "asset": "modula-vault-notes-2.0.1.tgz"
         }
       }
     },
@@ -621,7 +666,7 @@
     "marketplace": "2.1.0"
   },
   "extensionProduct": {
-    "version": "2.0.0",
+    "version": "2.0.1",
     "kind": "module",
     "targets": [],
     "extensionPoints": [
