@@ -12,7 +12,7 @@
   "source": {
     "provider": "github",
     "repository": "modula-mod/modula-vault-notes",
-    "commit": "2a59daf78f485f22670870bdca3080b91f865545",
+    "commit": "40ef19ca97b6c7197c18e9e1f66ea0fe1cf6c6ad",
     "manifestPath": "module.manifest.json",
     "releaseTag": "vault-notes-v2.1.0-rc.1",
     "releaseAssetName": "modula-vault-notes-2.1.0-rc.1.tgz"
@@ -533,7 +533,7 @@
     "executionMode": "declarative"
   },
   "integrity": {
-    "manifestSha256": "313f511ffa459ddf8e3e494ed7cacfa62ad74eb8d643276d5c9d7f8c5811a6ad"
+    "manifestSha256": "735b02490533048816238dc4d23948f34b3cc071df811778b27c8443e54777e5"
   },
   "extensions": {
     "marketplace": {

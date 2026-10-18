@@ -2406,9 +2406,12 @@
                       {
                         "children": [
                           {
+                            "accessibility": {
+                              "label": "Deleted date"
+                            },
                             "binding": "notes",
                             "type": "metadata",
-                            "valuePath": "updatedAt"
+                            "valuePath": "deletedAt"
                           },
                           {
                             "accessibility": {
