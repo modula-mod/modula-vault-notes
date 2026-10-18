@@ -87,6 +87,14 @@
       "recordType": "folder"
     },
     {
+      "confirm": true,
+      "family": "record.delete",
+      "id": "deleteFolder",
+      "label": "Delete folder",
+      "recordIdBinding": "folder",
+      "recordType": "folder"
+    },
+    {
       "family": "route.open",
       "id": "openTag",
       "label": "Open tag",
@@ -135,6 +143,14 @@
       },
       "inputBinding": "tagForm",
       "label": "Save tag",
+      "recordIdBinding": "tag",
+      "recordType": "tag"
+    },
+    {
+      "confirm": true,
+      "family": "record.delete",
+      "id": "deleteTag",
+      "label": "Delete tag",
       "recordIdBinding": "tag",
       "recordType": "tag"
     },
@@ -2692,17 +2708,34 @@
       "root": {
         "children": [
           {
+            "children": [
+              {
+                "children": [
+                  {
+                    "action": "editFolder",
+                    "text": "Rename folder",
+                    "type": "button"
+                  },
+                  {
+                    "action": "deleteFolder",
+                    "text": "Delete folder",
+                    "type": "button"
+                  }
+                ],
+                "text": "More",
+                "type": "menu"
+              }
+            ],
+            "text": "Folder actions",
+            "type": "toolbar"
+          },
+          {
             "accessibility": {
               "role": "header"
             },
             "binding": "folder",
             "type": "text",
             "valuePath": "name"
-          },
-          {
-            "action": "editFolder",
-            "text": "Rename folder",
-            "type": "button"
           },
           {
             "children": [
@@ -3098,17 +3131,34 @@
       "root": {
         "children": [
           {
+            "children": [
+              {
+                "children": [
+                  {
+                    "action": "editTag",
+                    "text": "Rename tag",
+                    "type": "button"
+                  },
+                  {
+                    "action": "deleteTag",
+                    "text": "Delete tag",
+                    "type": "button"
+                  }
+                ],
+                "text": "More",
+                "type": "menu"
+              }
+            ],
+            "text": "Tag actions",
+            "type": "toolbar"
+          },
+          {
             "accessibility": {
               "label": "Selected tag"
             },
             "binding": "tag",
             "type": "badge",
             "valuePath": "name"
-          },
-          {
-            "action": "editTag",
-            "text": "Rename tag",
-            "type": "button"
           },
           {
             "children": [

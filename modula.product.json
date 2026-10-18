@@ -24,7 +24,7 @@
   },
   "source": {
     "repository": "modula-mod/modula-vault-notes",
-    "commit": "40ef19ca97b6c7197c18e9e1f66ea0fe1cf6c6ad",
+    "commit": "ada6b3a2437643e6ab4fae78191c7cd6b10ee1d9",
     "manifestPath": "modula.product.json",
     "provider": "github"
   },
@@ -40,10 +40,10 @@
     "notes": "Vault Notes 2.1.0 release candidate. Product UI, organization, revision, media, and native host changes are under restricted acceptance; screenshots and stable publication remain pending.",
     "builder": "modula-product-release",
     "provenance": {
-      "manifestSha256": "e2eff4747810f8701ecd924f50f2ac30dcf393355c1c2e614ae338a3968724a4",
-      "frontendSha256": "0e35d7683b40290fe2788f403ddbc2b13ff599d3e214f1ad8b456534f7263d20",
-      "sourceCommit": "40ef19ca97b6c7197c18e9e1f66ea0fe1cf6c6ad",
-      "frontendCommit": "40ef19ca97b6c7197c18e9e1f66ea0fe1cf6c6ad"
+      "manifestSha256": "0a81d487744388d37629d209eacb8c04ebf0f56309b2488f75301a5fa930225c",
+      "frontendSha256": "248dbac19bb30133aa01b964a163c602f2abe161823af4c523f2dd5125600099",
+      "sourceCommit": "ada6b3a2437643e6ab4fae78191c7cd6b10ee1d9",
+      "frontendCommit": "ada6b3a2437643e6ab4fae78191c7cd6b10ee1d9"
     }
   },
   "security": {
@@ -158,7 +158,7 @@
     "artifact": {
       "path": "frontend/frontend.manifest.json",
       "mediaType": "application/vnd.modula.frontend+json",
-      "sha256": "0e35d7683b40290fe2788f403ddbc2b13ff599d3e214f1ad8b456534f7263d20",
+      "sha256": "248dbac19bb30133aa01b964a163c602f2abe161823af4c523f2dd5125600099",
       "schemaVersion": "1.0.0",
       "entryView": "home"
     }
