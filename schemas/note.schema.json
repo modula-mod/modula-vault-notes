@@ -31,7 +31,7 @@
     "contentFormat": {"enum": ["blocks-v1", "markdown-v1"]},
     "canonicalBody": {"type": "string", "maxLength": 250000},
     "plainTextProjection": {"type": "string", "maxLength": 200000},
-    "folderId": {"oneOf": [{"type": "string", "maxLength": 120}, {"$ref": "#/$defs/recordReference"}]},
+    "folderId": {"oneOf": [{"type": "string", "maxLength": 120}, {"$ref": "#/$defs/recordReference"}, {"type": "null"}]},
     "tagIds": {"type": "array", "items": {"type": "string", "maxLength": 120}, "maxItems": 100},
     "pinned": {"type": "boolean"},
     "favourite": {"type": "boolean"},
