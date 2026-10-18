@@ -5,13 +5,13 @@
   "identity": {
     "id": "digital.modula.vault-notes",
     "kind": "module",
-    "version": "2.0.2",
+    "version": "2.1.0-rc.1",
     "displayName": "Vault Notes",
     "slug": "vault-notes",
     "subtitle": "Your private knowledge space.",
     "description": "Portable private notes for Modula with folders, tags, templates, daily notes, typed properties, stable relationships, attachment metadata, history, import/export, sensitive-note policy, and governed extension points.",
-    "status": "stable",
-    "visibility": "public",
+    "status": "beta",
+    "visibility": "beta",
     "aliases": [
       "modula.vault-notes"
     ]
@@ -24,7 +24,7 @@
   },
   "source": {
     "repository": "modula-mod/modula-vault-notes",
-    "commit": "4543b28147a943741756724671194bf64d6aafa6",
+    "commit": "ae3e2ca2b4f4e3e3174e934b037294d4066a924c",
     "manifestPath": "modula.product.json",
     "provider": "github"
   },
@@ -36,14 +36,14 @@
     "declaredByPublisher": true
   },
   "release": {
-    "channel": "stable",
-    "notes": "Vault Notes 2.0.2. Notes save into this account's module records. The home, note, and editor are the writing surfaces, and the product hub shows three screenshots.",
+    "channel": "beta",
+    "notes": "Vault Notes 2.1.0 release candidate. Product UI, organization, revision, media, and native host changes are under restricted acceptance; screenshots and stable publication remain pending.",
     "builder": "modula-product-release",
     "provenance": {
-      "manifestSha256": "6645916fcb6a6dbc150928d9ee449e89e47aaf6c684f9a7dc8fe5078e7902f0e",
-      "frontendSha256": "a4872caeb59818ea2fd820ff042a4fc47cc98e636fe71fb57fdf633290a5a25c",
-      "sourceCommit": "4543b28147a943741756724671194bf64d6aafa6",
-      "frontendCommit": "4543b28147a943741756724671194bf64d6aafa6"
+      "manifestSha256": "053158f9676970d8370df42d5ca3bc3c2119166442f147e01faea45ded3bb805",
+      "frontendSha256": "8cb51865b845c520ae973e1c3c8dd2c763955b304ca36a2cacca3b447a142a47",
+      "sourceCommit": "ae3e2ca2b4f4e3e3174e934b037294d4066a924c",
+      "frontendCommit": "ae3e2ca2b4f4e3e3174e934b037294d4066a924c"
     }
   },
   "security": {
@@ -109,7 +109,7 @@
   "compatibility": {
     "productStandard": "^1.0.0",
     "greenfieldProtocol": "greenfield.v1",
-    "host": ">=1.0.0",
+    "host": ">=1.1.0",
     "moduleProfile": "^2.1.0",
     "platforms": [
       "ios",
@@ -158,7 +158,7 @@
     "artifact": {
       "path": "frontend/frontend.manifest.json",
       "mediaType": "application/vnd.modula.frontend+json",
-      "sha256": "a4872caeb59818ea2fd820ff042a4fc47cc98e636fe71fb57fdf633290a5a25c",
+      "sha256": "8cb51865b845c520ae973e1c3c8dd2c763955b304ca36a2cacca3b447a142a47",
       "schemaVersion": "1.0.0",
       "entryView": "home"
     }

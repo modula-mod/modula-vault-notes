@@ -3,7 +3,7 @@
   "moduleId": "digital.modula.vault-notes",
   "name": "Vault Notes",
   "description": "Offline-capable Vault Notes core with governed extension points and no embedded optional add-ons.",
-  "version": "2.0.2",
+  "version": "2.1.0-rc.1",
   "publisher": {
     "publisherId": "modula",
     "displayName": "Modula",
@@ -12,10 +12,10 @@
   "source": {
     "provider": "github",
     "repository": "modula-mod/modula-vault-notes",
-    "commit": "4543b28147a943741756724671194bf64d6aafa6",
+    "commit": "ae3e2ca2b4f4e3e3174e934b037294d4066a924c",
     "manifestPath": "module.manifest.json",
-    "releaseTag": "vault-notes-v2.0.2",
-    "releaseAssetName": "modula-vault-notes-2.0.2.tgz"
+    "releaseTag": "vault-notes-v2.1.0-rc.1",
+    "releaseAssetName": "modula-vault-notes-2.1.0-rc.1.tgz"
   },
   "license": {
     "status": "firstParty",
@@ -31,7 +31,7 @@
   },
   "compatibility": {
     "minimumGreenfieldVersion": "0.1.0",
-    "minimumModulaHostVersion": "0.1.0",
+    "minimumModulaHostVersion": "1.1.0",
     "protocolVersions": [
       "greenfield.v1",
       "modula-module-standard.v1"
@@ -533,7 +533,7 @@
     "executionMode": "declarative"
   },
   "integrity": {
-    "manifestSha256": "b51470ea0ec8a3802557ac776675a12ec5f0bc9e13e6b885af3277d3cc78eae0"
+    "manifestSha256": "b6b3a204f5a6fe9c3de51f2bb7932995f997a3ee264c166c363896abce2a62d8"
   },
   "extensions": {
     "marketplace": {
@@ -583,8 +583,8 @@
         ],
         "source": {
           "provider": "github-release",
-          "tag": "vault-notes-v2.0.2",
-          "asset": "modula-vault-notes-2.0.2.tgz"
+          "tag": "vault-notes-v2.1.0-rc.1",
+          "asset": "modula-vault-notes-2.1.0-rc.1.tgz"
         }
       }
     },
@@ -666,7 +666,7 @@
     "marketplace": "2.1.0"
   },
   "extensionProduct": {
-    "version": "2.0.2",
+    "version": "2.1.0-rc.1",
     "kind": "module",
     "targets": [],
     "extensionPoints": [

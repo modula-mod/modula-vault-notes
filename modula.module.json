@@ -1,7 +1,7 @@
 {
   "schemaVersion": "2.1.0",
   "standardVersion": "2.1.0",
-  "moduleVersion": "2.0.2",
+  "moduleVersion": "2.1.0-rc.1",
   "manifestSchemaVersion": "2.1.0",
   "dataSchemaVersion": "1.0.0",
   "id": "digital.modula.vault-notes",
@@ -15,7 +15,7 @@
     "supportUrl": "https://modula.digital/support"
   },
   "compatibility": {
-    "host": "^1.0.0",
+    "host": "^1.1.0",
     "runtime": "^1.0.0",
     "standard": "^2.1.0",
     "platforms": [
@@ -241,8 +241,15 @@
             "maxLength": 200000
           },
           "folderId": {
-            "type": "string",
-            "maxLength": 120
+            "oneOf": [
+              {
+                "type": "string",
+                "maxLength": 120
+              },
+              {
+                "$ref": "#/$defs/recordReference"
+              }
+            ]
           },
           "tagIds": {
             "type": "array",
@@ -389,8 +396,15 @@
             ]
           },
           "templateId": {
-            "type": "string",
-            "maxLength": 120
+            "oneOf": [
+              {
+                "type": "string",
+                "maxLength": 120
+              },
+              {
+                "$ref": "#/$defs/recordReference"
+              }
+            ]
           },
           "dailyDate": {
             "type": "string",
@@ -4332,7 +4346,7 @@
   },
   "release": {
     "repository": "modula-mod/modula-vault-notes",
-    "commitSha": "4543b28147a943741756724671194bf64d6aafa6",
+    "commitSha": "ae3e2ca2b4f4e3e3174e934b037294d4066a924c",
     "checksum": "0000000000000000000000000000000000000000000000000000000000000000",
     "licenseEvidence": [
       "LICENSE",
@@ -4418,7 +4432,7 @@
     "marketplace": "2.1.0"
   },
   "extensionProduct": {
-    "version": "2.0.2",
+    "version": "2.1.0-rc.1",
     "kind": "module",
     "targets": [],
     "extensionPoints": [
@@ -4605,7 +4619,7 @@
   },
   "versioning": {
     "version": "2.1.0",
-    "moduleVersion": "2.0.2",
+    "moduleVersion": "2.1.0-rc.1",
     "standardVersion": "2.1.0",
     "schemaVersion": "1.0.0",
     "manifestVersion": "2.1.0",
