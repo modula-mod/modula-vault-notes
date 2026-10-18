@@ -15,12 +15,12 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: modula-mod/modula-module-standard
-          ref: mms-v2.1.0
+          ref: eebf12c7df0583a5051fc584170f7f3a9f6d946c
           path: modula-module-standard
       - uses: actions/checkout@v4
         with:
           repository: modula-mod/modula-product-standard
-          ref: d3086e1f598395d2e24456172953909f3da1bf3e
+          ref: 582092b41d8da5f0f04f5f5302d54a9004d87487
           path: modula-product-standard
           ssh-key: ${{ secrets.MPS_READONLY_DEPLOY_KEY }}
       - uses: pnpm/action-setup@v4
