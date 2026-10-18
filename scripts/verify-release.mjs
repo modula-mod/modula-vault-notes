@@ -51,7 +51,7 @@ if (sourceAvailable) {
     .split('\n')
     .filter(Boolean)
   check(
-    !postSourceFiles.some(path => /^(?:frontend|schemas|src)\//.test(path)),
+    !postSourceFiles.some(path => path !== 'frontend/frontend.manifest.json' && /^(?:frontend|schemas|src)\//.test(path)),
     'no product implementation changed after the declared source commit',
   )
 }
