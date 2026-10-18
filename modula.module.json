@@ -248,6 +248,9 @@
               },
               {
                 "$ref": "#/$defs/recordReference"
+              },
+              {
+                "type": "null"
               }
             ]
           },
@@ -4346,7 +4349,7 @@
   },
   "release": {
     "repository": "modula-mod/modula-vault-notes",
-    "commitSha": "ae3e2ca2b4f4e3e3174e934b037294d4066a924c",
+    "commitSha": "2a59daf78f485f22670870bdca3080b91f865545",
     "checksum": "0000000000000000000000000000000000000000000000000000000000000000",
     "licenseEvidence": [
       "LICENSE",
