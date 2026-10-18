@@ -29,7 +29,7 @@ export function useFolderNotes() {
 }
 
 export function useTagNotes() {
-  return useRecords({id: "notes", type: "note", filterParam: "tagId", sortParam: "sort", limit: 100, filters: {archived: false}, recordState: "active"});
+  return useRecords({id: "notes", type: "note", membership: {field: "tagIds", param: "tagId"}, sortParam: "sort", limit: 100, filters: {archived: false}, recordState: "active"});
 }
 
 export function useFolders() {

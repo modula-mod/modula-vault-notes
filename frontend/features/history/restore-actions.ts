@@ -2,9 +2,10 @@ import {action} from "@modula/product-ui";
 
 export const restoreRevisionAction = action({
   id: "restoreRevision",
-  family: "function.invoke",
+  family: "record.restore",
   label: "Restore as new revision",
-  functionId: "digital.modula.vault-notes.function.note.restore-revision",
-  inputBinding: "revision",
+  recordType: "note",
+  recordIdBinding: "note",
+  sourceRevisionParam: "revisionId",
   confirm: true,
 });

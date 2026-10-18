@@ -1,0 +1,18 @@
+# Vault Product Experience 01: physical iPhone baseline
+
+Eight supplied captures, 589 × 1280 pixels, taken from Vault Notes 2.0.2 on iPhone 17 Pro Max. They show personal note content, so the images are kept outside the repository. This matrix records what is visible; an empty screen is not evidence that its backing action works.
+
+| Capture | Layout and typography | Components, data and empty state | Navigation and unavailable interactions | Owner and acceptance check |
+| --- | --- | --- | --- | --- |
+| 1 Home | Large top and bottom void; search begins too low; monospace dominates; weak search contrast. | Tall unexplained purple control at right; oversized shortcut pills; cards expose serialized `blocks` JSON. | New Note is not legible or discoverable; search results unproven. | Native: toolbar sizing, native type, structured preview. Vault: home hierarchy and actions. Verify create, search, note open. |
+| 2 Pinned | A one-line state floats in excessive empty space. | No explanation or Browse Notes action. | No visible way to pin a note from this screen. | Vault: useful state and pin action. Native: button and record update bridge. Verify pin persists and filters. |
+| 3 Favourites | Same sparse layout and monospaced title. | Empty state lacks guidance and action. | No visible path to mark a favourite. | Vault: state and favourite action. Native: update and reconciliation. Verify relaunch. |
+| 4 Folders | Search occupies a screen with no create affordance. | Empty state only says no folders. | Create, rename, delete, note counts and move workflow absent from capture. | Vault: folder routes/forms. Native: generic folder record writes and references. Verify create then move note. |
+| 5 Tags | Search and generic state with no useful action. | No canonical tag relationship shown. | Create, rename, filter and apply absent from capture. | Vault: tag routes/forms. Native: generic ID selection. Verify create, attach, filter, remove. |
+| 6 Trash | Large cards and void. | Deleted notes expose JSON; no deleted time. | Restore and permanent delete are not discoverable in the capture. | Native: preview and contextual record actions. Vault: Trash state and labels. Verify with disposable records. |
+| 7 Detail | Generic `Note` title plus separate record title; destructive action is visually dominant. | Body exposes raw JSON, no formatted reading hierarchy. | Edit and Trash are equal emphasis; no organization or history path. | Native: structured reader and action presentation. Vault: detail composition. Verify read, edit, trash. |
+| 8 Editor | Dense controls, form labels and toggles overwhelm writing; keyboard state unseen. | Internal `ui.richText@1` explanation is visible; toolbar and attachment action feel detached. | Save is at top of content; draft safety, cursor, attachment upload and return path unproven. | Native: structured round trip, focus, persistence, native controls. Vault: editor hierarchy. Verify save/reopen with marks and unknown blocks. |
+
+All eight also show a repeated product/version header, a development bug control and a persistent platform tab bar. The header and debug affordance are `ModuleHost` concerns; tab-bar policy is generic host navigation. Product copy, actions and screen order belong to Vault. The tall purple home control traces to the generic `toolbar` layout containing a search field and primary button; it needs a layout correction, not a mask.
+
+Acceptance requires fresh app captures of the eight cases plus search results, a rich document, permission denial and offline state. Visual review must use actual device dimensions and touch interactions. The supplied captures are the before evidence, not approved Product Hub media.

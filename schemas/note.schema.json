@@ -3,6 +3,25 @@
   "$id": "https://modula.digital/modules/vault-notes/schemas/note-1.0.0.json",
   "title": "Vault Note",
   "type": "object",
+  "$defs": {
+    "recordReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["record"],
+      "properties": {
+        "record": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["moduleId", "recordType", "recordId"],
+          "properties": {
+            "moduleId": {"const": "digital.modula.vault-notes"},
+            "recordType": {"type": "string", "minLength": 1, "maxLength": 120},
+            "recordId": {"type": "string", "minLength": 1, "maxLength": 120}
+          }
+        }
+      }
+    }
+  },
   "additionalProperties": false,
   "required": ["title", "document", "plainTextProjection", "tagIds", "pinned", "favourite", "archived", "dataSchemaVersion"],
   "properties": {
@@ -12,7 +31,7 @@
     "contentFormat": {"enum": ["blocks-v1", "markdown-v1"]},
     "canonicalBody": {"type": "string", "maxLength": 250000},
     "plainTextProjection": {"type": "string", "maxLength": 200000},
-    "folderId": {"type": "string", "maxLength": 120},
+    "folderId": {"oneOf": [{"type": "string", "maxLength": 120}, {"$ref": "#/$defs/recordReference"}]},
     "tagIds": {"type": "array", "items": {"type": "string", "maxLength": 120}, "maxItems": 100},
     "pinned": {"type": "boolean"},
     "favourite": {"type": "boolean"},
@@ -46,7 +65,7 @@
     "attachmentIds": {"type": "array", "items": {"type": "string", "maxLength": 180}, "maxItems": 500},
     "sensitive": {"type": "boolean"},
     "intelligencePolicy": {"enum": ["disabled", "localOnly", "preferLocal"]},
-    "templateId": {"type": "string", "maxLength": 120},
+    "templateId": {"oneOf": [{"type": "string", "maxLength": 120}, {"$ref": "#/$defs/recordReference"}]},
     "dailyDate": {"type": "string", "format": "date"},
     "source": {"$ref": "./saved-source.schema.json"},
     "revision": {"type": "integer", "minimum": 1},

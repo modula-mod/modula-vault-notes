@@ -1,4 +1,5 @@
 import {EditorToolbar} from "./editor/EditorToolbar";
+import {AttachmentList} from "./attachments/AttachmentList";
 import {IntelligenceMenu} from "./intelligence/IntelligenceMenu";
 import {Backlinks} from "./links/Backlinks";
 import {RelatedNotes} from "./links/RelatedNotes";
@@ -12,6 +13,7 @@ import {PropertiesPanel} from "./properties/PropertiesPanel";
  */
 export const extensionSurfaces = {
   EditorToolbar,
+  AttachmentList,
   IntelligenceMenu,
   Backlinks,
   RelatedNotes,
