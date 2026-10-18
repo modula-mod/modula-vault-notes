@@ -12,11 +12,13 @@ export const newFolderAction = action({id: "newFolder", family: "route.open", la
 export const editFolderAction = action({id: "editFolder", family: "route.open", label: "Rename folder", route: VAULT_PATHS.editFolder});
 export const createFolderAction = action({id: "createFolder", family: "record.create", label: "Create folder", recordType: "folder", inputBinding: "folderForm", input: {defaults: {position: 0}}});
 export const updateFolderAction = action({id: "updateFolder", family: "record.update", label: "Save folder", recordType: "folder", recordIdBinding: "folder", inputBinding: "folderForm"});
+export const deleteFolderAction = action({id: "deleteFolder", family: "record.delete", label: "Delete folder", recordType: "folder", recordIdBinding: "folder", confirm: true});
 export const openTagAction = action({id: "openTag", family: "route.open", label: "Open tag", route: VAULT_PATHS.tag, recordParam: "tagId"});
 export const newTagAction = action({id: "newTag", family: "route.open", label: "New tag", route: VAULT_PATHS.newTag});
 export const editTagAction = action({id: "editTag", family: "route.open", label: "Rename tag", route: VAULT_PATHS.editTag});
 export const createTagAction = action({id: "createTag", family: "record.create", label: "Create tag", recordType: "tag", inputBinding: "tagForm", input: {transforms: [{source: "name", target: "normalizedName", transform: "text.slug@1"}]}});
 export const updateTagAction = action({id: "updateTag", family: "record.update", label: "Save tag", recordType: "tag", recordIdBinding: "tag", inputBinding: "tagForm", input: {transforms: [{source: "name", target: "normalizedName", transform: "text.slug@1"}]}});
+export const deleteTagAction = action({id: "deleteTag", family: "record.delete", label: "Delete tag", recordType: "tag", recordIdBinding: "tag", confirm: true});
 
 export const openSearchAction = action({id: "openSearch", family: "route.open", label: "Search", route: VAULT_PATHS.search});
 export const openPinnedAction = action({id: "openPinned", family: "route.open", label: "Pinned", route: VAULT_PATHS.pinned});

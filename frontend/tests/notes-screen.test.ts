@@ -17,6 +17,10 @@ describe("Vault note surfaces", () => {
     expect(action("detachNoteMedia")).toMatchObject({family: "media.detach", recordType: "note", recordIdBinding: "note", confirm: true});
     expect(action("togglePin")).toMatchObject({family: "record.toggle", recordType: "note", recordField: "pinned", activeLabel: "Unpin"});
     expect(action("toggleFavourite")).toMatchObject({family: "record.toggle", recordType: "note", recordField: "favourite", activeLabel: "Remove from Favourites"});
+    expect(action("deleteFolder")).toMatchObject({family: "record.delete", recordType: "folder", confirm: true});
+    expect(action("deleteTag")).toMatchObject({family: "record.delete", recordType: "tag", confirm: true});
+    expect(nodes(view("folder").root).map(node => node.action)).toContain("deleteFolder");
+    expect(nodes(view("tag").root).map(node => node.action)).toContain("deleteTag");
     expect(nodes(view("trash").root).some(node => node.type === "recordList" && node.actions?.includes("restoreNote") && node.actions?.includes("purgeNote"))).toBe(true);
     expect(nodes(view("trash").root).some(node => node.type === "metadata" && node.valuePath === "deletedAt")).toBe(true);
   });
