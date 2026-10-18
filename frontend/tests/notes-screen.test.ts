@@ -18,6 +18,7 @@ describe("Vault note surfaces", () => {
     expect(action("togglePin")).toMatchObject({family: "record.toggle", recordType: "note", recordField: "pinned", activeLabel: "Unpin"});
     expect(action("toggleFavourite")).toMatchObject({family: "record.toggle", recordType: "note", recordField: "favourite", activeLabel: "Remove from Favourites"});
     expect(nodes(view("trash").root).some(node => node.type === "recordList" && node.actions?.includes("restoreNote") && node.actions?.includes("purgeNote"))).toBe(true);
+    expect(nodes(view("trash").root).some(node => node.type === "metadata" && node.valuePath === "deletedAt")).toBe(true);
   });
 
   it("declares loading, error, permission, and offline states", () => {

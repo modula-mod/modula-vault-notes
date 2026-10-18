@@ -11,6 +11,7 @@ import {
 } from "../hooks/useNotes";
 import {RecordList} from "@modula/product-ui";
 import {NoteRow} from "../components/NoteRow";
+import {DeletedNoteRow} from "../components/DeletedNoteRow";
 
 function PinnedNotesScreen() {
   const notes = usePinnedNotes();
@@ -38,7 +39,7 @@ function TrashScreen() {
     <ModuleScreen title="Trash">
       <Filter label="Deleted notes" records={notes} />
       <RecordList records={notes} actions={[restoreNoteAction, purgeNoteAction]} accessibility={{label: "Deleted notes", role: "list"}}>
-        <NoteRow note={notes} />
+        <DeletedNoteRow note={notes} />
       </RecordList>
     </ModuleScreen>
   );
