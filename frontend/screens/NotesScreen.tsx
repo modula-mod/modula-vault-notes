@@ -26,10 +26,12 @@ function NotesScreen() {
       <SearchBar results={notes} />
       <Stack direction="vertical" gap="compact">
         <Text text="Browse" accessibility={{role: "header"}} />
-        <Row gap="compact" scroll="horizontal">
+        <Row gap="compact">
           <Button label="Pinned" action={openPinnedAction} />
           <Button label="Favourites" action={openFavouritesAction} />
           <Button label="Folders" action={openFoldersAction} />
+        </Row>
+        <Row gap="compact">
           <Button label="Tags" action={openTagsAction} />
           <Button label="Trash" action={openTrashAction} />
         </Row>
