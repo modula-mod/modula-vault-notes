@@ -768,7 +768,7 @@
     ]
   },
   "productId": "digital.modula.vault-notes",
-  "releaseVersion": "2.1.0-rc.1",
+  "releaseVersion": "2.1.0-rc.2",
   "routes": [
     {
       "path": "/",
@@ -965,7 +965,15 @@
                     "action": "openFolders",
                     "text": "Folders",
                     "type": "button"
-                  },
+                  }
+                ],
+                "layout": {
+                  "gap": "compact"
+                },
+                "type": "row"
+              },
+              {
+                "children": [
                   {
                     "action": "openTags",
                     "text": "Tags",
@@ -978,8 +986,7 @@
                   }
                 ],
                 "layout": {
-                  "gap": "compact",
-                  "scroll": "horizontal"
+                  "gap": "compact"
                 },
                 "type": "row"
               }

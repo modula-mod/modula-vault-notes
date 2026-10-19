@@ -1,6 +1,6 @@
 {
   "name": "@modula/vault-notes",
-  "version": "2.1.0-rc.1",
+  "version": "2.1.0-rc.2",
   "description": "Portable, relationship-aware Vault Notes flagship candidate for the generic Modula module platform.",
   "type": "module",
   "main": "./dist/index.js",

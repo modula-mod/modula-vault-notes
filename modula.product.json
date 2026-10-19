@@ -5,7 +5,7 @@
   "identity": {
     "id": "digital.modula.vault-notes",
     "kind": "module",
-    "version": "2.1.0-rc.1",
+    "version": "2.1.0-rc.2",
     "displayName": "Vault Notes",
     "slug": "vault-notes",
     "subtitle": "Your private knowledge space.",
@@ -24,7 +24,7 @@
   },
   "source": {
     "repository": "modula-mod/modula-vault-notes",
-    "commit": "ada6b3a2437643e6ab4fae78191c7cd6b10ee1d9",
+    "commit": "beb259ad18bd0cd29174363609c16330da28091c",
     "manifestPath": "modula.product.json",
     "provider": "github"
   },
@@ -40,10 +40,10 @@
     "notes": "Vault Notes 2.1.0 release candidate. Product UI, organization, revision, media, and native host changes are under restricted acceptance; screenshots and stable publication remain pending.",
     "builder": "modula-product-release",
     "provenance": {
-      "manifestSha256": "0a81d487744388d37629d209eacb8c04ebf0f56309b2488f75301a5fa930225c",
-      "frontendSha256": "248dbac19bb30133aa01b964a163c602f2abe161823af4c523f2dd5125600099",
-      "sourceCommit": "ada6b3a2437643e6ab4fae78191c7cd6b10ee1d9",
-      "frontendCommit": "ada6b3a2437643e6ab4fae78191c7cd6b10ee1d9"
+      "manifestSha256": "71e93a7f453da9f12f7f7f13162db24c6b107ad0161cfbd499cfb666822b5628",
+      "frontendSha256": "1d0b990291081a7a7fdbf140fd74e75a59537e7182ee059c7c305396bd2436c6",
+      "sourceCommit": "beb259ad18bd0cd29174363609c16330da28091c",
+      "frontendCommit": "beb259ad18bd0cd29174363609c16330da28091c"
     }
   },
   "security": {
@@ -158,7 +158,7 @@
     "artifact": {
       "path": "frontend/frontend.manifest.json",
       "mediaType": "application/vnd.modula.frontend+json",
-      "sha256": "248dbac19bb30133aa01b964a163c602f2abe161823af4c523f2dd5125600099",
+      "sha256": "1d0b990291081a7a7fdbf140fd74e75a59537e7182ee059c7c305396bd2436c6",
       "schemaVersion": "1.0.0",
       "entryView": "home"
     }
