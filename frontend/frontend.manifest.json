@@ -775,7 +775,7 @@
     ]
   },
   "productId": "digital.modula.vault-notes",
-  "releaseVersion": "2.1.0-rc.3",
+  "releaseVersion": "2.1.0-rc.4",
   "routes": [
     {
       "path": "/",
@@ -924,7 +924,7 @@
                 "accessibility": {
                   "role": "header"
                 },
-                "text": "Your notes",
+                "text": "Notes",
                 "type": "text"
               },
               {
@@ -967,7 +967,15 @@
                     "action": "openFavourites",
                     "text": "Favourites",
                     "type": "button"
-                  },
+                  }
+                ],
+                "layout": {
+                  "gap": "compact"
+                },
+                "type": "row"
+              },
+              {
+                "children": [
                   {
                     "action": "openFolders",
                     "text": "Folders",
@@ -977,17 +985,17 @@
                     "action": "openTags",
                     "text": "Tags",
                     "type": "button"
+                  },
+                  {
+                    "action": "openTrash",
+                    "text": "Trash",
+                    "type": "button"
                   }
                 ],
                 "layout": {
-                  "columns": 2
+                  "gap": "compact"
                 },
-                "type": "grid"
-              },
-              {
-                "action": "openTrash",
-                "text": "Recently deleted",
-                "type": "button"
+                "type": "row"
               }
             ],
             "layout": {
@@ -1293,7 +1301,7 @@
             "type": "stack"
           }
         ],
-        "text": "Read note",
+        "text": "Note",
         "type": "section"
       },
       "states": {
@@ -1756,7 +1764,7 @@
             "type": "stack"
           }
         ],
-        "text": "Search Vault Notes",
+        "text": "Search",
         "type": "section"
       },
       "states": {
@@ -1796,7 +1804,7 @@
           "type": "errorState"
         }
       },
-      "title": "Search Vault Notes"
+      "title": "Search"
     },
     {
       "bindings": [
@@ -2549,24 +2557,9 @@
                 "binding": "folders",
                 "children": [
                   {
-                    "children": [
-                      {
-                        "accessibility": {
-                          "hidden": true
-                        },
-                        "icon": "folder",
-                        "type": "icon"
-                      },
-                      {
-                        "binding": "folders",
-                        "type": "text",
-                        "valuePath": "name"
-                      }
-                    ],
-                    "layout": {
-                      "gap": "regular"
-                    },
-                    "type": "row"
+                    "binding": "folders",
+                    "type": "text",
+                    "valuePath": "name"
                   }
                 ],
                 "type": "recordRow"
