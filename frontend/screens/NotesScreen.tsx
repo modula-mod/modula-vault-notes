@@ -1,4 +1,4 @@
-import {Button, Grid, ModuleScreen, Row, Stack, Text, screen} from "@modula/product-ui";
+import {Button, ModuleScreen, Row, Stack, Text, screen} from "@modula/product-ui";
 import {EmptyVault} from "../components/EmptyVault";
 import {errorState, loadingState} from "../components/ScreenStates";
 import {NotesCollection} from "../components/NotesCollection";
@@ -20,19 +20,21 @@ function NotesScreen() {
   return (
     <ModuleScreen title="Vault Notes" accessibility={{label: "Vault Notes home"}}>
       <Row gap="regular">
-        <Text text="Your notes" accessibility={{role: "header"}} />
+        <Text text="Notes" accessibility={{role: "header"}} />
         <Button label="New note" action={newNoteAction} />
       </Row>
       <SearchBar results={notes} />
       <Stack direction="vertical" gap="regular">
         <Text text="Collections" accessibility={{role: "header"}} />
-        <Grid columns={2}>
+        <Row gap="compact">
           <Button label="Pinned" action={openPinnedAction} />
           <Button label="Favourites" action={openFavouritesAction} />
+        </Row>
+        <Row gap="compact">
           <Button label="Folders" action={openFoldersAction} />
           <Button label="Tags" action={openTagsAction} />
-        </Grid>
-        <Button label="Recently deleted" action={openTrashAction} />
+          <Button label="Trash" action={openTrashAction} />
+        </Row>
       </Stack>
       <Text text="All notes" accessibility={{role: "header"}} />
       <SearchFilters results={notes} />

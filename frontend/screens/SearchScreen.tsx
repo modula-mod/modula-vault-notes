@@ -10,7 +10,7 @@ import {useVaultSearch} from "../hooks/useVaultSearch";
 function SearchScreen() {
   const results = useVaultSearch();
   return (
-    <ModuleScreen title="Search Vault Notes">
+    <ModuleScreen title="Search">
       <Stack direction="vertical" gap="regular">
         <SearchBar results={results} />
         <SearchFilters results={results} />
@@ -24,4 +24,4 @@ function SearchScreen() {
   );
 }
 
-export const searchScreen = screen("search", "collection", "Search Vault Notes", SearchScreen, {states: collectionStates("No notes match this search", "Search is unavailable")});
+export const searchScreen = screen("search", "collection", "Search", SearchScreen, {states: collectionStates("No notes match this search", "Search is unavailable")});

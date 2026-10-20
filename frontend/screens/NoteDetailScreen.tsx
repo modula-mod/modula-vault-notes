@@ -9,7 +9,7 @@ function NoteDetailScreen() {
   const note = useNote();
   const media = useRecordMedia({id: "noteMedia", type: "note", idParam: "noteId"});
   return (
-    <ModuleScreen title="Read note">
+    <ModuleScreen title="Note">
       <Stack direction="vertical" gap="regular">
         <Toolbar label="Note actions">
           <Button label="Edit" action={editNoteAction} />
