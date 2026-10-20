@@ -8,7 +8,7 @@ export function RevisionPreview({revision}: {revision: BindingRef}) {
         <Metadata binding={revision} valuePath="createdAt" />
         <Metadata binding={revision} valuePath="changeSource" />
         <Text binding={revision} valuePath="snapshot.title" accessibility={{role: "header"}} />
-        <Text binding={revision} valuePath="snapshot.plainTextProjection" />
+        <Text binding={revision} valuePath="snapshot.document" />
       </Stack>
     </Section>
   );

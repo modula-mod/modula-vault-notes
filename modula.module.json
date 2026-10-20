@@ -1,7 +1,7 @@
 {
   "schemaVersion": "2.1.0",
   "standardVersion": "2.1.0",
-  "moduleVersion": "2.0.1",
+  "moduleVersion": "2.1.0-rc.4",
   "manifestSchemaVersion": "2.1.0",
   "dataSchemaVersion": "1.0.0",
   "id": "digital.modula.vault-notes",
@@ -15,7 +15,7 @@
     "supportUrl": "https://modula.digital/support"
   },
   "compatibility": {
-    "host": "^1.0.0",
+    "host": "^1.1.0",
     "runtime": "^1.0.0",
     "standard": "^2.1.0",
     "platforms": [
@@ -241,8 +241,18 @@
             "maxLength": 200000
           },
           "folderId": {
-            "type": "string",
-            "maxLength": 120
+            "oneOf": [
+              {
+                "type": "string",
+                "maxLength": 120
+              },
+              {
+                "$ref": "#/$defs/recordReference"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "tagIds": {
             "type": "array",
@@ -389,8 +399,15 @@
             ]
           },
           "templateId": {
-            "type": "string",
-            "maxLength": 120
+            "oneOf": [
+              {
+                "type": "string",
+                "maxLength": 120
+              },
+              {
+                "$ref": "#/$defs/recordReference"
+              }
+            ]
           },
           "dailyDate": {
             "type": "string",
@@ -4332,7 +4349,7 @@
   },
   "release": {
     "repository": "modula-mod/modula-vault-notes",
-    "commitSha": "a5ec7f6d1efb40edeb6186d107793b172745982d",
+    "commitSha": "747bbc44d7efb5efbca042f7c025680fa0a68caf",
     "checksum": "0000000000000000000000000000000000000000000000000000000000000000",
     "licenseEvidence": [
       "LICENSE",
@@ -4418,7 +4435,7 @@
     "marketplace": "2.1.0"
   },
   "extensionProduct": {
-    "version": "2.0.1",
+    "version": "2.1.0-rc.4",
     "kind": "module",
     "targets": [],
     "extensionPoints": [
@@ -4605,7 +4622,7 @@
   },
   "versioning": {
     "version": "2.1.0",
-    "moduleVersion": "2.0.1",
+    "moduleVersion": "2.1.0-rc.4",
     "standardVersion": "2.1.0",
     "schemaVersion": "1.0.0",
     "manifestVersion": "2.1.0",
