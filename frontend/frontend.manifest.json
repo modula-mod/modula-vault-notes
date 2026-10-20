@@ -56,6 +56,7 @@
     },
     {
       "family": "route.open",
+      "icon": "system.folder.badge.plus",
       "id": "newFolder",
       "label": "New folder",
       "route": "/folders/new"
@@ -103,6 +104,7 @@
     },
     {
       "family": "route.open",
+      "icon": "system.number",
       "id": "newTag",
       "label": "New tag",
       "route": "/tags/new"
@@ -162,6 +164,7 @@
     },
     {
       "family": "route.open",
+      "icon": "system.pin",
       "id": "openPinned",
       "label": "Pinned",
       "route": "/pinned"
@@ -174,6 +177,7 @@
     },
     {
       "family": "route.open",
+      "icon": "system.star",
       "id": "openFavourites",
       "label": "Favourites",
       "route": "/favourites"
@@ -186,18 +190,21 @@
     },
     {
       "family": "route.open",
+      "icon": "system.trash",
       "id": "openTrash",
       "label": "Trash",
       "route": "/trash"
     },
     {
       "family": "route.open",
+      "icon": "system.folder",
       "id": "openFolders",
       "label": "Folders",
       "route": "/folders"
     },
     {
       "family": "route.open",
+      "icon": "system.number",
       "id": "openTags",
       "label": "Tags",
       "route": "/tags"
@@ -946,7 +953,7 @@
                 "accessibility": {
                   "role": "header"
                 },
-                "text": "Browse",
+                "text": "Collections",
                 "type": "text"
               },
               {
@@ -965,35 +972,27 @@
                     "action": "openFolders",
                     "text": "Folders",
                     "type": "button"
-                  }
-                ],
-                "layout": {
-                  "gap": "compact"
-                },
-                "type": "row"
-              },
-              {
-                "children": [
+                  },
                   {
                     "action": "openTags",
                     "text": "Tags",
                     "type": "button"
-                  },
-                  {
-                    "action": "openTrash",
-                    "text": "Trash",
-                    "type": "button"
                   }
                 ],
                 "layout": {
-                  "gap": "compact"
+                  "columns": 2
                 },
-                "type": "row"
+                "type": "grid"
+              },
+              {
+                "action": "openTrash",
+                "text": "Recently deleted",
+                "type": "button"
               }
             ],
             "layout": {
               "direction": "vertical",
-              "gap": "compact"
+              "gap": "regular"
             },
             "type": "stack"
           },
@@ -2552,21 +2551,22 @@
                   {
                     "children": [
                       {
-                        "binding": "folders",
-                        "type": "text",
-                        "valuePath": "name"
+                        "accessibility": {
+                          "hidden": true
+                        },
+                        "icon": "folder",
+                        "type": "icon"
                       },
                       {
                         "binding": "folders",
-                        "type": "metadata",
-                        "valuePath": "updatedAt"
+                        "type": "text",
+                        "valuePath": "name"
                       }
                     ],
                     "layout": {
-                      "direction": "vertical",
-                      "gap": "compact"
+                      "gap": "regular"
                     },
-                    "type": "stack"
+                    "type": "row"
                   }
                 ],
                 "type": "recordRow"

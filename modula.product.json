@@ -40,8 +40,8 @@
     "notes": "Vault Notes 2.1.0 release candidate. Product UI, organization, revision, media, and native host changes are under restricted acceptance; screenshots and stable publication remain pending.",
     "builder": "modula-product-release",
     "provenance": {
-      "manifestSha256": "71e93a7f453da9f12f7f7f13162db24c6b107ad0161cfbd499cfb666822b5628",
-      "frontendSha256": "1d0b990291081a7a7fdbf140fd74e75a59537e7182ee059c7c305396bd2436c6",
+      "manifestSha256": "e86d5b73286bb3faab74a9a2cce6822b6dcbe9ac7a46d29cf35852296bcd1545",
+      "frontendSha256": "fe8bc6861e94aa85ac757a18992d14452e558be955b4887ca14a3fc1cc7341b7",
       "sourceCommit": "beb259ad18bd0cd29174363609c16330da28091c",
       "frontendCommit": "beb259ad18bd0cd29174363609c16330da28091c"
     }
@@ -55,23 +55,23 @@
   "presentation": {
     "icon": {
       "role": "product.icon",
-      "path": "assets/icon/icon-1024.png",
+      "path": "assets/icon/icon-candidate.png",
       "mediaType": "image/png",
-      "width": 1024,
-      "height": 1024,
-      "sha256": "77bf6a7d8f645bbbe3be540c794624fa0cf23934aef1b452b333bda9c36f22fd",
+      "width": 1254,
+      "height": 1254,
+      "sha256": "6ab1652387d5addd5052f90c2d7a50f72eae293cb862e85f466650ef49dfb023",
       "developmentAsset": true,
-      "alt": "Vault Notes icon: a checklist note with a padlock badge on a teal tile"
+      "alt": "Vault Notes icon: a folded ivory page with a teal ink mark on a midnight teal field"
     },
     "cover": {
       "role": "product.cover",
-      "path": "assets/cover/cover.jpg",
-      "mediaType": "image/jpeg",
-      "width": 1600,
-      "height": 900,
-      "sha256": "cef9bbe729e59145bb8622020265b1640832a22a4a69421cc6db12939e145191",
+      "path": "assets/cover/cover-candidate.png",
+      "mediaType": "image/png",
+      "width": 1672,
+      "height": 941,
+      "sha256": "a52a052d0b81331904e0e36824beacbcaa1e50bf4ef1ada6aabc4ac5ae4f551b",
       "developmentAsset": true,
-      "alt": "Vault Notes cover: two note sheets, one with a checklist, on a deep teal background"
+      "alt": "Vault Notes cover: a floating folded ivory page with teal ink over a deep midnight field"
     },
     "screenshots": [
       {
@@ -158,7 +158,7 @@
     "artifact": {
       "path": "frontend/frontend.manifest.json",
       "mediaType": "application/vnd.modula.frontend+json",
-      "sha256": "1d0b990291081a7a7fdbf140fd74e75a59537e7182ee059c7c305396bd2436c6",
+      "sha256": "fe8bc6861e94aa85ac757a18992d14452e558be955b4887ca14a3fc1cc7341b7",
       "schemaVersion": "1.0.0",
       "entryView": "home"
     }
