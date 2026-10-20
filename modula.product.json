@@ -5,7 +5,7 @@
   "identity": {
     "id": "digital.modula.vault-notes",
     "kind": "module",
-    "version": "2.1.0-rc.2",
+    "version": "2.1.0-rc.3",
     "displayName": "Vault Notes",
     "slug": "vault-notes",
     "subtitle": "Your private knowledge space.",
@@ -24,7 +24,7 @@
   },
   "source": {
     "repository": "modula-mod/modula-vault-notes",
-    "commit": "beb259ad18bd0cd29174363609c16330da28091c",
+    "commit": "a28c76e967f61d0137eebc79f027a8904043c635",
     "manifestPath": "modula.product.json",
     "provider": "github"
   },
@@ -37,13 +37,13 @@
   },
   "release": {
     "channel": "beta",
-    "notes": "Vault Notes 2.1.0 release candidate. Product UI, organization, revision, media, and native host changes are under restricted acceptance; screenshots and stable publication remain pending.",
+    "notes": "Vault Notes 2.1.0-rc.3 visual candidate with refined collection navigation and new development artwork. Restricted QA and founder visual acceptance remain required.",
     "builder": "modula-product-release",
     "provenance": {
-      "manifestSha256": "e86d5b73286bb3faab74a9a2cce6822b6dcbe9ac7a46d29cf35852296bcd1545",
-      "frontendSha256": "fe8bc6861e94aa85ac757a18992d14452e558be955b4887ca14a3fc1cc7341b7",
-      "sourceCommit": "beb259ad18bd0cd29174363609c16330da28091c",
-      "frontendCommit": "beb259ad18bd0cd29174363609c16330da28091c"
+      "manifestSha256": "e524cbb4cd22236f2e6ff0943a753dc6b2667509bd77de2e40acd454ae24d612",
+      "frontendSha256": "fd107d1b09e80f5d2dc87956fb091484262ab14935fb8dbc647d8258a3633520",
+      "sourceCommit": "a28c76e967f61d0137eebc79f027a8904043c635",
+      "frontendCommit": "a28c76e967f61d0137eebc79f027a8904043c635"
     }
   },
   "security": {
@@ -158,7 +158,7 @@
     "artifact": {
       "path": "frontend/frontend.manifest.json",
       "mediaType": "application/vnd.modula.frontend+json",
-      "sha256": "fe8bc6861e94aa85ac757a18992d14452e558be955b4887ca14a3fc1cc7341b7",
+      "sha256": "fd107d1b09e80f5d2dc87956fb091484262ab14935fb8dbc647d8258a3633520",
       "schemaVersion": "1.0.0",
       "entryView": "home"
     }
