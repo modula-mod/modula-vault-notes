@@ -40,7 +40,7 @@
     "notes": "Vault Notes 2.0.2. Notes save into this account's module records. The home, note, and editor are the writing surfaces, and the product hub shows three screenshots.",
     "builder": "modula-product-release",
     "provenance": {
-      "manifestSha256": "6645916fcb6a6dbc150928d9ee449e89e47aaf6c684f9a7dc8fe5078e7902f0e",
+      "manifestSha256": "247a70d74f73e87194e5189fa417786363f1bde5a5e18c27408295a8bec8eca5",
       "frontendSha256": "a4872caeb59818ea2fd820ff042a4fc47cc98e636fe71fb57fdf633290a5a25c",
       "sourceCommit": "4543b28147a943741756724671194bf64d6aafa6",
       "frontendCommit": "4543b28147a943741756724671194bf64d6aafa6"
