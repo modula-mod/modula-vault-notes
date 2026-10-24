@@ -650,7 +650,7 @@
     ]
   },
   "productId": "digital.modula.vault-notes",
-  "releaseVersion": "2.0.1",
+  "releaseVersion": "2.0.2",
   "routes": [
     {
       "path": "/",
@@ -777,11 +777,11 @@
             "children": [
               {
                 "accessibility": {
-                  "label": "Search Vault Notes",
+                  "label": "Search notes",
                   "role": "search"
                 },
                 "binding": "notes",
-                "text": "Search titles, bodies, tags, folders, properties, and attachments",
+                "text": "Search notes",
                 "type": "search"
               },
               {
@@ -818,11 +818,6 @@
                 "type": "button"
               },
               {
-                "action": "openRecent",
-                "text": "Recent",
-                "type": "button"
-              },
-              {
                 "action": "openFavourites",
                 "text": "Favourites",
                 "type": "button"
@@ -838,28 +833,8 @@
                 "type": "button"
               },
               {
-                "action": "openSavedSearches",
-                "text": "Saved searches",
-                "type": "button"
-              },
-              {
-                "action": "openTemplates",
-                "text": "Templates",
-                "type": "button"
-              },
-              {
-                "action": "openDaily",
-                "text": "Daily note",
-                "type": "button"
-              },
-              {
-                "action": "openAttachments",
-                "text": "Attachments",
-                "type": "button"
-              },
-              {
-                "action": "openGraph",
-                "text": "Graph",
+                "action": "openTrash",
+                "text": "Trash",
                 "type": "button"
               }
             ],
@@ -951,7 +926,7 @@
               "type": "button"
             }
           ],
-          "text": "Your vault is ready for its first note",
+          "text": "No notes yet",
           "type": "emptyState"
         },
         "error": {
@@ -992,38 +967,6 @@
           "recordIdParam": "noteId",
           "recordType": "note",
           "source": "record.detail"
-        },
-        {
-          "id": "backlinkNotes",
-          "query": {
-            "filterParam": "references",
-            "limit": 50,
-            "recordState": "active",
-            "sortParam": "sort"
-          },
-          "recordType": "note",
-          "source": "record.query"
-        },
-        {
-          "id": "relatedNotes",
-          "query": {
-            "filterParam": "relatedTo",
-            "limit": 20,
-            "recordState": "active",
-            "sortParam": "sort"
-          },
-          "recordType": "note",
-          "source": "record.query"
-        },
-        {
-          "capability": "media.picker@1",
-          "id": "mediaPickerCapability",
-          "source": "capability"
-        },
-        {
-          "capability": "ui.local-intelligence@1",
-          "id": "localIntelligenceCapability",
-          "source": "capability"
         }
       ],
       "id": "detail",
@@ -1040,16 +983,6 @@
                     "type": "button"
                   },
                   {
-                    "action": "openHistory",
-                    "text": "History",
-                    "type": "button"
-                  },
-                  {
-                    "action": "shareNote",
-                    "text": "Share",
-                    "type": "button"
-                  },
-                  {
                     "action": "deleteNote",
                     "text": "Move to Trash",
                     "type": "button"
@@ -1059,386 +992,50 @@
                 "type": "toolbar"
               },
               {
-                "children": [
-                  {
-                    "accessibility": {
-                      "role": "header"
-                    },
-                    "binding": "note",
-                    "type": "text",
-                    "valuePath": "title"
-                  },
-                  {
-                    "accessibility": {
-                      "label": "Note document"
-                    },
-                    "binding": "note",
-                    "type": "text",
-                    "valuePath": "plainTextProjection"
-                  },
-                  {
-                    "accessibility": {
-                      "label": "Sensitive note; intelligence is local only",
-                      "role": "status"
-                    },
-                    "binding": "note",
-                    "type": "badge",
-                    "valuePath": "sensitive"
-                  },
-                  {
-                    "children": [
-                      {
-                        "accessibility": {
-                          "label": "Created date"
-                        },
-                        "binding": "note",
-                        "type": "metadata",
-                        "valuePath": "createdAt"
-                      },
-                      {
-                        "accessibility": {
-                          "label": "Updated date"
-                        },
-                        "binding": "note",
-                        "type": "metadata",
-                        "valuePath": "updatedAt"
-                      },
-                      {
-                        "accessibility": {
-                          "label": "Revision"
-                        },
-                        "binding": "note",
-                        "type": "metadata",
-                        "valuePath": "revision"
-                      }
-                    ],
-                    "layout": {
-                      "gap": "compact"
-                    },
-                    "type": "row"
-                  }
-                ],
-                "type": "section"
-              },
-              {
-                "children": [
-                  {
-                    "accessibility": {
-                      "label": "Folder"
-                    },
-                    "binding": "note",
-                    "type": "text",
-                    "valuePath": "folderId"
-                  },
-                  {
-                    "accessibility": {
-                      "label": "Tags"
-                    },
-                    "binding": "note",
-                    "type": "text",
-                    "valuePath": "tagIds"
-                  }
-                ],
-                "type": "section"
+                "accessibility": {
+                  "role": "header"
+                },
+                "binding": "note",
+                "type": "text",
+                "valuePath": "title"
               },
               {
                 "accessibility": {
-                  "label": "Typed note properties"
+                  "label": "Note"
                 },
-                "children": [
-                  {
-                    "children": [
-                      {
-                        "accessibility": {
-                          "label": "Note property values"
-                        },
-                        "binding": "note",
-                        "type": "metadata",
-                        "valuePath": "properties"
-                      }
-                    ],
-                    "layout": {
-                      "direction": "vertical",
-                      "gap": "compact"
-                    },
-                    "type": "stack"
-                  }
-                ],
-                "type": "section"
+                "binding": "note",
+                "type": "text",
+                "valuePath": "plainTextProjection"
               },
               {
                 "accessibility": {
-                  "label": "Note attachments"
+                  "label": "Sensitive note; intelligence is local only",
+                  "role": "status"
                 },
+                "binding": "note",
+                "type": "badge",
+                "valuePath": "sensitive"
+              },
+              {
                 "children": [
                   {
                     "accessibility": {
-                      "label": "Attachment identifiers"
+                      "label": "Updated date"
                     },
                     "binding": "note",
                     "type": "metadata",
-                    "valuePath": "attachmentIds"
+                    "valuePath": "updatedAt"
                   }
                 ],
-                "type": "section"
-              },
-              {
-                "accessibility": {
-                  "label": "Notes linking here"
+                "layout": {
+                  "gap": "compact"
                 },
-                "children": [
-                  {
-                    "accessibility": {
-                      "label": "Backlink notes",
-                      "role": "list"
-                    },
-                    "action": "openNote",
-                    "binding": "backlinkNotes",
-                    "children": [
-                      {
-                        "binding": "backlinkNotes",
-                        "children": [
-                          {
-                            "children": [
-                              {
-                                "binding": "backlinkNotes",
-                                "type": "text",
-                                "valuePath": "title"
-                              },
-                              {
-                                "binding": "backlinkNotes",
-                                "type": "text",
-                                "valuePath": "plainTextProjection"
-                              },
-                              {
-                                "children": [
-                                  {
-                                    "binding": "backlinkNotes",
-                                    "type": "metadata",
-                                    "valuePath": "updatedAt"
-                                  },
-                                  {
-                                    "accessibility": {
-                                      "label": "Sensitive note; intelligence is local only",
-                                      "role": "status"
-                                    },
-                                    "binding": "backlinkNotes",
-                                    "type": "badge",
-                                    "valuePath": "sensitive"
-                                  }
-                                ],
-                                "layout": {
-                                  "gap": "compact"
-                                },
-                                "type": "row"
-                              }
-                            ],
-                            "layout": {
-                              "direction": "vertical",
-                              "gap": "compact"
-                            },
-                            "type": "stack"
-                          }
-                        ],
-                        "type": "recordRow"
-                      }
-                    ],
-                    "type": "recordList"
-                  },
-                  {
-                    "accessibility": {
-                      "role": "status"
-                    },
-                    "text": "Backlinks require a generic reverse-reference query with account and installation scoping.",
-                    "type": "errorState"
-                  }
-                ],
-                "type": "section"
-              },
-              {
-                "children": [
-                  {
-                    "text": "Related notes use deterministic shared tags, stable links, and folder signals before semantic similarity.",
-                    "type": "text"
-                  },
-                  {
-                    "accessibility": {
-                      "label": "Related notes",
-                      "role": "list"
-                    },
-                    "action": "openNote",
-                    "binding": "relatedNotes",
-                    "children": [
-                      {
-                        "accessibility": {
-                          "label": "Related note",
-                          "role": "listitem"
-                        },
-                        "binding": "relatedNotes",
-                        "children": [
-                          {
-                            "children": [
-                              {
-                                "accessibility": {
-                                  "role": "header"
-                                },
-                                "binding": "relatedNotes",
-                                "type": "text",
-                                "valuePath": "title"
-                              },
-                              {
-                                "accessibility": {
-                                  "label": "Note preview",
-                                  "role": "text"
-                                },
-                                "binding": "relatedNotes",
-                                "type": "text",
-                                "valuePath": "plainTextProjection"
-                              },
-                              {
-                                "children": [
-                                  {
-                                    "accessibility": {
-                                      "label": "Created date"
-                                    },
-                                    "binding": "relatedNotes",
-                                    "type": "metadata",
-                                    "valuePath": "createdAt"
-                                  },
-                                  {
-                                    "accessibility": {
-                                      "label": "Updated date"
-                                    },
-                                    "binding": "relatedNotes",
-                                    "type": "metadata",
-                                    "valuePath": "updatedAt"
-                                  },
-                                  {
-                                    "accessibility": {
-                                      "label": "Revision"
-                                    },
-                                    "binding": "relatedNotes",
-                                    "type": "metadata",
-                                    "valuePath": "revision"
-                                  }
-                                ],
-                                "layout": {
-                                  "gap": "compact"
-                                },
-                                "type": "row"
-                              }
-                            ],
-                            "layout": {
-                              "direction": "vertical",
-                              "gap": "compact"
-                            },
-                            "type": "stack"
-                          }
-                        ],
-                        "type": "recordRow"
-                      }
-                    ],
-                    "type": "recordList"
-                  }
-                ],
-                "type": "section"
-              },
-              {
-                "accessibility": {
-                  "label": "Nodus actions"
-                },
-                "children": [
-                  {
-                    "children": [
-                      {
-                        "accessibility": {
-                          "label": "Local intelligence capability status"
-                        },
-                        "binding": "localIntelligenceCapability",
-                        "type": "metadata",
-                        "valuePath": "status"
-                      },
-                      {
-                        "accessibility": {
-                          "label": "Note intelligence policy"
-                        },
-                        "binding": "note",
-                        "type": "metadata",
-                        "valuePath": "intelligencePolicy"
-                      },
-                      {
-                        "accessibility": {
-                          "role": "status"
-                        },
-                        "text": "Sensitive notes use local-only intelligence. No server fallback is allowed.",
-                        "type": "text"
-                      },
-                      {
-                        "action": "intelligenceSummarize",
-                        "text": "Summarize",
-                        "type": "button"
-                      },
-                      {
-                        "action": "intelligenceRewrite",
-                        "text": "Rewrite",
-                        "type": "button"
-                      },
-                      {
-                        "action": "intelligenceExtractTasks",
-                        "text": "Extract tasks for review",
-                        "type": "button"
-                      },
-                      {
-                        "action": "intelligenceSuggestTags",
-                        "text": "Suggest tags",
-                        "type": "button"
-                      },
-                      {
-                        "action": "intelligenceSuggestTitle",
-                        "text": "Suggest title",
-                        "type": "button"
-                      },
-                      {
-                        "action": "intelligenceAskNote",
-                        "text": "Ask this note",
-                        "type": "button"
-                      },
-                      {
-                        "action": "intelligenceRelated",
-                        "text": "Find related notes",
-                        "type": "button"
-                      },
-                      {
-                        "accessibility": {
-                          "role": "status"
-                        },
-                        "text": "Local intelligence unavailable. Sensitive note content will not be sent to a server model.",
-                        "type": "errorState"
-                      }
-                    ],
-                    "layout": {
-                      "direction": "vertical",
-                      "gap": "compact"
-                    },
-                    "type": "stack"
-                  }
-                ],
-                "type": "section"
+                "type": "row"
               }
             ],
             "layout": {
               "direction": "vertical",
-              "gap": "regular",
-              "responsive": [
-                {
-                  "class": "compact",
-                  "columns": 1
-                },
-                {
-                  "class": "wide",
-                  "columns": 2
-                }
-              ]
+              "gap": "regular"
             },
             "type": "stack"
           }
@@ -1482,16 +1079,6 @@
         {
           "id": "noteForm",
           "source": "installation"
-        },
-        {
-          "capability": "ui.richText.commands@1",
-          "id": "formattingCapability",
-          "source": "capability"
-        },
-        {
-          "capability": "media.picker@1",
-          "id": "mediaPickerCapability",
-          "source": "capability"
         }
       ],
       "id": "newEditor",
@@ -1500,98 +1087,16 @@
         "children": [
           {
             "accessibility": {
-              "label": "Vault Notes editor",
+              "label": "Note editor",
               "role": "form"
             },
             "children": [
               {
                 "children": [
                   {
-                    "accessibility": {
-                      "label": "Selection-aware commands require the generic ui.richText.commands capability."
-                    },
-                    "children": [
-                      {
-                        "accessibility": {
-                          "label": "Formatting capability status"
-                        },
-                        "binding": "formattingCapability",
-                        "type": "metadata",
-                        "valuePath": "status"
-                      },
-                      {
-                        "action": "formatHeading",
-                        "text": "Heading",
-                        "type": "button"
-                      },
-                      {
-                        "action": "formatBold",
-                        "text": "Bold",
-                        "type": "button"
-                      },
-                      {
-                        "action": "formatItalic",
-                        "text": "Italic",
-                        "type": "button"
-                      },
-                      {
-                        "action": "formatStrike",
-                        "text": "Strike",
-                        "type": "button"
-                      },
-                      {
-                        "action": "formatCode",
-                        "text": "Code",
-                        "type": "button"
-                      },
-                      {
-                        "action": "formatQuote",
-                        "text": "Quote",
-                        "type": "button"
-                      },
-                      {
-                        "action": "formatBulletList",
-                        "text": "Bullets",
-                        "type": "button"
-                      },
-                      {
-                        "action": "formatNumberedList",
-                        "text": "Numbered list",
-                        "type": "button"
-                      },
-                      {
-                        "action": "formatChecklist",
-                        "text": "Checklist",
-                        "type": "button"
-                      },
-                      {
-                        "action": "insertLink",
-                        "text": "Link",
-                        "type": "button"
-                      },
-                      {
-                        "action": "insertReference",
-                        "text": "Reference",
-                        "type": "button"
-                      },
-                      {
-                        "action": "insertAttachment",
-                        "text": "Attachment",
-                        "type": "button"
-                      },
-                      {
-                        "action": "formatCallout",
-                        "text": "Callout",
-                        "type": "button"
-                      },
-                      {
-                        "action": "insertTable",
-                        "text": "Table",
-                        "type": "button"
-                      }
-                    ],
-                    "text": "Document formatting",
-                    "type": "toolbar"
+                    "action": "createNote",
+                    "text": "Save note",
+                    "type": "button"
                   },
                   {
                     "children": [
@@ -1612,10 +1117,9 @@
                         "binding": "noteForm",
                         "field": {
                           "capability": "ui.richText@1",
-                          "helpText": "Portable structured content; arbitrary HTML is not accepted.",
                           "id": "document",
                           "label": "Body",
-                          "placeholder": "Start writing your note",
+                          "placeholder": "Start writing",
                           "type": "richText"
                         },
                         "type": "field"
@@ -1649,30 +1153,6 @@
                       {
                         "binding": "noteForm",
                         "field": {
-                          "helpText": "Template expansion is performed by the module function, not duplicated in presentation code.",
-                          "id": "templateId",
-                          "label": "Template",
-                          "recordType": "template",
-                          "type": "recordReference"
-                        },
-                        "type": "field"
-                      },
-                      {
-                        "binding": "noteForm",
-                        "field": {
-                          "id": "icon",
-                          "label": "Note icon",
-                          "placeholder": "Optional symbol or short label",
-                          "type": "text",
-                          "validation": {
-                            "maxLength": 120
-                          }
-                        },
-                        "type": "field"
-                      },
-                      {
-                        "binding": "noteForm",
-                        "field": {
                           "id": "pinned",
                           "label": "Pinned",
                           "type": "boolean"
@@ -1697,95 +1177,17 @@
                     },
                     "children": [
                       {
-                        "children": [
-                          {
-                            "accessibility": {
-                              "label": "Attachment identifiers"
-                            },
-                            "binding": "noteForm",
-                            "type": "metadata",
-                            "valuePath": "attachmentIds"
-                          },
-                          {
-                            "accessibility": {
-                              "label": "Media picker capability status"
-                            },
-                            "binding": "mediaPickerCapability",
-                            "type": "metadata",
-                            "valuePath": "status"
-                          },
-                          {
-                            "action": "pickAttachment",
-                            "text": "Add attachment",
-                            "type": "button"
-                          }
-                        ],
-                        "layout": {
-                          "direction": "vertical",
-                          "gap": "compact"
-                        },
-                        "type": "stack"
+                        "action": "pickAttachment",
+                        "text": "Add attachment",
+                        "type": "button"
                       }
                     ],
                     "type": "section"
-                  },
-                  {
-                    "children": [
-                      {
-                        "binding": "noteForm",
-                        "field": {
-                          "helpText": "Sensitive notes require local-only intelligence and hide indexed content by default.",
-                          "id": "sensitive",
-                          "label": "Sensitive note",
-                          "type": "boolean"
-                        },
-                        "type": "field"
-                      },
-                      {
-                        "binding": "noteForm",
-                        "field": {
-                          "id": "intelligencePolicy",
-                          "label": "Local intelligence",
-                          "options": [
-                            {
-                              "label": "Disabled",
-                              "value": "disabled"
-                            },
-                            {
-                              "label": "Local only",
-                              "value": "localOnly"
-                            },
-                            {
-                              "label": "Prefer local",
-                              "value": "preferLocal"
-                            }
-                          ],
-                          "type": "singleSelect"
-                        },
-                        "type": "field"
-                      }
-                    ],
-                    "type": "section"
-                  },
-                  {
-                    "action": "createNote",
-                    "text": "Save note",
-                    "type": "button"
                   }
                 ],
                 "layout": {
                   "direction": "vertical",
-                  "gap": "regular",
-                  "responsive": [
-                    {
-                      "class": "compact",
-                      "columns": 1
-                    },
-                    {
-                      "class": "wide",
-                      "columns": 2
-                    }
-                  ]
+                  "gap": "regular"
                 },
                 "type": "stack"
               }
@@ -1838,16 +1240,6 @@
         {
           "id": "noteForm",
           "source": "installation"
-        },
-        {
-          "capability": "ui.richText.commands@1",
-          "id": "formattingCapability",
-          "source": "capability"
-        },
-        {
-          "capability": "media.picker@1",
-          "id": "mediaPickerCapability",
-          "source": "capability"
         }
       ],
       "id": "editor",
@@ -1856,98 +1248,16 @@
         "children": [
           {
             "accessibility": {
-              "label": "Vault Notes editor",
+              "label": "Note editor",
               "role": "form"
             },
             "children": [
               {
                 "children": [
                   {
-                    "accessibility": {
-                      "label": "Selection-aware commands require the generic ui.richText.commands capability."
-                    },
-                    "children": [
-                      {
-                        "accessibility": {
-                          "label": "Formatting capability status"
-                        },
-                        "binding": "formattingCapability",
-                        "type": "metadata",
-                        "valuePath": "status"
-                      },
-                      {
-                        "action": "formatHeading",
-                        "text": "Heading",
-                        "type": "button"
-                      },
-                      {
-                        "action": "formatBold",
-                        "text": "Bold",
-                        "type": "button"
-                      },
-                      {
-                        "action": "formatItalic",
-                        "text": "Italic",
-                        "type": "button"
-                      },
-                      {
-                        "action": "formatStrike",
-                        "text": "Strike",
-                        "type": "button"
-                      },
-                      {
-                        "action": "formatCode",
-                        "text": "Code",
-                        "type": "button"
-                      },
-                      {
-                        "action": "formatQuote",
-                        "text": "Quote",
-                        "type": "button"
-                      },
-                      {
-                        "action": "formatBulletList",
-                        "text": "Bullets",
-                        "type": "button"
-                      },
-                      {
-                        "action": "formatNumberedList",
-                        "text": "Numbered list",
-                        "type": "button"
-                      },
-                      {
-                        "action": "formatChecklist",
-                        "text": "Checklist",
-                        "type": "button"
-                      },
-                      {
-                        "action": "insertLink",
-                        "text": "Link",
-                        "type": "button"
-                      },
-                      {
-                        "action": "insertReference",
-                        "text": "Reference",
-                        "type": "button"
-                      },
-                      {
-                        "action": "insertAttachment",
-                        "text": "Attachment",
-                        "type": "button"
-                      },
-                      {
-                        "action": "formatCallout",
-                        "text": "Callout",
-                        "type": "button"
-                      },
-                      {
-                        "action": "insertTable",
-                        "text": "Table",
-                        "type": "button"
-                      }
-                    ],
-                    "text": "Document formatting",
-                    "type": "toolbar"
+                    "action": "updateNote",
+                    "text": "Save note",
+                    "type": "button"
                   },
                   {
                     "children": [
@@ -1968,10 +1278,9 @@
                         "binding": "noteForm",
                         "field": {
                           "capability": "ui.richText@1",
-                          "helpText": "Portable structured content; arbitrary HTML is not accepted.",
                           "id": "document",
                           "label": "Body",
-                          "placeholder": "Start writing your note",
+                          "placeholder": "Start writing",
                           "type": "richText"
                         },
                         "type": "field"
@@ -2005,30 +1314,6 @@
                       {
                         "binding": "noteForm",
                         "field": {
-                          "helpText": "Template expansion is performed by the module function, not duplicated in presentation code.",
-                          "id": "templateId",
-                          "label": "Template",
-                          "recordType": "template",
-                          "type": "recordReference"
-                        },
-                        "type": "field"
-                      },
-                      {
-                        "binding": "noteForm",
-                        "field": {
-                          "id": "icon",
-                          "label": "Note icon",
-                          "placeholder": "Optional symbol or short label",
-                          "type": "text",
-                          "validation": {
-                            "maxLength": 120
-                          }
-                        },
-                        "type": "field"
-                      },
-                      {
-                        "binding": "noteForm",
-                        "field": {
                           "id": "pinned",
                           "label": "Pinned",
                           "type": "boolean"
@@ -2053,95 +1338,17 @@
                     },
                     "children": [
                       {
-                        "children": [
-                          {
-                            "accessibility": {
-                              "label": "Attachment identifiers"
-                            },
-                            "binding": "noteForm",
-                            "type": "metadata",
-                            "valuePath": "attachmentIds"
-                          },
-                          {
-                            "accessibility": {
-                              "label": "Media picker capability status"
-                            },
-                            "binding": "mediaPickerCapability",
-                            "type": "metadata",
-                            "valuePath": "status"
-                          },
-                          {
-                            "action": "pickAttachment",
-                            "text": "Add attachment",
-                            "type": "button"
-                          }
-                        ],
-                        "layout": {
-                          "direction": "vertical",
-                          "gap": "compact"
-                        },
-                        "type": "stack"
+                        "action": "pickAttachment",
+                        "text": "Add attachment",
+                        "type": "button"
                       }
                     ],
                     "type": "section"
-                  },
-                  {
-                    "children": [
-                      {
-                        "binding": "noteForm",
-                        "field": {
-                          "helpText": "Sensitive notes require local-only intelligence and hide indexed content by default.",
-                          "id": "sensitive",
-                          "label": "Sensitive note",
-                          "type": "boolean"
-                        },
-                        "type": "field"
-                      },
-                      {
-                        "binding": "noteForm",
-                        "field": {
-                          "id": "intelligencePolicy",
-                          "label": "Local intelligence",
-                          "options": [
-                            {
-                              "label": "Disabled",
-                              "value": "disabled"
-                            },
-                            {
-                              "label": "Local only",
-                              "value": "localOnly"
-                            },
-                            {
-                              "label": "Prefer local",
-                              "value": "preferLocal"
-                            }
-                          ],
-                          "type": "singleSelect"
-                        },
-                        "type": "field"
-                      }
-                    ],
-                    "type": "section"
-                  },
-                  {
-                    "action": "updateNote",
-                    "text": "Save note",
-                    "type": "button"
                   }
                 ],
                 "layout": {
                   "direction": "vertical",
-                  "gap": "regular",
-                  "responsive": [
-                    {
-                      "class": "compact",
-                      "columns": 1
-                    },
-                    {
-                      "class": "wide",
-                      "columns": 2
-                    }
-                  ]
+                  "gap": "regular"
                 },
                 "type": "stack"
               }
@@ -2216,11 +1423,11 @@
             "children": [
               {
                 "accessibility": {
-                  "label": "Search Vault Notes",
+                  "label": "Search notes",
                   "role": "search"
                 },
                 "binding": "searchResults",
-                "text": "Search titles, bodies, tags, folders, properties, and attachments",
+                "text": "Search notes",
                 "type": "search"
               },
               {
@@ -2289,27 +1496,11 @@
                             "children": [
                               {
                                 "accessibility": {
-                                  "label": "Created date"
-                                },
-                                "binding": "searchResults",
-                                "type": "metadata",
-                                "valuePath": "createdAt"
-                              },
-                              {
-                                "accessibility": {
                                   "label": "Updated date"
                                 },
                                 "binding": "searchResults",
                                 "type": "metadata",
                                 "valuePath": "updatedAt"
-                              },
-                              {
-                                "accessibility": {
-                                  "label": "Revision"
-                                },
-                                "binding": "searchResults",
-                                "type": "metadata",
-                                "valuePath": "revision"
                               }
                             ],
                             "layout": {

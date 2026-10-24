@@ -51,7 +51,8 @@ if (sourceAvailable) {
     .split('\n')
     .filter(Boolean)
   check(
-    !postSourceFiles.some(path => /^(?:frontend|schemas|src)\//.test(path)),
+    // Test-only files (frontend/tests/) never ship and may be updated after the source commit.
+    !postSourceFiles.some(path => /^(?:frontend|schemas|src)\//.test(path) && !path.startsWith('frontend/tests/')),
     'no product implementation changed after the declared source commit',
   )
 }

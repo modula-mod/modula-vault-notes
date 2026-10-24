@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.2
+
+- Notes are stored in this account's module records. Create, edit, and trash use the generic record API, so later notes changes ship as a module download.
+- The home, open note, and editor drop contract copy and keep the writing actions.
+- Publishes three product-hub screenshots: the notes list, an open note, and the editor.
+
 ## 2.0.1
 
 - Home is a notes list: search, new note, and the collection shortcuts. The table and board contract notes are no longer on the home screen.

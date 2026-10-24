@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: modula-mod/modula-product-standard
-          ref: d3086e1f598395d2e24456172953909f3da1bf3e
+          ref: 3d450e87c44816af1be742ecac0b829a72fb1e1f
           path: modula-product-standard
           ssh-key: ${{ secrets.MPS_READONLY_DEPLOY_KEY }}
       - uses: pnpm/action-setup@v4

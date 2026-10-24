@@ -13,8 +13,7 @@ export const NOTE_BODY_FIELD: FieldDefinition = {
   type: "richText",
   label: "Body",
   capability: "ui.richText@1",
-  placeholder: "Start writing your note",
-  helpText: "Portable structured content; arbitrary HTML is not accepted.",
+  placeholder: "Start writing",
 };
 
 export const NOTE_FOLDER_FIELD: FieldDefinition = {
