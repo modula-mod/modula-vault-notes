@@ -405,7 +405,6 @@ export class VaultNotesStore {
     return this.queryNotes({query, includeDeleted: options.includeDeleted, includeSensitive: options.includeSensitive, filters: {archived: options.includeArchived ? undefined : false}, limit: 100})
       .items
       .map(note => projectNoteForSearch(note, this.context.accountId, note.folderId ? this.folders.get(note.folderId) : undefined, [...this.attachments.values()], {includeSensitiveBody: options.includeSensitive ?? false}))
-      .filter(entry => !entry.sensitive || options.includeSensitive)
   }
 
   queryNotes(input: VaultNoteSearchQuery = {}) {
@@ -545,7 +544,7 @@ export class VaultNotesStore {
       if (property.type === 'number' && typeof property.value !== 'number' && property.value !== null) throw new VaultNotesError('INVALID_NOTE_PROPERTY', 'Number property requires a numeric value')
       if (property.type === 'boolean' && typeof property.value !== 'boolean' && property.value !== null) throw new VaultNotesError('INVALID_NOTE_PROPERTY', 'Boolean property requires a boolean value')
       if (property.type === 'date' && typeof property.value !== 'string' && property.value !== null) throw new VaultNotesError('INVALID_NOTE_PROPERTY', 'Date property requires an ISO date string')
-      if (property.type === 'dateTime' && typeof property.value !== 'string' && property.value !== null) throw new VaultNotesError('INVALID_NOTE_PROPERTY', 'DateTime property requires an ISO datetime string')
+      if (property.type === 'dateTime' && typeof property.value !== 'string' && property.value !== null) throw new VaultNotesError('INVALID_NOTE_PROPERTY', 'DateTime property requires an ISO date-time string')
       if (['multiSelect', 'tags'].includes(property.type) && !Array.isArray(property.value) && property.value !== null) throw new VaultNotesError('INVALID_NOTE_PROPERTY', 'Multi-value property requires an array')
     }
   }
@@ -593,4 +592,3 @@ function validateAttachmentInput(input: {assetId: string; name: string; mimeType
   if (input.durationMs !== undefined && (!Number.isInteger(input.durationMs) || input.durationMs < 0 || input.durationMs > 86_400_000)) throw new VaultNotesError('INVALID_ATTACHMENT_DURATION', 'Attachment duration is invalid')
   if (input.checksumSha256 !== undefined && !/^[a-f0-9]{64}$/.test(input.checksumSha256)) throw new VaultNotesError('INVALID_ATTACHMENT_CHECKSUM', 'Attachment checksum is invalid')
 }
-
