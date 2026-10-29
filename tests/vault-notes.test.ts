@@ -154,9 +154,9 @@ describe('Vault Notes runtime helpers', () => {
       idempotencyKey: 'structured-1',
     })
     store.pinNote(note.id)
-    const attachment = store.attach({noteId: note.id, assetId: 'asset-pdf-1', name: 'architecture.pdf', mimeType: 'application/pdf', size: 4096, checksumSha256: 'a'.repeat(64), idempotencyKey: 'attach-1'})
+    const attachment = store.attach({noteId: note.id, assetId: 'asset-pdf-1', name: 'architecture.pdf', mimeType: 'application/pdf', size: 4096, checksumSha256: 'a'.repeat(64), idempotencyKey: 'attach-structured'})
     expect(attachment.kind).toBe('pdf')
-    expect(store.queryNotes({query: 'architecture.pdf', filters: {folderId: folder.id, tagIds: [tag.id], pinned: true, hasAttachment: true, property: {id: 'status', value: 'active'}}, includeSensitive: true})).toMatchObject({total: 1})
+    expect(store.queryNotes({query: 'architecture.pdf', filters: {folderId: folder.id, tagIds: [tag.id], pinned: true, hasAttachment: true, property: {id: 'status', value: 'active'}}, includeSensitive: true}).items[0]?.id).toBe(note.id)
     expect(store.saveSearch({name: 'Pinned research', filters: {pinned: true, folderId: folder.id}}).name).toBe('Pinned research')
     expect(() => store.attach({noteId: note.id, assetId: '/private/file', name: '../secret.pdf', mimeType: 'application/pdf', size: 1, idempotencyKey: 'attach-bad'})).toThrow(VaultNotesError)
   })
@@ -233,3 +233,66 @@ describe('Vault Notes runtime helpers', () => {
     expect(JSON.stringify(diagnostics)).not.toContain('Private body')
   })
 })
+
+describe('FLAGSHIP-02 privacy and content integrity regressions', () => {
+  const context = {accountId: 'acct-private', actorId: 'actor-private', requestId: 'req-private', correlationId: 'corr-private'}
+
+  it('purges note revisions, attachment metadata, and cached note results after permanent deletion', () => {
+    const store = new VaultNotesStore(context)
+    const first = store.createNote({title: 'Secret', document: createDocumentFromText('Original secret'), idempotencyKey: 'create-secret'})
+    store.updateNote({id: first.id, expectedRevision: 1, document: createDocumentFromText('Revised secret'), idempotencyKey: 'update-secret'})
+    store.attach({noteId: first.id, assetId: 'asset-one', name: 'secret.pdf', mimeType: 'application/pdf', size: 10, idempotencyKey: 'attach-secret'})
+    expect(store.listVersions(first.id).length).toBeGreaterThan(0)
+    store.permanentlyDeleteNote(first.id, true)
+    expect(store.listVersions(first.id)).toEqual([])
+    expect(store.listAttachments(first.id)).toEqual([])
+    expect(store.listNotes(true).some(note => note.id === first.id)).toBe(false)
+    const recreated = store.createNote({title: 'New', document: createDocumentFromText('New body'), idempotencyKey: 'create-secret'})
+    expect(recreated.id).not.toBe(first.id)
+    expect(recreated.title).toBe('New')
+  })
+
+  it('never reuses stale Markdown source when a structured document changes, and restores original source from revision', () => {
+    const store = new VaultNotesStore(context)
+    const original = createDocumentFromText('Original')
+    const first = store.createNote({title: 'Markdown', document: original, contentFormat: 'markdown-v1', canonicalBody: '**Original**', idempotencyKey: 'create-markdown'})
+    const renamed = store.updateNote({id: first.id, expectedRevision: 1, title: 'Renamed', document: original, idempotencyKey: 'rename-markdown'})
+    expect(renamed.canonicalBody).toBe('**Original**')
+    const rewritten = store.updateNote({id: first.id, expectedRevision: 2, document: createDocumentFromText('Rewritten'), idempotencyKey: 'rewrite-markdown'})
+    expect(rewritten.contentFormat).toBe('blocks-v1')
+    expect(rewritten.canonicalBody).toBeUndefined()
+    const restored = store.restoreRevision({noteId: first.id, revision: 1, expectedCurrentRevision: 3, idempotencyKey: 'restore-markdown'})
+    expect(restored.contentFormat).toBe('markdown-v1')
+    expect(restored.canonicalBody).toBe('**Original**')
+    expect(restored.plainTextProjection).toBe('Original')
+  })
+
+  it('rejects malformed rich-text shapes without runtime exceptions', () => {
+    const malformed = [
+      {schemaVersion: '1.0.0', blocks: {}},
+      {schemaVersion: '1.0.0', blocks: [{id: 'a', type: 'paragraph', inlines: [null]}]},
+      {schemaVersion: '1.0.0', blocks: [{id: 'a', type: 'paragraph', inlines: [{text: 'hi', marks: 12}]}]},
+      {schemaVersion: '1.0.0', blocks: [{id: 'a', type: 'paragraph', inlines: [{text: 'hi', marks: [null]}]}]},
+      {schemaVersion: '1.0.0', blocks: [{id: 'a', type: 'table', columns: ['A'], rows: {length: 1}}]},
+    ]
+    for (const document of malformed) {
+      expect(() => validateStructuredDocument(document)).not.toThrow()
+      expect(validateStructuredDocument(document).valid).toBe(false)
+    }
+    const cyclic: Record<string, unknown> = {schemaVersion: '1.0.0'}
+    cyclic.blocks = [cyclic]
+    expect(validateStructuredDocument(cyclic).issues).toContain('DOCUMENT_NOT_SERIALIZABLE')
+  })
+
+  it('refuses to restore references to attachments that have been removed', () => {
+    const store = new VaultNotesStore(context)
+    const note = store.createNote({title: 'With file', document: createDocumentFromText('File'), idempotencyKey: 'create-file'})
+    const attached = store.attach({noteId: note.id, assetId: 'file-two', name: 'file.pdf', mimeType: 'application/pdf', size: 5, idempotencyKey: 'add-file'})
+    const afterAttach = store.listNotes()[0]!
+    store.removeAttachment(note.id, attached.id)
+    const current = store.listNotes()[0]!
+    expect(() => store.restoreRevision({noteId: note.id, revision: afterAttach.revision, expectedCurrentRevision: current.revision, idempotencyKey: 'restore-file'})).toThrow('Revision references a missing attachment')
+    expect(store.listNotes()[0]?.revision).toBe(current.revision)
+  })
+})
+

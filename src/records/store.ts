@@ -150,6 +150,10 @@ export class VaultNotesStore {
       if (current.revision !== input.expectedRevision) throw new VaultNotesError('NOTE_REVISION_CONFLICT', 'Expected revision is stale')
       const document = input.document ?? current.document
       this.requireDocument(document)
+      // Never export an old Markdown body after its structured document changes.
+      const documentChanged = JSON.stringify(document) !== JSON.stringify(current.document)
+      const contentFormat = input.contentFormat ?? (documentChanged && input.canonicalBody === undefined ? 'blocks-v1' : current.contentFormat ?? 'blocks-v1')
+      const canonicalBody = input.canonicalBody !== undefined ? input.canonicalBody : documentChanged ? undefined : current.canonicalBody
       this.requireFolder(input.folderId)
       this.requireTags(input.tagIds ?? current.tagIds)
       this.requireProperties(input.properties ?? current.properties?.values ?? [])
@@ -160,8 +164,8 @@ export class VaultNotesStore {
         ...current,
         title: input.title?.trim() || current.title,
         document: structuredClone(document),
-        contentFormat: input.contentFormat ?? current.contentFormat ?? 'blocks-v1',
-        canonicalBody: input.canonicalBody ?? current.canonicalBody,
+        contentFormat,
+        canonicalBody,
         plainTextProjection: plainTextProjection(document),
         folderId: input.folderId ?? current.folderId,
         tagIds: unique(input.tagIds ?? current.tagIds),
@@ -216,6 +220,17 @@ export class VaultNotesStore {
     this.notes.delete(id)
     for (const [linkId, link] of this.links) if (link.sourceNoteId === id || link.targetNoteId === id) this.links.delete(linkId)
     for (const [attachmentId, attachment] of this.attachments) if (attachment.noteId === id) this.attachments.delete(attachmentId)
+    // Historical versions hold entire document bodies. They must not survive purge.
+    for (let index = this.versions.length - 1; index >= 0; index -= 1) {
+      if (this.versions[index]?.noteId === id) this.versions.splice(index, 1)
+    }
+    // Completed create/update/attachment mutations may also cache private note content.
+    for (const [key, operation] of this.idempotency) {
+      const result = operation.result
+      if (result && typeof result === 'object' && (('id' in result && result.id === id) || ('noteId' in result && result.noteId === id))) {
+        this.idempotency.delete(key)
+      }
+    }
     this.emit('vault-notes.note.permanently-deleted', current)
     return {deleted: true, id}
   }
@@ -348,7 +363,7 @@ export class VaultNotesStore {
     if (!attachment || attachment.noteId !== noteId) throw new VaultNotesError('ATTACHMENT_NOT_FOUND', 'Attachment not found')
     this.snapshot(note, 'manual')
     this.attachments.delete(attachmentId)
-    const updated = {...note, attachmentIds: (note.attachmentIds ?? []).filter(id => id !== attachmentId), coverAttachmentId: note.coverAttachmentId === attachmentId ? undefined : note.coverAttachmentId, revision: note.revision + 1, updatedAt: new Date().toISOString()}
+    const updated = {...note, attachmentIds: (note.attachmentIds ?? []).filter(id => id !== attachmentId), coverAttachmentId: note.coverAttachmentId === attachmentId ? undefined : note.coverAttachmentId}
     this.notes.set(noteId, updated)
     return updated
   }
@@ -359,14 +374,21 @@ export class VaultNotesStore {
       if (current.revision !== input.expectedCurrentRevision) throw new VaultNotesError('NOTE_REVISION_CONFLICT', 'Expected revision is stale')
       const version = this.versions.find(candidate => candidate.noteId === input.noteId && candidate.revision === input.revision)
       if (!version) throw new VaultNotesError('NOTE_VERSION_NOT_FOUND', 'Note version not found')
+      const restoredAttachmentIds = unique(version.attachmentIds ?? [])
+      for (const attachmentId of restoredAttachmentIds) {
+        const attachment = this.attachments.get(attachmentId)
+        if (!attachment || attachment.noteId !== current.id) throw new VaultNotesError('NOTE_VERSION_ATTACHMENT_MISSING', 'Revision references a missing attachment')
+      }
       this.snapshot(current, 'restore')
       const restored: VaultNoteRecord = {
         ...current,
         title: version.title,
         document: structuredClone(version.document),
+        contentFormat: version.contentFormat ?? 'blocks-v1',
+        canonicalBody: version.canonicalBody,
         plainTextProjection: version.plainTextProjection ?? plainTextProjection(version.document),
         properties: structuredClone(version.properties ?? {version: '1.0.0', values: []}),
-        attachmentIds: unique(version.attachmentIds ?? []),
+        attachmentIds: restoredAttachmentIds,
         sensitive: version.sensitive ?? false,
         intelligencePolicy: version.sensitive ? 'localOnly' : current.intelligencePolicy,
         deletedAt: undefined,
@@ -380,8 +402,10 @@ export class VaultNotesStore {
   }
 
   search(query: string, options: {includeArchived?: boolean; includeDeleted?: boolean; includeSensitive?: boolean} = {}) {
-    return this.queryNotes({query, includeDeleted: options.includeDeleted, includeSensitive: options.includeSensitive, filters: {archived: options.includeArchived ? undefined : false}, limit: 100}).items
-      .map(note => projectNoteForSearch(note, this.context.accountId, note.folderId ? this.folders.get(note.folderId) : undefined, [...this.attachments.values()], {includeSensitiveBody: options.includeSensitive}))
+    return this.queryNotes({query, includeDeleted: options.includeDeleted, includeSensitive: options.includeSensitive, filters: {archived: options.includeArchived ? undefined : false}, limit: 100})
+      .items
+      .map(note => projectNoteForSearch(note, this.context.accountId, note.folderId ? this.folders.get(note.folderId) : undefined, [...this.attachments.values()], {includeSensitiveBody: options.includeSensitive ?? false}))
+      .filter(entry => !entry.sensitive || options.includeSensitive)
   }
 
   queryNotes(input: VaultNoteSearchQuery = {}) {
@@ -481,6 +505,8 @@ export class VaultNotesStore {
       revision: note.revision,
       title: note.title,
       document: structuredClone(note.document),
+      contentFormat: note.contentFormat,
+      canonicalBody: note.canonicalBody,
       plainTextProjection: note.plainTextProjection,
       properties: structuredClone(note.properties ?? {version: '1.0.0', values: []}),
       attachmentIds: [...(note.attachmentIds ?? [])],
@@ -518,6 +544,8 @@ export class VaultNotesStore {
       ids.add(property.id)
       if (property.type === 'number' && typeof property.value !== 'number' && property.value !== null) throw new VaultNotesError('INVALID_NOTE_PROPERTY', 'Number property requires a numeric value')
       if (property.type === 'boolean' && typeof property.value !== 'boolean' && property.value !== null) throw new VaultNotesError('INVALID_NOTE_PROPERTY', 'Boolean property requires a boolean value')
+      if (property.type === 'date' && typeof property.value !== 'string' && property.value !== null) throw new VaultNotesError('INVALID_NOTE_PROPERTY', 'Date property requires an ISO date string')
+      if (property.type === 'dateTime' && typeof property.value !== 'string' && property.value !== null) throw new VaultNotesError('INVALID_NOTE_PROPERTY', 'DateTime property requires an ISO datetime string')
       if (['multiSelect', 'tags'].includes(property.type) && !Array.isArray(property.value) && property.value !== null) throw new VaultNotesError('INVALID_NOTE_PROPERTY', 'Multi-value property requires an array')
     }
   }
@@ -565,3 +593,4 @@ function validateAttachmentInput(input: {assetId: string; name: string; mimeType
   if (input.durationMs !== undefined && (!Number.isInteger(input.durationMs) || input.durationMs < 0 || input.durationMs > 86_400_000)) throw new VaultNotesError('INVALID_ATTACHMENT_DURATION', 'Attachment duration is invalid')
   if (input.checksumSha256 !== undefined && !/^[a-f0-9]{64}$/.test(input.checksumSha256)) throw new VaultNotesError('INVALID_ATTACHMENT_CHECKSUM', 'Attachment checksum is invalid')
 }
+

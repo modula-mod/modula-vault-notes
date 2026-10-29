@@ -177,6 +177,8 @@ export type VaultNoteVersionRecord = {
   revision: number
   title: string
   document: VaultStructuredDocument
+  contentFormat?: VaultContentFormat
+  canonicalBody?: string
   plainTextProjection?: string
   properties?: VaultNoteProperties
   attachmentIds?: string[]
@@ -293,3 +295,4 @@ export type VaultModuleEvent = {
   correlationId: string
   payload: Record<string, unknown>
 }
+

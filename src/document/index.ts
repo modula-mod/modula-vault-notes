@@ -45,13 +45,23 @@ export function createDocumentFromText(text: string): VaultStructuredDocument {
 export function validateStructuredDocument(input: unknown): VaultDocumentValidationResult {
   const issues: string[] = []
   if (!input || typeof input !== 'object' || Array.isArray(input)) return {valid: false, issues: ['DOCUMENT_NOT_OBJECT']}
-  if (JSON.stringify(input).length > MAX_DOCUMENT_BYTES) issues.push('DOCUMENT_TOO_LARGE')
+  let encoded: string
+  try {
+    encoded = JSON.stringify(input)
+  } catch {
+    return {valid: false, issues: ['DOCUMENT_NOT_SERIALIZABLE']}
+  }
+  if (Buffer.byteLength(encoded, 'utf8') > MAX_DOCUMENT_BYTES) issues.push('DOCUMENT_TOO_LARGE')
   if (depth(input) > MAX_DEPTH) issues.push('DOCUMENT_TOO_DEEP')
   const document = input as Partial<VaultStructuredDocument>
   if (document.schemaVersion !== '1.0.0') issues.push('UNSUPPORTED_DOCUMENT_SCHEMA')
-  if (!Array.isArray(document.blocks) || document.blocks.length > MAX_BLOCKS) issues.push('INVALID_BLOCKS')
+  if (!Array.isArray(document.blocks)) {
+    issues.push('INVALID_BLOCKS')
+    return {valid: false, issues}
+  }
+  if (document.blocks.length > MAX_BLOCKS) issues.push('INVALID_BLOCKS')
   const seen = new Set<string>()
-  for (const [index, block] of (document.blocks ?? []).entries()) validateBlock(block, index, seen, issues)
+  for (const [index, block] of document.blocks.entries()) validateBlock(block, index, seen, issues)
   return {valid: issues.length === 0, issues, document: issues.length === 0 ? document as VaultStructuredDocument : undefined}
 }
 
@@ -93,7 +103,7 @@ function validateBlock(input: unknown, index: number, seen: Set<string>, issues:
   if (block.level !== undefined && ![1, 2, 3].includes(block.level)) issues.push(`BLOCK_${index}_INVALID_LEVEL`)
   if (block.items !== undefined && (!Array.isArray(block.items) || block.items.length > 200 || !block.items.every(item => typeof item === 'string' && item.length <= 2000))) issues.push(`BLOCK_${index}_INVALID_ITEMS`)
   if (block.checked !== undefined && (!Array.isArray(block.checked) || !block.checked.every(item => typeof item === 'boolean'))) issues.push(`BLOCK_${index}_INVALID_CHECKED`)
-  if (block.checked && block.items && block.checked.length !== block.items.length) issues.push(`BLOCK_${index}_CHECKLIST_LENGTH_MISMATCH`)
+  if (Array.isArray(block.checked) && Array.isArray(block.items) && block.checked.length !== block.items.length) issues.push(`BLOCK_${index}_CHECKLIST_LENGTH_MISMATCH`)
   if (block.url !== undefined && !safeUrl(block.url)) issues.push(`BLOCK_${index}_UNSAFE_URL`)
   if (block.attachmentId !== undefined && (typeof block.attachmentId !== 'string' || !ID_PATTERN.test(block.attachmentId))) issues.push(`BLOCK_${index}_INVALID_ATTACHMENT_ID`)
   if (block.sourceRef !== undefined && (typeof block.sourceRef !== 'string' || !/^[A-Za-z0-9._:-]{1,180}$/.test(block.sourceRef))) issues.push(`BLOCK_${index}_INVALID_SOURCE_REFERENCE`)
@@ -101,7 +111,7 @@ function validateBlock(input: unknown, index: number, seen: Set<string>, issues:
   if (block.mimeType !== undefined && (typeof block.mimeType !== 'string' || !/^[a-z0-9.+-]+\/[a-z0-9.+-]+$/i.test(block.mimeType))) issues.push(`BLOCK_${index}_INVALID_MIME_TYPE`)
   if (block.durationMs !== undefined && (!Number.isInteger(block.durationMs) || block.durationMs < 0 || block.durationMs > 86_400_000)) issues.push(`BLOCK_${index}_INVALID_DURATION`)
   if (block.columns !== undefined && (!Array.isArray(block.columns) || block.columns.length < 1 || block.columns.length > 50 || !block.columns.every(cell => typeof cell === 'string' && cell.length <= 2000))) issues.push(`BLOCK_${index}_INVALID_COLUMNS`)
-  if (block.rows !== undefined && (!Array.isArray(block.rows) || block.rows.length > 1000 || !block.rows.every(row => Array.isArray(row) && row.length === block.columns?.length && row.every(cell => typeof cell === 'string' && cell.length <= 2000)))) issues.push(`BLOCK_${index}_INVALID_ROWS`)
+  if (block.rows !== undefined && (!Array.isArray(block.rows) || block.rows.length > 1000 || !block.rows.every(row => Array.isArray(row) && Array.isArray(block.columns) && row.length === block.columns.length && row.every(cell => typeof cell === 'string' && cell.length <= 2000)))) issues.push(`BLOCK_${index}_INVALID_ROWS`)
   if (block.type === 'table' && (!block.columns || !block.rows)) issues.push(`BLOCK_${index}_INCOMPLETE_TABLE`)
   if (block.type === 'note-reference' && !block.targetNoteId) issues.push(`BLOCK_${index}_MISSING_NOTE_REFERENCE`)
   if (['image-reference', 'file-reference', 'audio-reference'].includes(String(block.type)) && !block.attachmentId && !block.sourceRef) issues.push(`BLOCK_${index}_MISSING_ATTACHMENT_REFERENCE`)
@@ -109,11 +119,24 @@ function validateBlock(input: unknown, index: number, seen: Set<string>, issues:
     if (!Array.isArray(block.inlines) || block.inlines.length > 1000) issues.push(`BLOCK_${index}_INVALID_INLINES`)
     else {
       for (const [inlineIndex, inline] of block.inlines.entries()) {
-        if (!inline || typeof inline !== 'object' || Array.isArray(inline) || typeof inline.text !== 'string') issues.push(`BLOCK_${index}_INLINE_${inlineIndex}_INVALID`)
-        for (const mark of (inline as {marks?: unknown[]}).marks ?? []) {
-          if (!mark || typeof mark !== 'object' || Array.isArray(mark) || !INLINE_MARKS.has((mark as {type?: VaultInlineMarkType}).type as VaultInlineMarkType)) issues.push(`BLOCK_${index}_INLINE_${inlineIndex}_UNKNOWN_MARK`)
-          if ((mark as {type?: string}).type === 'link' && !safeUrl((mark as {href?: string}).href)) issues.push(`BLOCK_${index}_INLINE_${inlineIndex}_UNSAFE_LINK`)
-          if ((mark as {type?: string}).type === 'note-reference' && (typeof (mark as {noteId?: unknown}).noteId !== 'string' || !ID_PATTERN.test((mark as {noteId: string}).noteId))) issues.push(`BLOCK_${index}_INLINE_${inlineIndex}_INVALID_NOTE_REFERENCE`)
+        if (!inline || typeof inline !== 'object' || Array.isArray(inline) || typeof inline.text !== 'string') {
+          issues.push(`BLOCK_${index}_INLINE_${inlineIndex}_INVALID`)
+          continue
+        }
+        const marks: unknown = inline.marks
+        if (marks !== undefined && !Array.isArray(marks)) {
+          issues.push(`BLOCK_${index}_INLINE_${inlineIndex}_INVALID_MARKS`)
+          continue
+        }
+        for (const mark of marks ?? []) {
+          if (!mark || typeof mark !== 'object' || Array.isArray(mark)) {
+            issues.push(`BLOCK_${index}_INLINE_${inlineIndex}_UNKNOWN_MARK`)
+            continue
+          }
+          const candidate = mark as {type?: VaultInlineMarkType; href?: string; noteId?: string}
+          if (!INLINE_MARKS.has(candidate.type as VaultInlineMarkType)) issues.push(`BLOCK_${index}_INLINE_${inlineIndex}_UNKNOWN_MARK`)
+          if (candidate.type === 'link' && !safeUrl(candidate.href)) issues.push(`BLOCK_${index}_INLINE_${inlineIndex}_UNSAFE_LINK`)
+          if (candidate.type === 'note-reference' && (typeof candidate.noteId !== 'string' || !ID_PATTERN.test(candidate.noteId))) issues.push(`BLOCK_${index}_INLINE_${inlineIndex}_INVALID_NOTE_REFERENCE`)
         }
       }
     }
@@ -134,3 +157,4 @@ function depth(value: unknown, level = 0): number {
   if (!value || typeof value !== 'object') return level
   return Math.max(level, ...Object.values(value as Record<string, unknown>).map(child => depth(child, level + 1)))
 }
+
