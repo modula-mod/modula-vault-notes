@@ -2,7 +2,7 @@ import {Button, ModuleScreen, Stack, Text, Toolbar, screen} from "@modula/produc
 import {NoteMetadata} from "../components/NoteMetadata";
 import {SensitiveBadge} from "../components/SensitiveBadge";
 import {errorState, loadingState} from "../components/ScreenStates";
-import {deleteNoteAction, editNoteAction} from "../features/notes/actions";
+import {deleteNoteAction, editNoteAction, openHistoryAction, openHomeAction, shareNoteAction} from "../features/notes/actions";
 import {useNote} from "../hooks/useNote";
 
 function NoteDetailScreen() {
@@ -11,7 +11,10 @@ function NoteDetailScreen() {
     <ModuleScreen title="Note">
       <Stack direction="vertical" gap="regular">
         <Toolbar label="Note actions">
+          <Button label="Notes" action={openHomeAction} />
           <Button label="Edit" action={editNoteAction} />
+          <Button label="Revision history" action={openHistoryAction} />
+          <Button label="Share" action={shareNoteAction} />
           <Button label="Move to Trash" action={deleteNoteAction} />
         </Toolbar>
         <Text binding={note} valuePath="title" accessibility={{role: "header"}} />

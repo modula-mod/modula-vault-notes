@@ -1,4 +1,5 @@
 import {ModuleScreen, screen} from "@modula/product-ui";
+import {ReturnHome} from "../components/ReturnHome";
 import {errorState, loadingState} from "../components/ScreenStates";
 import {Editor} from "../features/editor/Editor";
 import {useExistingEditorBindings} from "../features/editor/bindings";
@@ -6,7 +7,7 @@ import {updateNoteAction} from "../features/notes/actions";
 
 function NoteEditorScreen() {
   const bindings = useExistingEditorBindings();
-  return <ModuleScreen title="Edit Note"><Editor form={bindings.noteForm} saveAction={updateNoteAction} /></ModuleScreen>;
+  return <ModuleScreen title="Edit Note"><ReturnHome presentation="button" /><Editor form={bindings.noteForm} saveAction={updateNoteAction} /></ModuleScreen>;
 }
 
 export const noteEditorScreen = screen("editor", "form", "Edit Note", NoteEditorScreen, {

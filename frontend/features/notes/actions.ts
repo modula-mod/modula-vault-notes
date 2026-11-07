@@ -1,6 +1,7 @@
 import {action} from "@modula/product-ui";
 import {VAULT_PATHS} from "../../lib/routes";
 
+export const openHomeAction = action({id: "openHome", family: "route.open", label: "Notes", route: VAULT_PATHS.home});
 export const newNoteAction = action({id: "newNote", family: "route.open", label: "New note", icon: "system.plus", route: VAULT_PATHS.newNote});
 export const openNoteAction = action({id: "openNote", family: "route.open", label: "Open note", route: VAULT_PATHS.note});
 export const editNoteAction = action({id: "editNote", family: "route.open", label: "Edit note", route: VAULT_PATHS.editNote});

@@ -5,7 +5,7 @@
   "identity": {
     "id": "digital.modula.vault-notes",
     "kind": "module",
-    "version": "2.0.2",
+    "version": "2.0.3",
     "displayName": "Vault Notes",
     "slug": "vault-notes",
     "subtitle": "Your private knowledge space.",
@@ -37,11 +37,11 @@
   },
   "release": {
     "channel": "stable",
-    "notes": "Vault Notes 2.0.2. Notes save into this account's module records. The home, note, and editor are the writing surfaces, and the product hub shows three screenshots.",
+    "notes": "Vault Notes 2.0.3. Every declared screen is reachable from Notes through generic route.open controls, including history, share, and trash restore.",
     "builder": "modula-product-release",
     "provenance": {
       "manifestSha256": "c78c8dfcf93b886ce86867731657c81b189a421da9cd7c34ee9597e891ce20e3",
-      "frontendSha256": "a4872caeb59818ea2fd820ff042a4fc47cc98e636fe71fb57fdf633290a5a25c",
+      "frontendSha256": "ad6d0ed7eec43d43bbfd432f01c8e73d00456469c2ec654f6e5cfdce99b702cc",
       "sourceCommit": "4543b28147a943741756724671194bf64d6aafa6",
       "frontendCommit": "4543b28147a943741756724671194bf64d6aafa6"
     }
@@ -158,7 +158,7 @@
     "artifact": {
       "path": "frontend/frontend.manifest.json",
       "mediaType": "application/vnd.modula.frontend+json",
-      "sha256": "a4872caeb59818ea2fd820ff042a4fc47cc98e636fe71fb57fdf633290a5a25c",
+      "sha256": "ad6d0ed7eec43d43bbfd432f01c8e73d00456469c2ec654f6e5cfdce99b702cc",
       "schemaVersion": "1.0.0",
       "entryView": "home"
     }

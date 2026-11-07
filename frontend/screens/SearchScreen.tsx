@@ -1,4 +1,5 @@
 import {ModuleScreen, RecordList, Stack, Text, screen} from "@modula/product-ui";
+import {ReturnHome} from "../components/ReturnHome";
 import {SearchResultRow} from "../components/SearchResultRow";
 import {collectionStates} from "../components/ScreenStates";
 import {openNoteAction} from "../features/notes/actions";
@@ -11,6 +12,7 @@ function SearchScreen() {
   const results = useVaultSearch();
   return (
     <ModuleScreen title="Search Vault Notes">
+      <ReturnHome />
       <Stack direction="vertical" gap="regular">
         <SearchBar results={results} />
         <SearchFilters results={results} />

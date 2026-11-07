@@ -10,6 +10,12 @@
   "actions": [
     {
       "family": "route.open",
+      "id": "openHome",
+      "label": "Notes",
+      "route": "/"
+    },
+    {
+      "family": "route.open",
       "icon": "system.plus",
       "id": "newNote",
       "label": "New note",
@@ -650,7 +656,7 @@
     ]
   },
   "productId": "digital.modula.vault-notes",
-  "releaseVersion": "2.0.2",
+  "releaseVersion": "2.0.3",
   "routes": [
     {
       "path": "/",
@@ -847,6 +853,60 @@
           {
             "children": [
               {
+                "action": "openSearch",
+                "text": "Search",
+                "type": "button"
+              },
+              {
+                "action": "openRecent",
+                "text": "Recent",
+                "type": "button"
+              },
+              {
+                "action": "openArchived",
+                "text": "Archived",
+                "type": "button"
+              },
+              {
+                "action": "openTemplates",
+                "text": "Templates",
+                "type": "button"
+              },
+              {
+                "action": "openDaily",
+                "text": "Daily Note",
+                "type": "button"
+              },
+              {
+                "action": "openSavedSearches",
+                "text": "Saved Searches",
+                "type": "button"
+              },
+              {
+                "action": "openAttachments",
+                "text": "Attachments",
+                "type": "button"
+              },
+              {
+                "action": "openGraph",
+                "text": "Graph",
+                "type": "button"
+              },
+              {
+                "action": "openSettings",
+                "text": "Settings",
+                "type": "button"
+              }
+            ],
+            "layout": {
+              "gap": "compact",
+              "scroll": "horizontal"
+            },
+            "type": "row"
+          },
+          {
+            "children": [
+              {
                 "accessibility": {
                   "label": "All Vault Notes",
                   "role": "list"
@@ -978,8 +1038,23 @@
               {
                 "children": [
                   {
+                    "action": "openHome",
+                    "text": "Notes",
+                    "type": "button"
+                  },
+                  {
                     "action": "editNote",
                     "text": "Edit",
+                    "type": "button"
+                  },
+                  {
+                    "action": "openHistory",
+                    "text": "Revision history",
+                    "type": "button"
+                  },
+                  {
+                    "action": "shareNote",
+                    "text": "Share",
                     "type": "button"
                   },
                   {
@@ -1085,6 +1160,11 @@
       "kind": "form",
       "root": {
         "children": [
+          {
+            "action": "openHome",
+            "text": "Notes",
+            "type": "button"
+          },
           {
             "accessibility": {
               "label": "Note editor",
@@ -1246,6 +1326,11 @@
       "kind": "form",
       "root": {
         "children": [
+          {
+            "action": "openHome",
+            "text": "Notes",
+            "type": "button"
+          },
           {
             "accessibility": {
               "label": "Note editor",
@@ -1422,6 +1507,17 @@
           {
             "children": [
               {
+                "action": "openHome",
+                "text": "Notes",
+                "type": "button"
+              }
+            ],
+            "text": "Screen navigation",
+            "type": "toolbar"
+          },
+          {
+            "children": [
+              {
                 "accessibility": {
                   "label": "Search notes",
                   "role": "search"
@@ -1593,6 +1689,17 @@
       "root": {
         "children": [
           {
+            "children": [
+              {
+                "action": "openHome",
+                "text": "Notes",
+                "type": "button"
+              }
+            ],
+            "text": "Screen navigation",
+            "type": "toolbar"
+          },
+          {
             "binding": "notes",
             "text": "Pinned notes",
             "type": "filter"
@@ -1727,6 +1834,17 @@
       "kind": "collection",
       "root": {
         "children": [
+          {
+            "children": [
+              {
+                "action": "openHome",
+                "text": "Notes",
+                "type": "button"
+              }
+            ],
+            "text": "Screen navigation",
+            "type": "toolbar"
+          },
           {
             "binding": "notes",
             "text": "Recently edited",
@@ -1864,6 +1982,17 @@
       "root": {
         "children": [
           {
+            "children": [
+              {
+                "action": "openHome",
+                "text": "Notes",
+                "type": "button"
+              }
+            ],
+            "text": "Screen navigation",
+            "type": "toolbar"
+          },
+          {
             "binding": "notes",
             "text": "Favourite notes",
             "type": "filter"
@@ -1999,6 +2128,17 @@
       "root": {
         "children": [
           {
+            "children": [
+              {
+                "action": "openHome",
+                "text": "Notes",
+                "type": "button"
+              }
+            ],
+            "text": "Screen navigation",
+            "type": "toolbar"
+          },
+          {
             "binding": "notes",
             "text": "Archived notes",
             "type": "filter"
@@ -2131,6 +2271,17 @@
       "root": {
         "children": [
           {
+            "children": [
+              {
+                "action": "openHome",
+                "text": "Notes",
+                "type": "button"
+              }
+            ],
+            "text": "Screen navigation",
+            "type": "toolbar"
+          },
+          {
             "binding": "notes",
             "text": "Deleted notes",
             "type": "filter"
@@ -2140,6 +2291,7 @@
               "label": "Deleted notes",
               "role": "list"
             },
+            "action": "restoreNote",
             "actions": [
               "restoreNote",
               "purgeNote"
@@ -2256,6 +2408,17 @@
       "root": {
         "children": [
           {
+            "children": [
+              {
+                "action": "openHome",
+                "text": "Notes",
+                "type": "button"
+              }
+            ],
+            "text": "Screen navigation",
+            "type": "toolbar"
+          },
+          {
             "binding": "folders",
             "text": "Search folders",
             "type": "search"
@@ -2370,12 +2533,27 @@
       "root": {
         "children": [
           {
+            "children": [
+              {
+                "action": "openHome",
+                "text": "Notes",
+                "type": "button"
+              }
+            ],
+            "text": "Screen navigation",
+            "type": "toolbar"
+          },
+          {
             "accessibility": {
               "role": "header"
             },
             "binding": "folder",
             "type": "text",
             "valuePath": "name"
+          },
+          {
+            "text": "Notes in this folder are listed when the host applies the folder filter.",
+            "type": "text"
           },
           {
             "children": [
@@ -2504,6 +2682,17 @@
       "root": {
         "children": [
           {
+            "children": [
+              {
+                "action": "openHome",
+                "text": "Notes",
+                "type": "button"
+              }
+            ],
+            "text": "Screen navigation",
+            "type": "toolbar"
+          },
+          {
             "binding": "tags",
             "text": "Search tags",
             "type": "search"
@@ -2607,12 +2796,27 @@
       "root": {
         "children": [
           {
+            "children": [
+              {
+                "action": "openHome",
+                "text": "Notes",
+                "type": "button"
+              }
+            ],
+            "text": "Screen navigation",
+            "type": "toolbar"
+          },
+          {
             "accessibility": {
               "label": "Selected tag"
             },
             "binding": "tag",
             "type": "badge",
             "valuePath": "name"
+          },
+          {
+            "text": "Notes with this tag are listed when the host applies the tag filter.",
+            "type": "text"
           },
           {
             "children": [
@@ -2741,6 +2945,17 @@
       "root": {
         "children": [
           {
+            "children": [
+              {
+                "action": "openHome",
+                "text": "Notes",
+                "type": "button"
+              }
+            ],
+            "text": "Screen navigation",
+            "type": "toolbar"
+          },
+          {
             "accessibility": {
               "role": "status"
             },
@@ -2863,6 +3078,17 @@
           {
             "children": [
               {
+                "action": "openHome",
+                "text": "Notes",
+                "type": "button"
+              }
+            ],
+            "text": "Screen navigation",
+            "type": "toolbar"
+          },
+          {
+            "children": [
+              {
                 "children": [
                   {
                     "text": "Daily notes use the account-local calendar date and exactly-one module function.",
@@ -2943,7 +3169,18 @@
       "root": {
         "children": [
           {
-            "text": "Restores create a new revision and never delete intervening history.",
+            "children": [
+              {
+                "action": "openHome",
+                "text": "Notes",
+                "type": "button"
+              }
+            ],
+            "text": "Screen navigation",
+            "type": "toolbar"
+          },
+          {
+            "text": "Restores create a new revision and never delete intervening history. Checkpoints for this note are listed when the host applies the noteId filter.",
             "type": "text"
           },
           {
@@ -3045,6 +3282,17 @@
       "kind": "detail",
       "root": {
         "children": [
+          {
+            "children": [
+              {
+                "action": "openHome",
+                "text": "Notes",
+                "type": "button"
+              }
+            ],
+            "text": "Screen navigation",
+            "type": "toolbar"
+          },
           {
             "children": [
               {
@@ -3154,6 +3402,17 @@
       "kind": "collection",
       "root": {
         "children": [
+          {
+            "children": [
+              {
+                "action": "openHome",
+                "text": "Notes",
+                "type": "button"
+              }
+            ],
+            "text": "Screen navigation",
+            "type": "toolbar"
+          },
           {
             "children": [
               {
@@ -3347,6 +3606,21 @@
           {
             "children": [
               {
+                "action": "openHome",
+                "text": "Notes",
+                "type": "button"
+              }
+            ],
+            "text": "Screen navigation",
+            "type": "toolbar"
+          },
+          {
+            "children": [
+              {
+                "text": "Saved searches are listed here. Opening one is unavailable until the host can run a stored query.",
+                "type": "text"
+              },
+              {
                 "binding": "savedSearches",
                 "text": "Search saved searches",
                 "type": "search"
@@ -3465,6 +3739,17 @@
       "root": {
         "children": [
           {
+            "children": [
+              {
+                "action": "openHome",
+                "text": "Notes",
+                "type": "button"
+              }
+            ],
+            "text": "Screen navigation",
+            "type": "toolbar"
+          },
+          {
             "accessibility": {
               "label": "Vault relationship graph"
             },
@@ -3576,6 +3861,17 @@
         "children": [
           {
             "children": [
+              {
+                "children": [
+                  {
+                    "action": "openHome",
+                    "text": "Notes",
+                    "type": "button"
+                  }
+                ],
+                "text": "Screen navigation",
+                "type": "toolbar"
+              },
               {
                 "children": [
                   {

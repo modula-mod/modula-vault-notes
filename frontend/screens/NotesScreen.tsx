@@ -1,5 +1,6 @@
 import {Button, ModuleScreen, Row, Toolbar, screen} from "@modula/product-ui";
 import {EmptyVault} from "../components/EmptyVault";
+import {LibraryNav} from "../components/LibraryNav";
 import {errorState, loadingState} from "../components/ScreenStates";
 import {NotesCollection} from "../components/NotesCollection";
 import {
@@ -32,6 +33,7 @@ function NotesScreen() {
         <Button label="Tags" action={openTagsAction} />
         <Button label="Trash" action={openTrashAction} />
       </Row>
+      <LibraryNav />
       <NotesCollection notes={notes} openNote={openNoteAction} label="All Vault Notes" />
     </ModuleScreen>
   );

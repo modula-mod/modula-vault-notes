@@ -1,5 +1,6 @@
 import {ModuleScreen, Text, screen} from "@modula/product-ui";
 import {NotesCollection} from "../components/NotesCollection";
+import {ReturnHome} from "../components/ReturnHome";
 import {collectionStates} from "../components/ScreenStates";
 import {openNoteAction} from "../features/notes/actions";
 import {useFolder, useFolderNotes} from "../hooks/useNotes";
@@ -7,7 +8,7 @@ import {useFolder, useFolderNotes} from "../hooks/useNotes";
 function FolderScreen() {
   const folder = useFolder();
   const notes = useFolderNotes();
-  return <ModuleScreen title="Folder"><Text binding={folder} valuePath="name" accessibility={{role: "header"}} /><NotesCollection notes={notes} openNote={openNoteAction} label="Notes in folder" /></ModuleScreen>;
+  return <ModuleScreen title="Folder"><ReturnHome /><Text binding={folder} valuePath="name" accessibility={{role: "header"}} /><Text text="Notes in this folder are listed when the host applies the folder filter." /><NotesCollection notes={notes} openNote={openNoteAction} label="Notes in folder" /></ModuleScreen>;
 }
 
 export const folderScreen = screen("folder", "collection", "Folder", FolderScreen, {states: collectionStates("This folder is empty", "This folder is unavailable")});

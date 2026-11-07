@@ -1,5 +1,6 @@
 import {Button, Field, Form, ModuleScreen, RecordList, Stack, useForm, useRecords, screen} from "@modula/product-ui";
 import {AttachmentRow} from "../components/AttachmentRow";
+import {ReturnHome} from "../components/ReturnHome";
 import {collectionStates} from "../components/ScreenStates";
 import {attachToNoteAction, pickAttachmentAction} from "../features/attachments/attachment-actions";
 
@@ -8,6 +9,7 @@ function AttachmentsScreen() {
   const attachmentForm = useForm({id: "attachmentForm"});
   return (
     <ModuleScreen title="Attachments">
+      <ReturnHome />
       <Stack direction="vertical" gap="regular">
         <Form accessibility={{label: "Attach a file", role: "form"}}>
           <Field binding={attachmentForm} field={{id: "noteId", type: "recordReference", label: "Note", recordType: "note", required: true}} />

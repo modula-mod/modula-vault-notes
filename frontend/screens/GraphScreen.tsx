@@ -1,11 +1,12 @@
 import {ModuleScreen, useRecords, screen} from "@modula/product-ui";
+import {ReturnHome} from "../components/ReturnHome";
 import {errorState, loadingState} from "../components/ScreenStates";
 import {GraphProjection} from "../features/graph/GraphProjection";
 
 function GraphScreen() {
   const notes = useRecords({id: "graphNotes", type: "note", filterParam: "filter", sortParam: "sort", limit: 100, recordState: "active"});
   const links = useRecords({id: "graphLinks", type: "note-link", filterParam: "filter", sortParam: "sort", limit: 100, recordState: "active"});
-  return <ModuleScreen title="Note Graph"><GraphProjection notes={notes} links={links} /></ModuleScreen>;
+  return <ModuleScreen title="Note Graph"><ReturnHome /><GraphProjection notes={notes} links={links} /></ModuleScreen>;
 }
 
 export const graphScreen = screen("graph", "dashboard", "Note Graph", GraphScreen, {

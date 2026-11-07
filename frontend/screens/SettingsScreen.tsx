@@ -1,4 +1,5 @@
 import {Button, Field, Form, Section, Stack, action, screen} from "@modula/product-ui";
+import {ReturnHome} from "../components/ReturnHome";
 import {errorState, loadingState} from "../components/ScreenStates";
 import {useVaultSettings} from "../hooks/useVaultSettings";
 
@@ -9,6 +10,7 @@ function SettingsScreen() {
   return (
     <Form accessibility={{label: "Vault Notes settings", role: "form"}}>
       <Stack direction="vertical" gap="regular">
+        <ReturnHome />
         <Section title="Editor">
           <Field binding={preferences} field={{id: "showWordCount", type: "boolean", label: "Show word count"}} />
           <Field binding={preferences} field={{id: "showCharacterCount", type: "boolean", label: "Show character count"}} />

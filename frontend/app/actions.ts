@@ -29,6 +29,7 @@ import {
   summarizeAction,
 } from "../features/intelligence/actions";
 import {
+  openHomeAction,
   createNoteAction,
   deleteNoteAction,
   editNoteAction,
@@ -62,6 +63,7 @@ import {createDailyNoteAction, createFromTemplateAction} from "../features/templ
 import {saveSettingsAction} from "../screens/SettingsScreen";
 
 export const vaultActions = [
+  openHomeAction,
   newNoteAction,
   openNoteAction,
   editNoteAction,

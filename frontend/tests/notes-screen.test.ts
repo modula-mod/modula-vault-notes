@@ -5,7 +5,7 @@ describe("Vault note surfaces", () => {
   it("composes list, detail actions, document, and metadata", () => {
     expect(nodes(view("home").root).map(node => node.type)).toContain("recordList");
     const detail = nodes(view("detail").root);
-    // 2.0.2 detail: one action toolbar (Edit, Move to Trash) above the note title, body,
+    // Detail toolbar: Notes, Edit, revision history, Share, and Move to Trash above the note title, body,
     // sensitivity badge and metadata.
     const toolbar = detail.find(node => node.type === "toolbar");
     expect(toolbar).toBeDefined();

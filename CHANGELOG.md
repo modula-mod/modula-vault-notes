@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.3
+
+- Makes every declared screen reachable from Notes with generic `route.open` controls. Hosts that ignore `navigation.tabs` and `navigation.secondary` still have a rendered path to each route.
+- Adds a Notes control on every other screen for hosts that replace the module route instead of keeping a stack.
+- Binds revision history and share on the open note, and binds trash restore on the row action hosts dispatch.
+
 ## 2.0.2
 
 - Notes are stored in this account's module records. Create, edit, and trash use the generic record API, so later notes changes ship as a module download.
