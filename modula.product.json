@@ -24,7 +24,7 @@
   },
   "source": {
     "repository": "modula-mod/modula-vault-notes",
-    "commit": "4543b28147a943741756724671194bf64d6aafa6",
+    "commit": "5f863cbf1de81d284c910d37b123d120bbaa7fc9",
     "manifestPath": "modula.product.json",
     "provider": "github"
   },
@@ -42,8 +42,8 @@
     "provenance": {
       "manifestSha256": "c78c8dfcf93b886ce86867731657c81b189a421da9cd7c34ee9597e891ce20e3",
       "frontendSha256": "ad6d0ed7eec43d43bbfd432f01c8e73d00456469c2ec654f6e5cfdce99b702cc",
-      "sourceCommit": "4543b28147a943741756724671194bf64d6aafa6",
-      "frontendCommit": "4543b28147a943741756724671194bf64d6aafa6"
+      "sourceCommit": "5f863cbf1de81d284c910d37b123d120bbaa7fc9",
+      "frontendCommit": "5f863cbf1de81d284c910d37b123d120bbaa7fc9"
     }
   },
   "security": {
