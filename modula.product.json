@@ -24,7 +24,7 @@
   },
   "source": {
     "repository": "modula-mod/modula-vault-notes",
-    "commit": "747bbc44d7efb5efbca042f7c025680fa0a68caf",
+    "commit": "d5f5fd7fe02a1efa0da21946c4e14d71eb4d8069",
     "manifestPath": "modula.product.json",
     "provider": "github"
   },
@@ -40,10 +40,10 @@
     "notes": "Vault Notes 2.1.0-rc.4 improves collection navigation, removes duplicate folder decoration, and refines note and search titles. Signed QA and founder visual review remain required before stable release.",
     "builder": "modula-product-release",
     "provenance": {
-      "manifestSha256": "327c4c3e019ad0859218a2ecec9576e8e632819d94e1b76f285648b8f9f62565",
+      "manifestSha256": "368ed56c4df48994b5b7b09f7b7531cf1d977cd1d3133b765f81ab0f469071db",
       "frontendSha256": "aa8c92013dbcf3b407e769ba158e2da7fa5514c6f1bc7339b48df366d97c1182",
-      "sourceCommit": "747bbc44d7efb5efbca042f7c025680fa0a68caf",
-      "frontendCommit": "747bbc44d7efb5efbca042f7c025680fa0a68caf"
+      "sourceCommit": "d5f5fd7fe02a1efa0da21946c4e14d71eb4d8069",
+      "frontendCommit": "d5f5fd7fe02a1efa0da21946c4e14d71eb4d8069"
     }
   },
   "security": {
