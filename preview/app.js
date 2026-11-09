@@ -4,6 +4,7 @@ const state = {
   commandOpen: new URLSearchParams(location.search).get('command') === '1',
   artifact: null,
 }
+const expectedReleaseVersion = '2.1.0-rc.4'
 
 const notes = [
   {id: 'architecture', title: 'Modula Platform — V1 Architecture', preview: 'The contract freeze, runtime boundaries, recovery model, and Native handoff.', folder: 'Projects / Modula Platform', tags: ['architecture', 'greenfield', 'v1'], updated: 'Just now'},
@@ -21,7 +22,7 @@ async function boot() {
     const response = await fetch('/frontend/frontend.manifest.json', {cache: 'no-store'})
     if (!response.ok) throw new Error(`artifact HTTP ${response.status}`)
     const artifact = await response.json()
-    if (artifact.productId !== 'digital.modula.vault-notes' || artifact.releaseVersion !== '2.0.0-rc.2') {
+    if (artifact.productId !== 'digital.modula.vault-notes' || artifact.releaseVersion !== expectedReleaseVersion) {
       throw new Error('preview artifact identity mismatch')
     }
     state.artifact = artifact
@@ -40,7 +41,7 @@ function render() {
 function titlebar() {
   const routeCount = state.artifact?.routes?.length ?? 0
   return `<header class="titlebar">
-    <div class="brand"><div class="brand-mark">V</div><span class="brand-copy">Vault Notes 2.0</span><span class="preview-badge">2.0.0-rc.2 · Private preview</span></div>
+    <div class="brand"><div class="brand-mark">V</div><span class="brand-copy">Vault Notes 2.1</span><span class="preview-badge">${escapeHtml(state.artifact?.releaseVersion ?? expectedReleaseVersion)} · Private preview</span></div>
     <div class="title-actions"><button class="soft-button" data-view="search">${icons.search}<span>Search</span></button><button class="command-button" data-command="open"><span>Command menu</span><span class="key">⌘ K</span></button><span class="preview-badge">${routeCount} MPS routes</span><button class="primary-button" data-view="editor">New note</button></div>
   </header>`
 }

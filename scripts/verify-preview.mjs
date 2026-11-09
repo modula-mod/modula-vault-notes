@@ -5,11 +5,13 @@ const html = readFileSync('preview/index.html', 'utf8')
 const css = readFileSync('preview/styles.css', 'utf8')
 const js = readFileSync('preview/app.js', 'utf8')
 const artifact = JSON.parse(readFileSync('frontend/frontend.manifest.json', 'utf8'))
+const packageJson = JSON.parse(readFileSync('package.json', 'utf8'))
 
 const checks = [
   [artifact.productId === 'digital.modula.vault-notes', 'compiled artifact has canonical product identity'],
-  [artifact.releaseVersion === '2.0.2', 'compiled artifact is the 2.0.2 release identity'],
-  [artifact.routes.length === 22 && artifact.views.length === 22, 'compiled artifact exposes 22 routes and 22 views'],
+  [packageJson.version === '2.1.0-rc.4', 'package has the verified 2.1.0-rc.4 release identity'],
+  [artifact.releaseVersion === packageJson.version, 'compiled artifact matches the package release identity'],
+  [artifact.routes.length === 26 && artifact.views.length === 26, 'compiled artifact exposes 26 routes and 26 views'],
   [html.includes('/preview/app.js') && html.includes('/preview/styles.css'), 'preview loads local assets only'],
   [js.includes("fetch('/frontend/frontend.manifest.json'"), 'preview verifies the compiled MPS artifact'],
   [js.includes('Modula Platform — V1 Architecture'), 'preview contains the synthetic hero note'],

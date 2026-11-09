@@ -4,7 +4,7 @@
 
 Vault Notes is authored as a substantial product inside the bounded `@modula/product-ui` language. The compiler follows product-local imports and emits one deterministic declarative artifact; ModuleHost never depends on the source directory layout and no React, React Native, web framework, CSS, executable bundle, or Vault-specific host branch is introduced.
 
-Before FLAGSHIP-01R, `frontend/index.tsx` held actions, bindings, screens, routes, states, navigation, settings, and registration in 248 lines. It is now a 29-line registration boundary. The architecture guard reports 83 reachable non-test source files, all under 500 lines.
+Before FLAGSHIP-01R, `frontend/index.tsx` held actions, bindings, screens, routes, states, navigation, settings, and registration in 248 lines. It is now a 30-line registration boundary. The architecture guard reports 85 reachable non-test source files, all under 500 lines.
 
 ## Entrypoint and composition
 
@@ -19,12 +19,13 @@ Internal components are private. Distribution remains `frontend/frontend.manifes
 
 ## Routes and screens
 
-The artifact contains 22 routes and 22 screens:
+The artifact contains 26 routes and 26 screens:
 
 - `/`, `/new`, `/note/:noteId`, `/note/:noteId/edit`
 - `/note/:noteId/history`, `/note/:noteId/history/:revisionId`
 - `/search`, `/pinned`, `/recent`, `/favourites`, `/archived`, `/trash`
-- `/folders`, `/folder/:folderId`, `/tags`, `/tag/:tagId`
+- `/folders`, `/folders/new`, `/folder/:folderId`, `/folder/:folderId/edit`
+- `/tags`, `/tags/new`, `/tag/:tagId`, `/tag/:tagId/edit`
 - `/templates`, `/daily`, `/attachments`, `/saved-searches`, `/graph`, `/settings`
 
 Each data-bound screen declares applicable loading, empty, error, permission-denied, offline, or capability-unavailable states. Empty-state copy remains product-specific.
@@ -62,7 +63,7 @@ Dirty-state lifecycle, autosave status, `expectedRevision`, selection-aware enab
 | Area | Status | Evidence |
 | --- | --- | --- |
 | stack/row/section/grid/scroll | SUPPORTED | compiled semantic layout and responsive declarations |
-| collection/detail/forms | SUPPORTED | record list/detail/form bindings and 22 valid screens |
+| collection/detail/forms | SUPPORTED | record list/detail/form bindings and 26 valid screens |
 | search/filter/sort | SUPPORTED-WITH-LIMITATIONS | scalar host query contract; nested properties/references are not expressible |
 | tabs/navigation | SUPPORTED-WITH-LIMITATIONS | app navigation works; in-screen tab items/state are not typed |
 | menus/context menu | SUPPORTED-WITH-LIMITATIONS | menu primitive exists; contextual anchors/items/selection state do not |
@@ -92,11 +93,11 @@ Dependencies flow from screens to features/components/hooks, then to product-ui 
 
 ## Testing
 
-Six frontend suites inspect the compiled artifact for routes, navigation, list/detail composition, editor parity and commands, search/filter/sort, templates/Daily Note, properties, attachments, history, graph states, settings, permissions, errors, capability declarations, and compatibility. Tests exercise what ModuleHost receives rather than executing compiler-only TSX.
+Seven frontend suites inspect the compiled artifact for rendered route reachability, navigation, list/detail composition, editor parity and commands, search/filter/sort, templates/Daily Note, properties, attachments, history, graph states, settings, permissions, errors, capability declarations, and compatibility. Tests exercise what ModuleHost receives rather than executing compiler-only TSX.
 
 ## Frontend performance snapshot
 
-On the candidate VPS checkout, the 147,239-byte artifact parsed in 0.908 ms. Mean semantic preview resolution across 1,000 iterations measured 0.0082 ms for Notes, 0.0083 ms for Search, 0.0089 ms for Note Detail, and 0.0097 ms for the editor route. These measurements cover declarative bootstrap/route projection, not host rendering or network/data latency.
+On the 2.1.0-rc.4 candidate VPS checkout, the 125,662-byte artifact parsed in 1.151 ms. Mean semantic preview resolution across 1,000 iterations measured 0.0175 ms for Notes, 0.0085 ms for Search, 0.0127 ms for Note Detail, and 0.0176 ms for the editor route. These measurements cover declarative bootstrap/route projection, not host rendering or network/data latency.
 
 ## Future extraction
 
