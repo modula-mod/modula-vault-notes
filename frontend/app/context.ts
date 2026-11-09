@@ -1,9 +1,9 @@
 import type {FrontendDefinition} from "@modula/product-ui";
 
-export const vaultHostRuntime: FrontendDefinition["hostRuntime"] = {versionRange: ">=1.0.0 <2.0.0"};
+export const vaultHostRuntime: FrontendDefinition["hostRuntime"] = {versionRange: ">=1.1.0 <2.0.0"};
 
 export const vaultCapabilities: NonNullable<FrontendDefinition["capabilities"]> = {
-  required: ["ui.richText@1"],
+  required: ["ui.richText@1", "ui.textTransform@1", "ui.recordRevisions@1", "ui.mediaAttach@1", "ui.mediaOpen@1"],
   optional: [
     "share.native@1",
     "ui.richText.commands@1",

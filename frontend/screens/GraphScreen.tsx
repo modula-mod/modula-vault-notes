@@ -13,7 +13,7 @@ export const graphScreen = screen("graph", "dashboard", "Note Graph", GraphScree
     loading: loadingState("Loading graph projection"),
     error: errorState("Graph data could not be loaded"),
     permissionDenied: errorState("You do not have permission to inspect this graph"),
-    capabilityUnavailable: errorState("BLOCKED-BY-MODULE-UI: this host has no generic graph renderer"),
+    capabilityUnavailable: errorState("The note graph is unavailable on this device"),
     offline: errorState("The complete graph is unavailable offline"),
   },
 });

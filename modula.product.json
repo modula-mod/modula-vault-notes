@@ -5,13 +5,13 @@
   "identity": {
     "id": "digital.modula.vault-notes",
     "kind": "module",
-    "version": "2.0.2",
+    "version": "2.1.0-rc.4",
     "displayName": "Vault Notes",
     "slug": "vault-notes",
     "subtitle": "Your private knowledge space.",
     "description": "Portable private notes for Modula with folders, tags, templates, daily notes, typed properties, stable relationships, attachment metadata, history, import/export, sensitive-note policy, and governed extension points.",
-    "status": "stable",
-    "visibility": "public",
+    "status": "beta",
+    "visibility": "beta",
     "aliases": [
       "modula.vault-notes"
     ]
@@ -24,7 +24,7 @@
   },
   "source": {
     "repository": "modula-mod/modula-vault-notes",
-    "commit": "4543b28147a943741756724671194bf64d6aafa6",
+    "commit": "747bbc44d7efb5efbca042f7c025680fa0a68caf",
     "manifestPath": "modula.product.json",
     "provider": "github"
   },
@@ -36,14 +36,14 @@
     "declaredByPublisher": true
   },
   "release": {
-    "channel": "stable",
-    "notes": "Vault Notes 2.0.2. Notes save into this account's module records. The home, note, and editor are the writing surfaces, and the product hub shows three screenshots.",
+    "channel": "beta",
+    "notes": "Vault Notes 2.1.0-rc.4 improves collection navigation, removes duplicate folder decoration, and refines note and search titles. Signed QA and founder visual review remain required before stable release.",
     "builder": "modula-product-release",
     "provenance": {
-      "manifestSha256": "c78c8dfcf93b886ce86867731657c81b189a421da9cd7c34ee9597e891ce20e3",
-      "frontendSha256": "a4872caeb59818ea2fd820ff042a4fc47cc98e636fe71fb57fdf633290a5a25c",
-      "sourceCommit": "4543b28147a943741756724671194bf64d6aafa6",
-      "frontendCommit": "4543b28147a943741756724671194bf64d6aafa6"
+      "manifestSha256": "c841872a2d19c96587321cc86f26341c5d503408508ee16447d6b52ed2f3adec",
+      "frontendSha256": "25c44cad45328b6902345bbb6cbf0e6bf3455b1ce02e3cd950c7e61fdabf2587",
+      "sourceCommit": "747bbc44d7efb5efbca042f7c025680fa0a68caf",
+      "frontendCommit": "747bbc44d7efb5efbca042f7c025680fa0a68caf"
     }
   },
   "security": {
@@ -65,13 +65,13 @@
     },
     "cover": {
       "role": "product.cover",
-      "path": "assets/cover/cover.jpg",
-      "mediaType": "image/jpeg",
-      "width": 1600,
-      "height": 900,
-      "sha256": "cef9bbe729e59145bb8622020265b1640832a22a4a69421cc6db12939e145191",
+      "path": "assets/cover/cover-candidate.png",
+      "mediaType": "image/png",
+      "width": 1672,
+      "height": 941,
+      "sha256": "a52a052d0b81331904e0e36824beacbcaa1e50bf4ef1ada6aabc4ac5ae4f551b",
       "developmentAsset": true,
-      "alt": "Vault Notes cover: two note sheets, one with a checklist, on a deep teal background"
+      "alt": "Vault Notes cover: a floating folded ivory page with teal ink over a deep midnight field"
     },
     "screenshots": [
       {
@@ -109,7 +109,7 @@
   "compatibility": {
     "productStandard": "^1.0.0",
     "greenfieldProtocol": "greenfield.v1",
-    "host": ">=1.0.0",
+    "host": ">=1.1.0",
     "moduleProfile": "^2.1.0",
     "platforms": [
       "ios",
@@ -158,7 +158,7 @@
     "artifact": {
       "path": "frontend/frontend.manifest.json",
       "mediaType": "application/vnd.modula.frontend+json",
-      "sha256": "a4872caeb59818ea2fd820ff042a4fc47cc98e636fe71fb57fdf633290a5a25c",
+      "sha256": "25c44cad45328b6902345bbb6cbf0e6bf3455b1ce02e3cd950c7e61fdabf2587",
       "schemaVersion": "1.0.0",
       "entryView": "home"
     }

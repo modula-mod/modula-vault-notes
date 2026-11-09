@@ -10,7 +10,7 @@ describe("Vault advanced surfaces", () => {
 
   it("keeps history, attachments, and graph honest about host capabilities", () => {
     expect(view("history").states?.empty?.type).toBe("emptyState");
-    expect(nodes(view("attachments").root).map(node => node.field?.type)).toContain("assetReference");
-    expect(view("graph").states?.capabilityUnavailable?.text).toContain("BLOCKED-BY-MODULE-UI");
+    expect(nodes(view("attachments").root).map(node => node.text)).toContain("Open a note to add, view, or remove its files.");
+    expect(view("graph").states?.capabilityUnavailable?.text).toContain("unavailable");
   });
 });

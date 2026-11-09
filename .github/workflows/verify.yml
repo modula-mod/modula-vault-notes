@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: modula-mod/modula-module-standard
-          ref: mms-v2.1.0
+          ref: eebf12c7df0583a5051fc584170f7f3a9f6d946c
           path: modula-module-standard
       - uses: actions/checkout@v4
         with:

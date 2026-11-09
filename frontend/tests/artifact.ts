@@ -5,6 +5,9 @@ export type NodeValue = {
   text?: string;
   action?: string;
   binding?: string;
+  valuePath?: string;
+  actions?: string[];
+  accessibility?: {role?: string};
   field?: {id?: string; type?: string};
   children?: NodeValue[];
 };
@@ -14,7 +17,7 @@ export type FrontendArtifact = {
   hostRuntime: {versionRange: string};
   routes: Array<{path: string; viewId: string}>;
   views: Array<{id: string; kind: string; bindings?: Array<Record<string, unknown>>; root: NodeValue; states?: Record<string, NodeValue>}>;
-  actions: Array<{id: string; family: string; capability?: string; functionId?: string}>;
+  actions: Array<{id: string; family: string; capability?: string; functionId?: string; recordType?: string; recordIdBinding?: string; sourceRevisionParam?: string; recordParam?: string}>;
   capabilities: {required: string[]; optional: string[]};
   navigation: {rootView: string; tabs: Array<{id: string; viewId: string}>; secondary: Array<{id: string; viewId: string}>};
 };
