@@ -1,11 +1,12 @@
 import {Button, EmptyState, ModuleScreen, RecordList, Search, Text, screen} from "@modula/product-ui";
+import {ReturnHome} from "../components/ReturnHome";
 import {TagChip} from "../components/TagChip";
 import {newTagAction, openTagAction} from "../features/notes/actions";
 import {useTags} from "../hooks/useNotes";
 
 function TagsScreen() {
   const tags = useTags();
-  return <ModuleScreen title="Tags"><Button label="New tag" action={newTagAction} /><Search label="Search tags" records={tags} /><RecordList records={tags} action={openTagAction} accessibility={{label: "Vault tags", role: "list"}}><TagChip tag={tags} /></RecordList></ModuleScreen>;
+  return <ModuleScreen title="Tags"><ReturnHome /><Button label="New tag" action={newTagAction} /><Search label="Search tags" records={tags} /><RecordList records={tags} action={openTagAction} accessibility={{label: "Vault tags", role: "list"}}><TagChip tag={tags} /></RecordList></ModuleScreen>;
 }
 
 export const tagsScreen = screen("tags", "collection", "Tags", TagsScreen, {states: {

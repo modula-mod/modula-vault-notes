@@ -1,5 +1,6 @@
 import {Button, ModuleScreen, Row, Stack, Text, screen} from "@modula/product-ui";
 import {EmptyVault} from "../components/EmptyVault";
+import {LibraryNav} from "../components/LibraryNav";
 import {errorState, loadingState} from "../components/ScreenStates";
 import {NotesCollection} from "../components/NotesCollection";
 import {
@@ -35,6 +36,7 @@ function NotesScreen() {
           <Button label="Tags" action={openTagsAction} />
           <Button label="Trash" action={openTrashAction} />
         </Row>
+        <LibraryNav />
       </Stack>
       <Text text="All notes" accessibility={{role: "header"}} />
       <SearchFilters results={notes} />

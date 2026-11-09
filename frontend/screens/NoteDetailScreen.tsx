@@ -2,7 +2,7 @@ import {Button, Menu, Metadata, ModuleScreen, RecordList, RecordRow, Section, St
 import {NoteMetadata} from "../components/NoteMetadata";
 import {SensitiveBadge} from "../components/SensitiveBadge";
 import {errorState, loadingState} from "../components/ScreenStates";
-import {attachNoteMediaAction, deleteNoteAction, detachNoteMediaAction, editNoteAction, openHistoryAction, openNoteMediaAction, toggleFavouriteAction, togglePinAction} from "../features/notes/actions";
+import {attachNoteMediaAction, deleteNoteAction, detachNoteMediaAction, editNoteAction, openHistoryAction, openHomeAction, openNoteMediaAction, toggleFavouriteAction, togglePinAction} from "../features/notes/actions";
 import {useNote} from "../hooks/useNote";
 
 function NoteDetailScreen() {
@@ -12,6 +12,7 @@ function NoteDetailScreen() {
     <ModuleScreen title="Note">
       <Stack direction="vertical" gap="regular">
         <Toolbar label="Note actions">
+          <Button label="Notes" action={openHomeAction} />
           <Button label="Edit" action={editNoteAction} />
           <Menu label="More">
             <Button label="History" action={openHistoryAction} />

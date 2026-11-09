@@ -1,5 +1,6 @@
 import {Filter, ModuleScreen, screen} from "@modula/product-ui";
 import {NotesCollection} from "../components/NotesCollection";
+import {ReturnHome} from "../components/ReturnHome";
 import {collectionStates, collectionStatesWithBrowse} from "../components/ScreenStates";
 import {openNoteAction, purgeNoteAction, restoreNoteAction, openHomeAction} from "../features/notes/actions";
 import {
@@ -15,28 +16,29 @@ import {DeletedNoteRow} from "../components/DeletedNoteRow";
 
 function PinnedNotesScreen() {
   const notes = usePinnedNotes();
-  return <ModuleScreen title="Pinned"><Filter label="Pinned notes" records={notes} /><NotesCollection notes={notes} openNote={openNoteAction} label="Pinned notes" /></ModuleScreen>;
+  return <ModuleScreen title="Pinned"><ReturnHome /><Filter label="Pinned notes" records={notes} /><NotesCollection notes={notes} openNote={openNoteAction} label="Pinned notes" /></ModuleScreen>;
 }
 
 function RecentNotesScreen() {
   const notes = useRecentNotes();
-  return <ModuleScreen title="Recently edited"><Filter label="Recently edited" records={notes} /><NotesCollection notes={notes} openNote={openNoteAction} label="Recently edited notes" /></ModuleScreen>;
+  return <ModuleScreen title="Recently edited"><ReturnHome /><Filter label="Recently edited" records={notes} /><NotesCollection notes={notes} openNote={openNoteAction} label="Recently edited notes" /></ModuleScreen>;
 }
 
 function FavouriteNotesScreen() {
   const notes = useFavouriteNotes();
-  return <ModuleScreen title="Favourites"><Filter label="Favourite notes" records={notes} /><NotesCollection notes={notes} openNote={openNoteAction} label="Favourite notes" /></ModuleScreen>;
+  return <ModuleScreen title="Favourites"><ReturnHome /><Filter label="Favourite notes" records={notes} /><NotesCollection notes={notes} openNote={openNoteAction} label="Favourite notes" /></ModuleScreen>;
 }
 
 function ArchivedNotesScreen() {
   const notes = useArchivedNotes();
-  return <ModuleScreen title="Archived"><Filter label="Archived notes" records={notes} /><NotesCollection notes={notes} openNote={openNoteAction} label="Archived notes" /></ModuleScreen>;
+  return <ModuleScreen title="Archived"><ReturnHome /><Filter label="Archived notes" records={notes} /><NotesCollection notes={notes} openNote={openNoteAction} label="Archived notes" /></ModuleScreen>;
 }
 
 function TrashScreen() {
   const notes = useDeletedNotes();
   return (
     <ModuleScreen title="Trash">
+      <ReturnHome />
       <Filter label="Deleted notes" records={notes} />
       <RecordList records={notes} actions={[restoreNoteAction, purgeNoteAction]} accessibility={{label: "Deleted notes", role: "list"}}>
         <DeletedNoteRow note={notes} />
