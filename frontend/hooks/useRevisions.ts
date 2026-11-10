@@ -1,5 +1,5 @@
-import {useRecords} from "@modula/product-ui";
+import {useRecordRevisions} from "@modula/product-ui";
 
 export function useRevisions() {
-  return useRecords({id: "revisions", type: "note-version", filterParam: "noteId", sortParam: "sort", limit: 100});
+  return useRecordRevisions({id: "revisions", type: "note", idParam: "noteId", limit: 100});
 }

@@ -36,6 +36,6 @@ const server = createServer((request, response) => {
 })
 
 server.listen(port, host, () => {
-  console.log(`Vault Notes 2.0 private preview: http://${host}:${port}`)
+  console.log(`Vault Notes 2.1 private preview: http://${host}:${port}`)
   console.log('Loopback only. Use an SSH tunnel for private remote access.')
 })

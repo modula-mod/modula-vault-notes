@@ -1,4 +1,5 @@
 import {ModuleScreen, RecordList, RecordRow, Search, Stack, Text, screen} from "@modula/product-ui";
+import {ReturnHome} from "../components/ReturnHome";
 import {collectionStates} from "../components/ScreenStates";
 import {useSavedSearches} from "../hooks/useVaultSearch";
 
@@ -6,6 +7,7 @@ function SavedSearchesScreen() {
   const savedSearches = useSavedSearches();
   return (
     <ModuleScreen title="Saved Searches">
+      <ReturnHome />
       <Stack direction="vertical" gap="regular">
         <Search label="Search saved searches" records={savedSearches} />
         <RecordList records={savedSearches} accessibility={{label: "Saved searches", role: "list"}}>

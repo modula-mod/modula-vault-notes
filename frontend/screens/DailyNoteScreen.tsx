@@ -1,4 +1,5 @@
 import {Button, ModuleScreen, Section, Stack, Text, screen} from "@modula/product-ui";
+import {ReturnHome} from "../components/ReturnHome";
 import {errorState, loadingState} from "../components/ScreenStates";
 import {createDailyNoteAction} from "../features/templates/template-actions";
 import {DAILY_NOTE_POLICY} from "../lib/dates";
@@ -7,6 +8,7 @@ import {FUNCTION_REVIEW_NOTICE} from "../lib/permissions";
 function DailyNoteScreen() {
   return (
     <ModuleScreen title="Daily Note">
+      <ReturnHome />
       <Section title="Today">
         <Stack direction="vertical" gap="regular">
           <Text text={DAILY_NOTE_POLICY} />

@@ -1,12 +1,14 @@
-import {Button, ModuleScreen, screen} from "@modula/product-ui";
+import {Button, ModuleScreen, Text, screen} from "@modula/product-ui";
+import {ReturnHome} from "../components/ReturnHome";
 import {errorState, loadingState} from "../components/ScreenStates";
 import {RevisionPreview} from "../features/history/RevisionPreview";
 import {restoreRevisionAction} from "../features/history/restore-actions";
-import {useRevision} from "../hooks/useNote";
+import {useNote, useRevision} from "../hooks/useNote";
 
 function RevisionDetailScreen() {
   const revision = useRevision();
-  return <ModuleScreen title="Revision"><RevisionPreview revision={revision} /><Button label="Restore as new revision" action={restoreRevisionAction} /></ModuleScreen>;
+  const note = useNote();
+  return <ModuleScreen title="Revision"><ReturnHome /><Text binding={note} valuePath="title" /><RevisionPreview revision={revision} /><Button label="Restore as new revision" action={restoreRevisionAction} /></ModuleScreen>;
 }
 
 export const revisionDetailScreen = screen("revision", "detail", "Revision", RevisionDetailScreen, {

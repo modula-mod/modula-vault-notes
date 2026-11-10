@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.1.0-rc.4 — integration candidate, not published
+
+- Expands the compiled product frontend to 26 routes and screens, including folder and tag create/edit flows.
+- Makes every declared route reachable through rendered Product UI controls and gives each non-entry screen a rendered return to Notes.
+- Preserves record-scoped note, revision, folder, and tag route parameters through the compiled navigation graph.
+- Carries forward the account-scoped privacy and structured-content integrity corrections from the reconciled mainline base.
+- Remains unsigned and unpublished; development artwork still requires founder approval.
+
 ## 2.0.2
 
 - Notes are stored in this account's module records. Create, edit, and trash use the generic record API, so later notes changes ship as a module download.
