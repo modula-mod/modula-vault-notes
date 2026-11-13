@@ -2,9 +2,9 @@
 
 ## 2.1.0-rc.5 — integration candidate, not published
 
-- Renders the existing `shareNote` action in the note's More menu. Sharing still depends on the host's `share.native@1` support.
-- Makes `restoreNote` the Trash row action, since some hosts dispatch only a row's primary action. Delete permanently stays in the row's actions.
-- Adds notices on the Folder, Tag, History, and Saved Searches screens saying their lists depend on host filter, revision, or stored-query support.
+- Renders the `shareNote` action in the note's More menu and binds it to the open note (`recordIdBinding: note`). Sharing still depends on the host's `share.native@1` support.
+- Makes `restoreNote` the Trash row action, since some hosts dispatch only a row's primary action, and shows a visible "Restore" label on each row. No permanent-delete control is rendered in the row.
+- Adds short notices on the Folder, Tag, History, and Saved Searches screens saying the list may be empty or incomplete, or that saved searches can't be opened yet.
 - Adds the MODULE-REFERENCE-01 functionality matrix report (re-cut of #21).
 - `2.1.0-rc.4` stays as it was, because its frontend hash is pinned by fixtures. This candidate is a new identity and is still unsigned and unpublished.
 

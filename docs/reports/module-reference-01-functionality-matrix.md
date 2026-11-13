@@ -13,15 +13,15 @@ NATIVE VERIFICATION was still not executed for this re-cut. No simulator, device
 | Every declared route reachable through rendered `route.open` controls | Already on main. 26 of 26, checked by `frontend/tests/reachability.test.ts`. | Unchanged. |
 | Rendered return to Notes (`openHome`) on every non-entry view | Already on main (`ReturnHome`, plus toolbar Notes buttons). | Unchanged. |
 | Note detail binds `openHistory` | Already on main, under the More menu. | Unchanged. |
-| Note detail renders `shareNote` | Missing. Main asserted it was absent ("Share action hidden pending accepted UI"). | **Added** as "Share" in the More menu. The action declaration is unchanged: `family: share`, optional `share.native@1`. |
-| Trash restore is the row `action` | Missing. Restore and purge existed only on `recordList.actions`. | **Added**: `action: restoreNote`, and `actions` still holds restore and purge. |
-| Folder, Tag, History, and Saved Searches notices about host limits | Missing. | **Added** to all four screens. |
+| Note detail renders `shareNote` | Missing. Main asserted it was absent ("Share action hidden pending accepted UI"). | **Added** as "Share" in the More menu (`family: share`, optional `share.native@1`). After Prism review, the action also carries `recordIdBinding: note`, which names the detail view's `record.detail` note binding, so a host shares exactly the open note. |
+| Trash restore is the row `action` | Missing. Restore and purge existed only on `recordList.actions`. | **Added**: `action: restoreNote`, and `actions` still holds restore and purge. Each row now shows a trailing "Restore" label (accessibility label "Restore"). No "Delete permanently" control is rendered in the row, because host confirmation is not honoured yet. |
+| Folder, Tag, History, and Saved Searches notices about host limits | Missing. | **Added** to all four screens, each under 90 characters: "This list may be empty or include notes from other folders.", "This list may be empty or include notes without this tag.", "This list may be empty until revision history can be loaded." (its own Text node after the original restore sentence), and "You can see saved searches here, but they can't be opened yet." |
 | This functionality matrix | Missing. | **Added** (this file). |
 | Provenance repointed at the frontend commit | Main has its own 2.1 provenance chain. | A new identity, 2.1.0-rc.5, bound to this branch's source commit. 2.1.0-rc.4 is left as it was. |
 
 ### Host evidence for the new notices and controls (modula-native `main` 5db0f027dd29c6a877b04aa98e0b457ee2b82e2d, read only)
 
-- `ProductUIRecords.visibleRecords` returns `[]` when a query's `filterParam` is `folderId`, `tagId`, `references`, or `relatedTo`, so the Folder screen lists no notes. The Tag screen now uses `membership: {field: tagIds, param: tagId}`, which that function ignores, so it lists every non-archived note. The Folder and Tag notices cover both outcomes.
+- `ProductUIRecords.visibleRecords` returns `[]` when a query's `filterParam` is `folderId`, `tagId`, `references`, or `relatedTo`, so the Folder screen lists no notes. The Tag screen now uses `membership: {field: tagIds, param: tagId}`, which that function ignores, so it lists every non-archived note. The Folder and Tag notices ("may be empty or include notes from other folders / without this tag") cover both outcomes.
 - `ProductUIRuntime` loads only `record.query` and `record.detail` bindings. History uses `record.revisions`, which is never loaded, so the History list stays empty on that host. The History notice says so.
 - Saved Searches has no open or apply action. Its notice says opening one waits for host stored-query support.
 - `ProductUIRenderer` record lists dispatch only `node["action"]` on a row tap. `actions` is not rendered. Before this branch, Trash restore could not be dispatched on native.
@@ -31,9 +31,9 @@ NATIVE VERIFICATION was still not executed for this re-cut. No simulator, device
 
 | Route | View | Change |
 | --- | --- | --- |
-| `/note/:noteId` | `detail` | `shareNote` is now rendered. INTERACTIVE not proven; host share is a no-op on native `main`. |
-| `/trash` | `trash` | `restoreNote` is now the row `action`, so it is dispatchable on native. `purgeNote` is still only on `actions`, which native does not render. |
-| `/folder/:folderId`, `/tag/:tagId`, `/note/:noteId/history`, `/saved-searches` | `folder`, `tag`, `history`, `savedSearches` | Each now states its host limit. They stay BLOCKED on the host gaps above. |
+| `/note/:noteId` | `detail` | `shareNote` is now rendered and bound to the current note (`recordIdBinding: note`). INTERACTIVE not proven; host share is a no-op on native `main`. |
+| `/trash` | `trash` | `restoreNote` is now the row `action`, so it is dispatchable on native, and each row shows a visible "Restore" label. `purgeNote` is still only on `actions`, which native does not render; the row renders no permanent-delete control. |
+| `/folder/:folderId`, `/tag/:tagId`, `/note/:noteId/history`, `/saved-searches` | `folder`, `tag`, `history`, `savedSearches` | Each now shows a short notice about the limit. They stay BLOCKED on the host gaps above. |
 
 No route is VERIFIED.
 

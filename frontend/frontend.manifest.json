@@ -309,7 +309,8 @@
       "capability": "share.native@1",
       "family": "share",
       "id": "shareNote",
-      "label": "Share"
+      "label": "Share",
+      "recordIdBinding": "note"
     },
     {
       "capability": "ui.mediaAttach@1",
@@ -2565,46 +2566,61 @@
                   {
                     "children": [
                       {
-                        "binding": "notes",
-                        "type": "text",
-                        "valuePath": "title"
-                      },
-                      {
-                        "binding": "notes",
-                        "type": "text",
-                        "valuePath": "plainTextProjection"
-                      },
-                      {
                         "children": [
                           {
-                            "accessibility": {
-                              "label": "Deleted date"
-                            },
                             "binding": "notes",
-                            "type": "metadata",
-                            "valuePath": "deletedAt"
+                            "type": "text",
+                            "valuePath": "title"
                           },
                           {
-                            "accessibility": {
-                              "label": "Sensitive note; intelligence is local only",
-                              "role": "status"
-                            },
                             "binding": "notes",
-                            "type": "badge",
-                            "valuePath": "sensitive"
+                            "type": "text",
+                            "valuePath": "plainTextProjection"
+                          },
+                          {
+                            "children": [
+                              {
+                                "accessibility": {
+                                  "label": "Deleted date"
+                                },
+                                "binding": "notes",
+                                "type": "metadata",
+                                "valuePath": "deletedAt"
+                              },
+                              {
+                                "accessibility": {
+                                  "label": "Sensitive note; intelligence is local only",
+                                  "role": "status"
+                                },
+                                "binding": "notes",
+                                "type": "badge",
+                                "valuePath": "sensitive"
+                              }
+                            ],
+                            "layout": {
+                              "gap": "compact"
+                            },
+                            "type": "row"
                           }
                         ],
                         "layout": {
+                          "direction": "vertical",
                           "gap": "compact"
                         },
-                        "type": "row"
+                        "type": "stack"
+                      },
+                      {
+                        "accessibility": {
+                          "label": "Restore"
+                        },
+                        "text": "Restore",
+                        "type": "text"
                       }
                     ],
                     "layout": {
-                      "direction": "vertical",
-                      "gap": "compact"
+                      "gap": "regular"
                     },
-                    "type": "stack"
+                    "type": "row"
                   }
                 ],
                 "type": "recordRow"
@@ -2900,7 +2916,7 @@
             "valuePath": "name"
           },
           {
-            "text": "Notes in this folder appear only when the host applies the folder filter. Until it does, this list may be empty or show notes from other folders.",
+            "text": "This list may be empty or include notes from other folders.",
             "type": "text"
           },
           {
@@ -3353,7 +3369,7 @@
             "valuePath": "name"
           },
           {
-            "text": "Notes with this tag appear only when the host applies the tag filter. Until it does, this list may be empty or show notes without this tag.",
+            "text": "This list may be empty or include notes without this tag.",
             "type": "text"
           },
           {
@@ -3810,7 +3826,11 @@
             "type": "toolbar"
           },
           {
-            "text": "Restores create a new revision and never delete intervening history. Checkpoints for this note appear only when the host loads note revisions. Until it does, this list may be empty.",
+            "text": "Restores create a new revision and never delete intervening history.",
+            "type": "text"
+          },
+          {
+            "text": "This list may be empty until revision history can be loaded.",
             "type": "text"
           },
           {
@@ -4080,7 +4100,7 @@
           {
             "children": [
               {
-                "text": "Saved searches are listed here. Opening one is unavailable until the host can run a stored query.",
+                "text": "You can see saved searches here, but they can't be opened yet.",
                 "type": "text"
               },
               {
