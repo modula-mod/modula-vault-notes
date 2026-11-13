@@ -5,7 +5,7 @@
   "identity": {
     "id": "digital.modula.vault-notes",
     "kind": "module",
-    "version": "2.1.0-rc.4",
+    "version": "2.1.0-rc.5",
     "displayName": "Vault Notes",
     "slug": "vault-notes",
     "subtitle": "Your private knowledge space.",
@@ -37,11 +37,11 @@
   },
   "release": {
     "channel": "beta",
-    "notes": "Vault Notes 2.1.0-rc.4 improves collection navigation, removes duplicate folder decoration, and refines note and search titles. Signed QA and founder visual review remain required before stable release.",
+    "notes": "Vault Notes 2.1.0-rc.5 renders Share on the open note, makes restore the Trash row action, and states host filter limits on the Folder, Tag, History, and Saved Searches screens. Signed QA and founder visual review remain required before stable release.",
     "builder": "modula-product-release",
     "provenance": {
-      "manifestSha256": "368ed56c4df48994b5b7b09f7b7531cf1d977cd1d3133b765f81ab0f469071db",
-      "frontendSha256": "aa8c92013dbcf3b407e769ba158e2da7fa5514c6f1bc7339b48df366d97c1182",
+      "manifestSha256": "001abc8ead320c725c1904ded1f13e7e7d641d42266080d00be2d1980c23f7dd",
+      "frontendSha256": "c544a3531db3949d6ab1fe9eb4ab969c3581a9027c40e1fb5000f0abb084803c",
       "sourceCommit": "d5f5fd7fe02a1efa0da21946c4e14d71eb4d8069",
       "frontendCommit": "d5f5fd7fe02a1efa0da21946c4e14d71eb4d8069"
     }
@@ -158,7 +158,7 @@
     "artifact": {
       "path": "frontend/frontend.manifest.json",
       "mediaType": "application/vnd.modula.frontend+json",
-      "sha256": "aa8c92013dbcf3b407e769ba158e2da7fa5514c6f1bc7339b48df366d97c1182",
+      "sha256": "c544a3531db3949d6ab1fe9eb4ab969c3581a9027c40e1fb5000f0abb084803c",
       "schemaVersion": "1.0.0",
       "entryView": "home"
     }

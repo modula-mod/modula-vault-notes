@@ -14,7 +14,8 @@ describe("Vault note surfaces", () => {
     expect(detail.map(node => node.action)).toContain("editNote");
     expect(detail.map(node => node.action)).toContain("openHistory");
     expect(detail.map(node => node.action)).toContain("attachNoteMedia");
-    expect(detail.map(node => node.action)).not.toContain("shareNote");
+    expect(detail.map(node => node.action)).toContain("shareNote");
+    expect(action("shareNote")).toMatchObject({family: "share", capability: "share.native@1"});
     expect(view("detail").bindings?.some(binding => binding.source === "record.media" && binding.recordType === "note")).toBe(true);
     expect(action("attachNoteMedia")).toMatchObject({family: "media.attach", recordType: "note", recordIdBinding: "note", capability: "ui.mediaAttach@1"});
     expect(action("openNoteMedia")).toMatchObject({family: "media.open", capability: "ui.mediaOpen@1"});
@@ -26,7 +27,17 @@ describe("Vault note surfaces", () => {
     expect(nodes(view("folder").root).map(node => node.action)).toContain("deleteFolder");
     expect(nodes(view("tag").root).map(node => node.action)).toContain("deleteTag");
     expect(nodes(view("trash").root).some(node => node.type === "recordList" && node.actions?.includes("restoreNote") && node.actions?.includes("purgeNote"))).toBe(true);
+    // Native record lists dispatch only the row `action`, so restore must be the row action as well.
+    expect(nodes(view("trash").root).some(node => node.type === "recordList" && node.action === "restoreNote")).toBe(true);
     expect(nodes(view("trash").root).some(node => node.type === "metadata" && node.valuePath === "deletedAt")).toBe(true);
+  });
+
+  it("states host filter limits instead of implying an empty or working collection", () => {
+    const texts = (id: string) => nodes(view(id).root).flatMap(node => typeof node.text === "string" ? [node.text] : []);
+    expect(texts("folder").some(text => text.includes("host applies the folder filter"))).toBe(true);
+    expect(texts("tag").some(text => text.includes("host applies the tag filter"))).toBe(true);
+    expect(texts("history").some(text => text.includes("host loads note revisions"))).toBe(true);
+    expect(texts("savedSearches").some(text => text.includes("until the host can run a stored query"))).toBe(true);
   });
 
   it("declares loading, error, permission, and offline states", () => {

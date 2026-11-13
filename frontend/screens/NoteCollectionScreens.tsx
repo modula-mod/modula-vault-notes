@@ -40,7 +40,7 @@ function TrashScreen() {
     <ModuleScreen title="Trash">
       <ReturnHome />
       <Filter label="Deleted notes" records={notes} />
-      <RecordList records={notes} actions={[restoreNoteAction, purgeNoteAction]} accessibility={{label: "Deleted notes", role: "list"}}>
+      <RecordList records={notes} action={restoreNoteAction} actions={[restoreNoteAction, purgeNoteAction]} accessibility={{label: "Deleted notes", role: "list"}}>
         <DeletedNoteRow note={notes} />
       </RecordList>
     </ModuleScreen>

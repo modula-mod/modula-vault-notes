@@ -4,7 +4,7 @@ const state = {
   commandOpen: new URLSearchParams(location.search).get('command') === '1',
   artifact: null,
 }
-const expectedReleaseVersion = '2.1.0-rc.4'
+const expectedReleaseVersion = '2.1.0-rc.5'
 
 const notes = [
   {id: 'architecture', title: 'Modula Platform — V1 Architecture', preview: 'The contract freeze, runtime boundaries, recovery model, and Native handoff.', folder: 'Projects / Modula Platform', tags: ['architecture', 'greenfield', 'v1'], updated: 'Just now'},

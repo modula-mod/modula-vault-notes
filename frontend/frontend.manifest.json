@@ -775,7 +775,7 @@
     ]
   },
   "productId": "digital.modula.vault-notes",
-  "releaseVersion": "2.1.0-rc.4",
+  "releaseVersion": "2.1.0-rc.5",
   "routes": [
     {
       "path": "/",
@@ -1241,6 +1241,11 @@
                       {
                         "action": "openHistory",
                         "text": "History",
+                        "type": "button"
+                      },
+                      {
+                        "action": "shareNote",
+                        "text": "Share",
                         "type": "button"
                       },
                       {
@@ -2547,6 +2552,7 @@
               "label": "Deleted notes",
               "role": "list"
             },
+            "action": "restoreNote",
             "actions": [
               "restoreNote",
               "purgeNote"
@@ -2892,6 +2898,10 @@
             "binding": "folder",
             "type": "text",
             "valuePath": "name"
+          },
+          {
+            "text": "Notes in this folder appear only when the host applies the folder filter. Until it does, this list may be empty or show notes from other folders.",
+            "type": "text"
           },
           {
             "children": [
@@ -3341,6 +3351,10 @@
             "binding": "tag",
             "type": "badge",
             "valuePath": "name"
+          },
+          {
+            "text": "Notes with this tag appear only when the host applies the tag filter. Until it does, this list may be empty or show notes without this tag.",
+            "type": "text"
           },
           {
             "children": [
@@ -3796,7 +3810,7 @@
             "type": "toolbar"
           },
           {
-            "text": "Restores create a new revision and never delete intervening history.",
+            "text": "Restores create a new revision and never delete intervening history. Checkpoints for this note appear only when the host loads note revisions. Until it does, this list may be empty.",
             "type": "text"
           },
           {
@@ -4065,6 +4079,10 @@
           },
           {
             "children": [
+              {
+                "text": "Saved searches are listed here. Opening one is unavailable until the host can run a stored query.",
+                "type": "text"
+              },
               {
                 "binding": "savedSearches",
                 "text": "Search saved searches",

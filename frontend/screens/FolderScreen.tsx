@@ -7,7 +7,7 @@ import {useFolder, useFolderNotes} from "../hooks/useNotes";
 function FolderScreen() {
   const folder = useFolder();
   const notes = useFolderNotes();
-  return <ModuleScreen title="Folder"><Toolbar label="Folder actions"><Button label="Notes" action={openHomeAction} /><Menu label="More"><Button label="Rename folder" action={editFolderAction} /><Button label="Delete folder" action={deleteFolderAction} /></Menu></Toolbar><Text binding={folder} valuePath="name" accessibility={{role: "header"}} /><NotesCollection notes={notes} openNote={openNoteAction} label="Notes in folder" /></ModuleScreen>;
+  return <ModuleScreen title="Folder"><Toolbar label="Folder actions"><Button label="Notes" action={openHomeAction} /><Menu label="More"><Button label="Rename folder" action={editFolderAction} /><Button label="Delete folder" action={deleteFolderAction} /></Menu></Toolbar><Text binding={folder} valuePath="name" accessibility={{role: "header"}} /><Text text="Notes in this folder appear only when the host applies the folder filter. Until it does, this list may be empty or show notes from other folders." /><NotesCollection notes={notes} openNote={openNoteAction} label="Notes in folder" /></ModuleScreen>;
 }
 
 export const folderScreen = screen("folder", "collection", "Folder", FolderScreen, {states: collectionStates("This folder is empty", "This folder is unavailable")});
