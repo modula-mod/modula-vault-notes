@@ -309,7 +309,8 @@
       "capability": "share.native@1",
       "family": "share",
       "id": "shareNote",
-      "label": "Share"
+      "label": "Share",
+      "recordIdBinding": "note"
     },
     {
       "capability": "ui.mediaAttach@1",
@@ -775,7 +776,7 @@
     ]
   },
   "productId": "digital.modula.vault-notes",
-  "releaseVersion": "2.1.0-rc.4",
+  "releaseVersion": "2.1.0-rc.5",
   "routes": [
     {
       "path": "/",
@@ -1241,6 +1242,11 @@
                       {
                         "action": "openHistory",
                         "text": "History",
+                        "type": "button"
+                      },
+                      {
+                        "action": "shareNote",
+                        "text": "Share",
                         "type": "button"
                       },
                       {
@@ -2547,6 +2553,7 @@
               "label": "Deleted notes",
               "role": "list"
             },
+            "action": "restoreNote",
             "actions": [
               "restoreNote",
               "purgeNote"
@@ -2559,46 +2566,61 @@
                   {
                     "children": [
                       {
-                        "binding": "notes",
-                        "type": "text",
-                        "valuePath": "title"
-                      },
-                      {
-                        "binding": "notes",
-                        "type": "text",
-                        "valuePath": "plainTextProjection"
-                      },
-                      {
                         "children": [
                           {
-                            "accessibility": {
-                              "label": "Deleted date"
-                            },
                             "binding": "notes",
-                            "type": "metadata",
-                            "valuePath": "deletedAt"
+                            "type": "text",
+                            "valuePath": "title"
                           },
                           {
-                            "accessibility": {
-                              "label": "Sensitive note; intelligence is local only",
-                              "role": "status"
-                            },
                             "binding": "notes",
-                            "type": "badge",
-                            "valuePath": "sensitive"
+                            "type": "text",
+                            "valuePath": "plainTextProjection"
+                          },
+                          {
+                            "children": [
+                              {
+                                "accessibility": {
+                                  "label": "Deleted date"
+                                },
+                                "binding": "notes",
+                                "type": "metadata",
+                                "valuePath": "deletedAt"
+                              },
+                              {
+                                "accessibility": {
+                                  "label": "Sensitive note; intelligence is local only",
+                                  "role": "status"
+                                },
+                                "binding": "notes",
+                                "type": "badge",
+                                "valuePath": "sensitive"
+                              }
+                            ],
+                            "layout": {
+                              "gap": "compact"
+                            },
+                            "type": "row"
                           }
                         ],
                         "layout": {
+                          "direction": "vertical",
                           "gap": "compact"
                         },
-                        "type": "row"
+                        "type": "stack"
+                      },
+                      {
+                        "accessibility": {
+                          "label": "Restore"
+                        },
+                        "text": "Restore",
+                        "type": "text"
                       }
                     ],
                     "layout": {
-                      "direction": "vertical",
-                      "gap": "compact"
+                      "gap": "regular"
                     },
-                    "type": "stack"
+                    "type": "row"
                   }
                 ],
                 "type": "recordRow"
@@ -2892,6 +2914,10 @@
             "binding": "folder",
             "type": "text",
             "valuePath": "name"
+          },
+          {
+            "text": "This list may be empty or include notes from other folders.",
+            "type": "text"
           },
           {
             "children": [
@@ -3341,6 +3367,10 @@
             "binding": "tag",
             "type": "badge",
             "valuePath": "name"
+          },
+          {
+            "text": "This list may be empty or include notes without this tag.",
+            "type": "text"
           },
           {
             "children": [
@@ -3800,6 +3830,10 @@
             "type": "text"
           },
           {
+            "text": "This list may be empty until revision history can be loaded.",
+            "type": "text"
+          },
+          {
             "accessibility": {
               "label": "Note revisions",
               "role": "list"
@@ -4065,6 +4099,10 @@
           },
           {
             "children": [
+              {
+                "text": "You can see saved searches here, but they can't be opened yet.",
+                "type": "text"
+              },
               {
                 "binding": "savedSearches",
                 "text": "Search saved searches",

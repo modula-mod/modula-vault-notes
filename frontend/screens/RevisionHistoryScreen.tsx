@@ -7,7 +7,7 @@ import {useRevisions} from "../hooks/useRevisions";
 
 function RevisionHistoryScreen() {
   const revisions = useRevisions();
-  return <ModuleScreen title="Revision history"><ReturnHome /><Text text="Restores create a new revision and never delete intervening history." /><RevisionList revisions={revisions} openRevision={openRevisionAction} /></ModuleScreen>;
+  return <ModuleScreen title="Revision history"><ReturnHome /><Text text="Restores create a new revision and never delete intervening history." /><Text text="This list may be empty until revision history can be loaded." /><RevisionList revisions={revisions} openRevision={openRevisionAction} /></ModuleScreen>;
 }
 
 export const revisionHistoryScreen = screen("history", "collection", "Revision history", RevisionHistoryScreen, {states: collectionStates("No revision checkpoints are available", "Generic revision history is unavailable on this host")});

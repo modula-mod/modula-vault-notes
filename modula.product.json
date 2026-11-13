@@ -5,7 +5,7 @@
   "identity": {
     "id": "digital.modula.vault-notes",
     "kind": "module",
-    "version": "2.1.0-rc.4",
+    "version": "2.1.0-rc.5",
     "displayName": "Vault Notes",
     "slug": "vault-notes",
     "subtitle": "Your private knowledge space.",
@@ -24,7 +24,7 @@
   },
   "source": {
     "repository": "modula-mod/modula-vault-notes",
-    "commit": "d5f5fd7fe02a1efa0da21946c4e14d71eb4d8069",
+    "commit": "6471879aaf0fd1f0fd030453a04de18edec84199",
     "manifestPath": "modula.product.json",
     "provider": "github"
   },
@@ -37,13 +37,13 @@
   },
   "release": {
     "channel": "beta",
-    "notes": "Vault Notes 2.1.0-rc.4 improves collection navigation, removes duplicate folder decoration, and refines note and search titles. Signed QA and founder visual review remain required before stable release.",
+    "notes": "Vault Notes 2.1.0-rc.5 renders Share on the open note, makes restore the Trash row action, and states host filter limits on the Folder, Tag, History, and Saved Searches screens. Signed QA and founder visual review remain required before stable release.",
     "builder": "modula-product-release",
     "provenance": {
-      "manifestSha256": "368ed56c4df48994b5b7b09f7b7531cf1d977cd1d3133b765f81ab0f469071db",
-      "frontendSha256": "aa8c92013dbcf3b407e769ba158e2da7fa5514c6f1bc7339b48df366d97c1182",
-      "sourceCommit": "d5f5fd7fe02a1efa0da21946c4e14d71eb4d8069",
-      "frontendCommit": "d5f5fd7fe02a1efa0da21946c4e14d71eb4d8069"
+      "manifestSha256": "b1d89301a96e35a6f5af0c7fd28f7013e99da98cc16e0dec3582049adecf1eb7",
+      "frontendSha256": "57642c93adba18e2d22a624e6e55cc561bebe7ac648633708511804abc22fc95",
+      "sourceCommit": "6471879aaf0fd1f0fd030453a04de18edec84199",
+      "frontendCommit": "6471879aaf0fd1f0fd030453a04de18edec84199"
     }
   },
   "security": {
@@ -158,7 +158,7 @@
     "artifact": {
       "path": "frontend/frontend.manifest.json",
       "mediaType": "application/vnd.modula.frontend+json",
-      "sha256": "aa8c92013dbcf3b407e769ba158e2da7fa5514c6f1bc7339b48df366d97c1182",
+      "sha256": "57642c93adba18e2d22a624e6e55cc561bebe7ac648633708511804abc22fc95",
       "schemaVersion": "1.0.0",
       "entryView": "home"
     }

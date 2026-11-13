@@ -73,7 +73,7 @@ export const togglePinAction = action({id: "togglePin", family: "record.toggle",
 export const toggleFavouriteAction = action({id: "toggleFavourite", family: "record.toggle", label: "Add to Favourites", activeLabel: "Remove from Favourites", recordType: "note", recordField: "favourite", recordIdBinding: "note"});
 
 export const deleteNoteAction = action({id: "deleteNote", family: "record.delete", label: "Move to Trash", recordType: "note", recordIdBinding: "note", confirm: true});
-export const shareNoteAction = action({id: "shareNote", family: "share", label: "Share", capability: "share.native@1"});
+export const shareNoteAction = action({id: "shareNote", family: "share", label: "Share", capability: "share.native@1", recordIdBinding: "note"});
 export const attachNoteMediaAction = action({id: "attachNoteMedia", family: "media.attach", label: "Attach file", capability: "ui.mediaAttach@1", recordType: "note", recordIdBinding: "note"});
 export const openNoteMediaAction = action({id: "openNoteMedia", family: "media.open", label: "Open file", capability: "ui.mediaOpen@1"});
 export const detachNoteMediaAction = action({id: "detachNoteMedia", family: "media.detach", label: "Remove attachment", recordType: "note", recordIdBinding: "note", confirm: true});

@@ -9,7 +9,7 @@ const packageJson = JSON.parse(readFileSync('package.json', 'utf8'))
 
 const checks = [
   [artifact.productId === 'digital.modula.vault-notes', 'compiled artifact has canonical product identity'],
-  [packageJson.version === '2.1.0-rc.4', 'package has the verified 2.1.0-rc.4 release identity'],
+  [packageJson.version === '2.1.0-rc.5', 'package has the verified 2.1.0-rc.5 release identity'],
   [artifact.releaseVersion === packageJson.version, 'compiled artifact matches the package release identity'],
   [artifact.routes.length === 26 && artifact.views.length === 26, 'compiled artifact exposes 26 routes and 26 views'],
   [html.includes('/preview/app.js') && html.includes('/preview/styles.css'), 'preview loads local assets only'],

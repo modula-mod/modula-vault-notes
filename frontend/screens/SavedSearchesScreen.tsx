@@ -9,6 +9,7 @@ function SavedSearchesScreen() {
     <ModuleScreen title="Saved Searches">
       <ReturnHome />
       <Stack direction="vertical" gap="regular">
+        <Text text="You can see saved searches here, but they can't be opened yet." />
         <Search label="Search saved searches" records={savedSearches} />
         <RecordList records={savedSearches} accessibility={{label: "Saved searches", role: "list"}}>
           <RecordRow binding={savedSearches} accessibility={{label: "Saved search", role: "listitem"}}>
