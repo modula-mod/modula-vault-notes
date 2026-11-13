@@ -24,7 +24,7 @@
   },
   "source": {
     "repository": "modula-mod/modula-vault-notes",
-    "commit": "d5f5fd7fe02a1efa0da21946c4e14d71eb4d8069",
+    "commit": "0947e00f834e4b17ad00a4827062126824ebbb7c",
     "manifestPath": "modula.product.json",
     "provider": "github"
   },
@@ -40,10 +40,10 @@
     "notes": "Vault Notes 2.1.0-rc.5 renders Share on the open note, makes restore the Trash row action, and states host filter limits on the Folder, Tag, History, and Saved Searches screens. Signed QA and founder visual review remain required before stable release.",
     "builder": "modula-product-release",
     "provenance": {
-      "manifestSha256": "001abc8ead320c725c1904ded1f13e7e7d641d42266080d00be2d1980c23f7dd",
+      "manifestSha256": "9180cd0b64e54a543d3a34a28fbf889aeda6af298f952ee9e9287801b116dd60",
       "frontendSha256": "c544a3531db3949d6ab1fe9eb4ab969c3581a9027c40e1fb5000f0abb084803c",
-      "sourceCommit": "d5f5fd7fe02a1efa0da21946c4e14d71eb4d8069",
-      "frontendCommit": "d5f5fd7fe02a1efa0da21946c4e14d71eb4d8069"
+      "sourceCommit": "0947e00f834e4b17ad00a4827062126824ebbb7c",
+      "frontendCommit": "0947e00f834e4b17ad00a4827062126824ebbb7c"
     }
   },
   "security": {
